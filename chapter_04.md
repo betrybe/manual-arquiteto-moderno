@@ -57,6 +57,10 @@ Pensando numa arquitetura básica em camadas e dividindo-a em três partes inter
 
 
 
+![](images/chapter_01/image1.png)
+
+
+
 Um ponto importante é que a arquitetura da camada MVC não é exclusiva para aplicações Web, como: Spring MVC ou JSF. Por exemplo, em uma aplicação RESTful as informações expostas como JSON funcionam como view, mesmo não tendo uma interface amigável.
 
 Após explicarmos de maneira resumida o MVC, falaremos sobre as vantagens e desvantagens do uso do DTO. Pensando em aplicações em camadas, o DTO tem como objetivo, separar o model da view, sendo assim, as desvantagens do DTO são:
