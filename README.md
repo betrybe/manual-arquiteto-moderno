@@ -78,7 +78,7 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 ### Cloud
 
 * IaaS, PaaS e o SaaS e os riscos de implantação
-* O que é de fato uma aplicação cloud-native
+* O que é de fato uma aplicação cloud-native?
 * Kubernetes - Quando usar e quando não usar
 * Service Mesh
 	* Arquitetura
