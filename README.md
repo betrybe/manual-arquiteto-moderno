@@ -84,6 +84,7 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 	* Arquitetura
 	* Orquestração
 	* Ferramentas
+* Serviços e riscos na implantação
 
 
 ### A importância de aprender os conceitos ao invés de novos frameworks
