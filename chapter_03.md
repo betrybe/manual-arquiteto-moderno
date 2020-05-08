@@ -8,7 +8,41 @@
 
 
 
+## O que é o Cloud Native?
 
+
+
+A computação em nuvem trouxe muitas metodologias e técnicas que revolucionaram os mundos comercial e técnico. Entre os termos que surgiram, nasceu o cloud native. Para atender e cobrir essas expectativas no universo Java, nasceu o Jakarta EE.
+Como qualquer novo conceito, existem vários conceitos com o mesmo nome. Se lermos os livros ou artigos sobre cloud native, poderemos não encontrar consenso sobre o termo. Por exemplo:
+
+
+
+> Cloud-native é uma abordagem para criar e executar aplicações que explora as vantagens do modelo de computação em nuvem  —Pivotal
+
+
+
+> Cloud-native é uma maneira diferente de pensar e raciocinar sobre sistemas de software. Ele incorpora os seguintes conceitos: Alimentado por infraestrutura descartável, composta por limites, escalas globalmente, adota a arquitetura descartável. — [Architecting Cloud Native Applications](https://www.amazon.com/Architecting-Cloud-Native-Applications-high-performing-ebook/dp/B07QTJ8WW8/ref=sr_1_4?keywords=cloud+native+applications&qid=1575059989&sr=8-4)
+
+
+
+> De maneira geral, “cloud-native” é uma abordagem para criar e executar aplicações que explora as vantagens do modelo de entrega de computação em nuvem. "Cloud-native" é sobre como os aplicações são criados e implantados, não onde. — [InfoWorld](https://www.infoworld.com/article/3281046/what-is-cloud-native-the-modern-way-to-develop-software.html)
+
+
+
+> As tecnologias cloud-native capacitam as empresas a criar e executar aplicações escaláveis em ambientes modernos e dinâmicos, como públicos, privados, e nuvens híbridas. Containers, service meshes, microservices, infraestrutura imutável e APIs declarativas exemplificam essa abordagem [Cloud-Native Computing Foundation](https://www.cncf.io/)
+
+
+
+Uma abordagem do [Otávio Santana](https://twitter.com/otaviojava):
+
+> Um conjunto de boas práticas para otimizar uma aplicação na nuvem por meio de:
+> * Containerização;
+> * Orquestração;
+> * Automação.
+
+
+
+Em um consenso mútuo em torno das definições de vários artigos, podemos dizer que o cloud native é um termo usado para descrever ambientes baseados em containers. Portanto, o cloud native não está relacionado a linguagens ou estruturas de programação específicas ou mesmo a uma empresa provedora de nuvem, mas a containers, porém, não limitado a isso.
 
 
 
