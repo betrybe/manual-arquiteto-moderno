@@ -39,7 +39,7 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 
 * Design de código: segregue a lógica de negócio
 * Testes
-	 * Testando com mock 
+	* Testando com mock 
 	* Teste de Unidades e de integração, qual a quantidade correta?
 	* Teste lógica de negócio, não de frameworks.
 
@@ -64,6 +64,7 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 	* BASIC
 	* Auth
 	* Auth 2
+* Paginação
 
 
 ### Banco de dados
