@@ -31,7 +31,6 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 * Dando adeus ao excesso de getters e setters
 * Definindo APIs a prova de bala
 * Lombok: problema ou solução?
-* Clean Code não é bala de prata.
 
 ### Clean Architecture
 
