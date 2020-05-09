@@ -14,9 +14,11 @@ Microservices, ou em portugues, Microsserviços, são um novo jeito de construir
 
 Neste cenário criamos aplicações que são desacopladas em pequenos serviços e cada um deles representando um objetivo de negócio. Onde eles podem ser desenvolvidos e fácilmente mantidos de maneira individual, e podendo usar diferentes tipos de linguagem de programação.
 
-<img src="images/chapter_04/Microservice.png" alt="Arquitetura Microsserviços"  />
+<center><img src="images/chapter_04/Microservice.png" alt="Arquitetura Microsserviços"  /></center>
 
-​												*Arquitetura de Microserviços*
+
+
+​												<center>*Arquitetura de Microserviços*</center>
 
 
 
