@@ -22,16 +22,14 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 
 ### Domain Driven Design (DDD)
 
-* Analisando problemas de encapsulamento
 * Quando criar Tipos
-* Definindo APIs a prova de bala
 * Java DSL e API fluente
 * Builders: uma maneira intituiva e segura para se instânciar objetos
 
 ### Clean Code
 
 * Dando adeus ao excesso de getters e setters
-* SOLID na prática
+* Definindo APIs a prova de bala
 * Lombok: problema ou solução?
 * Clean Code não é bala de prata.
 
