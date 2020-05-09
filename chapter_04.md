@@ -2,13 +2,25 @@
 
 
 
-Microserviços são serviços ou aplicações independentes que são modeladas para o dominio de negócios (o que faz o DDD ser muito importante). Ela se comunicam entre si via protocolos de rede, e tem uma arquitetura que pode resolver problemas que você tenha.Eles são um dos tipos do SOA (service-oriented architeture), só que com o foco de colocar fronteiras bem especificas de negocios e promover a entrega independente destes serviços, outra vantagem é também pode ser agnóstico de tecnologia.Vamos resumir no ponto de vista de tecnologia, são capacidades de negócios encapsuladas em um ou mais endpoints, mas seguindos os seguintes pilares:
+Microservices, ou em portugues, Microsserviços, são um novo jeito de construirmos nossas aplicações nos dias de hoje, pregam ser independentes e modeladas para o dominio de negócios (o que faz o DDD ser muito importante). Essas aplicações se comunicam entre si via protocolos de rede, e tem uma arquitetura que pode resolver problemas que você tenha. Os microsserviços são um dos tipos do SOA (service-oriented architeture), e te o foco de colocar fronteiras bem especificas de negocios e promover a entrega independente destes serviços, trazendo a vantagem de pode ser agnóstico de tecnologia. Resumindo no ponto de vista de tecnologia, são capacidades de negócios encapsuladas em um ou mais endpoints, mas seguindos os seguintes pilares:
 
 
 
-* Independencia para Deploy
-* Modelado em volta do Dominio de Negócio
-* Responsavel pelo seu próprio dado
+* Flexibilidade
+* Escalabidade
+* Simplicidade
+
+
+
+Neste cenário criamos aplicações que são desacopladas em pequenos serviços e cada um deles representando um objetivo de negócio. Onde eles podem ser desenvolvidos e fácilmente mantidos de maneira individual, e podendo usar diferentes tipos de linguagem de programação.
+
+
+
+![Microservice](/home/sergiolopes/Documentos/LivroArquitetura/manual-arquiteto-moderno/images/chapter_04/Microservice.png)
+
+​												*Arquitetura de Microserviços*
+
+
 
 
 
