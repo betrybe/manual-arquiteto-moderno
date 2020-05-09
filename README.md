@@ -20,19 +20,19 @@ Alinhando teoria e prática, este livro trará visões arquiteturais, motivaçõ
 
 A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram selecionados tópicos atuais e relevantes que irão te ajudar a tomar melhores decisões dia a dia como arquiteto.
 
-### Domain Driven Design (DDD)
+### 1 Domain Driven Design (DDD)
 
 * Quando criar Tipos
 * Java DSL e API fluente
 * Builders: uma maneira intituiva e segura para se instânciar objetos
 
-### Clean Code
+### 2 Clean Code
 
 * Dando adeus ao excesso de getters e setters
 * Definindo APIs a prova de bala
 * Lombok: problema ou solução?
 
-### Clean Architecture
+### 3 Clean Architecture
 
 * Design de código: segregue a lógica de negócio
 * Testes
@@ -41,7 +41,7 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 	* Teste lógica de negócio, não de frameworks.
 
 
-### Refatoração
+### 4 Refatoração
 
 * Como negociar uma refatoração?
 * Como lidar com o legado
@@ -49,7 +49,7 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 * Abandonar todo o código e fazer um novo?
 
 
-### Microservices
+### 5 Microservices
 
 * Pontos de atenção
 * Vantagens e desvantagens em relação ao monolito
@@ -64,7 +64,7 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 * Paginação
 
 
-### Banco de dados
+### 6 Banco de dados
 
 * NoSQL vs SQL
 * Dicas de modelagem relacional e não relacional
@@ -72,7 +72,7 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 * Lidando com dados em uma arquitetura de microservicos
 
 
-### Cloud
+### 7 Cloud
 
 * IaaS, PaaS e o SaaS e os riscos de implantação
 * O que é de fato uma aplicação cloud-native?
@@ -84,9 +84,9 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 * Serviços e riscos na implantação
 
 
-### A importância de aprender os conceitos ao invés de novos frameworks
+### 8 A importância de aprender os conceitos ao invés de novos frameworks
 
-#### Precisamos falar sobre atualizações
+#### 9 Precisamos falar sobre atualizações
 
 * Os problemas de se permanecer em uma versão fixa de JVM
 * Ciclo de atualizações dos frameworks
@@ -95,7 +95,7 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 * Balanceando a necessidade vs hype
 
 
-### Destrinchando performance de aplicações
+### 10 Destrinchando performance de aplicações
 
 * Conceitos
 * Testes de carga
