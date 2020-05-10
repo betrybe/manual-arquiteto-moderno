@@ -559,13 +559,13 @@ De uma maneira geral o projeto Lombok é uma biblioteca bastante famosa conhecid
 
 
 
-\* Uma vez que o código será gerado pelo projeto e não será visualizado pela IDE exceção que envolve essas classes tende a ser difícil de ser seguida pela pilha de exceção.
+* Uma vez que o código será gerado pelo projeto e não será visualizado pela IDE exceção que envolve essas classes tende a ser difícil de ser seguida pela pilha de exceção.
 
-\* Existem anotações como `@Data` que é uma maneira de quebrar o encapsulamento das classes. E você deixará de programar em programação orientada a objetos. É importante salientar o que diz no capítulo sete do clean code que deixa claro que a maior diferença entre OOP e estruturado é que na primeira opção nós escondemos os dados para expor o comportamento.
+* Existem anotações como `@Data` que é uma maneira de quebrar o encapsulamento das classes. E você deixará de programar em programação orientada a objetos. É importante salientar o que diz no capítulo sete do clean code que deixa claro que a maior diferença entre OOP e estruturado é que na primeira opção nós escondemos os dados para expor o comportamento.
 
-\* Boa parte dos códigos como getter e setter são gerados pela IDE.
+* Boa parte dos códigos como getter e setter são gerados pela IDE.
 
-\* O poder das anotações são muito tentadores, porém, encapsulamento não é sobre ter o atributo privado e com getter e setter públicos é sobre garantir que atributos sejam acessado com a menor visibilidade possível.
+* O poder das anotações são muito tentadores, porém, encapsulamento não é sobre ter o atributo privado e com getter e setter públicos é sobre garantir que atributos sejam acessado com a menor visibilidade possível.
 
 
 
