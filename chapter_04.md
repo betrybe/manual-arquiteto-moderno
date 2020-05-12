@@ -65,6 +65,28 @@ Um grande ponto de atenção que é necessário, é a governança e manter quem 
 
 
 
+## Quando não escolher por Microsserviços
+
+Um dos principais pontos para não se escolher ir para essa direção é quando não temos limites bem definidos de quais são as fronteiras que definem o seu negócio. Então é necessário ter uma visão completa de todo o seu domínio, e após isso começar a desacoplar as partes.
+
+Se você quer testar algo rápido no modelo de Startups, também não recomendo escolher por aqui, e sim ir para algo mais monolítico, ou descentralizado e depois de testado e estabelecido ir na direção de evoluir para microsserviços. Os microsserviços deveriam entrar depois que você encontrou aquilo que se encaixa ao seu negócio, então você consolida e ai sim coloca algo escalável para rodar.
+
+Se você criar aplicações que são empacotadas e entregues para seus clientes operar, microsserviços são uma péssima opção para você. Esse padrão de arquitetura traz algumas complexidades para você operar. Normalmente aplicações que são instaladas no cliente tem uma necessidade e um ambiente especifico para rodar, então neste caso, um arquitetura mais fechada e monolítica faz mais sentido.
+
+E o principal ponto a se escolher é não fazer porque está todo mundo fazendo. Você precisa ter um objetivo e analisar qual é o seu ganho em fazer isso, se não houver ganho, ou se você está fazendo só para dizer que fez, então a recomedação para você é: "não faça".
+
+## Planejando uma migração de um monolito para uma arquitetura de microservices
+
+Existem alguns padrões e tecnicas para fazer uma migração para de um monolito para um microserviço. Vale lembrar que são padrões, então são idéias que se pode seguir para chegar ao objeto que é migrar, mas não quer dizer que um padrão seja universalmente a melhor idéia, dependendo do caso, você pode precisar mesclar idéias e padrões.
+
+
+
+
+
+## Por onde começar?
+
+
+
 
 
 ## DTO ou não DTO?
