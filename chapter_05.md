@@ -119,6 +119,14 @@ Neste modelo você não roda a implementação velha ou a nova, você roda as du
 
 Esse padrão é uma opção para ser usada quando você tem aplicações de alto risco que não pode ficar indisponíveis de maneira alguma, que são críticas para o negócio, então você vai comparando o funcionamento da nova e faz a troca no momento em que você tem a certeza absoluta que vai funcionar tudo perfeitamente.
 
+#### Padrão: Colaborador de Decoração
+
+Esse padrão é utilizado quando você precisa mudar algo baseado no comportamento de algo acontecendo dentro do monolito, mas não pode alterar o monolíto. A idéia aqui é colocar algo como decoração para fazer com que o monolito esteja fazendo as chamadas aos serviços diretamente, mesmo que você não tenha chamado ele.
+
+Em vez de você interceptar ou mudar a requisição, você deixa ela acontecer normalmente, e baseado no resultado desta chamada, juntamos com a chamada ao microserviço externo e até mesmo alteramos o comportamento da resposta.
+
+Este padrão é usado normalmente quando você precisa mudar os dados, seja na chamada ou na resposta, e complementar essas informações sem alterar o seu monolito.
+
 
 
 ## Por onde começar?
