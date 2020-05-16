@@ -2,7 +2,7 @@
 
 
 
-Microservices, ou em portugues, Microsserviços, são um novo jeito de construirmos nossas aplicações nos dias de hoje, pregam ser independentes e modeladas para o dominio de negócios (o que faz o DDD ser muito importante). Essas aplicações se comunicam entre si via protocolos de rede, e tem uma arquitetura que pode resolver problemas que você tenha. Os microsserviços são um dos tipos do SOA (service-oriented architeture), e te o foco de colocar fronteiras bem especificas de negocios e promover a entrega independente destes serviços, trazendo a vantagem de pode ser agnóstico de tecnologia. Resumindo no ponto de vista de tecnologia, são capacidades de negócios encapsuladas em um ou mais endpoints, mas seguindos os seguintes pilares:
+[Microservices](https://www.martinfowler.com/articles/microservices.html), ou em portugues, Microsserviços, são um novo jeito de construirmos nossas aplicações nos dias de hoje, pregam ser independentes e modeladas para o dominio de negócios (o que faz o DDD ser muito importante). Essas aplicações se comunicam entre si via protocolos de rede, e tem uma arquitetura que pode resolver problemas que você tenha. Os microsserviços são um dos tipos do SOA (service-oriented architeture), e te o foco de colocar fronteiras bem especificas de negocios e promover a entrega independente destes serviços, trazendo a vantagem de pode ser agnóstico de tecnologia. Resumindo no ponto de vista de tecnologia, são capacidades de negócios encapsuladas em um ou mais endpoints, mas seguindos os seguintes pilares:
 
 
 
@@ -149,7 +149,26 @@ Agora imagine você no mesmo cenário que a Google, onde tudo lá roda em cima d
 
 Vale lembrar que o Kubernetes não é uma alternativa para o Docker, e uma ferramenta não substituí a outra, na verdade elas são complementares. Você pode usar as duas separadas, mas a chave do sucesso e juntar as duas. No Docker se cria o container da aplicação, e com o Kubernetes você automatiza as operação de manutenção, networking, segurança, escalabilidade. 
 
-#### Contruindo a aplicação
+#### Construindo o Serviço
 
-Mas claro que para isso você precisa construir aplicações que sejam leves e fáceis de se levar para um container e colocar nesse mundo.
+Mas claro que para isso você precisa construir aplicações que sejam leves e fáceis de se levar para um container e colocar nesse mundo. E para isso existem muitos sabores para você escolher, mas os mais populares usados pelas comunidades, vamos encontrar:
+
+- [Spring Cloud com Spring Boot](https://spring.io/projects/spring-cloud) -  O framework da Spring é um dos mais completos para se criar aplicações distribuídas e seus microsserviços. Fornecendo a você todo o ferramental para que você possa colocar seu serviços para funcionar.
+- [.Net Core](https://dotnet.microsoft.com/download/dotnet-core) - A versão Open Source da Microsoft para o .NET framework e também entregar uma versão mais leve e adequada para o mundo dos microsserviços.
+- [Vert.x](https://vertx.io/) - Este é um framework poliglota que roda em cima da JVM focado para que você crie seus serviços para um ambiente orientado a eventos de maneira reativa.
+- [Akka](https://akka.io/) - Este framework também é feito para ambientes orientados a eventos, voltando a programação reativa. Também roda em cima da JVM, mas para aplicações baseados em Java ou Scala.
+- [Quarkus](https://quarkus.io/) - Novo player neste mercado, mas é uma stack nativa para Kubernetes e baseado em JVM. Onde você pode seguir por padrões tanto reativos como imperativos.
+- [Falcon](https://falcon.readthedocs.io/en/stable/) - Essa é uma biblioteca para Python que permite que você construa seus serviços com alta performance.
+- [Go](https://golang.org/) - Linguagem criada pela Google, baseada em C, que pode lhe dar serviços leves e rapidos, permitindo o uso de programação funcional.
+- [Moleculer](https://moleculer.services/) - Para quem gosta de usar o Node.js para construir seus serviços, esse framework pode ajudar a construir serviços leve.
+
+Podemos citar ainda vários outros frameworks, o importante no caso de microserviços é manter os conceitos e pilares para que as aplicações possam ter responsabilidade única, serem independentes e performáticas.
+
+E depois que seu serviço estiver construído e já montado dentro de uma container, será necessário escolher onde você irá colocar esse serviço para funcionar, e pode ser aonde a sua infra-estrutura estiver, seja na Cloud, seja em uma Nuvem Privada, seja na sua propria estrutura on-premise, não importa. Claro que para cada ambiente diferentes, você irá encontrar desafios para fazer com que os conceitos sejam aplicados.
+
+Mas a grande chave aqui é escolher um framework e colocar em uma ambiente que sua equipe seja capaz de dar suporte e conheça como usar e monitorar, olhar performance. Pois escolher uma tecnologia, ou framework que você não conhece, vai ter uma curva de aprendizado e pode ser que seu time não tenho o tempo necessário para aprender e terá que lidar com ela em produção.
+
+Ambientes Privados ou On-Premise são mais trabalhasos para se manter um escalabidade, mas não são impossíveis de serem feitos, se os pilares são mantidos, você está sim fazendo microsserviços.
+
+#### Práticas de Segurança
 
