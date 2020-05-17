@@ -170,5 +170,35 @@ Mas a grande chave aqui é escolher um framework e colocar em uma ambiente que s
 
 Ambientes Privados ou On-Premise são mais trabalhasos para se manter um escalabidade, mas não são impossíveis de serem feitos, se os pilares são mantidos, você está sim fazendo microsserviços.
 
-#### Práticas de Segurança
+## Práticas de Segurança
+
+Código seguro deveria ser uma regra em qualquer design de aplicação, em alguns ramos são tão importantes quanto qualquer regra de qualidade que se possa ter. E para microsserviços não é diferente e aqui não existe nenhum segredo, é a mesma regra para qualquer desenho de aplicação, no mínino se deve olhar para o [Top 10 do OWASP](https://owasp.org/www-project-top-ten/) e seguir essas recomendações no seu projeto. O minimo que o seu desenvolvedor precisa saber é sobre essas vulnerabilidades.
+
+Sério mesmo, não há nada novo aqui, e qualquer um que esteja tentando lhe convencer de um "Cross Microservice Injection" ou algo do tipo, está tentando lhe enrolar. 
+
+No caso de Microsserviços há abordagem que muda é em relação a Autorização e Autenticação, e vamos discurtir isso mais a frente.
+
+Uma dica importante sempre que se olha em termos de código seguro, é colocar algo na sua esteira de CI/CD e fazer a validação do seu código para procurar isso, e não só verificar se apenas o seu código traz vulnerabilidades, é interessante olhar se a bibliotecas de terceiros que você possa estar usando não podem estar causando algum problema no seu ambiente.
+
+E ferramentas para isso tem várias, entre elas temos o [Fortify](https://www.microfocus.com/en-us/solutions/application-security), [Snyk](https://snyk.io/), [JFrog Xray](https://jfrog.com/xray/). Porque as vezes uma dependencia desatualizada pode colocar seu serviço em posição de risco, então olhar a melhor prática no código, e uma ferramenta para ajudar a apontar onde melhorar, formam um time imbátivel.
+
+Outra prática que eu vejo em algumas empresas, principalmente quando os serviços estão expostos apenas internarmente e não para fora, é não usar o HTTPS, ou melhor, use um TLS (Transport Layer Security). E para que você precisa disso, privacidade, integridade e idenficicação.
+
+E quando estamos falando de microsserviços, um cenário que vai acabar sempre existindo é termos que falar com servidores de autorização, e podemos estar falando de um API Key, ou de um "client secret", ou até mesmo credenciais para uma autenticação básica. Então a primeira regra básica não deixe essas chaves no seu repositório de fonte, esses caras precisam ser variáveis de ambientes ou chaves de configuração externa, e elas devem estar sempre encriptadas.
+
+Como estamos falando de containers, as práticas valem também para lá e nunca rode seu container como "root". Você precisa assumir a premissa de que seu sistema nunca é 100% seguro, alguém vai conseguir explorar algo. Então você não pode só prevenir, você precisa detectar e reagir a isso.
+
+A chave são seguir ao menos cinco pilares:
+
+- Seguro por desenho
+- Vasculhe suas dependencias
+- Use sempre HTTPS
+- Use Tokens de Acesso e Identidade
+- Proteja e Encripte seus segredos.
+
+#### Soluções para Autenticação e Autorização
+
+Para o mundo de microsserviços o principal ponto é verificar quem você é (Autenticação) e aquilo que você pode fazer (Autorização). E dentro da arquitetura de microsserviços você vai estar espalhado em muito serviços pela rede e terá que lidar com alguns problemas em relação a como resolver isso.
+
+
 
