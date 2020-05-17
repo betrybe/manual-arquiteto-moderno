@@ -102,7 +102,7 @@ Vamos falar sobre como *infraestrutura como serviço (Infrastructure As A Servic
 
 A melhor maneira de pensar no cloud em termo de abstração para o negócio, certamente é na analogia de uma pizza como serviço. Podemos partir do cenário onde temos a opção de preparar tudo em casa e ter que gerenciar todo o processo ou, sair para comer uma pizza e não se preocupar com nada. 
 
-![](images/chapter_03/image1.png)
+![](images/chapter_07_01.png)
 
 Na imagem acima, temos dispostos quatro formatos:  on-premise, IaaS, PaaS e SaaS, onde as caixinhas brancas são as tarefas de nossa responsabilidade, e as azuis são de responsabilidade de terceiros. Essa mesma comparação pode ser feita, se trocarmos as tarefas de criação de pizza, por tarefas referentes a criação de software: Instalação e gerenciamento de sistema operacional, networking, storage, orquestração de serviços, gerenciamento de middleware, rurntime, pipelines de CI/CD, e até a criação da aplicação propriamente dita.
 
@@ -110,7 +110,7 @@ Quando nós falamos de cloud e seus serviços, note que quanto menor a abstraç�
 
 
 
-![](images/chapter_03/image2.png)
+![](images/chapter_07_02.png)
 
 
 
