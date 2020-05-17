@@ -15,7 +15,7 @@ Essa estratégia de dividir e conquistar tem muitas vantagens dentre elas, inici
 
 
 
-Basicamente o livro tem pontos que valem a pena a serem seguidos:![](images/chapter_03/image_01.jpg)
+Basicamente o livro tem pontos que valem a pena a serem seguidos:![](images/chapter_03_01.jpg)
 
 *Fonte: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html*
 
