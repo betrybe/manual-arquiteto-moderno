@@ -14,7 +14,7 @@
 
 Neste cenário criamos aplicações que são desacopladas em pequenos serviços e cada um deles representando um objetivo de negócio. Onde eles podem ser desenvolvidos e facilmente mantidos de maneira individual, e podendo usar diferentes tipos de linguagem de programação.
 
-<center><img src="images/chapter_04/Microservice.png" alt="Arquitetura Microsserviços"  /></center>
+<center><img src="images/chapter_04_01.png" alt="Arquitetura Microsserviços"  /></center>
 
 
 
