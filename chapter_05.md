@@ -200,5 +200,25 @@ A chave são seguir ao menos cinco pilares:
 
 Para o mundo de microsserviços o principal ponto é verificar quem você é (Autenticação) e aquilo que você pode fazer (Autorização). E dentro da arquitetura de microsserviços você vai estar espalhado em muito serviços pela rede e terá que lidar com alguns problemas em relação a como resolver isso.
 
+Autenticação e Autorização precisam ser resolvidos em cada um dos microsserviços, e parte dessa lógica global vai ter que replicada em todas os serviços, e neste caso um jeito para se resolver isso é criar bibliotecas para padronizar essa implementação, só que isso vai fazer que você perca um pouco da flexibilidade de quais tecnologias usar, pois a linguagem ou framework precisa suportar essa biblioteca padrão.
 
+Outro cuidado que o uso da biblioteca lhe ajuda é a não quebrar o principio da responsabilidade única, já que o serviço deveria se preocupar apenas com a lógica de negócio.
+
+E outro ponto que é necessário ser analisado é que os microsserviços devem ser *stateless*, então é necessário usar soluções que consigam manter isso.
+
+Podemos abordar a Autorização e Autenticação pelo modelo de sessão distribuída, usando ferramentas para você armazenar essa sessão, e onde você pode abordar manter a sessão das seguintes maneiras:
+
+**Sticky Session** - A idéia aqui é usar o load balancer e manter o usuário sempre no mesmo servidor que veio o request. Só que esse cara vai fazer você só conseguir expandir horizontalmente.
+
+**Replicação de Sessão** - Ou seja, toda instância salva a sessão e sincroniza através da rede. Só que aqui vai lhe causar um "overhead" de rede. Quanto mais instancias, mais terá que replicar e se terá que lidar com a latencia disso.
+
+**Sessão Centralizada** - Isso significa que os dados podem ser recuperados em um repositório compartilhado. Em vários cenários, esse é um ótimo desenho, porque se pode dar alto desempenho para as aplicações, onde você deixa o status do login escondido dentro dessa sessão. Mas claro que existe a desvantagem que você precisa criar mecanismos para proteger essa sessão e replicar entre as aplicações, que pode também adicionar latências na sua rede.
+
+Mas quando estamos neste cenário de microsserviços, a recomendação passa a ser o uso de Tokens, onde a maior diferença para o modelo de sessão descrito acima, é que deixamos de ter algo centralizado em um servidor, e passamos a responsabilidade para o próprio usuário.
+
+O Token vai ter a informação de identificação de usuário, e toda vez que chega ao servidor, podemos validar no server a identidade e a autorização. O token é encriptado e podem seguir um padrão como o [JWT](https://jwt.io/).
+
+E usando token conseguimos delegar a responsabilide do estado do usuário, para algum processo que possa a validade do mesmo. Habilitamos vários tipos de validações de segurança que podem ser colocadas na malha (Service Mesh) ou no seu gateway de entrada e retirar essas responsabilidades dos serviços e aplicações e mesmo assim ainda continuar garantido a segurança.
+
+Com o uso do JWT você passa a ter um "client token" onde você vai passar a algum servidor para que ele possa fazer a validação/criação do mesmo. 
 
