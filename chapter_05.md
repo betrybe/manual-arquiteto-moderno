@@ -222,3 +222,28 @@ E usando token conseguimos delegar a responsabilide do estado do usuário, para 
 
 Com o uso do JWT você passa a ter um "client token" onde você vai passar a algum servidor para que ele possa fazer a validação/criação do mesmo. 
 
+E quando se fala em Tokens, a chave é não querer reinventar a roda, e sim usar aquilo que já está consolidadado, é onde entra o OpenId e o OAuth/OAuth2. O Oauth 2 é praticamente o padrão mais utilizado para autenticação.
+
+O padrão de OpenID é aquele usando quando você pode se conectar ou usar o token para se logar em vários sites ou serviços. Mas no seu padrão local, a recomendação é o OAuth, que estabelece um protocolo para que você tenha acesso aos recursos que você precisa, e ele trabalha com quatro papéis:
+
+**Resource Owner** - Este é o papel que controla os acessos aos recursos.
+
+**Resource Server** - É onde fica os serviços a serem acessados, ou seja, aqui são onde estão as suas API's, aplicações e etc.
+
+**Client** - É quem faz a solicitação ao Resource Owner do recurso que ele precisa consumir.
+
+**Authorization Server** - Quem gera os tokens de acesso, permite que o Client chegue ao recursos que foram permitidos, com o nível de acesso definido.
+
+E como funciona isso, basicamente o "client" solicita ao Resource Owner acesso ao recurso, e este quando autoriza envia para o "Client" o "authorization grant", que é a credencial que representa que o Resource Owner autorizou a passagem. Então o "Client" vai solicitar ao Authoration Server um Token de acesso, tudo sendo válido, o Client recebe o seu token de acesso, que vai ser repassado para o Resource Server para que ele possa consumir aquilo que foi solicitado.
+
+E existem 4 tipos fluxos para obtermos o token de acesso no padrão OAuth. Temos o Authorization Code, que é o tipo mais comum. O Implicit que é muito utlizado por aplicações SPA. O Resource Owner, que estabelece a confiança entre as aplicações e o Client Credentials que é usado para falar de um serviço para outro.
+
+Tirando a parte de Autenticação e Autorização, que precisam de um cuidado a parte, segurança de microsserviços é como a segurança de qualquer aplicação e precisamos estar atentos a isso.
+
+------
+
+Como visto acima, a arquitetura de microsserviços traz bastante beneficios para o seu ambiente e lhe oferece a vantagem de deixar o desenvolvimento independente quando se tem vários times e funcionalidade, e essa independencia se extende também para o deploy da aplicação. Ou seja, você da velocidade para seu times e agilidade, consegue ter código de melhor qualidade já que ele vai estar organizado ao redor da funcionalidade. Tem-se a vantagem de ser fácil de escalar apenas no ponto em que se precisa, e ainda poder ser aplicacado na tecnologia que você tem mais dominio.
+
+Mas, como já dito anteriormente, não é nenhuma bala de prata, ele traz complexidades para o ambiente e novas preopações em termos de segurança. Imagine um projeto gigante com multiplas instancias e centenas de microsserviços, como você irá monitorar? Em caso de erro, como você vai encontrar, desviar ou mesmo tratar o erro?
+
+Se usado da maneira correta, e tratado de perto os pontos de atenção, esse padrão de arquitetura tem muito a agregar no seus projetos.
