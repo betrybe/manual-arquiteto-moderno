@@ -1,7 +1,7 @@
 # Manual do Arquiteto Moderno
 
 ## Proposta
-  
+
 ## Objetivo
 
 Esta proposta é para a criação de um material que trás pontos de vista práticos propostos partir idéias existentes em renomados livros do mundo de desenvolvimento de software. Com base nestes livros e em resultados da aplicação destes conceitos na prática, será exposta a visão de arquitetos e engenheiros sêniors .
@@ -13,7 +13,7 @@ Um ponto importante sobre esse livro é que não há intenção de se introduzir
 -   Clean Architecture;
 -   Building Microservices;
 -   The Twelve Factors;
-  
+
 Alinhando teoria e prática, este livro trará visões arquiteturais, motivações que levam a determinadas escolhas e seus trade-offs. Não serão detalhados tutoriais ou usos de frameworks específicos.
 
 ## Capítulos
@@ -51,17 +51,13 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 
 ### 5 Microservices
 
-* Pontos de atenção
-* Vantagens e desvantagens em relação ao monolito
+* Monolitos vs Microsserviços
+* Quais as vantagens de se escolher por Microsserviços
+* E os desafios que Microsserviços vão trazer
+* Quando não escolher por Microsserviços
 * Planejando uma migração de um monolito para uma arquitetura de microservices
-* Teorema do CAP e seus impactos na arquitetura
-* DTO ou não DTO?
-* Melhores práticas para se definir camadas da aplicação
-* Segurança
-	* BASIC
-	* Auth
-	* Auth 2
-* Paginação
+* Por onde começar?
+* Práticas de Segurança
 
 
 ### 6 Banco de dados
@@ -70,6 +66,7 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 * Dicas de modelagem relacional e não relacional
 * Validação de dados é responsabilidade do banco ou da aplicação?
 * Lidando com dados em uma arquitetura de microservicos
+* Paginação
 
 
 ### 7 Cloud
@@ -83,8 +80,11 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 	* Ferramentas
 * Serviços e riscos na implantação
 
+#### 8 A importância de aprender os conceitos ao invés de novos frameworks
 
-### 8 A importância de aprender os conceitos ao invés de novos frameworks
+* Teorema do CAP e seus impactos na arquitetura
+* DTO ou não DTO?
+* Melhores práticas para se definir camadas da aplicação
 
 #### 9 Precisamos falar sobre atualizações
 
@@ -106,4 +106,4 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 A proposta é que este seja um livro colaborativo, onde haja uma revisão profissional de linguagem semântica e práticas de escrita sobre o conteúdo entregue. O grupo de autores será inicialmente composto por Otávio Santana, Karina Varela e Sérgio Lopes, sendo possível que novos colaboradores submetam conteúdo de sua expertise ao longo do processo de criação.
 
 
-  
+
