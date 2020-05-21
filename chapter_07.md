@@ -1,60 +1,103 @@
 # Cloud
 
-Agora que já cobrimos conceitos sobre microservices, boas práticas de arquitetura e design de código, vamos falar um pouco sobre computaçào em nuvem (*cloud*).
+Uma vez que conversamos sobre DDD, microservices, boas práticas design de código e arquitetura de software, temos embasamento para prosseguir e abordar um dos temas mais discutidos do cenário de tecnologia: computaçào em nuvem (*cloud* *computing*).
 
-A computação em nuvem trouxe metodologias e técnicas que revolucionaram os mundos comercial e técnico. Entre os termos que surgiram, nasceu o *cloud native*, e para atender e cobrir essas expectativas no universo Java, nasceu o Jakarta EE.
+Vamos discutir a seguir, o que se deve ter em mente ao arquitetar aplicações para um ambiente de cloud, quais as perspectivas mais populares a respeito do conceito de uma aplicação "cloud-native" e porque está tão ligada a ferramentas como Kubernetes.  Serão também descritos as funcionalidades esperadas em uma aplicação, para que sejam first-class citizens na cloud.
+
+Um dos termos mais populares para se categorizar aplicações relacionadas a cloud, é "*cloud-native*". Empresas já rotulam seus produtos como cloud-native, quando na verdade, são apenas cloud-enabled. Precisamos entender o que são estas categorizações, seus conceitos e diferenças.
 
 ## Cloud-Native ou Cloud-Enabled?
 
-Estes dois conceitos são fundamentais e servem de embasamento para o entendimento da situação atual de seu ambiente, e o planejamento de criação e modernização de aplicações.
+O entendimento destes conceitos te auxiliará no entendimento da situação em que suas aplicações estão, e dará suporte ao planejamento de uma jornada para a cloud.
 
-No contexto da computação em nuvem, uma aplicação pode ser categorizada conforme seu nível de adequação a um ambiente de cloud como sendo *cloud-enabled* ou *cloud-native* (a.k.a. *cloud-ready*).  
+Neste contexto, uma aplicação pode ser categorizada conforme seu nível de adequação a um ambiente de cloud como sendo *cloud-enabled* ou *cloud-native* (a.k.a. *cloud-ready*).  
 
-Uma aplicação que roda na cloud, mas que originalmente foi criada para rodar em ambiente tradicional - um data-center local, um cluster estático de servidores de aplicação, por exemplo, pode ser categorizada como *cloud-enabled*. Aplicações como esta costumam ter maior consumo de recursos (cpu, memória, storage) se comparado a aplicações cloud-native. 
+#### Cloud-Enabled
+
+É uma aplicação que roda na cloud - em um ambiente containerizado - mas que originalmente foi criada para rodar em ambiente tradicional - um data-center local, um cluster estático de servidores de aplicação, por exemplo, pode ser categorizada como *cloud-enabled*. Aplicações como esta costumam ter maior consumo de recursos (cpu, memória, storage) se comparado a aplicações cloud-native. 
 
 Uma aplicação cloud-enabled passou por refatorações e ajustes para ser conteinerizada e orquestrada por plataformas como Kubernetes. O custo ou esforço de se refatorar toda a aplicação não são viáveis, portanto ela não usufrui de todos os benefícios existentes em um ambiente de cloud. 
 
-> **INFO:** [Kubernetes](https://kubernetes.io/): É uma ferramenta open-source de orquestração de containers e trabalha muito bem com o [Docker](https://www.docker.com/). Atualmente, é uma das ferramentas mais populares. 
+> **INFO:** [Kubernetes](https://kubernetes.io/): É uma ferramenta open-source de orquestração de containers e trabalha muito bem com o [Docker](https://www.docker.com/). Atualmente, é a ferramenta mais popular na comunidade.
 
-Vamos entender melhor estas diferenças ao aprofundarmos o conceito de *cloud*-native. Vamos discorrer um pouco mais sobre este conceito uma vez que não há uma, no momento da escrita deste livro, uma definição exata acerca do termo.
+Para entender melhor tudo o que uma aplicação cloud-enabled não é capaz de entregar facilmente, vamos falar sobre o conceito cloud-native.
 
-### Desmistificando o Cloud-Native
+### Perspectivas sobre o conceito Cloud-Native
 
-Existem vários entendimentos acerca deste conceito. Se lermos livros ou artigos sobre cloud native, poderemos nos deparar com diferentes opinões e um consequente não consenso sobre o termo. Vejamos alguns exemplos abaixo:
+No momento da escrita deste livro, não há um consenso ou definição exata acerca do termo. Portanto, vejamos posicionamentos:
 
+> "Cloud-native é uma abordagem para criar e executar aplicações que explora as vantagens do modelo de computação em nuvem. (...)"
+>
+>  —[VMWare Tanzu (Pivotal)](https://tanzu.vmware.com/cloud-native)
 
+> "Cloud-native é uma maneira diferente de pensar e raciocinar sobre sistemas de software. Ele incorpora os seguintes conceitos: Alimentado por infraestrutura descartável, composta por limites, escala globalmente, adota a arquitetura descartável. (...)"
+>
+> — [Architecting Cloud Native Applications](https://www.amazon.com/Architecting-Cloud-Native-Applications-high-performing-ebook/dp/B07QTJ8WW8/ref=sr_1_4?keywords=cloud+native+applications&qid=1575059989&sr=8-4)
 
-> Cloud-native é uma abordagem para criar e executar aplicações que explora as vantagens do modelo de computação em nuvem.  —Pivotal
+> "De maneira geral, “cloud-native” é uma abordagem para criar e executar aplicações que explora as vantagens do modelo de entrega de computação em nuvem. "Cloud-native" é sobre como os aplicações são criados e implantados, não onde. (...)" 
+>
+> — [InfoWorld](https://www.infoworld.com/article/3281046/what-is-cloud-native-the-modern-way-to-develop-software.html)
 
+> "As tecnologias cloud-native capacitam as empresas a criar e executar aplicações escaláveis em ambientes modernos e dinâmicos, como públicos, privados, e nuvens híbridas. Containers, service meshes, microservices, infraestrutura imutável e APIs declarativas exemplificam essa abordagem. (...) "
+>
+> — [Cloud-Native Computing Foundation](https://www.cncf.io/)
 
+> "Cloud-native é um adjetivo que descreve as aplicações, arquiteturas, plataformas/infraestrutura, e processos,que juntos as fazem funcionar de uma forma que nos permita melhorar nossa habilidade de rapidamente responer a mudanças e reduzir imprev  that together make it economical to work in a way that allows us to improve our ability to quickly respond to change and reduce imprevisibilidade.”
+>
+> — [Christian Posta](https://www.infoq.com/articles/cloud-native-panel/)
 
-> Cloud-native é uma maneira diferente de pensar e raciocinar sobre sistemas de software. Ele incorpora os seguintes conceitos: Alimentado por infraestrutura descartável, composta por limites, escalas globalmente, adota a arquitetura descartável. — [Architecting Cloud Native Applications](https://www.amazon.com/Architecting-Cloud-Native-Applications-high-performing-ebook/dp/B07QTJ8WW8/ref=sr_1_4?keywords=cloud+native+applications&qid=1575059989&sr=8-4)
-
-
-
-> De maneira geral, “cloud-native” é uma abordagem para criar e executar aplicações que explora as vantagens do modelo de entrega de computação em nuvem. "Cloud-native" é sobre como os aplicações são criados e implantados, não onde. — [InfoWorld](https://www.infoworld.com/article/3281046/what-is-cloud-native-the-modern-way-to-develop-software.html)
-
-
-
-> As tecnologias cloud-native capacitam as empresas a criar e executar aplicações escaláveis em ambientes modernos e dinâmicos, como públicos, privados, e nuvens híbridas. Containers, service meshes, microservices, infraestrutura imutável e APIs declarativas exemplificam essa abordagem. — [Cloud-Native Computing Foundation](https://www.cncf.io/)
-
-
-
-Uma abordagem do tema sobre a perspectiva do autor:
-
-> Um conjunto de boas práticas para otimizar uma aplicação na nuvem por meio de: containerização, orquestração e automação. —  [Otávio Santana](https://twitter.com/otaviojava)
-
-
-
-Em um consenso mútuo em torno das definições de vários artigos, podemos dizer que o cloud native é um termo usado para descrever ambientes baseados em containers e as boas práticas ligadas a esta característica. Portanto, o cloud-native não está relacionado a linguagens ou estruturas de programação específicas ou mesmo a uma empresa provedora de nuvem: está relacionado, mas não limitado, ao uso de containers.
+> "Um conjunto de boas práticas para otimizar uma aplicação na nuvem por meio de: containerização, orquestração e automação. "
+>
+> —  [Otávio Santana](https://twitter.com/otaviojava)
 
 
+
+Além dos conceitos acima, um conjunto de padrões bastante adotado pela comunidade é o [12-factor](https://12factor.net/). As excelentes práticas de arquitetura de software sugeridas nesta metodologia originam do livro [Patterns of Enterprise Application Architecture, por Martin Fowler e David Rice](https://books.google.com.br/books/about/Patterns_of_enterprise_application_archi.html?id=FyWZt5DdvFkC&redir_esc=y). Tendo em mente que o livro foi publicado em 2003, tempos estes onde ainda não se falava em "cloud-native", podemos considerar que, ao adotar os conceitos do 12-factor você estará não apenas criando uma aplicação cloud-native, mas também, estará implementando boas práticas arquiteturais e culturais no desenvolvimento e entrega de software.
+
+> **TIP**: Os detalhes de implementação que serão detalhados a seguir, podem evoluir e mudar com o tempo. Porém, as definições e padrões esperadas de uma aplicação cloud-native, permanecerão. Portanto, recomendamos a leitura das referências citadas e aprofundamento no entendimento do conceito. 
+
+### Princípios de design e containerização de aplicações
+
+Em se tratando em detalhes de implementação de uma aplicação cloud-native, é consenso entre as fontes citadas, que estas apps serão **conteinerizadas**. Com isto em mente, o arquiteto deve se preocupar não apenas com o  [SOLID](https://www.amazon.com.br/Clean-Architecture-Craftsmans-Software-Structure-ebook/dp/B075LRM681/ref=sr_1_2?adgrpid=83848702769&gclid=CjwKCAjwqpP2BRBTEiwAfpiD-w6m0nZtj0_jaXw7DfCfvIuztN-m6OrPIQ5BH2g2UHzLOird4mProRoCNTYQAvD_BwE&hvadid=426015975773&hvdev=c&hvlocphy=1001541&hvnetw=g&hvqmt=b&hvrand=11863819395550854586&hvtargid=kwd-298463329082&hydadcr=5628_11235154&keywords=clean+architecture&qid=1590032086&sr=8-2) na qualidade do código e mas também com os [princípios de design de conteinerização de aplicações](https://www.redhat.com/en/resources/cloud-native-container-design-whitepaper).
+
+Princípios a serem considerados durante o tempo de construção:
+
+* Single Concern Principle: Similar ao **S** do padrão **S**OLID, porém neste contexto, cada contêiner deve resolver *um* problema, e resolvê-lo *bem*; Caso seja necessário acoplar mais features a um microservice, por exemplo, side-cars podem ser utilizado no mesmo pod.
+* Self-Containment Principle: Deve estar contida na imagem de build, todas as bibliotecas, runtime da linguagem e ferramentas de construção necessárias para se realizar o build a aplicação. As exceções são dados que variam entre ambientes, dados estes, que estarão por exemplo em variáveis de ambiente.
+* Image Immutability Principle: imagens imutáveis são essenciais para se permitir escalabilidade e adoção de estratégias de deploy. Diferenças entre ambientes são providas ao container através de configurações (por exemplo, utilizando-se variáveis de ambiente ou ConfigMaps);
+
+Princípios a serem considerados durante o tempo de runtime:
+
+* High Observability Principle: A aplicação containerizada deve prover as API's padronizadas para que o orquestrador possa fazer health-checks de liveness e readiness. Coletas de logs e métricas também são parte das API's que o orquestrador poderá consumir e disponibilizar através de ferramentas como, por exemplo, Fluentd, Logstash para logs centralizados, ou Prometheus e Grafana para métricas. Apesar de tratar a aplicação como uma caixa preta, os desenvolvedores que buscam entregar apps cloud-native devem se preocupar em expor estas API's.
+* Lifecycle conformance principle: é recomendado realizar graceful shutdown dos serviços sempre que possível, certo? Com containers, o mesmo é valido. O container precisa, através de API's, permitir que o orquestrador envie comandos para graceful ou forceful shutdown. E caso necessário, pode até mesmo fazer uso de api's como "pre-stop" e "post-stop" para implementação de necessidades específicas do componente pertencente ao container.
+* Process disposability principle: Deve-se ter em mente que o container é volátil, e pode ser destruído e recriado várias vezes. Desta forma, tenha em mente o tempo de start-up e shutdown de seus containers. Além disto, caso seja necessário manter estado, deve-se recorrer a bancos de dados ou volumes providos pela plataforma.
+* Runtime confinement principle: Ao seguir o princípio Self-Containment Principle, a imagem utilizada para se gerar o container utilizado de fato para executar a aplicação terá uma menor necessidade de consumo de recursos (memória, espaço, cpu). O princípio de Runtime Confinement, espera que o container tenha definidos os limites de recursos que serão utilizados. Com base nisso, o orquestrador poderá fazer uma melhor utilização da infraestrutura disponível.
+
+Com base nestes princípios, é possível notar que não basta apenas criar um Dockerfile, containerizar uma aplicação e categorizá-la como "cloud-native". No processo de conteinerização, é esperado que a aplicação implemente e disponibilize recursos que facilitarão seu gerenciamento e orquestração.
+
+### Funcionalidades de uma aplicação cloud-native
+
+Um conjunto de microserviços que serão disponibilizados contêinerizados em um ambiente de cloud, podem utilizar, conforme necessidade, dos seguintes recursos oferecidos da plataforma de orquestração:
+
+|                                                           |                                      |
+| :-------------------------------------------------------: | :----------------------------------: |
+| Gerenciamento de configurações (Configuration Management) | Service Discovery and Load Balancing |
+|                      API Management                       |           Service Security           |
+|                 Scheduling (of workloads)                 |     Auto Scaling / Self healing      |
+|                    Distributed Tracing                    |         Centralized Metrics          |
+|                    Centralized Logging                    |                                      |
+
+Existem centenas de serviços que podem ser utilizados juntamente à plataforma de orquestração para fornecer as funcionalidades acima. Pensando em organizações que estão na jornada para a cloud, nasceu a Cloud Native Computing Foundation (CNCF). A CNCF nasceu com o objetivo de se definir o termo Cloud Native e fornecer espaço para projetos opensource como Kubernetes, Prometheus, e [muito mais](https://landscape.cncf.io/zoom=200). A CNCF adota projetos e os encaixa na arquitetura de cloud computing, segundo a visão dos membros do comitê.
+
+Uma vez que tivemos um overview de todas as funcionalidades que podemos usufruir ao evoluir nossa aplicação, vamos ter uma idéia de como é o ciclo de vida dessas apps.
 
 ### O ciclo de vida de uma aplicação cloud-native
 
-Vejamos um cenário que demonstra o ciclo de vida de uma aplicação cloud-native, com aplicação de melhores práticas de implantação:
+A componentização dos serviços, permite agora que os times de desenvolvimento entreguem mudanças com maior velocidade. Com isto, o time de operações precisa responder de forma equivalente, entregando serviços que permitam entregas velozes porém estáveis. Para atingir o cenário ideal, é de comum entendimento que a automação de processos de T.I. é essencial não só para o aumento da produtividade como também, para o aceleramento da evolução da organização como um todo. 
 
-Uma vez criada a aplicação:
+Nos cenários atuais, clientes esperam uma evolução constante e serviços altamente disponíveis e performáticos. Vejamos um cenário que considera esta necessidade, e demonstra o ciclo de vida da aplicação, utilizando-se melhores práticas de implantação:
+
+Considerando que sua aplicação está pronta para deploy:
 
 * O código fonte deve ser disponibilizado em um repositório de código fonte - *a single source of truth*.
 
@@ -70,41 +113,27 @@ Uma vez criada a aplicação:
 
   >  **TIP:** É recomendado que a imagem-base gerada seja armazenada em um registro de imagens.
 
-* A partir desta imagem, a plataforma utilizada (i.e. Kubernetes, OpenShift, Rancher, etc) irá criar a quantidade de containers especificada em suas configurações. 
+* A partir desta imagem, a plataforma utilizada (i.e. Kubernetes, OpenShift, Rancher, etc) irá criar a quantidade de containers especificada. 
 
   > **TIP:** É muito comum a existência de casos de uso que podem usufruir da utilização de Operators para gerenciamento e manutenção de aplicações. 
 
-Alguns conceitos extras sobre a existência de uma aplicação cloud-native:
-
-* A imagem que contém a aplicação executável deve preferencialmente ser imutável. De acordo com esse conceito uma vez construída a imagem, não deve ser alterada. Portanto, todas as configurações e customizações passam a ser feitas via variáveis de ambiente na plataforma.
-* A aplicação pode usufruir de forma transparente de features providas por sidecars, containers que existem no mesmo pod e agregam funcionalidades de forma transparente à aplicação. Exemplos de fucionalidades são observabilidade, segurança, tracing, políticas de comunição, entre outros.
-* A utilização de ferramentas centralizadoras de logs facilitará a analise e troubleshooting quando necessário;
-* A aplicação deve disponibilizar uma API que permita que a plataforma identifique sua "saúde". Com base nisso a plataforma decidirá se um container está pronto para atender requests, se está estagnado e deve ser destruído para que um novo seja recriado.
+Automação dos processos de entrega de software através da utilização de Entrega Contínua e Deploy Contínuo (CI/CD) é uma das práticas da cultura DevOps. Esta prática se mostrou eficaz em ambientes tradicionais, e agora, se mostra indispensável quando se trabalhando com times menores e centenas de microserviços rodando em clouds privadas, públicas, ou híbridas. 
 
 ## A jornada cloud-native
 
-Entendidos os conceitos que giram em torno de uma aplicação cloud-native e após se ter um resumo superficial sobre o ciclo de vida de uma aplicação cloud-native, o próximo passo é entender as formas que estas aplicações podem ser entregues e as opções disponíveis no mercado. 
+Entendidos os conceitos que giram em torno de uma aplicação cloud-native e após se visualizar o ciclo de vida de uma aplicação cloud-native, o próximo passo é entender as formas que estas aplicações podem ser entregues e as opções disponíveis no mercado. 
 
-Há de se concordar que a transformação digital rumo a cloud acarreta não só uma mudança na forma de se codificar aplicações (time de desenvolvedores), mas se estende a outras áreas da organização de T.I. que precisará se reformular e lidar com novos desafios. Cada organização se encontra em um momento diferente, possui budgets diferentes e times com características e perfis muito distintos:
+Há de se concordar que a transformação digital rumo a cloud acarreta não só uma mudança na forma de se codificar aplicações (time de desenvolvedores), mas se estende a outras áreas da organização de T.I. que precisará se reformular e lidar com novos desafios. Cada organização se encontra em um momento diferente, possui budgets diferentes e times com características e perfis variados.
 
-- O time de administradores de sistema (sysadmins, também conhecido como time de infraestrutura) não possui conhecimento técnico para entregar ambientes arquitetados com containers;
-- O time de sysadmins  possui capacidade para instalar, gerenciar, escalar e fazer ajustes finos em uma plataforma de orquestração de containers como Kubernetes e derivados;
-- O time de desenvolvimento entende as vantagens e desvantanges de se migrar para uma arquitetura de microservicos, e está tecnicamente preparada para lidar com os novos desafios;
-- A empresa atualmente é mais composta por desenvolvedores, portanto, não possuem equipe para lidar especificamente com sistema operacional, virtualização ou containerização;
-- O que se busca pelo time de negócios, é atingir resultados rápido e há budget disponível para aplicação em serviços já existentes;
-- O time de desenvolvedores possui capacidade técnica para entregar aplicações cloud-native, porém, a infra-estrutura será mesclada, uma cloud-híbrida por falta de recursos físicos. 
-
-Vamos falar sobre como *infraestrutura como serviço (Infrastructure As A Service - IaaS)*, *plataforma como serviço (Platform As A Service - PaaS)* e *software como serviço (Software As A Service - SaaS )* coexistem, seus prós e cons e como cada uma delas pode auxiliar o momento atual de sua organização na jornada cloud-native.
-
-
+Vamos discorrer sobre como *infraestrutura como serviço (Infrastructure As A Service - IaaS)*, *plataforma como serviço (Platform As A Service - PaaS)* e *software como serviço (Software As A Service - SaaS )* coexistem, seus prós e cons e como cada uma delas pode auxiliar o momento atual de sua organização na jornada cloud-native.
 
 ## IaaS, PaaS e SaaS: Uma perspectiva arquitetural
 
-A melhor maneira de pensar no cloud em termo de abstração para o negócio, certamente é na analogia de uma pizza como serviço. Podemos partir do cenário onde temos a opção de preparar tudo em casa e ter que gerenciar todo o processo ou, sair para comer uma pizza e não se preocupar com nada. 
+A melhor maneira de pensar no cloud em termo de abstração para o negócio, certamente é na analogia de um serviço de pizzaria como serviço. Podemos partir do cenário onde temos a opção de preparar toda a pizza em casa e ter que gerenciar todo o processo de criação e cozimento, ou, sair para comer a pizza em um restaurante sem se preocupar com sua criação. 
 
 ![](images/chapter_03/image1.png)
 
-Na imagem acima, temos dispostos quatro formatos:  on-premise, IaaS, PaaS e SaaS, onde as caixinhas brancas são as tarefas de nossa responsabilidade, e as azuis são de responsabilidade de terceiros. Essa mesma comparação pode ser feita, se trocarmos as tarefas de criação de pizza, por tarefas referentes a criação de software: Instalação e gerenciamento de sistema operacional, networking, storage, orquestração de serviços, gerenciamento de middleware, rurntime, pipelines de CI/CD, e até a criação da aplicação propriamente dita.
+Na imagem acima, temos dispostos quatro formatos:  on-premise, IaaS, PaaS e SaaS, onde as caixinhas brancas são as tarefas de nossa responsabilidade, e as azuis são de responsabilidade de terceiros. Essa mesma comparação pode ser feita, se trocarmos as tarefas de criação de pizza, por tarefas referentes a criação de software: Instalação e gerenciamento de sistema operacional, networking, storage, orquestração de serviços, gerenciamento de middleware, runtime, pipelines de CI/CD, e até a criação da aplicação propriamente dita.
 
 Quando nós falamos de cloud e seus serviços, note que quanto menor a abstração que utilizamos como serviço, por exemplo com IaaS, teremos a maior responsabilidade no processo de construção do software. Esse grande número de processos crescerá na mesma medida que em o número de servidores aumenta, e essa complexidade é diretamente proporcional relacionada aos riscos. Em contrapartida, quanto menor a abstração, maior o controle a possibilidade de customização da arquitetura e componentes.
 
@@ -112,28 +141,28 @@ Quando nós falamos de cloud e seus serviços, note que quanto menor a abstraç�
 
 ![](images/chapter_03/image2.png)
 
+### IaaS - Infra as a Service
 
+Com este approach, é possível atingir e usufruir de todos os benefícios de um ambiente de cloud, porém, toda a responsabilidade de manutenção do software é da sua equipe de T.I. A empresa que provê o serviço de IaaS tem o dever de garantir a comunicação entre os serviços, de lidar com quedas, problemas de hardware e eventuais consertos. 
 
-### IaaS
+Neste cenário, a sua equipe assume tarefas referentes a banco de dados, backup, escalonamento tanto vertical quanto horizontal, etc. Esse fator aumenta a possibilidade de customização, e por outra perspectiva gera complexidade e mais risco. Nesta opção o hardware e a garantia de seu funcionamento pertence a terceiros, mas o serviço é executado pelo seu time, desta forma, pode ter um custo mais reduzido se comparado à outras opções.
 
-Com este approach, será possível atingir e usufruir de todos os benefícios de um ambiente de cloud, porém, toda a responsabilidade de manutenção ficará para a sua equipe de T.I. A empresa que provê o serviço de infra-estrutura deve garantir a comunicação entre os serviços é responsavel por lidar com quedas, problemas de hardware e consertos. A sua equipe deve assumir tarefas referentes a banco de dados, backup, escalonamento tanto vertical quanto horizontal, etc. Todos esses pontos aumentam a possibilidade de customização, e por outra perspectiva geram complexidade e por sua vez, mais risco. Nesta opção o hardware e garantia de seu funcionamento pertence a terceiros, mas o serviço é executado pelo seu time, desta forma, pode ter um custo mais reduzido se comparado à outras opções.
+O conceito de *orquestração* no contexto de IaaS é a configuração, gerenciamento e coordenação automatizada dos serviços, aplicações e sistemas de computador. Esta orquestração permite a manutenção da infraestrutura através de programação (infra as code) e tem como objetivo facilitar e abstrair a utilização da IaaS.
 
-A orquestração no contexto de IaaS é a configuração, o gerenciamento e a coordenação automatizada dos serviços, aplicações e sistemas de computador. Ela tem com o objetivo de facilitar e abstrair o IaaS, fazendo com que fique mais próximo de um PaaS.
-
-Exemplos de IaaS são Microsoft Azure, Google Compute Engine e [Amazon EC2](https://aws.amazon.com/ec2/). De uma maneira geral, se pode pensar nele como sendo um grande aluguel de máquinas no qual se pode pagar pelo uso delas, semelhante a nossa conta de luz. Para ilustrar isso, vamos analisar a realização do deploy de uma aplicação containerizada no ambiente da Amazon. A [primeira tarefa]((https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html)) é a criação de uma instância, atividade esta que requer cerca de sete passos. Em seguida, a [instalação do Docker](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html), para que assim seja possível criar [uma imagem para executar essa instância](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#docker-basics-create-image). É possível ver que um simples deploy de uma aplicação, requer não apenas know-how extra como a execução de tarefas de sysadmin por parte do seu time.
-
-> **TIP:** A respeito do gerenciamento de Kubernetes em IaaS, como bem sabemos, não existem uma solução simples para um problema complexo no mundo da arquitetura de software. O que existe é uma coleção de [histórias de terror relacionada a experiência com o Kubernetes](https://github.com/hjacobs/kubernetes-failure-stories). Um ponto importante é que [só porque a ferramenta é popular não quer dizer que ela seja a melhor opção para nós](https://pythonspeed.com/articles/dont-need-kubernetes/). Ou seja, mesmo sendo uma abstração dentro da infraestrutura como serviço, o Kubernetes não é uma solução simples e existem diversos riscos com a infraestrutura que devem ser considerados.
-
-
+Exemplos de IaaS são Microsoft Azure, Google Compute Engine e [Amazon EC2](https://aws.amazon.com/ec2/). De uma maneira geral, se pode pensar nela como sendo um grande aluguel de máquinas no qual se pode pagar pelo uso delas, semelhante a nossa conta de luz. Para ilustrar isso, vamos analisar a realização do deploy de uma aplicação containerizada no ambiente da Amazon. A [primeira tarefa]((https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html)) é a criação de uma instância, atividade esta que requer cerca de sete passos. Em seguida, a [instalação do Docker](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html), para que assim seja possível criar [uma imagem para executar essa instância](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#docker-basics-create-image). Neste caso, nota-se que um simples deploy de uma aplicação, requer não apenas know-how extra como a execução de tarefas de sysadmin por parte do seu time.
 
 ### PaaS
 
-Uma redução drástica de complexidade para focar na criação do software, certamente, é a maior vantagem dentro do PaaS. Com ele, no geral, não é necessário se preocupar com a manutenção das máquinas, criação de rotina de backup, compra de licenças, etc. Todos os cuidados do [desenvolvimento será na criação do software](https://twitter.com/gilzow/status/1251308583427465216). Porém, o PaaS costuma apresentar custo mais elevado se comparado com serviços sem maior abstração. 
+Uma redução drástica de complexidade para focar na criação do software, certamente, é a maior vantagem dentro do PaaS. Com ele, no geral, não é necessário se preocupar com a manutenção das máquinas, criação de rotina de backup, compra de licenças, etc. Todos os cuidados do [desenvolvimento serão na criação do software](https://twitter.com/gilzow/status/1251308583427465216). Porém, o PaaS costuma apresentar custo mais elevado se comparado com serviços sem maior abstração. 
 
 > **TIP:** Veja abaixo, algumas opções de PaaS atualmente disponíveis no mercado: 
 >
 > * [Platform.sh](platform.sh) :  É um PaaS que utiliza todos os conceitos de infraestrutura como serviço e também é orientado ao Git, além de ser possível realizar o deploy da aplicação deixando todo trabalho para a plataforma. Basicamente, a partir de três arquivos: [aplicação](https://docs.platform.sh/configuration/app-containers.html), [serviços](https://docs.platform.sh/configuration/services.html) e [rotas](https://docs.platform.sh/configuration/routes.html) podemos fazer o push para um repositório Git. Um simples push para o sistema remoto do Platform.sh criará automaticamente os containers da aplicação, dos serviços como banco de dados e as rotas da aplicação. Nesse caso a abstração é gigantesca e faz com que o time foque muito mais na aplicação central da empresa.
 > * [Red Hat Openshift Online](https://www.openshift.com/products/online/): uma opção para se utilizar o OpenShift (a.k.a. [OKD](https://www.okd.io/)) como serviço. Neste PaaS, o OpenShift é disponibilizado na AWS e permite aos desenvolvedores de aplicações Ruby, PHP, Node.js e Java utilizarem seus runtimes e banco de dados de preferência para rodar suas aplicações. Possui uma opção self-service e free para desenvolvedores. 
+
+
+
+​	
 
 ### SaaS
 
@@ -180,3 +209,4 @@ Como decidir quando é a hora de migrar seu workload para uma arquitetura contei
 
 # Serviços e riscos na implantação
 
+ 
