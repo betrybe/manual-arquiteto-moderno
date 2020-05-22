@@ -211,13 +211,13 @@ Então, basicamente estamos falando de um desacoplamento entre o "Dev" e o "Ops"
 
 Se avaliarmos que o conceito começou a ganhar popularidade em 2017, é um conceito um tanto quanto novo, mas a idéia é criar uma camada de abstração por cima da aplicação. E através da malhar prover a segurança entre os serviços, e também delegar para a malha toda a observação e resiliencia que ela possa precisar.
 
-E quando falamos em criar uma camada de abstração, ela pode exister em três níveis:
+Uma camada de abstração pode existir em três níveis:
 
 - **Biblioteca** - Cada serviço implementa uma bibliteca que inclue as capacidades da malha, blibliotecas como Hystrix (https://github.com/Netflix/Hystrix) ou Ribbon (https://github.com/Netflix/ribbon) são exemplos. Óbvio que essas implementações tem seus trade-offs, pois essa abordagem você precisaria fornecer as bibliotecas e com isso limitar as tecnologias que se pode trabalhar, e se seu projeto tem multiplas linguagens, vai precisar de multiplas implementações, gerenciar esse cenário. 
 - **Node Agent** - Desta maneira se teria um agente rodando em cada nó da malha e com a responsabilidade de cuidar das capacidades da malha. A implementação do Linkerd no Kubernetes usa esse modelo. A trade-off aqui é que o pessoal de Ops vai ter jogar junto com o pessoal de Dev para que as capacidades estejam bem estabelecidas.
 - **Sidecar** - Atualmente a implementação mais sugerida, é o modelo usado pelo Istio com Envoy. Neste modelo se terá sempre um container ao lado de cada aplicação sua deployada, ele vai lidar com tudo que a malha precisa para chegar ou sair do serviço.
 
-Mas o que são essas capacidades da Malha que são mencionadas acima. O malha de serviços deve seguir as regras de ORASTAR sem ter códigos implementados no seu microserviço:
+Mas o que são essas capacidades da Malha que são mencionadas acima. O malha de serviços devem seguir as regras de ORASTAR sem ter códigos implementados no seu microserviço:
 
 - **Observability** - O Painel de Controle prove todos os serviços de observação que estão rodando no plano de dados. Ou seja, métricas para ver a latência, consumo de banda, logging e tracing, tudo que precisa para monitor a saúde dos seus serviços ficam na malha. Provendo vizualições gráficas de todas as requisições.
 - **Routing** - As regras de roteamento para o controle do frafego pode ser feito tanto visualmente quanto por arquivos de configuração e então enviadas do controle para todos as aplicações. Estamos falando de mudança de tráfego, dividir tráfego, controlar o que entra e sai, inclusive a capacidade de injetar falhas e latências para fazer testes.
