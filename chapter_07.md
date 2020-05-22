@@ -201,11 +201,65 @@ Como decidir quando é a hora de migrar seu workload para uma arquitetura contei
 
 ## Service Mesh
 
+Para começarmos a falar, vamos a definição do que é service mesh (malha de serviços), que foi publicada por William Morgan em 2017 (https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one) :
+
+> Uma malha de serviço é uma camada de infraestrutura dedicada para lidar com a comunicação serviço a serviço. É responsável pela entrega confiável de solicitações por meio da topologia complexa de serviços que inclui um aplicativo nativo da nuvem moderno. Na prática, a malha de serviço é normalmente implementada como uma matriz de proxies de rede leves que são implantados juntamente com o código do aplicativo, sem que o aplicativo precise estar ciente.
+
+
+
+Então, basicamente estamos falando de um desacoplamento entre o "Dev" e o "Ops", ou melhor, o desenvolvedor não precisa se preocupar no código do seu microserviço de prover as capacidades que operação precisa. E toda vez que operação precisar alterar algo, não é necessário uma nova compilação da aplicação, gerando um desacoplamente que prove a resiliencia, a segurança, toda a parte de observability e reteamento para a malha e fora da aplicação.
+
+Se avaliarmos que o conceito começou a ganhar popularidade em 2017, é um conceito um tanto quanto novo, mas a idéia é criar uma camada de abstração por cima da aplicação. E através da malhar prover a segurança entre os serviços, e também delegar para a malha toda a observação e resiliencia que ela possa precisar.
+
+E quando falamos em criar uma camada de abstração, ela pode exister em três níveis:
+
+- **Biblioteca** - Cada serviço implementa uma bibliteca que inclue as capacidades da malha, blibliotecas como Hystrix (https://github.com/Netflix/Hystrix) ou Ribbon (https://github.com/Netflix/ribbon) são exemplos. Óbvio que essas implementações tem seus trade-offs, pois essa abordagem você precisaria fornecer as bibliotecas e com isso limitar as tecnologias que se pode trabalhar, e se seu projeto tem multiplas linguagens, vai precisar de multiplas implementações, gerenciar esse cenário. 
+- **Node Agent** - Desta maneira se teria um agente rodando em cada nó da malha e com a responsabilidade de cuidar das capacidades da malha. A implementação do Linkerd no Kubernetes usa esse modelo. A trade-off aqui é que o pessoal de Ops vai ter jogar junto com o pessoal de Dev para que as capacidades estejam bem estabelecidas.
+- **Sidecar** - Atualmente a implementação mais sugerida, é o modelo usado pelo Istio com Envoy. Neste modelo se terá sempre um container ao lado de cada aplicação sua deployada, ele vai lidar com tudo que a malha precisa para chegar ou sair do serviço.
+
+Mas o que são essas capacidades da Malha que são mencionadas acima. O malha de serviços deve seguir as regras de ORASTAR sem ter códigos implementados no seu microserviço:
+
+- **Observability** - O Painel de Controle prove todos os serviços de observação que estão rodando no plano de dados. Ou seja, métricas para ver a latência, consumo de banda, logging e tracing, tudo que precisa para monitor a saúde dos seus serviços ficam na malha. Provendo vizualições gráficas de todas as requisições.
+- **Routing** - As regras de roteamento para o controle do frafego pode ser feito tanto visualmente quanto por arquivos de configuração e então enviadas do controle para todos as aplicações. Estamos falando de mudança de tráfego, dividir tráfego, controlar o que entra e sai, inclusive a capacidade de injetar falhas e latências para fazer testes.
+- **Automatic Scaling** - O painel de controle tem que ser capaz de escalar automaticamente para lidar com os aumentos do workload ou diminuição do mesmo.
+- **Separation of duties** - Usar o painel de controle para separar a operação da malha e dar mais indepencia para os desenvolvedores.
+- **Trust** - Delegue para a malha e o plano de dados os protocolos de comunicação de segurança, bem como a renovação e manutenção de certificados. E a regra é sempre a mesma, considere que se está sempre inseguro, mesmo abaixo de um firewall.
+- **Automatic service registration and discovery** - O painel de controle interage com o gerenciamento do cluster para provisionar a descoberta dos serviços automaticamente, assim como registrar a aplicação durando o procedimento de deploy.
+- **Resilient** - As regras de resiliencia para toda a sua malha, é necessário assumir que a rede pode falhar. Então é preciso ter a capacidade de blindar o trafego e automaticamente balancear para outros pontos que estejam funcionamento e que possam prover a mesma capacidade. Aqui entra o conceito de Circuit Breaker.
+
 ### Arquitetura
 
-### Orquestração
+E para implementar as regras de ORASTAR temos a arquitetura de ter um plano de controle e um plano de dados. Vamos entender esses conceitos.
+
+Plano de Controle é onde ficam as configurações, políticas e a administração dos serviços que estão no plano de dados para o controle de rotas, tráfego, monitoração, descoberta e registro dos serviços. É aqui que está responsabilidade pela comunicação entre os microserviços através de autenticação, autorização e segurança no tráfego da rede.
+
+Plano de dados estão todos os microserviços e seus "sidecars", não importando como eles estão implementados. é com essa camada que o painel de controle interage para conseguir controlar os serviços.
+
+
+
+![](images/chapter_07_03.png)
 
 ### Ferramentas
+
+Service Mesh é um conceito novo, tem pouco mais de dois anos, e está em constante evolução, mas em termos de implementação, basicamente vamos falar de três ferramentas: Istio, Linkerd e Consul.
+
+**Istio** - Ferramenta criada pela Google, IBM e Lyft é hoje a implementação mais recomendada do mercado, e construída em cima da plataforma do Kubernetes. Você pode achar mais sobre a ferramenta aqui: https://istio.io/pt-br/
+
+Ele é um painel de controle centralizado que permite que se administre e coordene as aplicação no plano de dados, e inclusive pode-se rodar o core dele fora do kubernetes, tem suporte a integração com VMs e service discorevy com diferentes produtos.
+
+**Linkerd** -  Esse cara começou no Twitter para lidar com o volume massivo que eles tem. Hoje está na versão Linkerd 2.0, https://linkerd.io/. Ele tem a limitação de rodar apenas em um ambiente com Kubernetes. Também possui um painel de controle centralizado como o Istio, e usa seu próprio Sidecar, em vez do Envoy como proxy como os concorrentes.
+
+**Consul** - Esse cara é da Hashicorp, https://www.consul.io/. Esse carinha é mais velho que o próprio service mesh, sendo que sua primeira versão foi de 2014. Ele é composto de um binário em GO para o servidor e aplicações para prover as capacidades da malha. Mas diferente das ferramentas acima, ele tem um painel de controle distribuido, pois esse cara é feito para funcionar próximo as máquinas. 
+
+Interessante ver a comparação de funcionalidades entre os serviços que pode ser encontrada neste link: https://platform9.com/blog/kubernetes-service-mesh-a-comparison-of-istio-linkerd-and-consul/ e a partir disso decidir qual implementação você deve utilizar. Particularmente não gosto do Linkerd não ter Circuit Breaker nativo, pois isso faz com que você tenha que implementar no código do serviço, mas em compensação ele é mais fácil de operar entre os outros.
+
+Mas não podemos deixar de fora os provedores de Serviços na Nuvem que também tem oferecido serviços de "service mesh", como a AWS e a Microsoft.
+
+**AWS App Mesh** - Se o seu ambiente está na AWS, vale a pena dar uma neste serviço que usa o Envoy como sidecar proxy: https://aws.amazon.com/pt/app-mesh/.
+
+**Azure Service Fabric Mesh** - Apesar de usar o nome Service Mesh, ele é o que mais se difere dos demais, ele está mais para um Red Hat Openshift e se faz necessário que você tenha um plano de dados de malha de serviço já em uso. E como é um serviço gerenciado, os desenvolvedores não tem acesso ao painel de controle , https://azure.microsoft.com/pt-br/services/service-fabric/.
+
+
 
 # Serviços e riscos na implantação
 
