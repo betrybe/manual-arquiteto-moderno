@@ -71,14 +71,23 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 
 ### 7 Cloud
 
-* IaaS, PaaS e o SaaS e os riscos de implantação
-* O que é de fato uma aplicação cloud-native?
+* Cloud-Native ou Cloud-Enabled
+** Cloud-Enabled
+** Perspectivas sobre o conceito cloud-native
+** Princípios de Design e containerização de aplicações
+** Funcionalidades de uma aplicação cloud-native
+** O ciclo de vida de uma aplicação cloud-native
+** A jornada cloud-native
+* IaaS, PaaS e SaaS: Uma perspectiva arquitetural
+** IaaS - Infra as a Service
+** PaaS - Platform as a Service
+** SaaS - Software as a Service
 * Kubernetes - Quando usar e quando não usar
-* Service Mesh
-	* Arquitetura
-	* Orquestração
-	* Ferramentas
-* Serviços e riscos na implantação
+** Kubernetes Vanila e seus sabores
+** Service Mesh
+*** Arquitetura
+*** Ferramentas
+
 
 #### 8 A importância de aprender os conceitos ao invés de novos frameworks
 
