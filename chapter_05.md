@@ -30,11 +30,11 @@ Falar que está em uma arquitetura monolítica quer dizer que você tem uma arte
 
 Um monolito deve ser considerado como uma solução válida se você está desenvolvendo uma aplicação muito simples, onde pode-se testar repidamente e fácilmente colocar essa aplicação no ar.
 
+E quando estamos discutido sobre monolitos normalmente estamos falando de um código que é deployado em um processo único. Você até pode ter várias instâncias rodando, mas o código continua sendo um processo único. 
 
+Pode-se ter inclusive monolitos modulares, que não passa de se separar os códigos em módulos que podem ser executados separadamente, mas eles tem dependencia entre si e não podem ser deployados separadamente. Inclusive podemos ter neste cenário inclusive aplicações distribuidas, mas que não podem ser alteradas ou deploydas separadamente. Inclusive, esse é um modelo de monolito que se deve fugir, pois escala uma complexidade no sistema muito grande.
 
-<!-- Sergio, acho que valeria a pena falar do monolito e dos tipos, como o por camadas e o distruido, o que vc acha? -->
-
-Mas quanto a aplicação começa a se tornar muito complexa, com vários times de desenvolvimento, muitas funcionalidades, as adições ou alterações começam a se tornar complicadas por causa do acoplamento que começa a existir. Escalar então um ambiente destes começa a se tornar desafiador.
+E esse é o principal desafio do monolito, o acoplamento que ele gera, tanto em implementação quanto no deploy, e quandoa aplicação começa a se tornar muito complexa, com vários times de desenvolvimento, muitas funcionalidades, as adições ou alterações começam a se tornar complicadas por causa do acoplamento que começa a existir. Escalar então um ambiente destes começa a se tornar desafiador. 
 
 É aqui que entra a mão dos microsserviços em começar a desacoplar esses serviços e dar responsabilidade únicas para os "serviços", onde você pode alterar, deployar e escalar de maneira independente de todo o ecossistema. Justamente com a premissa de não afetar os outros microsserviços.
 
