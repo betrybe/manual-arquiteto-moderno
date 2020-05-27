@@ -2,7 +2,7 @@
 
 Uma vez que conversamos sobre DDD, microservices, boas práticas design de código e arquitetura de software, temos embasamento para prosseguir e abordar um dos temas mais discutidos do cenário de tecnologia: computaçào em nuvem (*cloud* *computing*).
 
-Vamos discutir a seguir, o que se deve ter em mente ao arquitetar aplicações para um ambiente de cloud, quais as perspectivas mais populares a respeito do conceito de uma aplicação "cloud-native" e porque está tão ligada a ferramentas como Kubernetes.  Serão também descritos as funcionalidades esperadas em uma aplicação, para que sejam first-class citizens na cloud.
+Discorreremos sobre consieração em arquiteturas de aplicações para um ambiente de cloud, quais as perspectivas mais populares a respeito do conceito de uma aplicação "cloud-native" e porque está tão ligada a ferramentas como Kubernetes.  Serão também descritos as funcionalidades esperadas em uma aplicação, para que sejam first-class citizens na cloud.
 
 Um dos termos mais populares para se categorizar aplicações relacionadas a cloud, é "*cloud-native*". Empresas já rotulam seus produtos como cloud-native, quando na verdade, são apenas cloud-enabled. Precisamos entender o que são estas categorizações, seus conceitos e diferenças.
 
