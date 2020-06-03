@@ -4,7 +4,7 @@ Uma vez que conversamos sobre DDD, microservices, boas práticas design de códi
 
 Discorreremos sobre o que se considerar ao arquitetura de aplicações para um ambiente de cloud, perspectivas populares a respeito de aplicações  "cloud-native" e porque este conceito é tão ligado a ferramentas como Kubernetes.  Serão também descritos padrões e funcionalidades esperadas em uma aplicação, para que sejam first-class citizens em um ambiente de cloud. 
 
->  **INFO:** Este capítulo não te ensinará a fazer deploy de um cluster Kubernetes, a configurar um serviço na AWS ou a criar uma aplicação cloud-native. A intenção deste capítulo é prover informações arquiteturais que embasarão suas decisões e modelagem dos seus serviços e plataformas. Com o conhecimento aqui fornecido, você estará preparadoe confiante para iniciar ou prosseguir sua jornada cloud-native independente da solução ou linguagem adotada.
+>  **INFO:** Este capítulo não tem como meta ensinar a fazer deploy de serviços em um cluster Kubernetes, configurar serviços na AWS ou criar aplicações cloud-native from scratch. A intenção deste capítulo é prover informações arquiteturais que embasarão suas decisões e modelagem dos seus serviços e plataformas. Com o conhecimento aqui fornecido, você estará preparadoe confiante para iniciar ou prosseguir sua jornada cloud-native independente da solução ou linguagem adotada. 
 
 A buzz-word "cloud-native" começou a se estabelecer por volta de 2014, e sua crescente popularidade se mostra em seu melhor cenário. Para atingir maior espaço no mercado, empresas passaram a rotular seus produtos como cloud-native, quando na verdade, são apenas tecnologias cloud-enabled. 
 
@@ -60,40 +60,57 @@ Além dos conceitos acima, um conjunto de padrões bastante adotado pela comunid
 
 > **TIP**: Os detalhes de implementação que serão detalhados a seguir, podem evoluir e mudar com o tempo. Porém, as definições e padrões esperadas de uma aplicação cloud-native, permanecerão. Portanto, recomendamos a leitura das referências citadas e aprofundamento no entendimento do conceito. 
 
-### Princípios de design e containerização de aplicações
+### Capabilities for cloud
 
-Em se tratando em detalhes de implementação de uma aplicação cloud-native, é consenso entre as fontes citadas, que estas apps serão **conteinerizadas**. Com isto em mente, o arquiteto deve se preocupar não apenas com o  [SOLID](https://www.amazon.com.br/Clean-Architecture-Craftsmans-Software-Structure-ebook/dp/B075LRM681/ref=sr_1_2?adgrpid=83848702769&gclid=CjwKCAjwqpP2BRBTEiwAfpiD-w6m0nZtj0_jaXw7DfCfvIuztN-m6OrPIQ5BH2g2UHzLOird4mProRoCNTYQAvD_BwE&hvadid=426015975773&hvdev=c&hvlocphy=1001541&hvnetw=g&hvqmt=b&hvrand=11863819395550854586&hvtargid=kwd-298463329082&hydadcr=5628_11235154&keywords=clean+architecture&qid=1590032086&sr=8-2) na qualidade do código e mas também com os [princípios de design de conteinerização de aplicações](https://www.redhat.com/en/resources/cloud-native-container-design-whitepaper).
+Suas aplicações podem usufruir de recursos oferecidos pelo ambiente onde é disponibilizada:
 
-Princípios a serem considerados durante o tempo de construção:
+|                                             |                                      |
+| :-----------------------------------------: | :----------------------------------: |
+| de configurações (Configuration Management) | Service Discovery and Load Balancing |
+|               API Management                |           Service Security           |
+|          Scheduling (of workloads)          |     Auto Scaling / Self healing      |
+|             Distributed Tracing             |         Centralized Metrics          |
+|             Centralized Logging             |                                      |
 
-* Single Concern Principle: Similar ao **S** do padrão **S**OLID, porém neste contexto, cada contêiner deve resolver *um* problema, e resolvê-lo *bem*; Caso seja necessário acoplar mais features a um microservice, por exemplo, side-cars podem ser utilizado no mesmo pod.
-* Self-Containment Principle: Deve estar contida na imagem de build, todas as bibliotecas, runtime da linguagem e ferramentas de construção necessárias para se realizar o build a aplicação. As exceções são dados que variam entre ambientes, dados estes, que estarão por exemplo em variáveis de ambiente.
-* Image Immutability Principle: imagens imutáveis são essenciais para se permitir escalabilidade e adoção de estratégias de deploy. Diferenças entre ambientes são providas ao container através de configurações (por exemplo, utilizando-se variáveis de ambiente ou ConfigMaps);
+Mais adiante discorreremos sobre o set de tecnologias disponíveis para utilização destes serviços. Mas o que se deve ter em mente é que você precisará implementar alguns conceitos em sua aplicação. Um excelente exemplo de implementação de funcionalidades que são largamente utilizadas em um ambiente de cloud, é a aplicação de exemplo gerada pelo site da especificação Microprofile. 
 
-Princípios a serem considerados durante o tempo de runtime:
+> **INFO:** Por trazer um runtime mais leve, a especificação Microprofile abriu um leque de possibilidades para o Java no mundo da cloud. Existem diversas implementações como Payara Micro, Open Liberty, Quarkus, Helidon e outros. Estes vendors podem oferecer starters, porém, vamos instruí-lo a partir da especificação.
 
-* High Observability Principle: A aplicação containerizada deve prover as API's padronizadas para que o orquestrador possa fazer health-checks de liveness e readiness. Coletas de logs e métricas também são parte das API's que o orquestrador poderá consumir e disponibilizar através de ferramentas como, por exemplo, Fluentd, Logstash para logs centralizados, ou Prometheus e Grafana para métricas. Apesar de tratar a aplicação como uma caixa preta, os desenvolvedores que buscam entregar apps cloud-native devem se preocupar em expor estas API's.
-* Lifecycle conformance principle: é recomendado realizar graceful shutdown dos serviços sempre que possível, certo? Com containers, o mesmo é valido. O container precisa, através de API's, permitir que o orquestrador envie comandos para graceful ou forceful shutdown. E caso necessário, pode até mesmo fazer uso de api's como "pre-stop" e "post-stop" para implementação de necessidades específicas do componente pertencente ao container.
-* Process disposability principle: Deve-se ter em mente que o container é volátil, e pode ser destruído e recriado várias vezes. Desta forma, tenha em mente o tempo de start-up e shutdown de seus containers. Além disto, caso seja necessário manter estado, deve-se recorrer a bancos de dados ou volumes providos pela plataforma.
-* Runtime confinement principle: Ao seguir o princípio Self-Containment Principle, a imagem utilizada para se gerar o container utilizado de fato para executar a aplicação terá uma menor necessidade de consumo de recursos (memória, espaço, cpu). O princípio de Runtime Confinement, espera que o container tenha definidos os limites de recursos que serão utilizados. Com base nisso, o orquestrador poderá fazer uma melhor utilização da infraestrutura disponível.
+O Microprofile tem evoluído de forma rápida, e para garantir um conteúdo atualizado, optamos por não incluir todo o código de boas práticas, mas sim, instruí-lo a como obter o conteúdo mais recente e de acordo com sua necessidade. 
 
-Com base nestes princípios, é possível notar que não basta apenas criar um Dockerfile, containerizar uma aplicação e categorizá-la como "cloud-native". No processo de conteinerização, é esperado que a aplicação implemente e disponibilize recursos que facilitarão seu gerenciamento e orquestração.
+Vamos criar um projeto onde você poderá validar exemplos de implementação de práticas e funcionalidades cloud-native utilizando-se a especificação MicroProfile. Se tiver a oportunidade, execute os passos a seguir:
 
-### Funcionalidades de uma aplicação cloud-native
+1. Acesse o site https://start.microprofile.io/
+2. Insira um `groupId`, `artifactId`, selecione uma versão do MicroProfile, versão do Java SE, e o `runtime`. O `runtime `  será a implementação da especificação MicroProfile. 
 
-Um conjunto de microserviços que serão disponibilizados contêinerizados em um ambiente de cloud, podem utilizar, conforme necessidade, dos seguintes recursos oferecidos da plataforma de orquestração:
+![chapter_08_01](images/chapter_07_04.png)
 
-|                                                           |                                      |
-| :-------------------------------------------------------: | :----------------------------------: |
-| Gerenciamento de configurações (Configuration Management) | Service Discovery and Load Balancing |
-|                      API Management                       |           Service Security           |
-|                 Scheduling (of workloads)                 |     Auto Scaling / Self healing      |
-|                    Distributed Tracing                    |         Centralized Metrics          |
-|                    Centralized Logging                    |                                      |
+3. Clique em `Download`. 
 
-Existem centenas de serviços que podem ser utilizados juntamente à plataforma de orquestração para fornecer as funcionalidades acima. Pensando em organizações que estão na jornada para a cloud, nasceu a Cloud Native Computing Foundation (CNCF). A CNCF nasceu com o objetivo de se definir o termo Cloud Native e fornecer espaço para projetos opensource como Kubernetes, Prometheus, e [muito mais](https://landscape.cncf.io/zoom=200). A CNCF adota projetos e os encaixa na arquitetura de cloud computing, segundo a visão dos membros do comitê.
+Será realizado o download de dois projetos em sua máquina. Você pode executar ambos e validar a simplicidade de se implementar padrões cloud-native. Repare na implementação das apis de `Health Checks` com liveness e readiness (apis que serão consumidas pelo orquestrador de containers aumentar a resiliência e suportar processos de deploy ao validar a saúde do pod), de métricas, tracing distribuído, resiliência a timeouts, segurança com JWT, injeção de propriedades de configuração através de anotações, e a utilização de RestClient (permite consumir um serviço rest apenas implementando-se uma interface no serviço cliente). 
 
-Uma vez que tivemos um overview de todas as funcionalidades que podemos usufruir ao evoluir nossa aplicação, vamos ter uma idéia de como é o ciclo de vida dessas apps.
+
+
+Esta é uma aplicação que inclui várias, mas não todas as features que iremos discutir. Uma vez que falamos sobre detalhes de implementação na aplicação propriamente dita, vamos seguir em frente e entender melhores práticas conteinerização destas aplicações. 
+
+### Princípios de design de contêinerização de aplicações
+
+Em se tratando de detalhes de implementação de uma aplicação cloud-native, é consenso entre as fontes citadas, que estas apps serão **conteinerizadas**. Com isto em mente, o arquiteto deve se preocupar não apenas com adoção do  [SOLID](https://www.amazon.com.br/Clean-Architecture-Craftsmans-Software-Structure-ebook/dp/B075LRM681/ref=sr_1_2?adgrpid=83848702769&gclid=CjwKCAjwqpP2BRBTEiwAfpiD-w6m0nZtj0_jaXw7DfCfvIuztN-m6OrPIQ5BH2g2UHzLOird4mProRoCNTYQAvD_BwE&hvadid=426015975773&hvdev=c&hvlocphy=1001541&hvnetw=g&hvqmt=b&hvrand=11863819395550854586&hvtargid=kwd-298463329082&hydadcr=5628_11235154&keywords=clean+architecture&qid=1590032086&sr=8-2) em seu código mas também com os [princípios de design de conteinerização de aplicações](https://www.redhat.com/en/resources/cloud-native-container-design-whitepaper).
+
+Princípios a serem considerados durante o tempo de **construção** de uma *imagem*:
+
+* **Single Concern Principle**: Similar ao **S** do padrão **S**OLID, porém neste contexto, cada contêiner deve resolver *um* problema, e resolvê-lo *bem*; Caso seja necessário acoplar mais features a um microservice, por exemplo, adicionar side-cars ao pod é uma boa alternativa.
+* **Self-Containment Principle**: Deve estar contida na imagem de build, todas as bibliotecas, runtime da linguagem e ferramentas de construção necessárias para se realizar o build a aplicação. As exceções são dados que variam entre ambientes, dados estes, que estarão por exemplo em variáveis de ambiente.
+* **Image Immutability Principle**: imagens imutáveis são essenciais para se permitir escalabilidade e adoção de estratégias de deploy. Diferenças entre ambientes são providas ao container através de configurações (por exemplo, utilizando-se variáveis de ambiente ou ConfigMaps);
+
+Princípios a serem considerados durante o tempo de **runtime** (execução, *container*):
+
+* **High Observability Principle**: A aplicação containerizada deve prover as API's padronizadas para que o orquestrador possa fazer health-checks de liveness e readiness. Coletas de logs e métricas também são parte das API's que o orquestrador poderá consumir e disponibilizar através de ferramentas como, por exemplo, Fluentd, Logstash para logs centralizados, ou Prometheus e Grafana para métricas. 
+* **Lifecycle conformance principle**: é recomendado realizar graceful shutdown dos serviços sempre que possível, certo? Com containers, esta prática também é valida. O container precisa, através de API's, permitir que o orquestrador envie comandos para graceful ou forceful shutdown. E caso necessário, pode até mesmo fazer uso de api's como "pre-stop" e "post-stop" para implementação de necessidades específicas do componente pertencente ao container.
+* **Process disposability principle**: Deve-se ter em mente que o container é volátil, e pode ser destruído e recriado várias vezes. Desta forma, tenha em mente o tempo de start-up e shutdown de seus containers. Além disto, caso seja necessário manter estado, deve-se recorrer a bancos de dados ou volumes providos pela plataforma.
+* **Runtime confinement principle**: Ao seguir o princípio **Self-Containment Principle** em tempo de build, a imagem utilizada para se gerar o container utilizado de fato para executar a aplicação terá uma menor necessidade de consumo de recursos (memória, espaço, cpu). O princípio de **Runtime Confinement,** espera que o container tenha definidos os limites de recursos que serão utilizados. Com base nisso, o orquestrador poderá fazer uma melhor utilização da infraestrutura disponível.
+
+Com base nestes princípios, é possível notar que não basta apenas criar um `Dockerfile`, containerizar uma aplicação e categorizá-la como "cloud-native". No processo de conteinerização, é esperado que a aplicação implemente e disponibilize recursos que facilitarão seu gerenciamento, monitoramento e orquestração.
 
 ### O ciclo de vida de uma aplicação cloud-native
 
@@ -117,11 +134,25 @@ Considerando que sua aplicação está pronta para deploy:
 
   >  **TIP:** É recomendado que a imagem-base gerada seja armazenada em um registro de imagens.
 
-* A partir desta imagem, a plataforma utilizada (i.e. Kubernetes, OpenShift, Rancher, etc) irá criar a quantidade de containers especificada. 
+* A partir desta imagem, a plataforma utilizada (i.e. Kubernetes) irá criar a quantidade de containers especificada. 
 
   > **TIP:** É muito comum a existência de casos de uso que podem usufruir da utilização de Operators para gerenciamento e manutenção de aplicações. 
 
 Automação dos processos de entrega de software através da utilização de Entrega Contínua e Deploy Contínuo (CI/CD) é uma das práticas da cultura DevOps. Esta prática se mostrou eficaz em ambientes tradicionais, e agora, se mostra indispensável quando se trabalhando com times menores e centenas de microserviços rodando em clouds privadas, públicas, ou híbridas. 
+
+O processo acima descrito chega a ser simplista diante da qualidade e eficiência que podemos agregar ao nosso processo de integração. Vamos dar um passo atrás e entender melhor o que seria integração contínua.
+
+#### Integração e Entrega Contínua
+
+A integração contínua inicia no seu repositório de código. 
+
+> **Você está pronto para automatizar a entrega de seu software a cada mudança?**
+
+[WIP]
+
+
+
+
 
 ## A jornada cloud-native
 
@@ -219,7 +250,32 @@ Neste contexto, ao selecionar sua próxima plataforma de orquestração consider
 - Avalie as ferramentas que seu desenvolvedor terá que utilizar no dia a dia para interagir com a ferramenta de orquestração: existe apenas CLI? Há um console que permite manutenção e monitoramento do ambiente? 
 - Caso seja parte do seu cenário uma migração parcial e de medio/longo prazo de um ambiente on-premise para uma cloud pública, avalie as possibilidades de um ambiente híbrido onde você possa usufruir de ambas clouds privada e pública sem maiores problemas com a plataforma em questão;
 
-## Service Mesh
+### Como escolher seu set de tecnologias
+
+
+Existem diversas opções de implementação de cada uma destas funcionalidades, e você pode ver as diversas opções recomendadas para um cenário de cloud na [CNCF Cloud Native Interactive Landscape](https://landscape.cncf.io/zoom=200). 
+
+> **INFO:** Pensando em organizações que estão na jornada para a cloud, nasceu a Cloud Native Computing Foundation (CNCF). A CNCF nasceu com o objetivo de se definir o termo Cloud Native e fornecer espaço para projetos opensource como Kubernetes, Prometheus, e [muito mais](https://landscape.cncf.io/zoom=200). A CNCF adota projetos e os encaixa na arquitetura de cloud computing, segundo a visão dos membros do comitê.
+
+A CNCF adota projetos e os classifica como **graduados**, **incubando** ou em **sandbox**. Esta classificação deriva da maturidade de cada software de acordo com sua utilização no mercado:
+
+![chasm-cncf](images/chapter_07_05.png)
+
+*Imagem obtida em https://www.cncf.io/projects/*
+
+Se tiver a possibilidade, acesse a [CNCF Cloud Native Interactive Landscape](https://landscape.cncf.io/zoom=200) e repare as inúmeras tecnologias disponíveis para solucionar os problemas de um ambiente de núvem. Note que apesar de ser hoje a mais popular, Kubernetes é apenas *uma*, dentre as opções de orquestração de contêineres. Não podemos deixar de ressaltar tecnologias populares como:
+
+* Diversas distribuições de Kubernetes como [Red Hat OpenShift](openshift.com) e [Rancher]([rancher.com](https://rancher.com/));
+* Ofertas de PaaS como [Heroku]([heroku.com](https://www.heroku.com/)) e [platform.sh](platform.sh);
+* [Jaeger](https://www.jaegertracing.io/) para tracing de aplicações, e [Prometheus](https://prometheus.io/) e [Grafana](https://grafana.com/) para monitoramento;
+* [Strimzi]([strimzi.io](https://strimzi.io/)) e [Apache Spark]([spark.apache.org](https://spark.apache.org/)) para streaming e mensageria;
+* [Istio]([istio.io](https://istio.io/)) para service mesh, [Envoy]([envoyproxy.io](https://www.envoyproxy.io/)) para Service proxy;
+* [Jenkins]([jenkins.io](https://jenkins.io/)), [JenkinsX]([jenkins.io](https://jenkins.io/)) e [Tekton]([tekton.dev](https://tekton.dev/)) para CI/CD;
+* [Helm]([helm.sh](https://helm.sh/)), [Operator Framework]([coreos.com/operators](https://coreos.com/operators/)) e [Podman]([podman.io](https://podman.io/)) para construção de imagens e definição de aplicações;
+
+Ainda no contexto de ferramentas e funcionalidades que aplicações cloud-native podem usufruir, vamos falar a seguir sobre service mesh e as tecnologias existentes.
+
+##### Service Mesh
 
 Vamos a definição de service mesh (malha de serviços) por [William Morgan, 2017](https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one):
 
@@ -245,7 +301,7 @@ Mas o que são essas capacidades da `Malha` que são mencionadas acima. A malha 
 - **Automatic service registration and discovery** - O painel de controle interage com o gerenciamento do cluster para provisionar a descoberta dos serviços automaticamente, assim como registrar a aplicação durando o procedimento de deploy.
 - **Resilient** - As regras de resiliencia para toda a sua malha, é necessário assumir que a rede pode falhar. Então é preciso ter a capacidade de blindar o trafego e automaticamente balancear para outros pontos que estejam funcionamento e que possam prover a mesma capacidade. Aqui entra o conceito de Circuit Breaker.
 
-### Arquitetura
+###### Arquitetura
 
 E para implementar as regras de ORASTAR temos a arquitetura de ter um plano de controle e um plano de dados. Vamos entender esses conceitos.
 
@@ -257,7 +313,7 @@ E para implementar as regras de ORASTAR temos a arquitetura de ter um plano de c
 
 ![](images/chapter_07_03.png)
 
-### Ferramentas
+###### Ferramentas
 
 Service Mesh é um conceito que surgiu aproximadamente em 2018 e está em constante evolução. Em termos de implementação, basicamente vamos falar de três ferramentas: Istio, Linkerd e Consul.
 
@@ -278,6 +334,14 @@ Não podemos deixar de fora os provedores de serviços na nuvem pública que tam
 **AWS App Mesh** - Se o seu ambiente está na AWS, vale a pena dar uma neste serviço que usa o Envoy como sidecar proxy: [AWS App Mesh](https://aws.amazon.com/app-mesh/?nc1=h_ls);
 
 **Azure Service Fabric Mesh** - Apesar de usar o nome Service Mesh, este é o que mais se difere dos demais. Está mais comparado a um Red Hat OpenShift e se faz necessário que você tenha um plano de dados de malha de serviço já em uso. É um serviço gerenciado e os desenvolvedores não tem acesso ao painel de controle: [Azure Service Fabric](https://azure.microsoft.com/services/service-fabric/)
+
+## Cloud, microservices e DDD
+
+Como tudo se conecta no final [WIP]
+
+
+
+
 
 
 
