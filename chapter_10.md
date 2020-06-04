@@ -37,8 +37,7 @@ Existem muitas formas de medir a performance da aplicação. Seja com um monitor
 
 ### Capturando o tempo da requisição.
 
-Neste capítulo, vamos utilizar a ferramenta [jMeter](https://jmeter.apache.org/) uma ferramenta muito utilizada para
- criar diversos tipos de teste de carga e medir o desempenho. O objetivo aqui não é ser um tutorial do jMeter, mas mostrar como é possível gerar e visualizar dados através dele. Abaixo um exemplo simples de medição de tempo de login considerando 10 usuários:
+Neste capítulo, vamos utilizar a ferramenta [jMeter](https://jmeter.apache.org/) uma ferramenta muito utilizada para criar diversos tipos de teste de carga e medir o desempenho. O objetivo aqui não é ser um tutorial do jMeter, mas mostrar como é possível gerar e visualizar dados através dele. Abaixo um exemplo simples de medição de tempo de login considerando 10 usuários:
   
 ![](images/chapter_10_01.png)
  
@@ -60,27 +59,59 @@ Ainda podemos ter gráficos mais ricos, utilizando o plugin [PerfMon](https://jm
 
 ![](images/chapter_10_03.png)
 
-No gráfico acima podemos ver que a maioria das requisições ficou entre 600 e 700 milesegundos em um cenário de testes
- com 1000 requisições.
+No gráfico acima, podemos ver que a maioria das requisições ficou entre 600 e 700 milesegundos em um cenário de testes com 1000 requisições.
 Podemos ter gráficos ainda mais bonitos e em tempo real podendo utilizar o [grafana](https://grafana.com/) como visualizador de
- graficos.
+ gráficos.
 
 Veja que capturamos o tempo total de um processo de login, porém se o login não está em um tempo adequado ou queremos
  melhorar ainda mais o tempo, precisamos visualizar cada componente separado.
 
 ## Entendendo e separando os componentes.
 
-Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Para isso, precisamos testar separadamente cada componente da arquitetura. É possivel que com apenas uma ferramenta não seja possível medir a performance da sua aplicação. É provável que você utilize uma ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos.
+Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Para isso, precisamos testar separadamente cada componente da arquitetura para descobrir onde é possível diminuir o tempo. É possível que com apenas uma ferramenta não seja possível medir a performance da sua aplicação. É provável que você utilize uma ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos. A imagem abaixo é uma representação da arquitetura para servir milhões de usuários:
 
+![](images/chapter_10_04.png)
 
+Créditos: https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/
+
+TODO: explicar cada um dos componentes?
+
+No entanto, não foi de primeira que esta arquitetura foi definida. Foram muitos experimentos, testes e medições para chegar em uma arquitetura escalável. Deve ser possível medir a performance da replica de leitura do banco de dados MySQL separadamente, por exemplo.
+
+## Monitorando a performance por componente
+
+Conforme demostrado acima, não é de primeira que se define uma arquitetura para milhões de usuários. É necessário
+ estressar e medir para verificar onde estão os pontos que podem sofrer carga. Neste ponto, existem várias opções que
+  mostram onde estão os gargalos da aplicação. Uma das várias opções é o [javamelody](https://github.com/javamelody
+  /javamelody) que pode ser utilizado em modo standalone junto com a sua aplicação Java, é free e muito simples de colocar na aplicação.
+  
+![](images/chapter_10_05.png)
+
+Na imagem acima, podemos notar que uma das consultas SQL demorou em média, mais que o normal em relação a outras. Podemos descobrir de onde veio este comando SQL, como tambem executar o comando SQL em modo 'Explain' afim de revelar que a query está fazendo um 'full scan' e que será preciso ajustar a query ou criar indices específicos na tabela.
+
+![](images/chapter_10_06.png)
+
+No outro exemplo abaixo, podemos ver um desvio bem grande no método 'findById' que por sua vez, não utiliza um banco
+ de dados MySQL, mas sim uma outra fonte de dados externo. Com estas informações em mãos já é possivel analisar de
+  modo isolado cada comportamento.
+
+![](images/chapter_10_07.png)
+
+Existem muitas ferramentas de monitoramento e o que fica aqui como exemplo é que em alguns casos você vai precisar ir no detalhe e fazer algum ajuste fino na infraestrutura ou até mesmo no código.
 
 ## Monitorando a performance em sistemas distribuídos
 
 Sistemas distribuídos atualmente mais populares com a utilização de microsserviços, são complexos e difíceis de
- monitorar a performance.
+ monitorar a performance. Neste caso, vamos precisar de mecanismos mais sofisticados como a utilização de um 'tracing
+ ' distribuido por exemplo. Aqui tambem, existem várias soluções como os famosos APM's tais como o New Relic
+ , AppDynamics, DataDog e Dynatrace. Vale lembrar que muitos provedores de cloud fornecem ferramentas de analise de
+  performance, tal como o AWS Performance Insights.
+No mundo OpenSource vale destacar a ferramenta [Jaeger Tracing](https://www.jaegertracing.io/), onde sua
+ especialidade é fazer o monitoramento de serviços distribuidos rodando em uma infraestrutura do Kubernetes por exemplo.
+ 
+![](images/chapter_10_08.png)
 
-https://www.jaegertracing.io/
-
+Podemos observar em qual dos serviços o tempo de resposta não está adequado e tomar as devidas ações.
 
 ## Mapeamento Objeto Relacional
 
@@ -93,27 +124,22 @@ Portanto, se o banco de dados suportar sequences, é muito mais eficiente usar a
 
 ### Enums
 
+TODO
 https://vladmihalcea.com/the-best-way-to-map-an-enum-type-with-jpa-and-hibernate/
 
 ### associação unidirecional ou bidirecional
 
+TODO
 https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
 
 ### Problema de consulta N + 1
 
+TODO
 https://vladmihalcea.com/how-to-detect-the-n-plus-one-query-problem-during-testing/
 
-## Ferramentas de solução de problemas ( troubleshooting tools) e monitoramento
 
+## Conclusão
 
-
-
-Por fim, não tente resolver todos os problemas ao mesmo tempo. Comece construindo um
-lista dos cinco principais contribuidores da hora e da queima da CPU e explore soluções.
-
-O que é performance para você? Se você me perguntar sobre como melhorar a performance do seu serviço, eu vou lhe fazer algumas perguntas e vc talvez saia com a resposta.
-
-Em todo o sistema?
-Em um ponto crítico?
-Reduzir uso de memória?
-Processamento?
+Não tente resolver todos os problemas ao mesmo tempo. Comece construindo uma lista dos cinco principais
+ contribuidores da hora e da queima da CPU, memória ou IO e explore soluções. Ataque um dos problemas e reavalie a
+  arquitetura. 
