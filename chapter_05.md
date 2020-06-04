@@ -2,7 +2,7 @@
 
 
 
-[Microservices](https://www.martinfowler.com/articles/microservices.html), ou em portugues, Microsserviços, são um novo jeito de construirmos nossas aplicações nos dias de hoje, pregam ser independentes e modeladas para o dominio de negócios (o que faz o DDD ser muito importante). Essas aplicações se comunicam entre si via protocolos de rede, e tem uma arquitetura que pode resolver problemas que você tenha. Os microsserviços são um dos tipos do SOA (service-oriented architeture), e te o foco de colocar fronteiras bem especificas de negocios e promover a entrega independente destes serviços, trazendo a vantagem de pode ser agnóstico de tecnologia. Resumindo no ponto de vista de tecnologia, são capacidades de negócios encapsuladas em um ou mais endpoints, mas seguindos os seguintes pilares:
+[Microservices](https://www.martinfowler.com/articles/microservices.html), ou em portugues, Microsserviços, são um novo jeito de construirmos nossas aplicações nos dias de hoje, pregam ser independentes e modeladas para o dominio de negócios (o que faz o DDD ser muito importante). Essas aplicações se comunicam entre si via protocolos de rede, e tem uma arquitetura que pode resolver problemas que você tenha. Os microsserviços são um dos tipos do SOA (service-oriented architeture), e tem como foco de colocar fronteiras bem especificas de negocios e promover a entrega independente destes serviços, trazendo a vantagem de pode ser agnóstico de tecnologia. Resumindo no ponto de vista de tecnologia, são capacidades de negócios encapsuladas em um ou mais endpoints, mas seguindos os seguintes pilares:
 
 
 
@@ -30,7 +30,11 @@ Falar que está em uma arquitetura monolítica quer dizer que você tem uma arte
 
 Um monolito deve ser considerado como uma solução válida se você está desenvolvendo uma aplicação muito simples, onde pode-se testar repidamente e fácilmente colocar essa aplicação no ar.
 
-Mas quanto a aplicação começa a se tornar muito complexa, com vários times de desenvolvimento, muitas funcionalidades, as adições ou alterações começam a se tornar complicadas por causa do acoplamento que começa a existir. Escalar então um ambiente destes começa a se tornar desafiador.
+E quando estamos discutido sobre monolitos normalmente estamos falando de um código que é deployado em um processo único. Você até pode ter várias instâncias rodando, mas o código continua sendo um processo único. 
+
+Pode-se ter inclusive monolitos modulares, que não passa de se separar os códigos em módulos que podem ser executados separadamente, mas eles tem dependencia entre si e não podem ser deployados separadamente. Inclusive podemos ter neste cenário inclusive aplicações distribuidas, mas que não podem ser alteradas ou deploydas separadamente. Inclusive, esse é um modelo de monolito que se deve fugir, pois escala uma complexidade no sistema muito grande.
+
+E esse é o principal desafio do monolito, o acoplamento que ele gera, tanto em implementação quanto no deploy, e quandoa aplicação começa a se tornar muito complexa, com vários times de desenvolvimento, muitas funcionalidades, as adições ou alterações começam a se tornar complicadas por causa do acoplamento que começa a existir. Escalar então um ambiente destes começa a se tornar desafiador. 
 
 É aqui que entra a mão dos microsserviços em começar a desacoplar esses serviços e dar responsabilidade únicas para os "serviços", onde você pode alterar, deployar e escalar de maneira independente de todo o ecossistema. Justamente com a premissa de não afetar os outros microsserviços.
 
@@ -85,7 +89,11 @@ Quem veio com esse padrão pela primeira vez foi Martin Fowler, https://martinfo
 
 Esse padrão pode ser usado para migrar de uma monolito para outro e também ir de uma monolito para um padrão de microsserviços. As vezes, apenas separando código e reimplementando as funcionalidades segregadas, o unico ponto de atenção é que se a funcionalidade tem algum requerimento de persistência de estado, você vai precisar ver como vai levar isso para o mundo dos serviços.
 
-Implementar esse padrão requer basicamente três passos. O primeiro passo é identificar as partes do sistema a serem migradas, então entrar no segundo passo que é implementar a funcionalidade em um novo microserviço. E então entrar no último passo que é fazer a aplicação antiga apontar para o novo microserviço.
+Implementar esse padrão requer basicamente três passos:
+
+1. Identificar as partes do sistema a serem migradas,
+2. Implementar a funcionalidade em um novo microserviço. 
+3. Fazer a aplicação antiga apontar para o novo microserviço.
 
 Outra vantagem de seguir nessa direção é a possibilidade de em caso de necessidade, você poder voltar a aplicação para o estado anterior e continuar usando o legado enquanto você analisa o que fez com que o novo serviço não funcionasse como deveria.
 
@@ -93,19 +101,19 @@ Mas para este padrão funcionar, você precisa saber claramente o mapa de como f
 
 #### Padrão: Composição de UI
 
-O padrão de estrangulamente olha para o trabalho todo sendo no lado servidor, mas a interface também nos da ótimas oportunidades para ir separando as funcionalidades para o novo padrão de microsserviços.
+O padrão de estrangulamento olha para o trabalho todo sendo no lado servidor, mas a interface também nos da ótimas oportunidades para ir separando as funcionalidades para o novo padrão de microsserviços.
 
 E aqui temos diversos jeitos de aplicar essa separação, a idéia é ir do front até o backend. A chave é começar a componentizar a UI para que ela possa funcionar isolada, e ai poder encaixar a funcionalidade onde for necessário.
 
-Um dos pontos de atenção desta técnica é que você precisa alterar seu monolito e lançar uma nova versão sempre que alterar essa parte do front, principalmente se a aplicação for mobile, porque será necessário uma nova versão na loja e nos clientes. E neste ponto é onde a técnica dos Micro-Frontends vai lhe ajudar bastante.
+Um dos pontos de atenção desta técnica é que você precisa alterar seu monólito e lançar uma nova versão sempre que alterar essa parte do front, principalmente se a aplicação for mobile, porque será necessário uma nova versão na loja e nos clientes. E neste ponto é onde a técnica dos Micro-Frontends vai lhe ajudar bastante.
 
 #### Padrão: Ramificar por Abstração
 
-Para o padrão de estrangulamento, temos que ser capazes de interceptar as chamadas no perímetro do monolíto. Mas e quando a funcionalidade está completamente enraizada dentro da sua aplicação? 
+Para o padrão de estrangulamento, temos que ser capazes de interceptar as chamadas no perímetro do monólito. Mas e quando a funcionalidade está completamente enraizada dentro da sua aplicação? 
 
 Neste casos é preciso fazer alterações significantes e disruptivas na sua base de código, só que isso se tornar um problema para você, porque queremos fazer as mudanças no código de maneira incremental, mas ao mesmo tempo impactar o menor possível os desenvolvedores que já estão trabalhando na sua base de código. Aqui entra o padrão de ramificar, e como fazer isso.
 
-O primeiro passo é criar uma abstração da funcionalidade para ser substituida, então a aplicação atual passa a usar a abstração, então você trabalha no código desta abstração e cria o mecanismo para alternar entre o modelo antigo e o novo microserviço criado, e se está tudo ok, você remove a implementação antiga.
+O primeiro passo é criar uma abstração da funcionalidade para ser substituída, então a aplicação atual passa a usar a abstração, então você trabalha no código desta abstração e cria o mecanismo para alternar entre o modelo antigo e o novo microserviço criado, e se está tudo ok, você remove a implementação antiga.
 
 O interessante neste modelo, é que ao mesmo tempo você acaba criando um modelo de *fallback* que pode ser usado se seu novo serviço não se comportar bem. 
 
@@ -121,7 +129,7 @@ Esse padrão é uma opção para ser usada quando você tem aplicações de alto
 
 #### Padrão: Colaborador de Decoração
 
-Esse padrão é utilizado quando você precisa mudar algo baseado no comportamento de algo acontecendo dentro do monolito, mas não pode alterar o monolíto. A idéia aqui é colocar algo como decoração para fazer com que o monolito esteja fazendo as chamadas aos serviços diretamente, mesmo que você não tenha chamado ele.
+Esse padrão é utilizado quando você precisa mudar algo baseado no comportamento de algo acontecendo dentro do monólito, mas não pode alterar o monólito. A idéia aqui é colocar algo como decoração para fazer com que o monolito esteja fazendo as chamadas aos serviços diretamente, mesmo que você não tenha chamado ele.
 
 Em vez de você interceptar ou mudar a requisição, você deixa ela acontecer normalmente, e baseado no resultado desta chamada, juntamos com a chamada ao microserviço externo e até mesmo alteramos o comportamento da resposta.
 
@@ -131,7 +139,7 @@ Este padrão é usado normalmente quando você precisa mudar os dados, seja na c
 
 ## Por onde começar?
 
-O padrão de arquitetura de microserviços ele se encaixa para você se você tem um sistema que possui muitas funcionalidades, se você faz releases constantes, tem muitos subdomínios e linhas de negócio, se você tem times grandes e que precisam trabalhar em multiplas funcionalidades do seu sistemas ao mesmo tempo, se seu projeto está sempre em expansão.
+O padrão de arquitetura de microserviços ele se encaixa para você se você tem um sistema que possui muitas funcionalidades, se você faz releases constantes, tem muitos subdomínios e linhas de negócio, se você tem times grandes e que precisam trabalhar em múltiplas funcionalidades do seu sistemas ao mesmo tempo, se seu projeto está sempre em expansão.
 
 E para isso algumas tecnologias vão te ajudar nessa missão, não são todas obrigatórias, mas elas ajudam nessa direção.
 
@@ -141,7 +149,7 @@ Microsserviços são normalmente vinculados a containers (mas não obrigatoriame
 
 Com o conceito de containers você consegue realmente abstrair sua aplicação do ambiente e dar a indenpencia que o time precisa. Usando o Docker, por exemplo, cada microserviço pode ser entregue de maneira independente no ambiente que vai ser o "host".
 
-E ele também ajuda que suas aplicações seja pequenas, tenham indepencias necessária e possam se comunicar umas com as outras. E aqui entra uma segunda ferramenta para ajudar a sua vida, pois quando você coloca suas aplicações em containers, será necessário gerenciar de alguma maneira esses pedaços de aplicação espalhados.
+E ele também ajuda que suas aplicações seja pequenas, tenham independências necessária e possam se comunicar umas com as outras. E aqui entra uma segunda ferramenta para ajudar a sua vida, pois quando você coloca suas aplicações em containers, será necessário gerenciar de alguma maneira esses pedaços de aplicação espalhados.
 
 #### Orquestração de Containers
 
@@ -168,11 +176,11 @@ E depois que seu serviço estiver construído e já montado dentro de uma contai
 
 Mas a grande chave aqui é escolher um framework e colocar em uma ambiente que sua equipe seja capaz de dar suporte e conheça como usar e monitorar, olhar performance. Pois escolher uma tecnologia, ou framework que você não conhece, vai ter uma curva de aprendizado e pode ser que seu time não tenho o tempo necessário para aprender e terá que lidar com ela em produção.
 
-Ambientes Privados ou On-Premise são mais trabalhasos para se manter um escalabidade, mas não são impossíveis de serem feitos, se os pilares são mantidos, você está sim fazendo microsserviços.
+Ambientes Privados ou On-Premise são mais trabalhosas para se manter um escalabidade, mas não são impossíveis de serem feitos, se os pilares são mantidos, você está sim fazendo microsserviços.
 
 ## Práticas de Segurança
 
-Código seguro deveria ser uma regra em qualquer design de aplicação, em alguns ramos são tão importantes quanto qualquer regra de qualidade que se possa ter. E para microsserviços não é diferente e aqui não existe nenhum segredo, é a mesma regra para qualquer desenho de aplicação, no mínino se deve olhar para o [Top 10 do OWASP](https://owasp.org/www-project-top-ten/) e seguir essas recomendações no seu projeto. O minimo que o seu desenvolvedor precisa saber é sobre essas vulnerabilidades.
+Código seguro deveria ser uma regra em qualquer design de aplicação, em alguns ramos são tão importantes quanto qualquer regra de qualidade que se possa ter. E para microsserviços não é diferente e aqui não existe nenhum segredo, é a mesma regra para qualquer desenho de aplicação, no mínimo se deve olhar para o [Top 10 do OWASP](https://owasp.org/www-project-top-ten/) e seguir essas recomendações no seu projeto. O mínimo que o seu desenvolvedor precisa saber é sobre essas vulnerabilidades.
 
 Sério mesmo, não há nada novo aqui, e qualquer um que esteja tentando lhe convencer de um "Cross Microservice Injection" ou algo do tipo, está tentando lhe enrolar. 
 
@@ -180,7 +188,7 @@ No caso de Microsserviços há abordagem que muda é em relação a Autorizaçã
 
 Uma dica importante sempre que se olha em termos de código seguro, é colocar algo na sua esteira de CI/CD e fazer a validação do seu código para procurar isso, e não só verificar se apenas o seu código traz vulnerabilidades, é interessante olhar se a bibliotecas de terceiros que você possa estar usando não podem estar causando algum problema no seu ambiente.
 
-E ferramentas para isso tem várias, entre elas temos o [Fortify](https://www.microfocus.com/en-us/solutions/application-security), [Snyk](https://snyk.io/), [JFrog Xray](https://jfrog.com/xray/). Porque as vezes uma dependencia desatualizada pode colocar seu serviço em posição de risco, então olhar a melhor prática no código, e uma ferramenta para ajudar a apontar onde melhorar, formam um time imbátivel.
+E ferramentas para isso tem várias, entre elas temos o [Fortify](https://www.microfocus.com/en-us/solutions/application-security), [Snyk](https://snyk.io/), [JFrog Xray](https://jfrog.com/xray/). Porque as vezes uma dependencia desatualizada pode colocar seu serviço em posição de risco, então olhar a melhor prática no código, e uma ferramenta para ajudar a apontar onde melhorar, formam um time imbatível.
 
 Outra prática que eu vejo em algumas empresas, principalmente quando os serviços estão expostos apenas internarmente e não para fora, é não usar o HTTPS, ou melhor, use um TLS (Transport Layer Security). E para que você precisa disso, privacidade, integridade e idenficicação.
 
@@ -191,7 +199,7 @@ Como estamos falando de containers, as práticas valem também para lá e nunca 
 A chave são seguir ao menos cinco pilares:
 
 - Seguro por desenho
-- Vasculhe suas dependencias
+- Vasculhe suas dependências
 - Use sempre HTTPS
 - Use Tokens de Acesso e Identidade
 - Proteja e Encripte seus segredos.
@@ -242,8 +250,8 @@ Tirando a parte de Autenticação e Autorização, que precisam de um cuidado a 
 
 ------
 
-Como visto acima, a arquitetura de microsserviços traz bastante beneficios para o seu ambiente e lhe oferece a vantagem de deixar o desenvolvimento independente quando se tem vários times e funcionalidade, e essa independencia se extende também para o deploy da aplicação. Ou seja, você da velocidade para seu times e agilidade, consegue ter código de melhor qualidade já que ele vai estar organizado ao redor da funcionalidade. Tem-se a vantagem de ser fácil de escalar apenas no ponto em que se precisa, e ainda poder ser aplicacado na tecnologia que você tem mais dominio.
+Como visto acima, a arquitetura de microsserviços traz bastante benefícios para o seu ambiente e lhe oferece a vantagem de deixar o desenvolvimento independente quando se tem vários times e funcionalidade, e essa independencia se estende também para o deploy da aplicação. Ou seja, você da velocidade para seu times e agilidade, consegue ter código de melhor qualidade já que ele vai estar organizado ao redor da funcionalidade. Tem-se a vantagem de ser fácil de escalar apenas no ponto em que se precisa, e ainda poder ser aplicacado na tecnologia que você tem mais domínio.
 
-Mas, como já dito anteriormente, não é nenhuma bala de prata, ele traz complexidades para o ambiente e novas preopações em termos de segurança. Imagine um projeto gigante com multiplas instancias e centenas de microsserviços, como você irá monitorar? Em caso de erro, como você vai encontrar, desviar ou mesmo tratar o erro?
+Mas, como já dito anteriormente, não é nenhuma bala de prata, ele traz complexidades para o ambiente e novas preocupações em termos de segurança. Imagine um projeto gigante com múltiplas instâncias e centenas de microsserviços, como você irá monitorar? Em caso de erro, como você vai encontrar, desviar ou mesmo tratar o erro?
 
 Se usado da maneira correta, e tratado de perto os pontos de atenção, esse padrão de arquitetura tem muito a agregar no seus projetos.
