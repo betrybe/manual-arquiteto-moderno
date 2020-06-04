@@ -28,7 +28,7 @@ Usaremos a imagem acima para discorrer sobre pontos de atenção que valem a pen
 
 * Tenha uma estratégia de teste eficaz que segue a pirâmide de testes;
 *  As estruturas devem ser isoladas em módulos individuais. Quando (não se) mudarmos de ideia, só precisaremos fazer mudança em apenas um lugar;
-* Arquitetura gritando também conhecida como uso pretendido. Quando você olha para a estrutura do pacote, percebe o que o aplicativo faz, em vez de ver detalhes técnicos. Existem muito semelhante quando você faz package by layer ao invés de package by layer. [@Otavio #Revisar]
+* "Arquitetura Gritante" também conhecida como <u>uso pretendido</u>[@Otavio #Revisar o sublinhado]. Ao olhar para a estrutura do pacote, percebe-se imediatamente o que o aplicativo faz, e não seus detalhes técnicos. É semelhante a quando se utiliza package by layer ao invés de package by feature. 
 
 * Toda a lógica de negócios deve estar em um caso de uso, portanto, será fácil encontrar e não duplicar em nenhum outro lugar;
 
