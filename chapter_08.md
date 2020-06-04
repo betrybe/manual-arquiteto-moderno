@@ -1,353 +1,138 @@
-# A importância de aprender os conceitos ao invés de novos frameworks
+# A importância de se aprender conceitos ao invés de novos frameworks
+
+Escrever este capítulo pode não ser uma das tarefas mais fáceis, uma vez que o público-alvo deste material é o de Desenvolvedores com alto nível de Experiência (*Senior Developers*). A intenção, portanto, deste texto não é de um acadêmico dizer o que um profissional deve estudar, mas principalmente, gerar uma auto-crítica de muitos assuntos que poderiam ser explorados com maior profundidade (e até mesmo a aplicação do famoso termo "ligar os pontos") enquanto estávamos em processo de formação (na Universidade).
+
+Pois bem, como iniciar? Basicamente uma formação de um profissional de desenvolvimento tem como base seu *background* em um curso de Ciência (ou Engenharia) da Computação (ou outro bacharelado na área). Muitas destas respostas podem estar em disciplinas já esquecidas por nós como estudantes, e mesmo pelos profissionais. 
+
+O grande "mistério" que podemos tentar revelar aqui neste capítulo pode ser extremamente simples (ou tornar-se simples) a partir do momento que identificamos o seguinte: as diferentes disciplinas que estudamos estão sempre interconectadas, mesmo que não pareçam.
+
+## Por que estudar Análise de Algoritmos, Estruturas de Dados, Sistemas Operacionais, Arquitetura de Computadores, Grafos, entre outros?
+
+Podemos interconectar disciplinas de Análise de Algoritmos com Programação Orientada a Objetos e Bancos de dados? Sim! E de uma forma mais comum do que pode-se imaginar:
+
+Considere o exemplo de uma busca de objetos em um banco através de um ORM. Dependendo da aplicação, compartilhamento de recursos, escalabilidade e também concorrência, temos que pensar em eficiência de algoritmos mesmo antes de sua implementação. 
+
+Ter consciência de que um *Lazy Fetch* em *hibernate*, por exemplo pode gerar uma complexidade assintótica muito maior do que um *Eager Fetch* é fundamental para um senior developer. Isso porque, por exemplo, em um sistema de recuperação de cabeçalhos de pedidos e seus respectivos itens, ocorre uma sequência de acessos ao banco de dados muito volumosa na primeira abordagem (*lazy*). Acessos para recuperar todos os cabeçalhos de pedidos e, para cada pedido mais uma sequência de acessos ao banco de dados. Se observarmos um algoritmo com essas características, veremos algo próximo ao pseudocódigo a seguir:
+
+	1. recuperar conjunto de pedidos e armazenar em listaP
+	2. para cada pedido P em listaP faça
+	3. 	   recuperar itens I[] do pedido P a partir de seu ID
+	4. fim-para
+
+De forma bastante geral, a execução das instruções podem ser descritas da forma abaixo
+
+	1 execução da linha 1
+	N+1 execuções da linha 2 (for sempre tem o teste que retorna falso)
+	N execuções da linha 3
+
+Desse modo, a complexidade deste algoritmo é de ordem O(n). Isso significa que à medida que o conjunto de valores recuperados na linha 1 aumenta, o tempo computacional aumenta proporcionalmente.
+
+Podemos extrapolar ainda este algoritmo e, para cada item, recuperar toda da lista de impostos, que pode gerar um algoritmo de complexidade quadrática O(n2). Observe:
+
+	1. recuperar conjunto de pedidos e armazenar em listaP
+	2. para cada pedido P em listaP[] faça
+	3. 	   recuperar itens I[] do pedido P a partir de seu ID
+	4.     para cada item I de P, faça
+	5.          recuperar lista L de impostos de I[]
+	6.     fim-para
+	7. fim-para
+
+Neste caso analisando a complexidade assintótica, temos:
+
+	1 execução da linha 1
+	N+1 execuções da linha 2
+	N execuções das linhas de 3 a 5, o que implica em:
+		1 execução da linha 3
+		N+1 execuções da linha 4
+		N execuções da linha 5
+	
+Portanto, se somarmos todas as execuções temos 1 + (N+1) + N * (1 + (N+1) + N), o que resulta num polinômio cujo maior expoente é 2 (Nˆ2). Logo, nosso algoritmo de busca de pedidos, itens e impostos pode ser considerado um algoritmo de ordem quadrática. 
+Isso porque apenas pensamos na recuperação da informação. Nem pensamos ainda na iteração destes valores, o que pode elevar ainda mais o tempo computacional. Agora imagine este cenário em um sistema Web com algumas dezenas de milhares de usuários conectados. Se fizermos acessos ao disco (que é um dispositivo bastante lento se comparado ao acesso à memória) de forma ineficiente para uma única requisição, como será o desempenho da aplicação para diversas requisições simultâneas?
+
+Qual conclusão podemos tomar de toda esta discussão? Talvez não seja tarefa do dia-a-dia de um desenvolvedor Senior realizar a análise assintótica de algoritmos através da obtenção dos polinômios. Porém para um desenvolvedor que irá trabalhar com problemas mais complexos que a maioria dos casos do dia-a-dia, identificar complexidades (mesmo que de forma mais superficial inicialmente) de algoritmos é fundamental para ter uma visão criteriosa de quais decisões tomar.
+
+## A importância de um estudo mais aprofundado em Estruturas de Dados
+Sabemos que Estruturas de Dados é um assunto que, para muitos estudantes em formação, é algo tenebroso e extremamente abstrato. Porém a necessidade de termos conhecimento das estruturas básicas e avançadas é fundamental para também entendermos as ferramentas que utilizamos em sistemas atuais.
+
+Quer exemplos? 
+- **Filas**: Apache Kafka, Rabbit MQ, MQTT, entre outros são exemplos de aplicações que utilizam os conceitos de Filas em suas implementações. Não apenas filas únicas, mas filas com prioridades, que também são objeto de estudo no período da graduação.
+- **Pilhas**: Sua IDE faz uso de Pilhas a todo momento para conferir se as chaves abertas foram fechadas corretamente (o *parser* da linguagem faz uso de pilhas quase que constantemente). Se os parêntesis que definem as instruções em *Clojure* estão em conformidade. Isso apenas para citar exemplos imediatos. 
+
+Além destes exemplos mais "simples" (e destaco a importância de se colocar o termo entre aspas), temos também exemplos mais complexos que geram muita diferença de desempenho nas aplicações. Por exemplo: Qual a diferença entre utilizarmos Listas (sejam elas Vetores ou listas ligadas) e Hash? A principal diferença está no desempenho da busca. Observe este pequeno exemplo de Benchmark em JAVA.
+
+		ArrayList<Produto> lista;
+		lista = new ArrayList<Produto>();
+		for (int i = 0; i < 100000; i++) {
+		    Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
+		    lista.add(p);
+		}
+		int quantosAchei=0; // numero de ocorrencias encontradas
+		// inicio da medicao do tempo
+		long inicio = System.currentTimeMillis();
+		Produto busca;
+		for (int cont = 0; cont < 10000; cont++) {
+		    for (int i = 0; i < lista.size(); i++) {
+		        Produto tmp = lista.get(i);
+		        if (tmp.getId() == -1) { // forcando buscar um ID que nao existe na lista -> o pior caso
+		             busca = tmp;
+		             quantosAchei++;
+		             break;
+		         }
+		     }
+		 }
+		 long fim = System.currentTimeMillis();
+		 // fim da medicao do tempo
+		 System.out.println("Achei = " + quantosAchei +" em "+(fim-inicio));
+
+Este simples algoritmo popula uma lista com 100.000 objetos do tipo produto e realiza 10.000 buscas de um produto inexistente nesta lista. Como é uma estrutura linear (e voltamos na análise de algoritmos), a busca obrigatoriamente tem que passar por todos os objetos até concluir que ele não existe na lista. Um algoritmo deste pode levar alguns bons segundos para executar (um teste em uma máquina comum pode levar entre 2 e 5 segundos para executar).
+É possível melhorar o desempenho desta busca? Claro que sim. Poderíamos usar, ao invés de busca linear, um algoritmo de busca binária. Entretanto para esta estratégia nosso conjunto precisaria estar previamente ordenado.
+
+Agora, se pensarmos em outra estrutura, como um mapa Hash, qual a vantagem? Vamos observar este código.
+
+		HashMap<Integer, Produto> mapa;
+		mapa = new HashMap<Integer, Produto>();
+		for (int i = 0; i < 1000000; i++) {
+		   Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
+		   mapa.put(p.getId(), p);
+		}
+		int quantosAchei=0;
+		
+		// inicio da medicao
+		long inicio = System.currentTimeMillis();
+		for (int cont=0; cont< 10000; cont++) {
+			Produto busca = mapa.get(-1); // novamente forcando a busca de um elemento que nao existe
+			if (busca != null) {
+				quantosAchei++;
+			}
+		}
+		long fim = System.currentTimeMillis();
+		// fim da medicao
+		System.out.println("Achei = "+quantosAchei+" em "+(fim-inicio));
 
+Pela própria definição de Hash, há um cálculo para determinar, através de um atributo chave do objeto, qual a posição de memória que ele irá ocupar. Uma vez determinada esta posição, o acesso é direto ao objeto (ou a inexistência dele). Portanto o tempo computacional de acesso de um objeto em um mapa hash é O(1), ou seja, constante!
 
+Desse modo, independente do tamanho do conjunto, o tempo de acesso sempre será o mesmo (o que traz um desempenho excepcional se comparado ao desempenho de busca em uma lista). 
 
+Não somente Hash, como também Árvores binárias, AVLs ou mesmo B-Trees, para que o Senior developer tenha condições mínimas de definir estratégias de índices em tabelas de Bancos de Dados relacionais.
 
+Agora, estou buscando valorizar bastante a Análise de Algoritmos, correto? Quer um exemplo onde a Análise de Algoritmos pode não ser suficiente para uma solução?
 
-## DTO ou não DTO?
+Um algoritmo bastante comum na formação durante a Graduação é o percurso e preenchimento de matrizes. Este tipo de algoritmo, independente se o preenchimento é via Linhas x Colunas ou Colunas x Linhas, na visão única e exclusiva da Análise de Algoritmos é irrelevante, pois ambos são de ordem assintótica O(nˆ2). Observe estes fragmentos de código Java.
 
+Fragmento1: preencimento Linha x Coluna
 
+	
+	for (int i=0; i < TAM; i++)
+		for (int j=0; j < TAM; j++)
+			matriz[i][j] = valor;
 
+   Fragmento 2: preenchimento Coluna x Linha
+ 	   
+	   for (int i=0; i < TAM; i++)
+		   for (int j=0; j < TAM ; j++)
+			   matriz[j][i] = valor;
 
+O aspecto interessante nestes códigos é que, na prática, o desempenho destes dois algoritmos é muito diferente, se a dimensão da matriz for considerável (aqui, considerável, vamos pensar em valores acima de 5.000).
 
-O Data Transfer Object, conhecido como DTO, é alvo de grandes discussões, quando falamos sobre o desenvolvimento de aplicações Java. O DTO nasceu no mundo Java no EJB2 com dois propósitos: primeiro, contornar o problema de serialização do EJB e; segundo, definir implicitamente uma fase de montagem, na qual todos os dados que serão usados para apresentação passam por uma ordenação antes de irem efetivamente para a camada de apresentação. Porém, atualmente o EJB não é mais utilizado em larga escala, portanto, os DTOs também podem ser descartados? 
-
-Existe uma grande discussão sobre os DTOs, afinal, num ambiente onde existem vários tópicos novos, como cloud e microservices, essa tal camada faz sentido? Quando falamos em uma boa arquitetura de software a resposta é praticamente unânime: depende do quão acoplado desejamos que a entidade esteja com a camada de visualização.
-
-
-
-Pensando numa arquitetura básica em camadas e dividindo-a em três partes interconectadas, encontramos o famoso [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller).
-
-
-
-![](/home/sergiolopes/Documentos/LivroArquitetura/manual-arquiteto-moderno/images/chapter_01/image1.png)
-
-
-
-Um ponto importante é que a arquitetura da camada MVC não é exclusiva para aplicações Web, como: Spring MVC ou JSF. Por exemplo, em uma aplicação RESTful as informações expostas como JSON funcionam como view, mesmo não tendo uma interface amigável.
-
-Após explicarmos de maneira resumida o MVC, falaremos sobre as vantagens e desvantagens do uso do DTO. Pensando em aplicações em camadas, o DTO tem como objetivo, separar o model da view, sendo assim, as desvantagens do DTO são:
-
-* Aumento a complexidade;
-* Existe grande possibilidade do código ficar duplicado.
-
-
-
-Adicionar uma nova camada causando impacto no layout, deixando-o mais lento, ou seja, cria problemas relacionados a desempenho.
-
-Assim, sistemas simples e dos quais não precisam de um model rico como premissa, não utilizar o DTO traz grandes benefícios para a aplicação. Um ponto interessante é que muitos frameworks de serialização acabam obrigando que os atributos tenham métodos de acesso (getter e setter) sempre presentes e públicos, assim, em algum momento isso significará um impacto no encapsulamento e na segurança da aplicação.
-
-A outra opção está em adicionar a camada DTO garantindo algumas vantagens, como o desacoplamento da view e do model como mencionado anteriormente:
-
-
-
-* Deixa explícito quais campos irão para a camada da view. Sim, existem várias anotações em diversos frameworks que indicam quais campos não irão para a visualização. Porém, caso esqueçamos de fazer as anotações, podemos exportar um campo crítico de maneira acidental como a senha do usuário;
-* Facilita o desenho em relação a orientação de objeto. Um dos pontos que o clean code deixa claro sobre orientação a objetos é que, o [POO](https://en.wikipedia.org/wiki/Object-oriented_programming) esconde os dados para expor o comportamento e, o encapsulamento, ajuda com isso;
-* [Facilita o atualização do banco de dados](https://dzone.com/articles/orms-heroes-or-villains-indoors-the-architecture). Muitas vezes é importante refatorar ou migrar o banco de dados sem que essa alteração impacte o cliente. Essa separação facilita otimizações, modificações no banco de dados sem que isso impacte a visualização;
-* Versionamento e retrocompatibilidade são pontos importantes, principalmente, quando se tem uma API de uso público e com vários clientes, assim é possível ter um DTO para cada versão e evoluir o modelo de negócio sem se preocupar;
-* Outro benefício é a facilidade de trabalhar com o model rico e na criação de uma API que é [a prova de balas](https://dzone.com/articles/designing-a-bulletproof-code). Por exemplo, dentro do model podemos usar uma API do tipo money, porém, dentro da camada da view, exporto como sendo um simples objeto com apenas o valor monetário, ou seja, o bom e velho String no Java;
-* [CQRS](https://martinfowler.com/bliki/CQRS.html): a Segregação de Responsabilidade de Consulta de Comando (Command Query Responsibility Segregation) separa a responsabilidade da escrita e da leitura de dados. Como fazer isso sem os DTOs?
-
-
-
-No geral, adicionar uma camada significa desacoplar e facilitar a manutenção em detrimento de ter mais classes e mais complexidade. Uma vez que também temos que pensar na operação de conversão entre essas camadas. Essa é a razão, por exemplo, da existência do MVC, assim, é muito importante entender que tudo se baseia em impacto e tradeoffs em uma determinada aplicação ou situação. A não existência dessas camadas pode ser péssimo, acarretando um padrão [Highlander, there can be only one](https://www.youtube.com/watch?v=sqcLjcSloXs), no qual existe uma classe que detém todas as responsabilidades. Do mesmo jeito que o excesso de camadas torna o padrão similar a uma cebola, onde o desenvolvedor se arrepende ao passar por cada camada.
-
-
-
-Uma crítica mais frequente ao DTOs se encontra no trabalho para realizar a conversão. A boa notícia é que existem diversos frameworks especializados neste trabalho, ou seja, não é necessário realizar a mudança manualmente. Nesse artigo escolheremos o framework [modelmapper](http://modelmapper.org/).
-
-
-
-```xml
-<dependency>
-    <groupId>org.modelmapper</groupId>
-    <artifactId>modelmapper</artifactId>
-    <version>${modelmapper.version}</version>
-</dependency>
-
-```
-
-
-
-Para ilustrar o conceito do DTO, criaremos uma aplicação utilizando JAX-RS conectado ao MongoDB, tudo isso, graças ao Jakarta EE, utilizando o Payara como servidor. Basicamente, iremos gerenciar um User com nickname, salary, birthday e lista de idiomas que o usuário fala (languages). Como trabalharemos com MongoDB no Jakarta EE, utilizaremos o Jakarta NoSQL.
-
-Para mapear a entidade para persistir no banco de dados, as anotações que o Jakarta NoSQL utiliza é bastante semelhante ao JPA, com exceção do nome do pacote. Assim, temos as anotações `Entity`, `Id`, `Column` para identificar que a classe é uma entidade, o campo é uma chave e os campos que serão persistidos respectivamente.
-
-
-
-
-
-```java
-import jakarta.nosql.mapping.Column;
-import jakarta.nosql.mapping.Convert;
-import jakarta.nosql.mapping.Entity;
-import jakarta.nosql.mapping.Id;
-import my.company.infrastructure.MonetaryAmountAttributeConverter;
-
-import javax.money.MonetaryAmount;
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-@Entity
-public class User {
-
-    @Id
-    private String nickname;
-
-    @Column
-    @Convert(MonetaryAmountAttributeConverter.class)
-    private MonetaryAmount salary;
-
-    @Column
-    private List<String> languages;
-
-    @Column
-    private LocalDate birthday;
-
-    @Column
-    private Map<String, String> settings;
-
-   // somente os métodos getter
-}
-
-```
-
-
-
-Uma coisa importante é que o MongoDB não tem suporte para persistir o tipo `MonetaryAmount`, assim, criamos também uma classe que realiza a conversão de/para String de modo que criamos o `MonetaryAmountAttributeConverter` para realizar essa conversão de/para o banco MongoDB.
-
-
-
-```java
-import jakarta.nosql.document.Document;
-import jakarta.nosql.mapping.AttributeConverter;
-import org.javamoney.moneta.Money;
-
-import javax.money.CurrencyUnit;
-import javax.money.Monetary;
-import javax.money.MonetaryAmount;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class MonetaryAmountAttributeConverter implements AttributeConverter<MonetaryAmount, String> {
-
-    @Override
-    public String convertToDatabaseColumn(MonetaryAmount attribute) {
-        if (attribute == null) {
-            return null;
-        }
-        return attribute.toString();
-    }
-
-    @Override
-    public MonetaryAmount convertToEntityAttribute(String dbData) {
-        if (dbData == null) {
-            return null;
-        }
-        return Money.parse(dbData);
-    }
-}
-
-```
-
-
-
-De uma maneira geral, não faz sentido fazer com que as entidades tenham getter e setter para todos os atributos, afinal, isso seria o mesmo que deixar o atributo público de maneira direta. Como o foco do artigo não é sobre DDD ou sobre o model rico, omitiremos os detalhes dessa entidade. Para o DTO, teremos todos os campos que a entidade possui, porém, para o view o `MonetaryAmount` será uma `String` e a birthday seguirá a mesma linha.
-
-
-
-```java
-import java.util.List;
-import java.util.Map;
-
-public class UserDTO {
-
-    private String nickname;
-
-    private String salary;
-
-    private List<String> languages;
-
-    private String birthday;
-
-    private Map<String, String> settings;
-
-    //getter e setter
-}
-
-```
-
-
-
-O grande benefício do mapper é que não precisamos nos preocupar em fazer isso manualmente. O único ponto a salientar é que os tipos especiais, por exemplo, o `[MonetaryAmount](https://javamoney.github.io/apidocs/javax/money/MonetaryAmount.html)` do [money-api](https://javamoney.github.io/api.html) precisarão criar um converter para virar `String` e vice-versa.
-
-
-
-```java
-import org.modelmapper.AbstractConverter;
-
-import javax.money.MonetaryAmount;
-
-public class MonetaryAmountStringConverter extends AbstractConverter<MonetaryAmount, String> {
-
-    @Override
-    protected String convert(MonetaryAmount source) {
-        if (source == null) {
-            return null;
-        }
-        return source.toString();
-    }
-}
-
-
-import org.javamoney.moneta.Money;
-import org.modelmapper.AbstractConverter;
-
-import javax.money.MonetaryAmount;
-
-public class StringMonetaryAmountConverter extends AbstractConverter<String, MonetaryAmount> {
-
-    @Override
-    protected MonetaryAmount convert(String source) {
-        if (source == null) {
-            return null;
-        }
-        return Money.parse(source);
-    }
-}
-
-```
-
-
-
-Os converters estão prontos, o próximo passo é instanciar a classe que realiza a conversão do `ModelMapper`. A partir de agora, toda a aplicação poderá utilizar o mesmo mapper, sendo necessário utilizar apenas a anotação `Inject` como veremos a frente.
-
-
-
-```java
-import org.modelmapper.ModelMapper;
-
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import java.util.function.Supplier;
-
-import static org.modelmapper.config.Configuration.AccessLevel.PRIVATE;
-
-@ApplicationScoped
-public class MapperProducer implements Supplier<ModelMapper> {
-    private ModelMapper mapper;
-
-    @PostConstruct
-    public void init() {
-        this.mapper = new ModelMapper();
-        this.mapper.getConfiguration()
-                .setFieldMatchingEnabled(true)
-                .setFieldAccessLevel(PRIVATE);
-        this.mapper.addConverter(new StringMonetaryAmountConverter());
-        this.mapper.addConverter(new MonetaryAmountStringConverter());
-        this.mapper.addConverter(new StringLocalDateConverter());
-        this.mapper.addConverter(new LocalDateStringConverter());
-        this.mapper.addConverter(new UserDTOConverter());
-    }
-
-    @Override
-    @Produces
-    public ModelMapper get() {
-        return mapper;
-    }
-}
-
-```
-
-
-
-Uma das grandes vantagens do uso do Jakarta NoSQL está na facilidade entre integrar o banco de dados. Por exemplo, nesse artigo utilizaremos o conceito de repositório, no qual criaremos uma interface e o Jakarta NoSQL irá se encarregar da implementação.
-
-
-
-```java
-import jakarta.nosql.mapping.Repository;
-
-import javax.enterprise.context.ApplicationScoped;
-import java.util.stream.Stream;
-
-@ApplicationScoped
-public interface UserRepository extends Repository<User, String> {
-    Stream<User> findAll();
-}
-
-```
-
-
-
-Por fim, faremos o recurso com o JAX-RS. Um ponto importantíssimo é a exposição de dados, que será feita a partir do DTO, ou seja, é possível realizar toda a modificação dentro da entidade sem que o cliente saiba, graças ao DTO. Como foi dito anteriormente, o mapper foi injetado e o método `map` facilita bastante essa integração entre o DTO e a entidade, sem necessidade de muito código adicional.
-
-
-
-
-
-```Java
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-@Path("users")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-public class UserResource {
-
-    @Inject
-    private UserRepository repository;
-
-    @Inject
-    private ModelMapper mapper;
-
-    @GET
-    public List<UserDTO> getAll() {
-        Stream<User> users = repository.findAll();
-        return users.map(u -> mapper.map(u, UserDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @POST
-    public void insert(UserDTO dto) {
-        User map = mapper.map(dto, User.class);
-        repository.save(map);
-    }
-
-    @POST
-    @Path("id")
-    public void update(@PathParam("id") String id, UserDTO dto) {
-        User user = repository.findById(id).orElseThrow(() ->
-                new WebApplicationException(Response.Status.NOT_FOUND));
-        User map = mapper.map(dto, User.class);
-        user.update(map);
-        repository.save(map);
-    }
-
-    @DELETE
-    @Path("id")
-    public void delete(@PathParam("id") String id) {
-       repository.deleteById(id);
-    }
-}
-
-```
+Mas por que a diferença de desempenho? Por conta do número de acessos ao cache. Se aprofundarmos um pouco mais o estudo e também levarmos em conta Arquitetura de computadores, veremos que uma matriz é alocada em memória como um grande array (a notação de matriz que as linguagens de programação utilizam é apenas uma abstração). Por conta disso (e levando em consideração o conceito da localidade referencial - negligenciado no estudo de Sistemas Operacionais), obviamente se uma linha é trazida para o cache, é muito mais rápido preencher seus elementos adjacentes até que haja a necessidade de acesso a outras páginas de memória (gerando assim um *page fault*) do que ficar buscando elementos em regiões "distantes" da memória, aumentando - e muito - o volume de paginação.
 
