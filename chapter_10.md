@@ -34,6 +34,10 @@ Cuidado com a performance também quer dizer em muitos casos, implementar mais c
 ## Como medir a performance? 
 
 Existem muitas formas de medir a performance da aplicação. Seja com um monitoramento em tempo real ou um teste de ‘stress’ antes de liberar uma funcionalidade em produção. Tudo vai depender do requisito não funcional solicitado. É claro que todo usuário quer ter sempre a resposta o mais rápido possível. Mas qual o limite aceitável? Esta é a medida que se deve ter em mente até mesmo antes de iniciar a codificação. Por exemplo: o tempo de login não pode ser superior a um segundo. Como posso medir isso?
+Lembrando que não é simplesmente colocar que o 'login precisa ser feito em menos de um segundo'. Deve-se avaliar em
+ quais circunstancias esse login pode ou não demorar mais. Até onde o sistema de login pode escalar. Uma boa diretriz
+  de media seria dizer: O tempo de resposta do login é de 1 segundo para 500 solicitações simultâneas, com uma carga de
+   CPU de 60% e uma utilização de memória de 80%.
 
 ### Capturando o tempo da requisição.
 
@@ -64,11 +68,14 @@ Podemos ter gráficos ainda mais bonitos e em tempo real podendo utilizar o [gra
  gráficos.
 
 Veja que capturamos o tempo total de um processo de login, porém se o login não está em um tempo adequado ou queremos
- melhorar ainda mais o tempo, precisamos visualizar cada componente separado.
+ melhorar ainda mais o tempo, precisamos visualizar cada componente em separado. Compreender como um valor é calculado e o que isso significa é essencial para tirar as conclusões corretas. Para esse fim, devemos examinar os métodos estatísticos usados para calcular e agregar dados de desempenho. Nunca utilize somente o valor da **média** para tirar conclusões sobre performance, pois durante um periodo de 24 horas com  milhares de requisições, os valores de pico serão ocultados pela média.
 
 ## Entendendo e separando os componentes.
 
-Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Para isso, precisamos testar separadamente cada componente da arquitetura para descobrir onde é possível diminuir o tempo. É possível que com apenas uma ferramenta não seja possível medir a performance da sua aplicação. É provável que você utilize uma ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos. A imagem abaixo é uma representação da arquitetura para servir milhões de usuários:
+Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Para isso, precisamos testar
+ separadamente cada componente da arquitetura para descobrir onde é possível diminuir o tempo. É possível que com
+  apenas uma ferramenta não seja possível medir a performance da sua aplicação. É provável que você utilize uma
+   ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos. A imagem abaixo é uma representação da arquitetura para servir milhões de usuários:
 
 ![](images/chapter_10_04.png)
 
@@ -142,4 +149,10 @@ https://vladmihalcea.com/how-to-detect-the-n-plus-one-query-problem-during-testi
 
 Não tente resolver todos os problemas ao mesmo tempo. Comece construindo uma lista dos cinco principais
  contribuidores da hora e da queima da CPU, memória ou IO e explore soluções. Ataque um dos problemas e reavalie a
-  arquitetura. 
+   arquitetura. Abaixo algumas etapas que podem ajudar a encontrar e solucionar um problema de performance.
+   
+**Descobrir:** 
+   
+**Entender:**
+   
+**Corrigir ou Melhorar:**
