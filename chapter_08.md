@@ -51,7 +51,7 @@ Isso porque apenas pensamos na recuperação da informação. Nem pensamos ainda
 
 Qual conclusão podemos tomar de toda esta discussão? Talvez não seja tarefa do dia-a-dia de um desenvolvedor Senior realizar a análise assintótica de algoritmos através da obtenção dos polinômios. Porém para um desenvolvedor que irá trabalhar com problemas mais complexos que a maioria dos casos do dia-a-dia, identificar complexidades (mesmo que de forma mais superficial inicialmente) de algoritmos é fundamental para ter uma visão criteriosa de quais decisões tomar.
 
-## A importância de um estudo mais aprofundado em Estruturas de Dados
+## A importância de um estudo mais aprofundado em disciplinas teóricas
 Sabemos que Estruturas de Dados é um assunto que, para muitos estudantes em formação, é algo tenebroso e extremamente abstrato. Porém a necessidade de termos conhecimento das estruturas básicas e avançadas é fundamental para também entendermos as ferramentas que utilizamos em sistemas atuais.
 
 Quer exemplos? 
