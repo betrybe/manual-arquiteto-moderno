@@ -1,6 +1,6 @@
 # A importância de se aprender conceitos ao invés de novos frameworks
 
-Escrever este capítulo pode não ser uma das tarefas mais fáceis, uma vez que o público-alvo deste material é o de Desenvolvedores com alto nível de Experiência (*Senior Developers*). A intenção, portanto, deste texto não é de um acadêmico dizer o que um profissional deve estudar, mas principalmente, gerar uma auto-crítica de muitos assuntos que poderiam ser explorados com maior profundidade (e até mesmo a aplicação do famoso termo "ligar os pontos") enquanto estávamos em processo de formação (na Universidade).
+Escrever este capítulo pode não ser uma das tarefas mais fáceis, uma vez que o público-alvo deste material é o de desenvolvedores com alto nível de experiência (*Senior Developers*). A intenção, portanto, deste texto não é de um acadêmico dizer o que um profissional deve estudar, mas principalmente, gerar uma auto-crítica de muitos assuntos que poderiam ser explorados com maior profundidade (e até mesmo a aplicação do famoso termo "ligar os pontos") enquanto estávamos em processo de formação (na Universidade).
 
 Pois bem, como iniciar? Basicamente uma formação de um profissional de desenvolvimento tem como base seu *background* em um curso de Ciência (ou Engenharia) da Computação (ou outro bacharelado na área). Muitas destas respostas podem estar em disciplinas já esquecidas por nós como estudantes, e mesmo pelos profissionais. 
 
@@ -12,7 +12,7 @@ Podemos interconectar disciplinas de Análise de Algoritmos com Programação Or
 
 Considere o exemplo de uma busca de objetos em um banco através de um ORM. Dependendo da aplicação, compartilhamento de recursos, escalabilidade e também concorrência, temos que pensar em eficiência de algoritmos mesmo antes de sua implementação. 
 
-Ter consciência de que um *Lazy Fetch* em *hibernate*, por exemplo pode gerar uma complexidade assintótica muito maior do que um *Eager Fetch* é fundamental para um senior developer. Isso porque, por exemplo, em um sistema de recuperação de cabeçalhos de pedidos e seus respectivos itens, ocorre uma sequência de acessos ao banco de dados muito volumosa na primeira abordagem (*lazy*). Acessos para recuperar todos os cabeçalhos de pedidos e, para cada pedido mais uma sequência de acessos ao banco de dados. Se observarmos um algoritmo com essas características, veremos algo próximo ao pseudocódigo a seguir:
+Ter consciência de que um `Lazy Fetch` com Hibernate, por exemplo pode gerar uma complexidade assintótica muito maior do que um `Eager Fetch` é fundamental para um senior developer. Isso porque, por exemplo, em um sistema de recuperação de cabeçalhos de pedidos e seus respectivos itens, ocorre uma sequência de acessos ao banco de dados muito volumosa na primeira abordagem (*lazy*). Acessos para recuperar todos os cabeçalhos de pedidos e, para cada pedido mais uma sequência de acessos ao banco de dados. Se observarmos um algoritmo com essas características, veremos algo próximo ao pseudocódigo a seguir:
 
 	1. recuperar conjunto de pedidos e armazenar em listaP
 	2. para cada pedido P em listaP faça
@@ -45,20 +45,20 @@ Neste caso analisando a complexidade assintótica, temos:
 		1 execução da linha 3
 		N+1 execuções da linha 4
 		N execuções da linha 5
-	
+
 Portanto, se somarmos todas as execuções temos 1 + (N+1) + N * (1 + (N+1) + N), o que resulta num polinômio cujo maior expoente é 2 (Nˆ2). Logo, nosso algoritmo de busca de pedidos, itens e impostos pode ser considerado um algoritmo de ordem quadrática. 
 Isso porque apenas pensamos na recuperação da informação. Nem pensamos ainda na iteração destes valores, o que pode elevar ainda mais o tempo computacional. Agora imagine este cenário em um sistema Web com algumas dezenas de milhares de usuários conectados. Se fizermos acessos ao disco (que é um dispositivo bastante lento se comparado ao acesso à memória) de forma ineficiente para uma única requisição, como será o desempenho da aplicação para diversas requisições simultâneas?
 
-Qual conclusão podemos tomar de toda esta discussão? Talvez não seja tarefa do dia-a-dia de um desenvolvedor Senior realizar a análise assintótica de algoritmos através da obtenção dos polinômios. Porém para um desenvolvedor que irá trabalhar com problemas mais complexos que a maioria dos casos do dia-a-dia, identificar complexidades (mesmo que de forma mais superficial inicialmente) de algoritmos é fundamental para ter uma visão criteriosa de quais decisões tomar.
+Qual conclusão podemos tomar de toda esta discussão? Talvez não seja tarefa do dia-a-dia de um desenvolvedor sênior realizar a análise assintótica de algoritmos através da obtenção dos polinômios. Porém para um desenvolvedor que irá trabalhar com problemas mais complexos que a maioria dos casos do dia-a-dia, identificar complexidades (mesmo que de forma mais superficial inicialmente) de algoritmos é fundamental para ter uma visão criteriosa de quais decisões tomar.
 
 ## A importância de um estudo mais aprofundado em disciplinas teóricas
 Sabemos que Estruturas de Dados é um assunto que, para muitos estudantes em formação, é algo tenebroso e extremamente abstrato. Porém a necessidade de termos conhecimento das estruturas básicas e avançadas é fundamental para também entendermos as ferramentas que utilizamos em sistemas atuais.
 
 Quer exemplos? 
-- **Filas**: Apache Kafka, Rabbit MQ, MQTT, entre outros são exemplos de aplicações que utilizam os conceitos de Filas em suas implementações. Não apenas filas únicas, mas filas com prioridades, que também são objeto de estudo no período da graduação.
-- **Pilhas**: Sua IDE faz uso de Pilhas a todo momento para conferir se as chaves abertas foram fechadas corretamente (o *parser* da linguagem faz uso de pilhas quase que constantemente). Se os parêntesis que definem as instruções em *Clojure* estão em conformidade. Isso apenas para citar exemplos imediatos. 
+- **Filas**: Apache Kafka, Rabbit MQ, MQTT, entre outros são exemplos de ferramentas que utilizam os conceitos de `filas` em suas implementações. Não apenas filas únicas, mas filas com prioridades, que também são objeto de estudo no período da graduação.
+- **Pilhas**: Sua IDE faz uso de pilhas a todo momento para conferir se as chaves abertas foram fechadas corretamente (o *parser* da linguagem faz uso de pilhas quase que constantemente). Se os parêntesis que definem as instruções em `Clojure` estão em conformidade. Isso apenas para citar exemplos imediatos. 
 
-Além destes exemplos mais "simples" (e destaco a importância de se colocar o termo entre aspas), temos também exemplos mais complexos que geram muita diferença de desempenho nas aplicações. Por exemplo: Qual a diferença entre utilizarmos Listas (sejam elas Vetores ou listas ligadas) e Hash? A principal diferença está no desempenho da busca. Observe este pequeno exemplo de Benchmark em JAVA.
+Além destes exemplos mais "simples" (e destaco a importância de se colocar o termo entre aspas), temos também exemplos mais complexos que geram muita diferença de desempenho nas aplicações. Por exemplo: Qual a diferença entre utilizarmos Listas (sejam elas Vetores ou listas ligadas) e Hash? A principal diferença está no desempenho da busca. Observe este pequeno exemplo de benchmark em Java:
 
 		ArrayList<Produto> lista;
 		lista = new ArrayList<Produto>();
@@ -113,7 +113,7 @@ Pela própria definição de Hash, há um cálculo para determinar, através de 
 
 Desse modo, independente do tamanho do conjunto, o tempo de acesso sempre será o mesmo (o que traz um desempenho excepcional se comparado ao desempenho de busca em uma lista). 
 
-Não somente Hash, como também Árvores binárias, AVLs ou mesmo B-Trees, para que o Senior developer tenha condições mínimas de definir estratégias de índices em tabelas de Bancos de Dados relacionais.
+Não somente Hash, como também Árvores binárias, AVLs ou mesmo B-Trees, para que o desenvolvedor sênior tenha condições mínimas de definir estratégias de índices em tabelas de bancos de dados relacionais.
 
 Agora, estou buscando valorizar bastante a Análise de Algoritmos, correto? Quer um exemplo onde a Análise de Algoritmos pode não ser suficiente para uma solução?
 
@@ -121,13 +121,12 @@ Um algoritmo bastante comum na formação durante a Graduação é o percurso e 
 
 Fragmento1: preencimento Linha x Coluna
 
-	
+
 	for (int i=0; i < TAM; i++)
 		for (int j=0; j < TAM; j++)
 			matriz[i][j] = valor;
 
    Fragmento 2: preenchimento Coluna x Linha
- 	   
 	   for (int i=0; i < TAM; i++)
 		   for (int j=0; j < TAM ; j++)
 			   matriz[j][i] = valor;
