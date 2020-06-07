@@ -79,9 +79,7 @@ Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Par
 
 ![](images/chapter_10_04.png)
 
-Créditos: https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/
-
-TODO: explicar cada um dos componentes?
+**Créditos:** https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/
 
 No entanto, não foi de primeira que esta arquitetura foi definida. Foram muitos experimentos, testes e medições para chegar em uma arquitetura escalável. Deve ser possível medir a performance da replica de leitura do banco de dados MySQL separadamente, por exemplo.
 
@@ -131,19 +129,54 @@ Portanto, se o banco de dados suportar sequences, é muito mais eficiente usar a
 
 ### Enums
 
-TODO
-https://vladmihalcea.com/the-best-way-to-map-an-enum-type-with-jpa-and-hibernate/
+Geralmente mapeamos **Enums** como String para facilitar a leitura no banco de dados ou exibir diretamente o literal do enum. 
 
-### associação unidirecional ou bidirecional
+```java
+@Enumerated(EnumType.STRING)
+@Column(length = 9)
+private TipoTelefoneEnum tipo;
 
-TODO
-https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
+public enum TipoTelefoneEnum {
+    CASA,
+    COMERCIAL,
+    CELULAR;
+}
+```
+Por mais legível que isso possa ser para o desenvolvedor, essa coluna ocupa muito mais espaço do que o necessário
+. Nesse caso, a coluna de tipo ocupa 9 bytes. Se armazenarmos 10 milhões de registros, apenas a coluna tipo de
+ telefone ocupará 90 MB.
 
-### Problema de consulta N + 1
+#### Mapeando como inteiro
 
-TODO
-https://vladmihalcea.com/how-to-detect-the-n-plus-one-query-problem-during-testing/
+Observe que a coluna @Enumerated não precisa receber o valor ORDINAL EnumType, pois é usado por padrão. Também estamos usando o tipo de coluna número inteiro smallint, pois é improvável que precisemos de mais de 2 bytes para armazenar todos os valores do tipo Enum.
 
+```java
+@Enumerated
+@Column(columnDefinition = "smallint")
+private TipoTelefoneEnum tipo;
+```
+
+O valor será armazenado como inteiro iniciando com zero para o tipo CASA. Agora, isso é muito mais eficiente, mas
+ menos expressivo. Então, como podemos ter desempenho e legibilidade?
+
+Basta criarmos uma tabela no banco de dados representando o enum e na consulta, fazer o join com a tabela de constantes.
+Parece trabalhoso? Mas pode valer a pena se tivermos milhoes de registros.
+
+É claro que existem os contras desta solução. Se o enum for alterado, mudado de ordem ou acrescentado novos valores
+, os registros da base de dados terão que ser ajustados tambem.
+
+Portanto, é tudo uma questão de escolha, então escolha sabiamente.
+
+### Outras medidas de melhoria
+
+Muitas outras medidas de performance podem ser adotadas ou verificadas no seu código. Abaixo alguns materiais em
+ Ingles para auxiliar:
+
+[Associação unidirecional ou bidirecional](https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/)
+
+[Problema de consulta N + 1](https://vladmihalcea.com/how-to-detect-the-n-plus-one-query-problem-during-testing/)
+
+**Referências:** https://vladmihalcea.com/tutorials/hibernate/
 
 ## Conclusão
 
@@ -151,8 +184,9 @@ Não tente resolver todos os problemas ao mesmo tempo. Comece construindo uma li
  contribuidores da hora e da queima da CPU, memória ou IO e explore soluções. Ataque um dos problemas e reavalie a
    arquitetura. Abaixo algumas etapas que podem ajudar a encontrar e solucionar um problema de performance.
    
-**Descobrir:** 
+**Descobrir:** Porque este ponto está com baixa performance?
    
-**Entender:**
+**Entender:** O que está causando a baixa performance?
    
-**Corrigir ou Melhorar:**
+**Corrigir ou Melhorar:** Oportunidade de corrigir ou melhorar com base nos dados obtidos nas etapas acima.
+
