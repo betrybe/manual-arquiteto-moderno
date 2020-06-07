@@ -34,6 +34,10 @@ Cuidado com a performance também quer dizer em muitos casos, implementar mais c
 ## Como medir a performance? 
 
 Existem muitas formas de medir a performance da aplicação. Seja com um monitoramento em tempo real ou um teste de ‘stress’ antes de liberar uma funcionalidade em produção. Tudo vai depender do requisito não funcional solicitado. É claro que todo usuário quer ter sempre a resposta o mais rápido possível. Mas qual o limite aceitável? Esta é a medida que se deve ter em mente até mesmo antes de iniciar a codificação. Por exemplo: o tempo de login não pode ser superior a um segundo. Como posso medir isso?
+Lembrando que não é simplesmente colocar que o 'login precisa ser feito em menos de um segundo'. Deve-se avaliar em
+ quais circunstancias esse login pode ou não demorar mais. Até onde o sistema de login pode escalar. Uma boa diretriz
+  de media seria dizer: O tempo de resposta do login é de 1 segundo para 500 solicitações simultâneas, com uma carga de
+   CPU de 60% e uma utilização de memória de 80%.
 
 ### Capturando o tempo da requisição.
 
@@ -64,17 +68,18 @@ Podemos ter gráficos ainda mais bonitos e em tempo real podendo utilizar o [gra
  gráficos.
 
 Veja que capturamos o tempo total de um processo de login, porém se o login não está em um tempo adequado ou queremos
- melhorar ainda mais o tempo, precisamos visualizar cada componente separado.
+ melhorar ainda mais o tempo, precisamos visualizar cada componente em separado. Compreender como um valor é calculado e o que isso significa é essencial para tirar as conclusões corretas. Para esse fim, devemos examinar os métodos estatísticos usados para calcular e agregar dados de desempenho. Nunca utilize somente o valor da **média** para tirar conclusões sobre performance, pois durante um periodo de 24 horas com  milhares de requisições, os valores de pico serão ocultados pela média.
 
 ## Entendendo e separando os componentes.
 
-Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Para isso, precisamos testar separadamente cada componente da arquitetura para descobrir onde é possível diminuir o tempo. É possível que com apenas uma ferramenta não seja possível medir a performance da sua aplicação. É provável que você utilize uma ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos. A imagem abaixo é uma representação da arquitetura para servir milhões de usuários:
+Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Para isso, precisamos testar
+ separadamente cada componente da arquitetura para descobrir onde é possível diminuir o tempo. É possível que com
+  apenas uma ferramenta não seja possível medir a performance da sua aplicação. É provável que você utilize uma
+   ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos. A imagem abaixo é uma representação da arquitetura para servir milhões de usuários:
 
 ![](images/chapter_10_04.png)
 
-Créditos: https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/
-
-TODO: explicar cada um dos componentes?
+**Créditos:** https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/
 
 No entanto, não foi de primeira que esta arquitetura foi definida. Foram muitos experimentos, testes e medições para chegar em uma arquitetura escalável. Deve ser possível medir a performance da replica de leitura do banco de dados MySQL separadamente, por exemplo.
 
@@ -124,22 +129,64 @@ Portanto, se o banco de dados suportar sequences, é muito mais eficiente usar a
 
 ### Enums
 
-TODO
-https://vladmihalcea.com/the-best-way-to-map-an-enum-type-with-jpa-and-hibernate/
+Geralmente mapeamos **Enums** como String para facilitar a leitura no banco de dados ou exibir diretamente o literal do enum. 
 
-### associação unidirecional ou bidirecional
+```java
+@Enumerated(EnumType.STRING)
+@Column(length = 9)
+private TipoTelefoneEnum tipo;
 
-TODO
-https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
+public enum TipoTelefoneEnum {
+    CASA,
+    COMERCIAL,
+    CELULAR;
+}
+```
+Por mais legível que isso possa ser para o desenvolvedor, essa coluna ocupa muito mais espaço do que o necessário
+. Nesse caso, a coluna de tipo ocupa 9 bytes. Se armazenarmos 10 milhões de registros, apenas a coluna tipo de
+ telefone ocupará 90 MB.
 
-### Problema de consulta N + 1
+#### Mapeando como inteiro
 
-TODO
-https://vladmihalcea.com/how-to-detect-the-n-plus-one-query-problem-during-testing/
+Observe que a coluna @Enumerated não precisa receber o valor ORDINAL EnumType, pois é usado por padrão. Também estamos usando o tipo de coluna número inteiro smallint, pois é improvável que precisemos de mais de 2 bytes para armazenar todos os valores do tipo Enum.
 
+```java
+@Enumerated
+@Column(columnDefinition = "smallint")
+private TipoTelefoneEnum tipo;
+```
+
+O valor será armazenado como inteiro iniciando com zero para o tipo CASA. Agora, isso é muito mais eficiente, mas
+ menos expressivo. Então, como podemos ter desempenho e legibilidade?
+
+Basta criarmos uma tabela no banco de dados representando o enum e na consulta, fazer o join com a tabela de constantes.
+Parece trabalhoso? Mas pode valer a pena se tivermos milhoes de registros.
+
+É claro que existem os contras desta solução. Se o enum for alterado, mudado de ordem ou acrescentado novos valores
+, os registros da base de dados terão que ser ajustados tambem.
+
+Portanto, é tudo uma questão de escolha, então escolha sabiamente.
+
+### Outras medidas de melhoria
+
+Muitas outras medidas de performance podem ser adotadas ou verificadas no seu código. Abaixo alguns materiais em
+ Ingles para auxiliar:
+
+[Associação unidirecional ou bidirecional](https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/)
+
+[Problema de consulta N + 1](https://vladmihalcea.com/how-to-detect-the-n-plus-one-query-problem-during-testing/)
+
+**Referências:** https://vladmihalcea.com/tutorials/hibernate/
 
 ## Conclusão
 
 Não tente resolver todos os problemas ao mesmo tempo. Comece construindo uma lista dos cinco principais
  contribuidores da hora e da queima da CPU, memória ou IO e explore soluções. Ataque um dos problemas e reavalie a
-  arquitetura. 
+   arquitetura. Abaixo algumas etapas que podem ajudar a encontrar e solucionar um problema de performance.
+   
+**Descobrir:** Porque este ponto está com baixa performance?
+   
+**Entender:** O que está causando a baixa performance?
+   
+**Corrigir ou Melhorar:** Oportunidade de corrigir ou melhorar com base nos dados obtidos nas etapas acima.
+
