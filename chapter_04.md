@@ -1,13 +1,38 @@
 # Refatoração
 
+TODO: talvez colocar algum texto motivador aqui
+
+## Medo de alterar código de outro programador
+
+Todo desenvolvedor em algum momento da sua carreira entrou ou entrará no meio de um projeto de software. Isso quer dizer que ele chegou de paraquedas para desenvolver, corrigir e manter funcionalidades em cima de uma base de código existente, que pode ter desde 6 meses até 20 anos de vida. 
+
+Essa base de código provavelmente já passou pela mão de diversos desenvolvedores, desde os mais experientes até os medianos e os estagiários. Para piorar, dificilmente a equipe que iniciou o projeto e, tomou decisões importantes de arquitetura e de design, estará ainda na empresa. Ou seja, um sitema com 5 anos de idade pode ter trocado o time completo 2 ou 3 vezes no mínimo.
+
+Essa alta rotatividade de profissionais traz inúmeros prejuízos à empresa, em especial ao código do sistema. Pois certos trechos de código críticos foram (e são) alterados, mantidos e evoluídos por diversos destes profissionais, uns que dominam o negócio de ponta a ponta, outros nem tanto; uns com completa maestria nas tecnologias e frameworks utilizados enquanto outros não tem a mínima idéia de como elas funcionam; já outros, utilizaram o projeto como laboratório no curto tempo que permanceram na empresa. Não é de se espantar que boa parte desse código seja repleto de gambiarras, duplicação de rotinas, abarrotados de comentários desatualizados, pouca clareza nas lógicas de negócio, alto acoplamento e baixa coesão. Não se assuste ao ter que manter uma classe ou um método com mais de 5 mil linhas de código macarrônico e totalmente ilegível.
+
+Situações como essa são mais comuns do que a maioria dos profissionais imagina. Lidar com sistemas problemáticos dessa magnitude traz frustrução e, principalmente, **medo** para o novo desenvolvedor que acabara de entrar na empresa. Ele terá que trabalhar no código "dos outros", programando no escuro, sem ter a mínima noção se sua última alteração impacta noutras partes do sistema ou pior ainda, qual o tamanho desse impacto.
+
+## A importância dos testes automatizados na hora refatorar
+
+## Refatoração contínua do código
+
+## Sistemas legados e o ímpeto do jovem
+
+## Qual sua motivação para refatorar o código?
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra molestie lobortis. In nec rhoncus erat, non varius magna. Vestibulum volutpat ex vel augue dignissim molestie. Suspendisse potenti. Cras sapien quam, pellentesque et metus vel, sodales faucibus nulla. In hac habitasse platea dictumst. Maecenas nunc urna, sagittis eget lectus id, ullamcorper feugiat mi. Nunc ut orci porta, lobortis libero a, ultrices ipsum. Duis mattis ultrices leo, eget lacinia augue efficitur pulvinar. Nullam porta euismod nunc at feugiat. Suspendisse eu pretium dui. Morbi rutrum non nulla eget mattis.
+## Refatorando para legibilidade
+...
 
-Vestibulum ut erat id urna convallis tincidunt. Fusce tristique vel purus quis viverra. Vestibulum malesuada ex elit, et maximus nisl facilisis eu. Maecenas eu urna non turpis iaculis elementum sed eu risus. Nunc eget mi non elit sagittis euismod ac quis diam. Pellentesque bibendum metus ut dui varius finibus. Quisque lobortis vehicula mauris molestie viverra. Sed sem neque, ultricies in tempor et, malesuada sit amet metus. Pellentesque vestibulum interdum ante, id aliquet tellus consequat nec. In venenatis, velit at gravida euismod, felis velit egestas libero, in hendrerit ligula purus lacinia justo. Ut cursus augue vel lectus sodales, sed tempor nisi fringilla. Nunc eget nibh hendrerit, condimentum odio eu, lacinia enim. Curabitur molestie lobortis interdum.
+## Refatorando para flexibilidade
+...
 
-Etiam lorem urna, lacinia sit amet orci ac, ultricies aliquet sapien. Suspendisse potenti. Suspendisse potenti. In lacinia tortor orci. Donec eu elementum odio. Morbi porttitor mollis eleifend. Ut tristique, arcu vitae laoreet tristique, ipsum magna euismod diam, ac molestie ipsum metus sit amet neque. Integer nec blandit tellus, ac vehicula lectus. Nam egestas interdum bibendum. Cras nunc odio, consequat tristique porttitor non, imperdiet quis nisl. Sed orci arcu, fringilla hendrerit commodo a, commodo eu ante. Etiam dignissim elementum convallis. Morbi id turpis ipsum. Praesent iaculis tempus consectetur.
+## Refatorando para performance
+...
 
-Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque blandit ligula pellentesque tristique sollicitudin. Duis sit amet lacus purus. Praesent sit amet facilisis diam. Aliquam auctor, dolor quis convallis rutrum, elit libero scelerisque lacus, vel tempus nisl sem vitae ipsum. Aenean interdum tellus in libero aliquam, nec hendrerit justo commodo. Donec quis pretium est.
+## Refatorando para remover duplicidade
+...
 
-Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pretium arcu magna, eu egestas orci aliquet vel. Proin tincidunt venenatis est, ut ullamcorper turpis maximus at. Praesent eget auctor magna, id commodo nisl. Nulla facilisi. Donec a diam in ipsum rhoncus pellentesque. In sed pellentesque tellus.
+## Refatorando para usar uma biblioteca
+...
+
