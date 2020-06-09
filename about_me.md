@@ -30,7 +30,7 @@
   By the time of 2020, Karina is working with the Application Services Business Unit in Red Hat, as a Technical Marketing Manager, an expert on the matter of Business Automation. She's a member of the Sou Java community, and passionate for helping the communities and especially fond of open-source projects and initiatives. Another hobby is to speak at conferences, therefore, she presented in conferences like Campus Party, TDC, and Women Who Code.
   
 
-<img src="images/salaboy.png" alt="salaboy" style="zoom:50%;" />
+<img src="images/salaboy512x512.png" alt="salaboy" style="zoom:50%;" />
 
 * **Name:** Mauricio Salatino (Salaboy)
 * **Job Title:** Principal Software Engineer
