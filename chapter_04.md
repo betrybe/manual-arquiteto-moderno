@@ -10,7 +10,7 @@ Uma das definições mais aceitas na indústria para "Refatoração" é a do **M
 
 > "Refatoração é uma técnica controlada para reestruturar um trecho de código existente, **alterando sua estrutura interna sem modificar seu comportamento externo**. Consiste em uma série de pequenas transformações que preservam o comportamento inicial. Cada transformação (chamada de refatoração) reflete em uma pequena mudança, mas uma sequência de transformações pode produzir uma significante reestruturação. Como cada refatoração é pequena, é menos provável que se introduza um erro. Além disso, o sistema  continua em pleno funcionamento depois de cada pequena refatoração, reduzindo as chances do sistema ser seriamente danificado durante a reestruturação." -- Martin Fowler
 
-Em outras palavras, refatoração é o processo de modificar um trecho de código já escrito, executando pequenos passos (**baby steps**) sem modificar o comportamento atual do sistema. É uma técnica utilizada para melhorar algum aspecto do código, entre eles podemos citar melhorias na clareza do código para facilitar a leitura, ou também ajustes no design das classes a fim de trazer maior flexbilidade ao sistema.
+Em outras palavras, refatoração é o processo de modificar um trecho de código já escrito, executando pequenos passos (**baby steps**) sem modificar o comportamento atual do sistema. É uma técnica utilizada para melhorar algum aspecto do código, entre eles podemos citar melhorias na clareza do código para facilitar a leitura, ou também ajustes no design das classes a fim de trazer maior flexibilidade ao sistema.
 
 ## Medo de alterar código de outro programador
 
