@@ -28,3 +28,12 @@
 * **Job Title:** Senior Technical Product Marketing Manager, Red Hat
 * **Bio:** Karina M. Varela has experienced more than ten years on I.T., working in roles like application developer, software architect, consultant, tech lead, and product marketing management. With a solid background in software development, she has professional expertise in planning, architecting, delivering, and troubleshooting critical software in enterprise environments of different sectors around the world. 
   By the time of 2020, Karina is working with the Application Services Business Unit in Red Hat, as a Technical Marketing Manager, an expert on the matter of Business Automation. She's a member of the Sou Java community, and passionate for helping the communities and especially fond of open-source projects and initiatives. Another hobby is to speak at conferences, therefore, she presented in conferences like Campus Party, TDC, and Women Who Code.
+  
+
+<img src="images/salaboy.png" alt="salaboy" style="zoom:50%;" />
+
+* **Name:** Mauricio Salatino (Salaboy)
+* **Job Title:** Principal Software Engineer
+* **Bio:** Mauricio is a Principal Software Engineer at Camunda (http://www.camunda.com ) and a LearnK8s (http://learnk8s.io ) Instructor. Mauricio has been working with Kubernetes for the last 5 years, training teams and developing cloud-native applications. In his journey, he has participated in several open-source projects including Zeebe, Jhipster, Spring Cloud and Jenkins X. Previously, Mauricio worked at Red Hat/JBoss in the Business Automation Engineering department. Mauricio is currently involved with the CD Foundation (http://cd.foundation), the Jenkins X project (as member of the bootstrap steering committee) as well as he presented at Kubecon 2019 San Diego and Kubercon 2020 Amsterdam. 
+  
+  
