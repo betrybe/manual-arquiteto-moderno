@@ -34,3 +34,9 @@
 * **Name:** Elder Moraes
 * **Job Title:** Developer Advocate, Red Hat
 * **Bio:** Elder helps Java developers to work on great projects by guiding them on how to build and deliver secure, available, and fast server-side applications. He is the author of Jakarta EE Cookbook and a board member at SouJava, one of the biggest JUGs in the world. As a Developer Advocate, he shares experiences and best practices through online content and at international events like JavaOne, The Developers Conference, QCon, Oracle Code One, Campus Party and Devnexus.
+
+<img src="images/sandro-giacomozzi.png" alt="sandro-giacomozzi" style="zoom:24%;" />
+
+* **Name:** Sandro Giacomozzi
+* **Job Title:** Software engineer, TOTVS
+* **Bio:** Sandro helps Java developers working on enterprise applications to become experts on Java and Devops by practicing the right skills. Volunteer and public speaker. My goal in the software industry is to make organizations and people more agile through processes and tools. Faster, more efficient and quality deliveries. People and technology in line with customer satisfaction and delivery.
