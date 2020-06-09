@@ -10,7 +10,7 @@ Uma das definições mais aceitas na indústria para "Refatoração" é a do **M
 
 > "Refatoração é uma técnica controlada para reestruturar um trecho de código existente, **alterando sua estrutura interna sem modificar seu comportamento externo**. Consiste em uma série de pequenas transformações que preservam o comportamento inicial. Cada transformação (chamada de refatoração) reflete em uma pequena mudança, mas uma sequência de transformações pode produzir uma significante reestruturação. Como cada refatoração é pequena, é menos provável que se introduza um erro. Além disso, o sistema  continua em pleno funcionamento depois de cada pequena refatoração, reduzindo as chances do sistema ser seriamente danificado durante a reestruturação."
 
-Em outras palavras, refatoração é o processo de modificar um trecho de código já escrito, executando pequenos passos (**baby-steps**) sem modificar o comportamento atual do sistema. É uma técnica utilizada para melhorar algum aspecto do código, entre eles podemos citar melhorias na clareza do código para facilitar a leitura, ou também melhorias no design das classes a fim de trazer maior flexbilidade ao sistema.
+Em outras palavras, refatoração é o processo de modificar um trecho de código já escrito, executando pequenos passos (**baby steps**) sem modificar o comportamento atual do sistema. É uma técnica utilizada para melhorar algum aspecto do código, entre eles podemos citar melhorias na clareza do código para facilitar a leitura, ou também melhorias no design das classes a fim de trazer maior flexbilidade ao sistema.
 
 ## Medo de alterar código de outro programador
 
@@ -24,11 +24,11 @@ Situações como essa são mais comuns do que a maioria dos profissionais imagin
 
 ## A importância dos testes automatizados na hora refatorar
 
-Quanto menos conhecimento no sistema o desenvolvedor tem, maior é sua insegurança na hora de alterar código e menores são as garantias de que suas alterações não causarão mais estragos ao sistema que já se encontra frágil pelo tempo. Mesmo pequenas refatorações com o intuito de melhorar a clareza ou a simplicidade do código podem gerar novos bugs, reintroduzir bugs antigos no sistema ou impactar o sistema de forma negativa.
+Quanto menos conhecimento sobre sistema o desenvolvedor tem, maior é sua insegurança na hora de alterar código e menores são as garantias de que suas alterações não causarão mais estragos ao sistema que já se encontra frágil pelo tempo. Mesmo pequenas refatorações com o intuito de melhorar a clareza ou a simplicidade do código podem gerar novos bugs, reintroduzir bugs antigos no sistema ou impactar o sistema de forma negativa.
 
 Se refatorar código traz riscos, como o desenvolvedor pode garantir que erros não serão introduzidos nas suas refatorações?
 
-A verdade, é que refatorar código sem uma garantia concreta de que o comportamento atual não vá mudar é um ato imprudente, pois não adianta nada melhorar o código se algo que já existe é quebrado. Essa garantia pode ser obtida de diversas maneiras, mas sem dúvida uma das melhores alternativas a um preço justo é através do uso de **testes automatizados**; uma bateria de testes de regressão mostraria rapidamente se uma determinada mudança (ou refatoração) no código mudou o comportamento da funcionalidade ou mesmo impactou outras partes do sistema.
+A verdade é que refatorar código sem uma garantia concreta de que o comportamento atual não vá mudar é um ato imprudente, pois não adianta nada melhorar o código se algo que já existe é quebrado. Essa garantia pode ser obtida de diversas maneiras, como uma equipe de QA (testers), um ambiente de homologação para o cliente etc, mas sem dúvida uma das melhores alternativas a um preço justo é através do uso de **testes automatizados**. Uma bateria de testes de regressão mostraria rapidamente se uma determinada mudança (ou refatoração) no código mudou o comportamento da funcionalidade ou mesmo impactou outras partes do sistema.
 
 Como dito pelo Fowler, refatorar é o ato de aplicar pequenas transformações no código existente sem mudar seu comportamento externo. Assim como muitas técnicas de engenharia de software, a teoria é mais fácil que a prática. Em um processo complexo, como desenvolvimento de software, temos que verificar frequentemente onde estamos e, se necessário, fazer correções no percurso. No caso da refatoração, a cada transformação precisamos verificar que tudo continua funcionando como esperado para só então partimos para o passo seguinte; o contrário também é verdade, precisamos identificar se nosso último passo quebrou algo no sistema para então desfazê-lo e tomarmos uma estratégia diferente. Esse ciclo frequente de verificação onde aprendemos a cada passo é chamado de **feedback loop**.
 
@@ -36,7 +36,7 @@ Quanto mais curto e frequente o feedback loop mais natural o processo de refator
 
 Não vou mentir, é possível fazer refatorações sem uma linha de teste automatizado, muitas empresas e equipes fazem isso, contudo, não se pode ignorar que há grandes riscos envolvidos nessa prática que podem introduzir bugs ou gerar prejuízos à empresa ou cliente final. Refatorar código sem testes torna tudo mais difícil e arriscado, consome mais tempo do que o necessário, desencoraja melhorias no código e ainda exige muito mais do desenvolvedor e da equipe. Para isso, a experiência do desenvolvedor conta bastante nesse momento, seja na hora de refatorar usando passos pequenos e seguros, analisar e mensurar o impacto de suas (possíveis) mudanças ou simplesmente decidir que não vale a pena refatorar determinado trecho de código.
 
-Apesar da experiência do desenvolvedor ser um fator importante na hora de refatorar, dependendo da empresa, as chances são de que seu gestor não permita modificar código que funciona e já se encontra em produção.
+Apesar da experiência do desenvolvedor ser um fator importante na hora de refatorar código não coberto por testes, dependendo da empresa e dos seus processos, as chances são de que seu gestor não permita modificar código que funciona e já se encontra em produção.
 
 ## Refatoração contínua do código
 
