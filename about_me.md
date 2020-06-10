@@ -33,7 +33,7 @@
 
 * **Name:** Mauricio Salatino (Salaboy)
 * **Job Title:** Principal Software Engineer
-* **Bio:** Mauricio is a Principal Software Engineer at Camunda (http://www.camunda.com ) and a LearnK8s (http://learnk8s.io ) Instructor. Mauricio has been working with Kubernetes for the last 5 years, training teams and developing cloud-native applications. In his journey, he has participated in several open-source projects including Zeebe, Jhipster, Spring Cloud and Jenkins X. Previously, Mauricio worked at Red Hat/JBoss in the Business Automation Engineering department. Mauricio is currently involved with the CD Foundation (http://cd.foundation), the Jenkins X project (as member of the bootstrap steering committee) as well as he presented at Kubecon 2019 San Diego and Kubercon 2020 Amsterdam. 
+* **Bio:** Mauricio is a Principal Software Engineer at Camunda (http://www.camunda.com ) and a LearnK8s (http://learnk8s.io ) Instructor. Mauricio has been working with Kubernetes for the last 5 years, training teams and developing cloud-native applications. In his journey, he has participated in several open-source projects including Zeebe, Jhipster, Spring Cloud and Jenkins X. Previously, Mauricio worked at Red Hat/JBoss in the Business Automation Engineering department. Mauricio is currently involved with the CD Foundation (http://cd.foundation), the Jenkins X project (as member of the bootstrap steering committee) as well as he presented at Kubecon 2019 San Diego and Kubecon 2020 Amsterdam. 
   
 
 <img src="images/elder-moraes.png" alt="elder-moraes" style="zoom:24%;" />
