@@ -137,8 +137,7 @@ Considerando que sua aplicação está pronta para deploy:
 
   >  **TIP:** É recomendado que a imagem-base gerada seja armazenada em um registro de imagens.
 
-
-[WIP] [create yamls / version / release]
+* Deve-se preocupar-se em criar os arquivos de definição que serão usados para disponibilizar sua aplicação na cloud. Se falando de Kubernetes por exemplo, deve-se criar os arquivos YAML, manter seu versionamento e processo de release;
 
 * A partir desta imagem, a plataforma utilizada (i.e. Kubernetes) irá criar a quantidade de containers especificada. 
 
