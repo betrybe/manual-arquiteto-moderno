@@ -116,7 +116,8 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 
 * Conceitos
 * Testes de carga
-* Logging
+* Monitoramento
+* Boas práticas e melhorias
 
 ## Livro Colaborativo
 
