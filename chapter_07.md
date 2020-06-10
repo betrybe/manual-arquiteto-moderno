@@ -4,7 +4,7 @@ Uma vez que conversamos sobre DDD, microservices, boas práticas design de códi
 
 Discorreremos sobre o que se considerar ao arquitetura de aplicações para um ambiente de cloud, perspectivas populares a respeito de aplicações  "cloud-native" e porque este conceito é tão ligado a ferramentas como Kubernetes.  Serão também descritos padrões e funcionalidades esperadas em uma aplicação, para que sejam first-class citizens em um ambiente de cloud. 
 
->  **INFO:** Este capítulo não tem como meta ensinar a fazer deploy de serviços em um cluster Kubernetes, configurar serviços na AWS ou criar aplicações cloud-native from scratch. A intenção deste capítulo é prover informações arquiteturais que embasarão suas decisões e modelagem dos seus serviços e plataformas. Com o conhecimento aqui fornecido, você estará preparadoe confiante para iniciar ou prosseguir sua jornada cloud-native independente da solução ou linguagem adotada. 
+>  **INFO:** Este capítulo não tem como meta ensinar a fazer deploy de serviços em um cluster Kubernetes, configurar serviços na AWS ou criar aplicações cloud-native from scratch. A intenção deste capítulo é prover informações arquiteturais que embasarão suas decisões e modelagem dos seus serviços e plataformas. Com o conhecimento aqui fornecido, você estará preparado e confiante para iniciar ou prosseguir sua jornada cloud-native independente da solução ou linguagem adotada. 
 
 A buzz-word "cloud-native" começou a se estabelecer por volta de 2014, e sua crescente popularidade se mostra em seu melhor cenário. Para atingir maior espaço no mercado, empresas passaram a rotular seus produtos como cloud-native, quando na verdade, são apenas tecnologias cloud-enabled. 
 
@@ -20,13 +20,15 @@ Uma aplicação pode ser categorizada conforme seu nível de adequação a um am
 
 ### Cloud-Enabled
 
-É uma aplicação que roda na cloud - em um ambiente containerizado - mas que originalmente foi criada para rodar em ambiente tradicional - um data-center local, um cluster estático de servidores de aplicação, por exemplo, pode ser categorizada como *cloud-enabled*. Aplicações como esta costumam ter maior consumo de recursos (cpu, memória, storage) se comparado a aplicações cloud-native. 
+É uma aplicação que foi containerizada e roda na cloud, mas  que originalmente foi criada para rodar em ambiente tradicional como por exemplo um data-center local, máquinas virtuais com cluster de servidores de aplicação tradicional.  Estas aplicações podem ser categorizadas como *cloud-enabled*. Estas aplicações têm maior consumo de recursos (cpu, memória, storage) se comparado a aplicações cloud-native. 
 
-Uma aplicação cloud-enabled passou por refatorações e ajustes para ser conteinerizada e orquestrada por plataformas como Kubernetes. O custo ou esforço de se refatorar toda a aplicação não são viáveis, portanto ela não usufrui de todos os benefícios existentes em um ambiente de cloud. 
+Uma aplicação cloud-enabled passou por refatorações e ajustes para rodar um ambiente conteinerizado e também para suportar orquestração por plataformas como Kubernetes. Afinal de contas, não é mais o tradicional cluster de WildFly (a.k.a. JBoss EAP) ou GlassFish (Weblogic) clusterizados que permite que você use a rede ou sistema de arquivos a seu bel prazer. Agora, estes serviços rodam em pods, em contêineres efêmeros. 
 
-> **INFO:** [Kubernetes](https://kubernetes.io/): É uma ferramenta open-source de orquestração de containers e trabalha muito bem com o [Docker](https://www.docker.com/). Atualmente, é a ferramenta mais popular na comunidade.
+Apesar dos "contras" de se possuir uma aplicação cloud-enabled, o custo ou esforço de se refatorar toda a aplicação não são viáveis. Desta forma, a aplicação pode rodar em cloud, mas não pode usufruir de todos os benefícios existentes em um ambiente de cloud. 
 
-Para entender melhor tudo o que uma aplicação cloud-enabled não é capaz de entregar facilmente, vamos falar sobre o conceito cloud-native.
+> **INFO:** [Kubernetes](https://kubernetes.io/): É uma ferramenta open-source de orquestração de containers e trabalha muito bem com o [Docker](https://www.docker.com/). Atualmente, é a ferramenta mais popular na comunidade. Outros exemplos de ferramenta de orquestração de containers são Docker Swarm, Mesos e Amazon ECS.
+
+Para entender melhor tudo o que uma aplicação cloud-enabled *não* é capaz de utilizar nativamente, vamos falar sobre o conceito cloud-native.
 
 ### Perspectivas sobre o conceito Cloud-Native
 
@@ -56,42 +58,43 @@ No momento da escrita deste livro, não há um consenso ou definição exata ace
 >
 > —  [Otávio Santana](https://twitter.com/otaviojava)
 
-Além dos conceitos acima, um conjunto de padrões bastante adotado pela comunidade é o [12-factor](https://12factor.net/). As excelentes práticas de arquitetura de software sugeridas nesta metodologia originam do livro [Patterns of Enterprise Application Architecture, por Martin Fowler e David Rice](https://books.google.com.br/books/about/Patterns_of_enterprise_application_archi.html?id=FyWZt5DdvFkC&redir_esc=y). Tendo em mente que o livro foi publicado em 2003, tempos estes onde ainda não se falava em "cloud-native", podemos considerar que, ao adotar os conceitos do 12-factor você estará não apenas criando uma aplicação cloud-native, mas também, estará implementando boas práticas arquiteturais e culturais no desenvolvimento e entrega de software.
+Além dos conceitos acima, um conjunto de padrões bem recebido pela comunidade é o [12-factor](https://12factor.net/). As excelentes práticas de arquitetura de software sugeridas nesta metodologia originam do livro [Patterns of Enterprise Application Architecture, por Martin Fowler e David Rice](https://books.google.com.br/books/about/Patterns_of_enterprise_application_archi.html?id=FyWZt5DdvFkC&redir_esc=y). Tendo em mente que o livro foi publicado em 2003, tempos estes onde ainda não se falava em "cloud-native", podemos considerar que, ao adotar os conceitos do 12-factor você estará não apenas criando uma aplicação cloud-native, mas também, estará implementando boas práticas arquiteturais e culturais no desenvolvimento e entrega de software.
 
-> **TIP**: Os detalhes de implementação que serão detalhados a seguir, podem evoluir e mudar com o tempo. Porém, as definições e padrões esperadas de uma aplicação cloud-native, permanecerão. Portanto, recomendamos a leitura das referências citadas e aprofundamento no entendimento do conceito. 
+> **TIP**: Nomes de projetos que serão detalhados a seguir, podem evoluir e mudar com o tempo. Porém, as definições e padrões esperadas de uma aplicação cloud-native, permanecerão. Portanto, recomendamos a leitura das referências citadas e aprofundamento no entendimento do conceito. 
 
 ### Capabilities for cloud
 
-Suas aplicações podem usufruir de recursos oferecidos pelo ambiente onde é disponibilizada:
+Veja alguns dos recursos que estão disponíveis e são comumente utilizados em sua aplicações que são concebidas para rodarem na cloud:
 
-|                                             |                                      |
-| :-----------------------------------------: | :----------------------------------: |
-| de configurações (Configuration Management) | Service Discovery and Load Balancing |
-|               API Management                |           Service Security           |
-|          Scheduling (of workloads)          |     Auto Scaling / Self healing      |
-|             Distributed Tracing             |         Centralized Metrics          |
-|             Centralized Logging             |                                      |
+- Gerência de configurações (Configuration Management)
+- API Management
+- Scheduling (of workloads)
+- Distributed Tracing
+- Service Security
+- Centralized Metrics
+- Auto Scaling / Self healing
+- Service Discovery and Load Balancing
+- Centralized Logging
 
-Mais adiante discorreremos sobre o set de tecnologias disponíveis para utilização destes serviços. Mas o que se deve ter em mente é que você precisará implementar alguns conceitos em sua aplicação. Um excelente exemplo de implementação de funcionalidades que são largamente utilizadas em um ambiente de cloud, é a aplicação de exemplo gerada pelo site da especificação Microprofile. 
+Mais adiante discorreremos sobre um set de tecnologias disponíveis que implementam as features acima no ambiente. Neste momento o que se deve ter em mente é que para usufruir destas funcionalidades que existem no ecossistema você precisa também ajustar um pouco seu código na aplicação. Caso queira ver na prática um excelente exemplo de como usufruir e implementar funcionalidades cloud-native, recomendo que você baixe e verifique o código da aplicação de exemplo gerada pelo site da especificação [Microprofile](http://microprofile.io/). 
 
-> **INFO:** Por trazer um runtime mais leve, a especificação Microprofile abriu um leque de possibilidades para o Java no mundo da cloud. Existem diversas implementações como Payara Micro, Open Liberty, Quarkus, Helidon e outros. Estes vendors podem oferecer starters, porém, vamos instruí-lo a partir da especificação.
+> **INFO:** Por trazer um runtime mais leve, a especificação Microprofile abriu um leque de possibilidades para o Java no mundo da cloud. Existem diversas implementações como Payara Micro, Open Liberty, Quarkus, Helidon e outros. 
 
 O Microprofile tem evoluído de forma rápida, e para garantir um conteúdo atualizado, optamos por não incluir todo o código de boas práticas, mas sim, instruí-lo a como obter o conteúdo mais recente e de acordo com sua necessidade. 
 
-Vamos criar um projeto onde você poderá validar exemplos de implementação de práticas e funcionalidades cloud-native utilizando-se a especificação MicroProfile. Se tiver a oportunidade, execute os passos a seguir:
+Para criar um projeto onde você pode estudar exemplos de implementação de práticas e funcionalidades cloud-native utilizando-se a especificação MicroProfile, execute os passos a seguir:
 
 1. Acesse o site https://start.microprofile.io/
-2. Insira um `groupId`, `artifactId`, selecione uma versão do MicroProfile, versão do Java SE, e o `runtime`. O `runtime `  será a implementação da especificação MicroProfile. 
+2. Insira um `groupId`, `artifactId`, selecione uma versão do MicroProfile, versão do Java SE, e o `runtime`. 
+   O `runtime `  será a implementação da especificação MicroProfile. 
 
 ![chapter_08_01](images/chapter_07_04.png)
 
 3. Clique em `Download`. 
 
-Será realizado o download de dois projetos em sua máquina. Você pode executar ambos e validar a simplicidade de se implementar padrões cloud-native. Repare na implementação das apis de `Health Checks` com liveness e readiness (apis que serão consumidas pelo orquestrador de containers aumentar a resiliência e suportar processos de deploy ao validar a saúde do pod), de métricas, tracing distribuído, resiliência a timeouts, segurança com JWT, injeção de propriedades de configuração através de anotações, e a utilização de RestClient (permite consumir um serviço rest apenas implementando-se uma interface no serviço cliente). 
+Será realizado o download de dois projetos em sua máquina. Você pode iniciar ambos, testá-los e analisar a simplicidade de se implementar padrões cloud-native. Veja no código como são realizadas a implementação das apis de `Health Checks` com liveness e readiness (apis que serão consumidas pelo orquestrador de containers aumentar a resiliência e suportar processos de deploy ao validar a saúde do pod), de métricas, tracing distribuído, resiliência a timeouts, segurança com JWT, injeção de propriedades de configuração através de anotações, e a utilização de RestClient (permite consumir um serviço rest apenas implementando-se uma interface no serviço cliente). 
 
-
-
-Esta é uma aplicação que inclui várias, mas não todas as features que iremos discutir. Uma vez que falamos sobre detalhes de implementação na aplicação propriamente dita, vamos seguir em frente e entender melhores práticas conteinerização destas aplicações. 
+A aplicação de exemplo acima é uma aplicação que inclui várias, mas não todas as features que iremos discutir. Uma vez que falamos sobre detalhes de implementação na aplicação propriamente dita, vamos seguir em frente e entender melhores práticas conteinerização destas aplicações. 
 
 ### Princípios de design de contêinerização de aplicações
 
@@ -101,7 +104,7 @@ Princípios a serem considerados durante o tempo de **construção** de uma *ima
 
 * **Single Concern Principle**: Similar ao **S** do padrão **S**OLID, porém neste contexto, cada contêiner deve resolver *um* problema, e resolvê-lo *bem*; Caso seja necessário acoplar mais features a um microservice, por exemplo, adicionar side-cars ao pod é uma boa alternativa.
 * **Self-Containment Principle**: Deve estar contida na imagem de build, todas as bibliotecas, runtime da linguagem e ferramentas de construção necessárias para se realizar o build a aplicação. As exceções são dados que variam entre ambientes, dados estes, que estarão por exemplo em variáveis de ambiente.
-* **Image Immutability Principle**: imagens imutáveis são essenciais para se permitir escalabilidade e adoção de estratégias de deploy. Diferenças entre ambientes são providas ao container através de configurações (por exemplo, utilizando-se variáveis de ambiente ou ConfigMaps);
+* **Image Immutability Principle**: imagens imutáveis são essenciais para se permitir escalabilidade e adoção de estratégias de deploy. Diferenças entre ambientes são providas ao container através de configurações (por exemplo, utilizando-se variáveis de ambiente ou `ConfigMaps`);
 
 Princípios a serem considerados durante o tempo de **runtime** (execução, *container*):
 
@@ -134,6 +137,9 @@ Considerando que sua aplicação está pronta para deploy:
 
   >  **TIP:** É recomendado que a imagem-base gerada seja armazenada em um registro de imagens.
 
+
+[WIP] [create yamls / version / release]
+
 * A partir desta imagem, a plataforma utilizada (i.e. Kubernetes) irá criar a quantidade de containers especificada. 
 
   > **TIP:** É muito comum a existência de casos de uso que podem usufruir da utilização de Operators para gerenciamento e manutenção de aplicações. 
@@ -144,15 +150,75 @@ O processo acima descrito chega a ser simplista diante da qualidade e eficiênci
 
 #### Integração e Entrega Contínua
 
-A integração contínua inicia no seu repositório de código. 
+Começo este tópico com uma pergunta para você:
 
-> **Você está pronto para automatizar a entrega de seu software a cada mudança?**
+>  **Você e sua organização, estão prontos para colocar em produção uma nova versão do seu software a cada mudança?**
 
-[WIP]
+Este é o estado da arte da integração e entrega contínua. Mas calma, mesmo que sua resposta seja não, a integração e entrega contínua ainda devem fazer parte da sua jornada cloud-native. **Integração** Contínua e **Entrega** Contínua são temas tão vastos que cada um possui seu próprio livro. Mas vamos discorrer sobre os principais tópicos a seguir.
 
+Primeiro de tudo a base: <u>automação de tarefas</u>. "Mas até onde devo automatizar?", você me pergunta. Vamos lá:
 
+#### Integração contínua (CI)
 
+Utilize uma ferramenta que permita a você automatizar o processo de integração da sua aplicação. A integração é contínua, ou seja, a cada commit no branch master a sua ferramenta de automação deve:
 
+- Compilar e executar o build da aplicação;
+
+- Executar testes unitários e obter o percentual da cobertura de testes;
+- Executar testes para validar a qualidade do código;
+- Enviar notificação ao time caso qualquer um dos itens acima falhe de acordo com seus critérios (cobertura de testes aceitável? Qualidade do código aceitável?);
+
+Os passos acima devem ser facilmente executáveis, a se dizer, ao clique de um botão. Devem ser reproduzidos de ponta a ponta sem necessidade de intervenção humana.
+
+Com as regras acima, os desenvolvedores no seu time terão sempre a boa prática de versionar código que roda e de testar o build localmente *antes* de se comitar no branch master. Se um commit quebra qualquer uma das regras, deve-se imediatamente corrigir o problema. 
+
+Estas práticas tornarão o seu processo de desenvolvimento e release mais confiáveis e estáveis.
+
+#### Entrega Contínua (CD)
+
+Uma vez que, com a utilização de CI, você agora gera pacotes mais confiáveis de acordo com os critérios da sua organização, o que o impede de entregar versões novas com mais frequência em ambiente produtivo? Vamos falar sobre automação do processo de deploy.
+
+>  Entrega contínua != Deploy Contínuo
+
+Com Entrega Contínua, você estaria pronto para liberar - através de um deployment pipeline - a versão recente mais estável do seu código a qualquer momento em produção. Novamente, com um clique de um botão. 
+
+E não podemos deixar de falar sobre **Deploy contínuo** que é quando você libera - através de um deployment pipeline - uma nova versão em produção a cada commit no branch master. Empresas grandes que praticam deploy contínuo chegam a liberar dezenas de centenas de versões em produção diariamente. 
+
+#### Automação é o segredo
+
+Pare por um instante e identifique o nível de automação que você possui no momento. Quanto maior a maturidade das práticas de CI mencionadas, mais confiante você se sentirá ao liberar novas releases do seu software. E quanto mais frequentemente você liberar software, mais rápido você terá feedback do usuário final, e o mais importante: maior a garantia de entregar software que funciona e que entrega exatamente o que o cliente precisa.  
+
+Tenha em mente:
+
+- CI é o primeiro passo;
+- Para realizar Entrega Contínua, você precisa praticar CI. 
+- Para praticar Deploy Contínuo, você precisa estar apto e praticando Entrega Contínua.
+
+#### Estratégias de deployment 
+
+Escolha dentre estratégias de deploy maduras que sejam mais apropriada à sua aplicação para permitir entregas mais confiáveis. Ao escolher a estratégia de deploy para sua aplicação, escolha baseado no quão importante é: 
+
+- Tempo de indisponibilidade - o quão crítico é para o negócio que sua aplicação ficar fora do ar durante o deploy?
+- Sua aplicação suportaria que você executasse duas versões (antiga e a nova) ao mesmo tempo?
+- Você gostaria que um determinado grupo de usuários fizesse testes na sua nova release, antes que você libere para 100% dos usuários?
+- Você não possui um grupo de usuários de testes, mas mesmo assim, gostaria de avaliar o funcionamento da nova versão liberando a release apenas para um percentual dos seus usuários finais?
+
+Veja algumas estratégias de deploy que você pode usar de maneira fácil com plataformas de orquestração como Kubernetes:
+
+* Recreate Strategy:
+
+  Todos os pods existentes serão escalados a zero, e só então, o Kubernetes criará pods com a nova versão do seu código. Uma estratégia ousada (tudo ou nada), mas que pode ser necessária em casos de mudanças radicais em estruturas de dados, ou, caso você não possa rodar as duas versões simultaneamente em produção;
+
+* Canary release: é um tipo de Rolling Strategy, onde se libera a nova versão e apenas quando constatado que a nova versão é saudável (de acordo com o readiness check do Kubernetes), o Kubernetes comecará a destruir os pods com a versão antiga; Neste cenário os pods novos e antigos precisam co-existir durante o período de deploy;
+
+* Blue-Green: é uma boa estratégia para se mitigar falhas, porém é mais custoso. Utilize caso você queria que um grupo de pessoas realizem testes para garantir que a nova versão está de fato pronta e pode ir ao ar. Devem existir dois ambientes de produção idênticos, o azul e o verde, mas apenas um estará ativo por vez. Você terá um router que irá direcionar os usuários para o ambiente ativo.
+  
+  >  **TIP:** Leitura recomendada sobre blue-green deployment: artigo [BlueGreenDeployment,por Martin Fowler](https://martinfowler.com/bliki/BlueGreenDeployment.html).
+  
+  Digamos que o ambiente azul está ativo, rodando seu código v1. O grupo de usuários realizará os testes no ambiente verde, não ativo, na versão v2. Uma vez confirmado que a nova versão, v2, pode ir ao ar você vira a chave e todos os usuários passam a utilizar agora, o ambiente verde. 
+  Seguindo a mesma linha, como o ambiente verde agora está em produção, em um próximo deploy você usaria o ambiente azul para garantir a release antes de virar a chave, e assim por diante.
+
+* A/B testing:  Neste cenário você executa duas versões da aplicação em produção ao mesmo tempo, como uma forma de se testar uma hipótese. Você pode por exemplo comparar durante o período de uma semana, qual das duas versões vai performar melhor. Ou, de uma outra perspectiva, se o fato de adicionar um novo botão na tela da aplicação na nova versão, leva os usuários a comprarem mais. Uma vez realizados os testes, pode-se liberar a versão desejada em sua totalidade, usando por exemplo canary release. 
 
 ## A jornada cloud-native
 
@@ -178,7 +244,7 @@ Quando nós falamos de cloud e seus serviços, note que quanto menor a abstraç�
 
 ### IaaS - Infra as a Service
 
-Com este approach, é possível atingir e usufruir de todos os benefícios de um ambiente de cloud, porém, toda a responsabilidade de manutenção do software é da sua equipe de T.I. A empresa que provê o serviço de IaaS tem o dever de garantir a comunicação entre os serviços, de lidar com quedas, problemas de hardware e eventuais consertos. 
+Com esta abordagem, é possível obter todos os benefícios de um ambiente de cloud, porém, toda a responsabilidade de manutenção do software é da sua equipe de T.I. A empresa que provê o serviço de IaaS tem o dever de garantir a comunicação entre os serviços, de lidar com quedas, problemas de hardware e eventuais consertos. 
 
 Neste cenário, a sua equipe assume tarefas referentes a banco de dados, backup, escalonamento tanto vertical quanto horizontal, etc. Esse fator aumenta a possibilidade de customização, e por outra perspectiva gera complexidade e mais risco. Nesta opção o hardware e a garantia de seu funcionamento pertence a terceiros, mas o serviço é executado pelo seu time, desta forma, pode ter um custo mais reduzido se comparado à outras opções.
 
@@ -194,10 +260,10 @@ Uma redução drástica de complexidade para focar na criação do software, cer
 >
 > * [Platform.sh](platform.sh) :  É um PaaS que utiliza todos os conceitos de infraestrutura como serviço e também é orientado ao Git, além de ser possível realizar o deploy da aplicação deixando todo trabalho para a plataforma. Basicamente, a partir de três arquivos: [aplicação](https://docs.platform.sh/configuration/app-containers.html), [serviços](https://docs.platform.sh/configuration/services.html) e [rotas](https://docs.platform.sh/configuration/routes.html) podemos fazer o push para um repositório Git. Um simples push para o sistema remoto do Platform.sh criará automaticamente os containers da aplicação, dos serviços como banco de dados e as rotas da aplicação. Nesse caso a abstração é gigantesca e faz com que o time foque muito mais na aplicação central da empresa.
 > * [Red Hat OpenShift Online](https://www.openshift.com/products/online/): uma opção para se utilizar o OpenShift (a.k.a. [OKD](https://www.okd.io/)) como serviço. Neste PaaS, o OpenShift é disponibilizado na AWS e permite aos desenvolvedores de aplicações Ruby, PHP, Node.js e Java utilizarem seus runtimes e banco de dados de preferência para rodar suas aplicações. Possui uma opção self-service e free para desenvolvedores. 
-> * Heroku #TODO
-> * GKE #TODO
+> * [Heroku](heroku.com): Nascido em 2007 exclusivamente para Ruby, hoje o Heroku suporta as mais diversas linguagens como Go, Java, PHP, Node.JS e outras, além de várias ferramentas do ecossistema de uma aplicação;
+> * [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine): O PaaS oferecido pelo Google é totalmente baseado em Kubernetes vanilla. Simples de se iniciar, ao se cadastrar você ganha uma quantidade de créditos para poder rodar seus workloads e recebe também acesso a outros produtos da Google.
 
-Baseado em leituras e conceito aplicação de PaaS por diversas empresas, podemo analisar por duas perspectivas:
+Baseado em leituras e conceito aplicação de PaaS por diversas empresas, podemos analisar por duas perspectivas:
 
 1. Você delega o gerenciamento de toda a plataforma (leia, Kubernetes e similares ) para terceiros. Desta forma a sua equipe não precisa instalar, lidar com manutenções, backups e monitoring. Esta perspectiva é apenas viável quando o caso de uso pode usufruir de uma cloud pública. Heroku e os vários flavors de Kubernetes como Platform.sh, GKE e OpenShift Online são exemplos de solução de PaaS que se adequam a esta perspectiva.
 2. No segundo cenário, devido a restrições na sua empresa, você necessáriamente deve utilizar uma cloud privada.  Neste caso, você pode prover um PaaS ao disponibilizar uma ferramenta que aumente a autonomia do desenvolvedor ao prover uma forma eficiente e automatizada de entregar aplicações conteinerizadas, seja através do uso de catálogo de serviços, abstração de apis de entrega de containers, e automação de deploy. Desta perspectiva, é valido considerar que ferramentas como por exemplo OpenShift, instalado em uma cloud-privada, e gerenciada pelo seu time de infra-estrutura.
@@ -209,6 +275,8 @@ Em ambos os cenários, é comum assumir que há maior autonomia do desenvolvedor
 O software como serviço é a oferta que provê uma solução mais rápida para determinado problema. Nesta oferta, o cliente opta por consumir um programa pronto para uso, e não precisa se preocupar com hospedagem, escalabilidade, etc e nem mesmo desenvolvimento. Toda a complexidade e o risco já foram resolvidos. No entanto, a customização é bem reduzida e a possibilidade de configuração depende diretamente do provedor. 
 
 ---
+
+### Conclusão sobre IaaS, Paas e SaaS
 
 De uma maneira geral temos que pensar nos seguintes três princípios cíclicos que compara:
 
@@ -275,7 +343,7 @@ Se tiver a possibilidade, acesse a [CNCF Cloud Native Interactive Landscape](htt
 
 Ainda no contexto de ferramentas e funcionalidades que aplicações cloud-native podem usufruir, vamos falar a seguir sobre service mesh e as tecnologias existentes.
 
-##### Service Mesh
+##### Bonus Topic: Service Mesh
 
 Vamos a definição de service mesh (malha de serviços) por [William Morgan, 2017](https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one):
 
@@ -335,11 +403,11 @@ Não podemos deixar de fora os provedores de serviços na nuvem pública que tam
 
 **Azure Service Fabric Mesh** - Apesar de usar o nome Service Mesh, este é o que mais se difere dos demais. Está mais comparado a um Red Hat OpenShift e se faz necessário que você tenha um plano de dados de malha de serviço já em uso. É um serviço gerenciado e os desenvolvedores não tem acesso ao painel de controle: [Azure Service Fabric](https://azure.microsoft.com/services/service-fabric/)
 
-## Cloud, microservices e DDD
+# Conclusão 
 
-Como tudo se conecta no final [WIP]
+Não existem dúvidas de que o futuro da tecnologia reside na cloud. Com o surgimento dos microserviços, cada vez mais precisamos do conhecimento do ecossistema que gira ao seu redor. Com o aumento no uso de contêineres e práticas de DevOps, cada vez mais o desenvolvedor precisa conhecer sobre plataforma, e o system admin precisa conhecer sobre desenvolvimento. 
 
-
+Se ainda não faz parte da sua realidade, aplicações cloud-ready e cloud-native com certeza farão em um futuro muito próximo. Junto a elas, todo o vasto ecossistema de contêineres, orquestração de conteineres e demais funcionalidades que giram ao redor destes serviços serão necessários. Esteja pronto para aderir ao movimento. 
 
 
 
