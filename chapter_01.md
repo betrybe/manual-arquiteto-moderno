@@ -61,7 +61,62 @@ The next section covers an example that I’ve created based on my experience wh
 
 ## From Monolith to K8s using DDD
 
+This section covers an example scenario that helps us to explain some of the concepts in action. You can map these concepts to your business domain and copy the actual technical solution from the example for some of the challenges presented. 
+
+As expected, creating a full-blown application is hard work and usually requires a lot of time investment. For that reason, the following example is provided as a set of Open Source repositories where you can contribute to making it better. As a real application, the example will evolve in time, adding more tools and best practices, so I invite you to participate in this journey where we can all learn and share valuable information together. 
+
+[From Monolith to K8s Github Repository](https://github.com/salaboy/from-monolith-to-k8s)
+
+We begin our journey with a Monolith Java Application. The scenario that we will cover belongs to a company that is in charge of providing a platform to create Conference websites. Imagine that each of our customers requires us to host and scale their Conference website. 
+We all have seen big Java Web Applications and for this scenario, the application will look like this: 
+
+![chapter_01_01](images/chapter_01_01.png)
+
+The “Customer Management” Facade is in charge of isolating different customers from each other. In some companies, this is defined as a multi-tenant platform or application. Unfortunately, this is quite common in the Java space. For historical reasons, implementations ended up growing into big, scary monoliths that came with a lot of scalability issues as well as data and traffic isolation challenges. No matter how fancy our platform looks, it is just running in a single JVM. You have no way of scaling each individual customer - you scale all or nothing. 
+
+As you can see in the red box, each Conference Site will contain a bunch of modules depending on each customer selection, but in reality, at runtime, all the code will be there for every single conference. 
+
+> Please note that if you have a platform like this and it does the work that it is supposed to do,you **should NOT** change it. Unless you are having problems managing this “Platform” or scaling it, you shouldn’t rearchitect the whole thing.
+
+Now this Monolith architecture has some clear drawbacks, and for this scenario, we can consider the following reason to rearchitect into a proper Cloud-Native Platform:
+
+- Customers cannot be scaled independently
+- Customer traffic is all handled by the same application
+- Single Point of Failure in the JVM
+- If data is stored in a database, data is shared across customers. The application code needs to deal with isolating each customer data. The database becomes a bottleneck as well, as all customer data is in the same DB. 
+- Every change into the platform requires the entire application to be restarted
+- Every developer involved with the application works against the same code base, making a release and merging features a major task with a lot of risks involved. This usually can be done by someone who understands the entire application.
+
+If you already have this application up and running and you have customers using the platform, you will have a good understanding of which features are essential and how you can start re-architecting it. 
+
+As Martin Fowler describes in the linked blog post [Monolith First](https://martinfowler.com/bliki/MonolithFirst.html) is the way to go. By having a monolith you already understand the solution that you need to build, making it easy to estimate how the new architecture will tackle the problems of the existing version. In other words, if you don’t have an existing Monolith, do not start with a distributed architecture from scratch. Create a monolith first and then split if needed. 
+
+The next step in our journey is to decide where to start. In my experience I’ve seen three common patterns repeating:
+
+- **Start new functionalities as separated services**: this is usually recommended if you can afford to maintain the Monolith as it is. New services will not solve the already existing problems, but it will help your developer teams to get used to working with a microservice mindset.
+- **Split existing functionality out of the monolith** (and slowly deprecate the old code): if you have pressing issues with the Monolith you can evaluate branching off some of the functionality outside into a new service. This might solve some of your existing problems, but it will not bring any business value immediately. It also adds to the complexity of the day-to-day operations as you might end up running two solutions for the same problem over a long period of time. This can also be used to understand how complex and costly a core rearchitecture can be. 
+- **Rearchitect the core of the platform as microservices** (to tackle existing problems): Sooner or later, if you are experiencing problems maintaining and scaling your Monolith, you will need to rethink and redesign the core bits of your platform, making sure that you focus on solving the current scalability and maintenance problems. This can be a costly initiative, but it can be done in complete isolation from your production environments. Several times I’ve seen how this is done as a Proof of Concept to demonstrate that is actually possible and also to make sure that your team members understand the implications from a business (advantages) and technical point of view (new tech stack, new tools).
+
+In this chapter, I will cover the last of these options (**Rearchitect the core of the platform as microservices**) to highlight the solution for our existing problems with the monolith application, but you can explore the other two if they are more appropriate for your situation. 
+
+This is where DDD concepts and patterns become really handy to define how to split the functionalities of the monolith and how to organize our teams around the new services. In the following sections, we will explore some of these concepts in action.
+
+
 ### Assumptions and Simplifications
+
+Platforms are complex beasts, trying to re-architect something big will give you more headaches than solutions. For that reason, you should try to simplify the scope of the problem to tackle different challenges in a controlled way. 
+
+For our scenario, this might mean that instead of trying to go for the re-architecture of the entire platform, first, we try to solve the architecture and shape of a simple Conference Site. This means that instead of focusing on the platform, we first focus on what the Customer will expect for their Conference Site. By understanding the shape of a single Conference Site you and your teams have a well-defined set of challenges to solve that can bring immediate business value. Later we automate how each of these Conference Sites can be provisioned. 
+
+From a more architectural point of view, this might mean a Monolith Conference Site or a Conference Site that is built with different distributed services. If Conference Sites are complex enough and we want to reuse modules for all of them we might consider a distributed approach. Based on my experience, this kind of platform does leverage shared services most of the time so it makes sense to architect them with reusability in mind. This might lead to having multiple services from day one, which is something that you and your teams will need to get used to.
+
+Our independent Conference Sites will look like this: 
+![chapter_01_02](images/chapter_01_02.png)
+
+As you can see in the previous diagram, it is quite clear that there are important architectural changes. It is quite common to have the User Interface, in this case, the “Conference Site” box separated from core services. Most of the time, this user-facing component will act as a router, routing requests from the Conference  Site to services that are not directly exposed to users. 
+
+But before digging into technicalities, how do we prioritize and make sure that we start on the right foot? How do we scope these services correctly (not too macro, not too micro)? DDD concepts can help us, providing some answers and guidelines. 
+
 
 ### Bounded Contexts to start splitting your Monolith 
 
