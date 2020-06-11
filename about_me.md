@@ -43,3 +43,9 @@
 * **Name:** Sandro Giacomozzi
 * **Job Title:** Software engineer, TOTVS
 * **Bio:** Sandro helps Java developers working on enterprise applications to become experts on Java and Devops by practicing the right skills. Volunteer and public speaker. My goal in the software industry is to make organizations and people more agile through processes and tools. Faster, more efficient and quality deliveries. People and technology in line with customer satisfaction and delivery.
+
+<img src="images/isidro.JPG" alt="Professor Isidro" />
+
+* **Name:** Francisco Isidro
+* **Job Title:** * Professor, Researcher at Federal University of ABC
+* **Bio:** Professor Isidro is a Computer Science professor and researcher focused on Programming Fundamentals Teaching, Game Engine Development and Cloud Computing. Isidro mantains a Youtbe channel offering free content about Data Structures, Operating Systems, Web Development, Games and other subjects to all professionals and students who want to improve their knowledge and understand Computer Science and Software Development fundamentals. Speaker at Campus Party, The Developer's Conference, QCon and other conferences, Isidro is always helping developer communities offering technical content and carrer mentoring.
