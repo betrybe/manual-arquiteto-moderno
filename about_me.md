@@ -44,7 +44,7 @@
 * **Job Title:** Software engineer, TOTVS
 * **Bio:** Sandro helps Java developers working on enterprise applications to become experts on Java and Devops by practicing the right skills. Volunteer and public speaker. My goal in the software industry is to make organizations and people more agile through processes and tools. Faster, more efficient and quality deliveries. People and technology in line with customer satisfaction and delivery.
 
-<img src="images/isidro.JPG" alt="Professor Isidro" />
+<img src="images/Isidro.JPG" alt="Professor Isidro" />
 
 * **Name:** Francisco Isidro
 * **Job Title:** * Professor, Researcher at Federal University of ABC
