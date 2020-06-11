@@ -5,7 +5,7 @@ Não vou mentir pra você: quando ouvi falar que o Java seria atualizado há cad
 Oras, e porque? Por alguns motivos (seis, para ser mais exato):
 
 1. Se olharmos a plataforma Java apenas do ponto de vista de código fonte, já veremos que trata-se de um projeto absolutamente gigantesco, que vem sendo evoluído há 25 anos e que, durante esse tempo, passou por mudanças da própria computação em si (vide os casos de cloud e containers, só para citar dois exemplos rápidos);
-2. Milhões linhas de código, milhares e milhares de classes, um "buzilhão" de coisas que dependem de outras tantas;
+2. Milhões de linhas de código, milhares e milhares de classes, um "buzilhão" de coisas que dependem de outras tantas;
 3. Cada feature deriva de uma JSR, que não raro está debaixo de um projeto "guarda-chuva". Cada uma dessas partes muitas vezes tem pessoas diferentes trabalhando e ritmos diferentes de evolução dos projetos;
 4. Tudo o que acontece dentro da plataforma é regulado pelo JCP, que não é famoso pela sua velocidade;
 5. O ecossistema de ferramentas e frameworks em torno do Java é um dos maiores do mundo (se não for o maior). Alguns open source, outros propretários. E todos totalmente dependentes do ritmo de evolução da plataforma;
@@ -47,12 +47,12 @@ Só para te dar uma ideia, o JDK 9 teve noventa e um itens em sua release, enqua
 
 ## Os problemas de não atualizar a versão de JVM
 
-A empresa JRebel publicou esse ano os resultados de uma pesquisa realizada com centenas de desenvolvedores ao redor do mundo. Veja abaixo um dos resultados específicos em relação às versões de Java:
+A empresa JRebel publicou no ano de 2020 os resultados de uma pesquisa realizada com centenas de desenvolvedores ao redor do mundo. Veja abaixo um dos resultados específicos em relação às versões de Java:
 
 ![alt text](images/chapter_09_01.png)
-Fonte: https://www.jrebel.com/blog/2020-java-technology-report
+*Fonte: https://www.jrebel.com/blog/2020-java-technology-report*
 
-Outra pesquisa interessante também foi publicada pela Snyk com os seguintes resultados:
+Outra pesquisa interessante também publicada em 2020 pela Snyk trouxe os seguintes resultados:
 
 ![alt text](images/chapter_09_02.png)
 Fonte: https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/
@@ -86,9 +86,10 @@ No caso do item 2 (custo de migração elevado), ele também é perfeitamente ju
 
 1. Fazer o build do código atual na versão nova (muitos já desistem aqui)
 2. Fazer todos os ajustes de código necessários para funcionar na versão nova
-3. Fazer todos os testes necessários para garantir que nenhum erro foi adicionado na aplicação pela pura troca de versão de JVM
+3. Fazer todos os testes necessários para garantir que nenhum erro foi adicionado na aplicação pela pura troca de versão de JVM (e nessas horas, testes unitários serão seu melhor amigo)
 4. Atualizar as ferramentas do seu ecossistema que dependendiam da versão anterior
-5. Se chegar até aqui, provavelmente já terá boa segurança pra migrar
+5. Garantir que a nova versão do Java estará instalado e configurado em todos os ambientes onde sua aplicação rodar (container ou vms)
+6. Se chegar até aqui, provavelmente já terá boa segurança pra migrar
 
 E no caso da migração do Java 8 para versões mais atuais, temos ainda um "pequeno" detalhe pelo caminho: o Java 9.
 
@@ -106,9 +107,9 @@ Porém, se por um lado é compreensível que se pense duzentas vezes antes de mi
 
 Há motivos para que se lancem novas versões de qualquer software. Seja para corrigir erros, melhorar funcionalidades, criar outras novas, ou mesmo introduzir tendências que surgem no mercado de tecnologia.
 
-Com a plataforma Java não é diferente. Ela não é atualizada, evoluída e modernizada "por esporte". Logo, se já motivos técnicos que justificam sua atualização, os bons arquitetos, desenvolvedores e engenheiros do mercado devem estar atentos a isso.
+Com a plataforma Java não é diferente. Ela não é atualizada, evoluída e modernizada "por esporte". Logo, se há motivos técnicos que justificam sua atualização, os bons arquitetos, desenvolvedores e engenheiros do mercado devem estar atentos a isso.
 
-Vamos imaginar que você é um profissional que trabalha em uma aplicação Java que está usando o JDK 8. Vamos supor que, nesse nosso ambiente imaginário, não há interesse em atualizar o Java para as versões mais recentes (mesmo que seja a versão 11, que é o último LTS lançado até então). Vamos olhar alguns poucos e importantes itens que vocês estão perdendo:
+Vamos imaginar que você é um profissional que trabalha em uma aplicação Java que está usando o JDK 8. Vamos supor que, nesse nosso ambiente imaginário, não há interesse em atualizar o Java para as versões mais recentes (mesmo que seja a versão 11, que é a versão LTS - Long Term Support - mais recente em 2020). Vamos olhar alguns poucos e importantes itens que você está perdendo:
 
 * Com a modularização do JDK 9, surgiu também o jlink, que permite que você, de certa forma, gere o seu próprio JRE. Ou seja, você consegue gerar a sua aplicação utilizando estritamente as dependências necessárias. Em um mundo cada vez mais ligado aos containers, é possível gerar imagens até 70% menores utilizando jlink;
 * Falando em containers, até o JDK 8 a plataforma Java não tinha sido concebida para lidar com restrições de memória de um processo (cgroups, de onde saiu o conceito de container). Ou seja, um container rodando até a versão do JDK 8 poderia alocar memória indefinidamente, até que ocupasse todos os recursos disponibilizados para o daemon, o que exigiu que muitos fizessem workarounds (=gambiarras) para evitar maiores problemas. Desde o JDK 9 a cada nova release temos alguma melhoria com relação à gestão de consumo de recursos da plataforma. Hoje podemos dizer que Java é extremamente performático, eficiente e viável ao usá-lo com containers;
