@@ -99,9 +99,14 @@ A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram sel
 
 #### 8 A importância de aprender os conceitos ao invés de novos frameworks
 
-* Teorema do CAP e seus impactos na arquitetura
-* DTO ou não DTO?
-* Melhores práticas para se definir camadas da aplicação
+* Por que estudar Análise de Algoritmos, Estruturas de Dados, Sistemas Operacionais, Arquitetura de Computadores, Grafos, entre outros?
+* A importância de um estudo mais aprofundado em disciplinas teóricas
+
+* // Teorema do CAP e seus impactos na arquitetura
+
+* // DTO ou não DTO?
+
+* // Melhores práticas para se definir camadas da aplicação
 
 #### 9 Precisamos falar sobre atualizações
 
