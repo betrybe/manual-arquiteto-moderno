@@ -370,9 +370,181 @@ Both, Bounded Contexts and Context Maps are great conceptual tools to understand
 
 ### Focus on Business Value
 
+When working on real applications, you need to focus on what is going to bring more value and solve more problems for your business. As a very practical person, I tend to analyze use cases and how Bounded Context in conjunction with Context Maps provides a business flow end to end. 
 
+For this particular example, the conference scenario, we will be looking at the Call for Proposals basic flow, which looks like this:
+Potential Speaker Submits a proposal via the conference website
+Board/Committee review the proposal
+If the proposal gets accepted
+A new agenda item is created and published into the Agenda Page
+A notification is sent via email for Accepted and Rejected proposals
 
+You need to pay attention to your human/people interactions as these interactions tend to require asynchronous behaviors such as reminders, notifications, alerts as well as User Interfaces which will need to be carefully designed. As engineers, we tend to oversimplify and underestimate the amount of work and iterations that crafting a good user experience might take.
+
+The user interfaces for covering this simple scenario look like this: 
+
+![chapter_01_07](images/chapter_01_07.png)
+
+The main page inside the Conference Site displays the Agenda divided by days. The items inside the agenda are the ones that are already confirmed and were approved by the committee.
+
+The main page also allow potential speakers to submit proposals by filling up a form:
+
+![chapter_01_08](images/chapter_01_08.png)
+
+Once the proposal is submitted the potential speaker will need to wait for Approval or Rejection by the committee. 
+
+The committee members have a back-office page where they can Approve or Reject each submitted proposal: 
+
+![chapter_01_09](images/chapter_01_09.png)
+
+The back-office page also offers Board members the option to send email notifications to the potential speakers.
+
+![chapter_01_10](images/chapter_01_10.png)
+
+Once again, you can notice the simplification of this scenario on purpose to establish a base set of functionality, quickly iterate and get it working and then expand the requirements. 
+
+#### Architecture and Services 
+
+From an architectural perspective it might look more like this: 
+![chapter_01_11](images/chapter_01_11.png)
+
+Where the  User Interface with some routing capability is required to forward requests to the Call for Proposals Service (C4P) to the Agenda or Emails Service. 
+
+All the communications happen via HTTP/Rest invocations. 
+
+### API Gateway / User Interface
+Most of the time, an API Gateway is also used to hide all the other services from direct access. It is quite common to see this service delegating Authorization and Authentication to an OAuth or SAML provider, serving as a security fence to the outside world. The example uses the Spring Cloud Gateway (https://spring.io/projects/spring-cloud-gateway) which provides the routing mechanism to forward inbound requests to the rest of the services. Spring Cloud Gateway allows us to transform any Spring Boot application into a request router with advanced capabilities. It is important to notice, that Spring Cloud Gateway gives you the flexibility to actually add programmatically any transformation that you want/need into the incoming requests. This power and freedom come with the drawback that then it is up to you to maintain, test, and bug fix. In large projects, you might want to evaluate a third-party API gateway (such as Kong, 3Scale, Apigee, etc) based on your project requirements. 
+
+The API Gateway / User interface module can be found in this repository: https://github.com/salaboy/fmtok8s-api-gateway
+
+Which adds to its maven dependencies:
+
+```
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
+
+```
+And configure the default routes for our services inside the application.yaml file: 
+https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/main/resources/application.yaml#L4
+
+```
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: c4p
+        uri: ${C4P_SERVICE:http://fmtok8s-c4p}
+        predicates:
+        - Path=/c4p/**
+        filters:
+          - RewritePath=/c4p/(?<id>.*), /$\{id}
+      - id: email
+        uri: ${EMAIL_SERVICE:http://fmtok8s-email}
+        predicates:
+        - Path=/email/**
+        filters:
+          - RewritePath=/email/(?<id>.*), /$\{id}
+```
+
+These routes define a path into the gateway such as /c4p/** will automatically forward the request to the http://fmtok8s-c4p service. Because we are running in Kubernetes, we can use the name of the Kubernetes Service instead of point to a specific Pod. This routing mechanism enable us to only expose the API Gateway Endpoints to the outside world, leaving behind a secure network all the other services.
+
+The user interface for the website can be found here: https://github.com/salaboy/fmtok8s-api-gateway/tree/master/src/main/resources/templates
+
+And the Controller which fetches the data from the backend services here: https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/main/java/com/salaboy/conferences/site/DemoApplication.java
+
+### Call for Proposals Service
+Because the flow under analysis is core to the Call For Proposals Bounded Context it is no surprise that the core logic belongs to the Call For Proposal Service, more concretely to the following two pieces of functionality: Proposal Submission and Decision Made By the Board. 
+
+The Call for Proposals Service can be found here:  https://github.com/salaboy/fmtok8s-c4p/
+
+The Proposal Submission endpoint accepts a proposal from the User Interface and stores it in a Database or storage. This is an important step, we need to make sure that we don’t loose proposals. Notice that we might be interested in emitting a DDD Domain Event at this point as other systems/applications might be interested to react every time that a proposal is received. https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/C4PController.java#L37
+
+More importantly, Decision Made by the Board endpoint records a decision made by the board, but it also defines the following steps based on that decision. In real life, this decision will affect the course of action. Most of the time, these decision points and the actions derived by them are critical to run a cost-effective and efficient business. 
+https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/C4PController.java#L60
+
+```
+@PostMapping(value = "/{id}/decision")
+    public void decide(@PathVariable("id") String id, @RequestBody ProposalDecision decision) {
+        emitEvent("> Proposal Approved Event ( " + ((decision.isApproved()) ? "Approved" : "Rejected") + ")");
+        Optional<Proposal> proposalOptional = proposalStorageService.getProposalById(id);
+        if (proposalOptional.isPresent()) {
+            Proposal proposal = proposalOptional.get();
+
+            // Apply Decision to Proposal
+            proposal.setApproved(decision.isApproved());
+            proposal.setStatus(ProposalStatus.DECIDED);
+            proposalStorageService.add(proposal);
+
+//          Only if it is Approved create a new Agenda Item into the Agenda Service
+            if (decision.isApproved()) {
+                agendaService.createAgendaItem(proposal);
+            }
+
+            // Notify Potential Speaker By Email
+            emailService.notifySpeakerByEmail(decision, proposal);
+        } else {
+            emitEvent(" Proposal Not Found Event (" + id + ")");
+        }
+
+    }
+
+```
+
+As you can probably guess, this method contains the logic of the entire flow. It starts by checking if the proposal Id can be found, if it is present it will apply the decision to the proposal object (Approved or Rejected) and then only if it was approved call the Agenda Service to create a new Agenda Item. No matter if it was accepted or not, an email needs to be sent to the potential speaker to notify him/her about the decision.  Both “agendaService” (https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/services/AgendaService.java) and “emailService” (https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/services/EmailService.java) are just encapsulating simple REST calls. 
+
+This simple method example, in real-life scenarios is never simple. Because of the inherent complexity of real-life challenges, you must expect simple methods like the one discussed above to become real monsters. The next section covers some of the major pitfalls and considerations that you must have in mind while writing business logic that is key to your domain. The next section also tries to share valuable resources, approaches, and projects which can help you to make batter decisions early on to avoid common mistakes.
+
+### Common Pitfalls
+Real-life applications are complex, and that complexity tends to come from the inherent complexity of the problems that we are trying to solve. We can try to reduce this complexity by using a continuous improvement approach and by making sure that we are not reinventing unnecessary wheels that are not providing any business differentiation. 
+
+Let’s start with something that you might have faced in the past: REST to REST communications can be challenging. 
+
+#### REST to REST communications can be challenging
+If you look at the example provided in the previous section both the Agenda and Email services are invoked from the Call for Proposals Service by using a REST call (https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/services/AgendaService.java#L29). As we discussed before these interactions represent a key part of our business flow, so you need to make sure that these interactions go as planned 100% of the times. It is vital that our application doesn’t end up in an inconsistent state, for example, a proposal gets approved and published into the agenda, but we never sent a notification to the speaker. As it is coded in this example, if the Agenda or Email Service goes down, the HTTP request will silently fail.
+
+This basic requirement, when working with distributed systems where there is no shared state between services becomes a challenge that has several possible solutions. 
+
+One common solution is to write inside our service code to retry in case of failure, this makes every call much more complicated. In the past, there have been several libraries that provided helpers for such situations. It is important to notice that vanilla Kubernetes doesn’t deal with these kind of failure in any way. 
+
+Another solution might be to use a messaging or pub/sub mechanism to communicate our services that out of the box provide you with more guarantees about the delivery of the messages sent. Switching to using messaging such as RabbitMQ or Kafka introduces another set of challenges, most of the time related with now dealing with another complex piece of infrastructure that needs to be maintained over time. Nonetheless, messaging has been proven to be robust and the only option for certain scenarios where these guarantees are required, and the volume of interactions is high. 
+
+Finally, a newer approach are Service Meshes, where we delegate the responsibility of retrying (for example) to the infrastructure. Service Meshes uses proxies to inspect HTTP payloads and error codes so automatic retries can be don in case of failure. You should check out Istio, Gloo, and LinkerD if you are interested in understanding more about how Service Meshes work and what are their advantages. 
+
+#### Flow Buried in Code
+It is quite common to find complex business logic hidden inside our services, obscured in a way by all the boilerplate required to deal with technical errors, fetch data from different sources and transform data between different formats. In real-life projects, it gets quite hard for Domain Experts to actually understand the code that implements their business flows. 
+
+The example discussed in this chapter would become hard to read if we add the code to deal with other aspects such as: 
+- UnHappy paths and exceptional cases: such as, the speaker that submitted a proposal disappeared and it is not answering any emails.
+- Time-Based events, reminders and constraints: for example, schedule a reminder for the board members to review a proposal before 3 days after the submission happened. Cancel the reminder if the decision was made before the deadline. 
+- New requirements are added which push developers to change the sequence of the flow: such as, an email that needs to be sent with a confirmation link to the speaker before we publish and approved talk to the agenda. The more requirements the more code that we need to add, the more it looks like spaghetti. 
+- Reporting and Analytics: for example, your manager wants to know how many proposals we receive per day and how much time on average it takes to approve or reject proposals. You might be tempted to add new endpoints to deal with such reports inside the same service. 
+
+There are no silver bullets to tackle these challenges but I wanted to mention a couple of things that might help in your scenarios to reduce complexity and provide visibility about how your services are working. 
+
+Domain Events are introduced in DDD to externalize the application’s state that might be relevant for other services to consume. On a practical side, these events can be created using Cloud Events (cloudevents.io) which provides a transport-agnostic format for events to be exchanged. 
+
+Service Orchestration tools can be used in conjunction with Cloud Events to externalize the buried business logic inside our services. I recommend you to check projects such as Zeebe, jBPM or Kogito to understand more about how these tools can help you out. Also, I’ve created this blog post about Cloud Events that you might find useful. 
+
+Finally, as discussed in the book Implementing DDD, patterns such as CQRS (Command/Query Responsibility Segregation) can help you out a lot when dealing with reports and analytics. You want to avoid running expensive reports or intense data crunching routines on top of your service database. By applying CQRS you externalize the data that you are interested in reporting on into a separate store that has an optimized format for indexing, searching, and summarizing data. A popular approach is to send data to ElasticSearch for full-text indexing. Then in your application, if you want to search between thousands of proposals you don’t query the Call For Proposal Service, instead, you use ElasticSearch indexes, offloading your Call for Proposal service, so it can continue accepting valuable proposals for your conferences. 
+
+#### Adapters for Legacy Systems
+
+A short note on Legacy Systems, try to abstract them away so you have control on top of their APIs. For the example covered in this chapter, a service called Email was introduced to expose via HTTP endpoints the functionality of an Email Server. This was done on purpose to highlight the advantages of providing an adapter to a Server that we cannot change (an SMTP server). In this adapter, we can include helper functions, templates, and domain-specific functionality that is required by our use cases. 
+
+The Email Service provided doesn’t include an SMTP connection but it exposes a set of APIs that are easy to consume and don’t require other services to include SMTP clients. 
+The source code for this service can be found here: https://github.com/salaboy/fmtok8s-email
+
+Consider creating Adapters for your legacy Services, remember that inside Kubernetes even if the adapters are created in separate containers, these containers can be run inside the same host, avoiding an extra network hop. 
 
 
 ## Sum up
+
+This chapter has covered a wide range of tools, principles with reference to an example application. Some of these tools will make sense to your scenario, some of them will not. What is important to take away from here can be summarized in the following points.
+Optimize decisions around building or integrating third-party software to solve specific or cross-cutting concerns. Having a clear process to evaluate tools against building in house software for challenges that are not core to your business is key to gain agility. 
+Bring your teams up to speed with training. Knowledge transfer is a big problem when the technology stack is broad and complex. Learn to identify what are the main topics that your teams struggle with and find training that can help to spread knowledge across your teams.  
+Use conventions over in-house definition, tap into open source communities. Open Source communities are great places to find best practices applied, innovations, and trends. Don’t be afraid to participate, get involved, and share your learnings. 
+Consider using SaaS providers instead of hosting in-house when possible. If you are already running in a Cloud Provider you need to seriously consider the set of services that they offer. Cloud Providers and SaaS offerings will save you valuable time when setting up and maintaining key pieces of your infrastructure. Because a developer can run Kafka, ElasticSearch or any other third party tool using containers doesn’t mean that they are willing to maintain, upgrade, and backup these services for the entire company. 
+
 
