@@ -120,7 +120,67 @@ But before digging into technicalities, how do we prioritize and make sure that 
 
 ### Bounded Contexts to start splitting your Monolith 
 
+If you are planning a rearchitecture for the core of your platform you need to be careful and you need to choose wisely which components will be re-architected first and why. 
+In my experience, you will try to tackle core components first, that you understand and that you know that provide value to the business where you are. 
+
+In the case of our scenario, dealing with Call for Proposals is critical to bootstrap a conference. 
+There is substantial work around accepting proposals, reviewing them and making sure that the conference has an interesting agenda. 
+
+If we are confident that implementing the Call For Proposal functionality first will give us immediate wins, we need to estimate how big and how complex the effort is. 
+
+DDD proposes the concept of Bounded Context as a well-scoped set of functionalities that belong together. These functionalities usually map how a Domain Expert (Subject Matter Expert) will do the work if there is no software available. In order to plan, design, and implement these functionalities, a team is assembled with Domain Experts that will work hand in hand with Software Engineers. Most of the time, a Domain Expert will know what Bounded Contexts already exist and what are they responsible for. From a DDD perspective, it is extremely important to not make up these Bounded Contexts a technical boundary that is imposed on Domain Experts. 
+
+A Bounded Context will expose a well-defined set of APIs so other Teams from different Bounded Contexts can consume and interact with the Call For Proposals functionality. 
+
+The Call for Proposals Bounded Context will enable a team to implement all the needed functionality independently of other teams. This team will be in charge of the entire lifecycle of the project, from designing it, implementing it, running it for the rest of the company and for your customers to consume it. 
+
+As soon as you start designing the Call for Proposal functionality you realize that you will need to consume and interact with other teams. Very early on the following Bounded Contexts are identified:
+
+![chapter_01_03](images/chapter_01_03.png)
+
+Each of these Bounded Contexts will be owned by different teams and we need to make sure that they have enough autonomy to make progress, create new versions with new features, and deploy concrete software components to our customer’s environments. 
+
+On a practical side, each Bounded Context will be implemented as one or a set of services that implement the context features. There is no need to be strict about the number of services that will compose a Bounded Context, but usually, there is one that is in charge of exposing a set of APIs to the outside world. 
+
+For the purpose of this example, a single service will implement all the Call For Proposals Bounded Context logic and the team behind this service will be responsible for designing its APIs, choosing the frameworks that they are going to use, and actually deploying it into a live environment. 
+
+Going deep into practical details, there are a couple of best practices shared by many companies and tools: 
+- One Repository /  One Service + Continuous Delivery
+- Open APIs
+
+
 #### One Repository / One Service + Continuous Delivery
+
+It is usually recommended to keep all the technical resources needed to run a service close to the source code. This facilitates the maintenance and the cognitive load of understanding how to run our Services in an actual environment. 
+
+Nowadays, it is quite common to have a service, let’s say written in Spring Boot versioned in a git provider such as GitHub, where we can find a Dockerfile to create a containerized version of our service that can be run anywhere where a Docker daemon is present. 
+
+With the rise in popularity of Kubernetes, it is also common to find Kubernetes Manifest (YAML files) describing how our Service can be deployed to a Kubernetes Cluster. Finally, we tend to use Continuous Integration pipelines to actually build all these software components, so it is quite common to also find the pipeline definition close to the source that needs to be built. 
+
+You, as a developer targeting Kubernetes as your deployment platform, are now responsible for a bunch of artifacts, not just your Java Service Source Code. 
+
+![chapter_01_03](images/chapter_01_03.png)
+
+In order to deploy your code to Kubernetes you will need to: 
+- Build and Test your source code, if it is Java you will use Maven or Gradle to do that
+- That will result in a JAR file that you might want to push to a repository such as Nexus or Artifactory. This JAR file will already have a version in it and if you are using Maven or Gradle this JAR will be identified by its GAV (Group/Artifact/Version).
+- From that JAR you create a Docker Image by defining a Dockerfile that understands how to run your Java application with a provided JVM.
+- Finally, if you want to deploy your container to a Kubernetes Cluster you will need some YAML manifests
+- Optionally, if you are building a lot of services you might want to use Helm to package and release these YAML files. Helm provides the idea of Charts (Packages) that map one to one with how we deal with our Maven artifacts. If you are working with Helm Charts, these charts are usually also pushed/released to a chart repository such as Chart Museum. 
+All these artifacts need to be versioned accordingly, meaning that when you build a new version of your JAR file, a new container needs to be built and a new Helm Chart needs to be released. 
+
+At this point if you are thinking ‘that is a lot of work,’ you are 100% right. If you are thinking, ‘I don’t want to do all of that,’ you are absolutely right. I don’t want to do that either. If you want to make this work, you will need to use specialized tools that already deliver all this functionality in an automated way. You should aim for automating every step, and the industry uses Continuous Integration pipelines to achieve this. But you are now targeting Kubernetes, so welcome Jenkins X to your toolchain. Jenkins X, brings CI/CD to Kubernetes and it is part of the Continuous Delivery Foundation. 
+
+As you might notice, Jenkins X is not only about Continuous Integration but also about Continuous Delivery. By covering Continuous Delivery, the pipeline doesn’t stop when these components are built. The pipeline is in charge of building, testing, and also deploying our artifacts into a live environment where they will run to serve our customers. The “continuous” part makes reference to the fact that you want to make sure deploying a new version of your service is frictionless and you will aim to deploy new versions in a short period of time. 
+
+In order to achieve Continuous Delivery, Jenkins X uses a set of conventions to enable developers to focus on building business value. These conventions are not exclusive to Jenkins X and are part of best practices gathered from different industries and practitioners. 
+
+One of these conventions is called “Trunk Based Development” which basically means that every change applied (merged) to the master branch will generate a new release of our artifacts. Most of the time, this is not comfortable for developers, as most of these practices are commonly defined in each company and they tend to vary quite a lot. The key motivation to use something like Trunk Based Development is to make sure that teams don’t need to spend time defining these practices. Projects like Jenkins X are the catalysts for thousands of community members, who are experts in the CI/CD space, which creates best practices and tools that apply them. When working with Trunk Based Development you are enabled to focus on writing code and, when your code is done and merged in master, a new release is created and deployed to some kind of staging environment for further validations. 
+
+I strongly recommend if you are starting a new project, to check the advantages of Trunk Based Development as well as the book Accelerate as it was used as the basis to create tools like Jenkins X. https://jenkins-x.io/about/overview/accelerate/
+
+At the end of the day, Jenkins X uses “One Repository / One Service” plus “Trunk Based Development” to take your service from source to a running instance inside a Kubernetes Cluster. 
+
 
 #### Open APIs
 
