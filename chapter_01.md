@@ -159,7 +159,7 @@ With the rise in popularity of Kubernetes, it is also common to find Kubernetes 
 
 You, as a developer targeting Kubernetes as your deployment platform, are now responsible for a bunch of artifacts, not just your Java Service Source Code. 
 
-![chapter_01_03](images/chapter_01_03.png)
+![chapter_01_04](images/chapter_01_04.png)
 
 In order to deploy your code to Kubernetes you will need to: 
 - Build and Test your source code, if it is Java you will use Maven or Gradle to do that
@@ -181,7 +181,7 @@ I strongly recommend if you are starting a new project, to check the advantages 
 
 At the end of the day, Jenkins X uses “One Repository / One Service” plus “Trunk Based Development” to take your service from source to a running instance inside a Kubernetes Cluster. 
 
-![chapter_01_04](images/chapter_01_04.png)
+![chapter_01_05](images/chapter_01_05.png)
 
 For our example, the following links demonstrate all these concepts in action 
 Pipeline: https://github.com/salaboy/fmtok8s-email/blob/master/jenkins-x.yml 
@@ -222,7 +222,7 @@ In real-life projects, these user interfaces and API specification documents can
 
 The following screenshot shows the Open API User Interface that is provided by just including the previous dependency. This screen can be accessed by pointing your browser to host:port/swagger-ui.html and it provides a simple client to interact with your services, understand which endpoints are exposed and which data these endpoints expect and return. 
 
-![chapter_01_05](images/chapter_01_05.png)
+![chapter_01_06](images/chapter_01_06.png)
 
 Feel free to clone one of the services from this example and run `mvn spring-boot:run` to explore each service APIs definitions. By default, each service will start in port 8080 so you will need to point your browser at http://localhost:8080/swagger-ui.html
 
@@ -239,7 +239,7 @@ As you might guess, APIs are extremely important, but understanding who is going
 Well-defined Context Maps help a lot to plan and understand how these “isolated’ Bounded Context and teams working on them will interact on a day to day basis. 
 
 For our example the following context map would make sense:
-![chapter_01_06](images/chapter_01_06.png)
+![chapter_01_07](images/chapter_01_07.png)
 
 This diagram depicts the relationships between the simple Bounded Context that we have for our Conference Site application. Here we can see that there is a Customer/Supplier relationship between Call for Proposals and the Conference Agenda Bounded Context. Where Call for Proposals is a consumer of the upstream service Conference Agenda. Between these two teams, there is a Partnership relationship as well, as they need to collaborate to get things done. This means that the communication between these two teams is important and they should be able to influence each other’s roadmap. 
 
@@ -383,30 +383,30 @@ You need to pay attention to your human/people interactions as these interaction
 
 The user interfaces for covering this simple scenario look like this: 
 
-![chapter_01_07](images/chapter_01_07.png)
+![chapter_01_08](images/chapter_01_08.png)
 
 The main page inside the Conference Site displays the Agenda divided by days. The items inside the agenda are the ones that are already confirmed and were approved by the committee.
 
 The main page also allow potential speakers to submit proposals by filling up a form:
 
-![chapter_01_08](images/chapter_01_08.png)
+![chapter_01_09](images/chapter_01_09.png)
 
 Once the proposal is submitted the potential speaker will need to wait for Approval or Rejection by the committee. 
 
 The committee members have a back-office page where they can Approve or Reject each submitted proposal: 
 
-![chapter_01_09](images/chapter_01_09.png)
+![chapter_01_10](images/chapter_01_10.png)
 
 The back-office page also offers Board members the option to send email notifications to the potential speakers.
 
-![chapter_01_10](images/chapter_01_10.png)
+![chapter_01_11](images/chapter_01_11.png)
 
 Once again, you can notice the simplification of this scenario on purpose to establish a base set of functionality, quickly iterate and get it working and then expand the requirements. 
 
 #### Architecture and Services 
 
 From an architectural perspective it might look more like this: 
-![chapter_01_11](images/chapter_01_11.png)
+![chapter_01_12](images/chapter_01_12.png)
 
 Where the  User Interface with some routing capability is required to forward requests to the Call for Proposals Service (C4P) to the Agenda or Emails Service. 
 
