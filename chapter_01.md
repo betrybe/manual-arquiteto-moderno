@@ -529,7 +529,7 @@ Service Orchestration tools can be used in conjunction with Cloud Events to exte
 
 Finally, as discussed in the book Implementing DDD, patterns such as CQRS (Command/Query Responsibility Segregation) can help you out a lot when dealing with reports and analytics. You want to avoid running expensive reports or intense data crunching routines on top of your service database. By applying CQRS you externalize the data that you are interested in reporting on into a separate store that has an optimized format for indexing, searching, and summarizing data. A popular approach is to send data to ElasticSearch for full-text indexing. Then in your application, if you want to search between thousands of proposals you don’t query the Call For Proposal Service, instead, you use ElasticSearch indexes, offloading your Call for Proposal service, so it can continue accepting valuable proposals for your conferences. 
 
-#### Adapters for Legacy Systems
+#### Adapters for Legacy Systems
 
 A short note on Legacy Systems, try to abstract them away so you have control on top of their APIs. For the example covered in this chapter, a service called Email was introduced to expose via HTTP endpoints the functionality of an Email Server. This was done on purpose to highlight the advantages of providing an adapter to a Server that we cannot change (an SMTP server). In this adapter, we can include helper functions, templates, and domain-specific functionality that is required by our use cases. 
 
