@@ -181,10 +181,111 @@ I strongly recommend if you are starting a new project, to check the advantages 
 
 At the end of the day, Jenkins X uses “One Repository / One Service” plus “Trunk Based Development” to take your service from source to a running instance inside a Kubernetes Cluster. 
 
+![chapter_01_04](images/chapter_01_04.png)
+
+For our example, the following links demonstrate all these concepts in action 
+Pipeline: https://github.com/salaboy/fmtok8s-email/blob/master/jenkins-x.yml 
+DockerFile: https://github.com/salaboy/fmtok8s-email/blob/master/Dockerfile
+Helm Charts: https://github.com/salaboy/fmtok8s-email/tree/master/charts/fmtok8s-email
+Continuous Releases: https://github.com/salaboy/fmtok8s-email/releases
+
+You will find the same setup for all the projects inside the Conference Site Demo. 
+
 
 #### Open APIs
+If you are already implementing a Bounded Context, very early one you will need to design and specify what kind of interface are you going to expose to other Bounded Context and third party services that might be interested in the functionality that your context provides. A popular way of implementing these APIs are REST endpoints. Since you are probably familiar with REST endpoints already this section is focused on the Open API Specification: https://github.com/OAI/OpenAPI-Specification As defined in the Spec text “the OpenAPI Specification removes the guesswork in calling a service.” Nowadays popular frameworks such as Spring Boot comes with out of the box integration with Open API and Open API tooling. 
+
+By just adding a Spring Boot extension/starter, you enable your application to expose a user interface that serves as live documentation and browser of your APIs.
+
+If you are using standard (Tomcat) Spring Boot you need to only add to your pom file: 
+
+```
+<dependency>
+   <groupId>org.springdoc</groupId>
+   <artifactId>springdoc-openapi-ui</artifactId>
+   <version>${springdoc-openapi-ui.version}</version>
+</dependency>
+
+```
+If you are using Webflux, the reactive stack you need to only add: 
+```
+<dependency>
+   <groupId>org.springdoc</groupId>
+   <artifactId>springdoc-openapi-webflux-ui</artifactId>
+   <version>${springdoc-openapi-ui.version}</version>
+</dependency>
+```
+
+https://github.com/salaboy/fmtok8s-email/blob/master/pom.xml#L40 
+
+In real-life projects, these user interfaces and API specification documents can be used by other teams to understand with concrete details about how to interact with your services. The sooner that you get an API exposed, the sooner that other teams can start leveraging your service. 
+
+The following screenshot shows the Open API User Interface that is provided by just including the previous dependency. This screen can be accessed by pointing your browser to host:port/swagger-ui.html and it provides a simple client to interact with your services, understand which endpoints are exposed and which data these endpoints expect and return. 
+
+![chapter_01_05](images/chapter_01_05.png)
+
+Feel free to clone one of the services from this example and run `mvn spring-boot:run` to explore each service APIs definitions. By default, each service will start in port 8080 so you will need to point your browser at http://localhost:8080/swagger-ui.html
+
+
 
 ### Context Map to understand Team and Technical interactions
+
+Bounded Contexts are great to understand a well-scoped set of functionalities that need to be provided together. When we have several of these contexts, we need to understand how they will interact with each other and their relationships. That is where the concept of Context Maps really helps. With Context Maps, you can map out the relationships between bounded context and what they will actually need to interact. Context mapping also gives you visibility about how the teams responsible for each Bounded Context will interact with other teams.
+
+On the practical side, this is all about System Integrations. How our services or the services that expose some kind of APIs talk to each other. How do they transform and move data around and how do they know which services are available to consume. 
+
+As you might guess, APIs are extremely important, but understanding who is going to consume our APIs, what is expected from these APIs and who actually depends on us is critical. 
+
+Well-defined Context Maps help a lot to plan and understand how these “isolated’ Bounded Context and teams working on them will interact on a day to day basis. 
+
+For our example the following context map would make sense:
+![chapter_01_06](images/chapter_01_06.png)
+
+This diagram depicts the relationships between the simple Bounded Context that we have for our Conference Site application. Here we can see that there is a Customer/Supplier relationship between Call for Proposals and the Conference Agenda Bounded Context. Where Call for Proposals is a consumer of the upstream service Conference Agenda. Between these two teams, there is a Partnership relationship as well, as they need to collaborate to get things done. This means that the communication between these two teams is important and they should be able to influence each other’s roadmap. 
+
+On the other hand, the relationship with the Notification service is different. Call For Proposals has an upstream relationship with the Notification Bounded context, but it will comfort with their contracts. This means that from the Call for Proposals team perspective they cannot influence or change the Notification Bounded Context APIs. This happens a lot when we have legacy systems or when this bounded context is external to our company. 
+
+
+Jumping on the practical side, while System integrations is a very broad topic, this section focuses on a very practical recommendation: “You must learn about Consumer-Driven Contact Testing”. Once again Martin Fowler has an article about this: https://martinfowler.com/articles/consumerDrivenContracts.html 
+While the topic itself is not new (previous blog post from 2006) there are very up to date tools to actually implement this in your projects, such as Spring Cloud Contracts (https://spring.io/projects/spring-cloud-contract). 
+
+With Spring Cloud Contracts, the story goes like this, first you define a contact for your APIs, this basically means what kind of request the consumer will submit and what kind of response we will provide as a service. 
+
+A contract looks like this: https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/test/resources/contracts/shouldAcceptPostProposal.groovy
+
+```
+
+Contract.make {
+       name "should accept POST with new Proposal"
+       request{
+           method 'POST'
+           url '/'
+           body([
+               "title": $(anyNonEmptyString()),
+               "description": $(anyNonEmptyString()),
+               "author": $(anyNonEmptyString()),
+               "email": $(anyEmail())
+           ])
+           headers {
+               contentType('application/json')
+           }
+       }
+       response {
+           status OK()
+           headers {
+               contentType('application/json')
+           }
+           body(
+                   "id": $(anyUuid()),
+                   "title": $(anyNonEmptyString()),
+                   "description": $(anyNonEmptyString()),
+                   "author": $(anyNonEmptyString()),
+                   "email": $(anyEmail())
+           )
+       }
+   }
+
+```
 
 ### Focus on Business Value
 
