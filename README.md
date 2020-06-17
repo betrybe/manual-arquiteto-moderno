@@ -20,11 +20,19 @@ Alinhando teoria e prática, este livro trará visões arquiteturais, motivaçõ
 
 A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram selecionados tópicos atuais e relevantes que irão te ajudar a tomar melhores decisões dia a dia como arquiteto.
 
-### 1 Domain Driven Design (DDD)
+### 1 Domain Driven Design (DDD), where to go next?
 
-* Quando criar Tipos
-* Java DSL e API fluente
-* Builders: uma maneira intituiva e segura para se instânciar objetos
+* Java in the Cloud, Containers and Container Orchestrators
+* From Monolith to K8s using DDD
+  * Bounded Context Practical implications
+    * Continuous Delivery, One Repository / One Service
+    * OpenAPIs
+  * Context Maps Practical Implications
+    * Consumer Driven Contract Testing
+    * API Gateway + Single Sign On
+* Focus on Business Value
+  * Common Pitfalls
+
 
 ### 2 Clean Code
 
