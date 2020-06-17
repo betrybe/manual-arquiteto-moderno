@@ -573,6 +573,6 @@ This chapter has covered a wide range of tools, principles with reference to an 
 
 - Use conventions over in-house definition, tap into open source communities. Open Source communities are great places to find best practices applied, innovations, and trends. Don’t be afraid to participate, get involved, and share your learnings. 
 
-0 Consider using SaaS providers instead of hosting in-house when possible. If you are already running in a Cloud Provider you need to seriously consider the set of services that they offer. Cloud Providers and SaaS offerings will save you valuable time when setting up and maintaining key pieces of your infrastructure. Because a developer can run Kafka, ElasticSearch or any other third party tool using containers doesn’t mean that they are willing to maintain, upgrade, and backup these services for the entire company. 
+- Consider using SaaS providers instead of hosting in-house when possible. If you are already running in a Cloud Provider you need to seriously consider the set of services that they offer. Cloud Providers and SaaS offerings will save you valuable time when setting up and maintaining key pieces of your infrastructure. Because a developer can run Kafka, ElasticSearch or any other third party tool using containers doesn’t mean that they are willing to maintain, upgrade, and backup these services for the entire company. 
 
 
