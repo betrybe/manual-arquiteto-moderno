@@ -567,12 +567,12 @@ Consider creating Adapters for your legacy Services, remember that inside Kubern
 
 This chapter has covered a wide range of tools, principles with reference to an example application. Some of these tools will make sense to your scenario, some of them will not. What is important to take away from here can be summarized in the following points.
 
-Optimize decisions around building or integrating third-party software to solve specific or cross-cutting concerns. Having a clear process to evaluate tools against building in house software for challenges that are not core to your business is key to gain agility. 
+- Optimize decisions around building or integrating third-party software to solve specific or cross-cutting concerns. Having a clear process to evaluate tools against building in house software for challenges that are not core to your business is key to gain agility. 
 
-Bring your teams up to speed with training. Knowledge transfer is a big problem when the technology stack is broad and complex. Learn to identify what are the main topics that your teams struggle with and find training that can help to spread knowledge across your teams.  
+- Bring your teams up to speed with training. Knowledge transfer is a big problem when the technology stack is broad and complex. Learn to identify what are the main topics that your teams struggle with and find training that can help to spread knowledge across your teams.  
 
-Use conventions over in-house definition, tap into open source communities. Open Source communities are great places to find best practices applied, innovations, and trends. Don’t be afraid to participate, get involved, and share your learnings. 
+- Use conventions over in-house definition, tap into open source communities. Open Source communities are great places to find best practices applied, innovations, and trends. Don’t be afraid to participate, get involved, and share your learnings. 
 
-Consider using SaaS providers instead of hosting in-house when possible. If you are already running in a Cloud Provider you need to seriously consider the set of services that they offer. Cloud Providers and SaaS offerings will save you valuable time when setting up and maintaining key pieces of your infrastructure. Because a developer can run Kafka, ElasticSearch or any other third party tool using containers doesn’t mean that they are willing to maintain, upgrade, and backup these services for the entire company. 
+0 Consider using SaaS providers instead of hosting in-house when possible. If you are already running in a Cloud Provider you need to seriously consider the set of services that they offer. Cloud Providers and SaaS offerings will save you valuable time when setting up and maintaining key pieces of your infrastructure. Because a developer can run Kafka, ElasticSearch or any other third party tool using containers doesn’t mean that they are willing to maintain, upgrade, and backup these services for the entire company. 
 
 
