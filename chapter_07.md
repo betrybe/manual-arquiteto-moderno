@@ -1,6 +1,6 @@
 # Cloud
 
-Uma vez que conversamos sobre DDD, microservices, boas práticas design de código e arquitetura de software, temos embasamento para prosseguir e abordar um dos temas mais discutidos do cenário de tecnologia: computaçào em nuvem (*cloud* *computing*).
+Uma vez que conversamos sobre DDD, microservices, boas práticas design de código e arquitetura de software, temos embasamento para prosseguir e abordar um dos temas mais discutidos do cenário de tecnologia: computação em nuvem (*cloud* *computing*).
 
 Discorreremos sobre o que se considerar ao arquitetura de aplicações para um ambiente de cloud, perspectivas populares a respeito de aplicações  "cloud-native" e porque este conceito é tão ligado a ferramentas como Kubernetes.  Serão também descritos padrões e funcionalidades esperadas em uma aplicação, para que sejam first-class citizens em um ambiente de cloud. 
 
@@ -10,7 +10,7 @@ A buzz-word "cloud-native" começou a se estabelecer por volta de 2014, e sua cr
 
 > **TIP:** Uma das formas de se avaliar a popularidade de um termo, é validar a quantidade de buscas realizadas ao longo do tempo e as regiões interessadas.
 >
->  https://trends.google.com.br/trends/explore?date=all&q=cloud-native
+> https://trends.google.com.br/trends/explore?date=all&q=cloud-native
 
 O entendimento destes conceitos te auxiliará no entendimento da situação em que suas aplicações estão, e dará suporte ao planejamento de uma jornada para a cloud. Vamos discorrer sobre estas categorizações, seus conceitos e diferenças.
 
@@ -36,7 +36,7 @@ No momento da escrita deste livro, não há um consenso ou definição exata ace
 
 > "Cloud-native é uma abordagem para criar e executar aplicações que explora as vantagens do modelo de computação em nuvem. (...)"
 >
->  —[VMWare Tanzu (Pivotal)](https://tanzu.vmware.com/cloud-native)
+> —[VMWare Tanzu (Pivotal)](https://tanzu.vmware.com/cloud-native)
 
 > "Cloud-native é uma maneira diferente de pensar e raciocinar sobre sistemas de software. Ele incorpora os seguintes conceitos: Alimentado por infraestrutura descartável, composta por limites, escala globalmente, adota a arquitetura descartável. (...)"
 >
@@ -88,13 +88,21 @@ Para criar um projeto onde você pode estudar exemplos de implementação de pr�
 2. Insira um `groupId`, `artifactId`, selecione uma versão do MicroProfile, versão do Java SE, e o `runtime`. 
    O `runtime `  será a implementação da especificação MicroProfile. 
 
-![chapter_08_01](images/chapter_07_04.png)
+![/chapter_07_04](images/chapter_07_04.png)
 
 3. Clique em `Download`. 
 
-Será realizado o download de dois projetos em sua máquina. Você pode iniciar ambos, testá-los e analisar a simplicidade de se implementar padrões cloud-native. Veja no código como são realizadas a implementação das apis de `Health Checks` com liveness e readiness (apis que serão consumidas pelo orquestrador de containers aumentar a resiliência e suportar processos de deploy ao validar a saúde do pod), de métricas, tracing distribuído, resiliência a timeouts, segurança com JWT, injeção de propriedades de configuração através de anotações, e a utilização de RestClient (permite consumir um serviço rest apenas implementando-se uma interface no serviço cliente). 
+Será realizado o download de dois projetos em sua máquina. Você pode iniciar ambos, testá-los e analisar a simplicidade de se implementar padrões cloud-native. 
 
-A aplicação de exemplo acima é uma aplicação que inclui várias, mas não todas as features que iremos discutir. Uma vez que falamos sobre detalhes de implementação na aplicação propriamente dita, vamos seguir em frente e entender melhores práticas conteinerização destas aplicações. 
+>  **INFO:** MicroProfile é uma especificação recomendada para a criação de microserviços Java. Esteja atento ao fato de que, entregar microserviços **não** é sinônimo de se entregar aplicações cloud-native.
+
+Veja no código como são realizadas a implementação das apis de `Health Checks` com liveness e readiness (apis que serão consumidas pelo orquestrador de containers aumentar a resiliência e suportar processos de deploy ao validar a saúde do pod), de métricas, tracing distribuído, resiliência a timeouts, segurança com JWT, injeção de propriedades de configuração através de anotações, e a utilização de RestClient (permite consumir um serviço rest apenas implementando-se uma interface no serviço cliente).  A aplicação de exemplo acima é uma aplicação que inclui *várias*, mas não *todas* as features que iremos discutir.
+
+Além da utilização da especificação MicroProfile para entrega de microserviços cloud-native, outra ferramenta amplamente utilizada é o [Spring Boot](https://spring.io/projects/spring-boot). É possível também construir serviços que usufruem de capabilities de aplicações cloud-native com a utilização de Spring e sua stack. [Spring Cloud](https://cloud.spring.io/spring-cloud-static/spring-cloud.html) é um dos frameworks disponíveis que permitem entregar aplicações cloud-native e Java. Assim como demonstrado para o MicroProfile, também é possível criar aplicações de uma forma simples : https://start.spring.io/ . Note que, ao clicar em `Add Dependencies` você pode filtrar por cloud e escolher os componentes que deseja habilitar em sua aplicação:
+
+![chapter_07_06](images/chapter_07_06.png)
+
+Agora, uma vez que falamos sobre algunss detalhes de implementação da aplicação propriamente dita, vamos seguir em frente e entender melhores práticas conteinerização destas aplicações. 
 
 ### Princípios de design de contêinerização de aplicações
 
@@ -204,16 +212,14 @@ Escolha dentre estratégias de deploy maduras que sejam mais apropriada à sua a
 
 Veja algumas estratégias de deploy que você pode usar de maneira fácil com plataformas de orquestração como Kubernetes:
 
-* Recreate Strategy:
-
-  Todos os pods existentes serão escalados a zero, e só então, o Kubernetes criará pods com a nova versão do seu código. Uma estratégia ousada (tudo ou nada), mas que pode ser necessária em casos de mudanças radicais em estruturas de dados, ou, caso você não possa rodar as duas versões simultaneamente em produção;
+* Recreate Strategy: Todos os pods existentes serão escalados a zero, e só então, o Kubernetes criará pods com a nova versão do seu código. Uma estratégia ousada (tudo ou nada), mas que pode ser necessária em casos de mudanças radicais em estruturas de dados, ou, caso você não possa rodar as duas versões simultaneamente em produção;
 
 * Canary release: é um tipo de Rolling Strategy, onde se libera a nova versão e apenas quando constatado que a nova versão é saudável (de acordo com o readiness check do Kubernetes), o Kubernetes comecará a destruir os pods com a versão antiga; Neste cenário os pods novos e antigos precisam co-existir durante o período de deploy;
 
 * Blue-Green: é uma boa estratégia para se mitigar falhas, porém é mais custoso. Utilize caso você queria que um grupo de pessoas realizem testes para garantir que a nova versão está de fato pronta e pode ir ao ar. Devem existir dois ambientes de produção idênticos, o azul e o verde, mas apenas um estará ativo por vez. Você terá um router que irá direcionar os usuários para o ambiente ativo.
-  
+
   >  **TIP:** Leitura recomendada sobre blue-green deployment: artigo [BlueGreenDeployment,por Martin Fowler](https://martinfowler.com/bliki/BlueGreenDeployment.html).
-  
+
   Digamos que o ambiente azul está ativo, rodando seu código v1. O grupo de usuários realizará os testes no ambiente verde, não ativo, na versão v2. Uma vez confirmado que a nova versão, v2, pode ir ao ar você vira a chave e todos os usuários passam a utilizar agora, o ambiente verde. 
   Seguindo a mesma linha, como o ambiente verde agora está em produção, em um próximo deploy você usaria o ambiente azul para garantir a release antes de virar a chave, e assim por diante.
 
@@ -282,7 +288,6 @@ De uma maneira geral temos que pensar nos seguintes três princípios cíclicos 
 * Quanto maior a complexidade menor abstração;
 * Quanto maior abstração menor é o risco;
 * Quanto menor o risco menor é complexidade.
-  
 
 É verdade que existem vários benefícios na navegação nos mares da computação em nuvem, porém, é muito importante conhecer os tipos de serviços que a cloud disponibiliza e fazer uma análise profunda entre a complexidade de um serviço com o seu respectivo risco, além de quanto tempo o time está disposto a gastar para criar e manter toda a infraestrutura. O PaaS fornece uma grande vantagem de abstração de toda a infraestrutura e manutenção para que o desenvolvedor foque no seu negócio. O IaaS te garantirá uma grande flexibilidade e poder para instalar e configurar o que seu time deseja sem nenhum problema mesmo que tudo tenha que seja configurado manualmente. É muito importante que a quanto o time quanto a empresa tenha noção de que, independente da escolha haverão benefícios e desvantagens. É muito importante para que os arquitetos avaliem o que melhor se encaixa na instituição, afinal, cloud e computação não está relacionado a quando, mas como.
 
@@ -298,7 +303,7 @@ Como decidir quando é a hora de migrar seu workload para uma arquitetura contei
 
     > TIP: É recomendada a leitura do livro [Kubernetes patterns for desiging cloud-native apps](https://www.redhat.com/en/resources/oreilly-kubernetes-patterns-cloud-native-apps). Trás boas práticas na implementação de serviços cloud-native. 
 
-  *  Da perspectiva do time de middleware ou sysadmins, o dia-a-dia passa a ser diferente. Não é mais necessário despender tempo aprendendo como entregar diferentes tipos de aplicação e desvendando suas respectivas peculiaridades e dependencias. Basta aprender a lidar com containers, e a forma de trabalho passa a ser padrão, independente da tecnologia utilizada nas aplicações. Por outro lado, deve-se entender conceitos de operators, segregação e segurança no ambiente Kubernetes, estratégias de deployment (rolling, blue-green, canary), como lidar com storages, etc.
+  * Da perspectiva do time de middleware ou sysadmins, o dia-a-dia passa a ser diferente. Não é mais necessário despender tempo aprendendo como entregar diferentes tipos de aplicação e desvendando suas respectivas peculiaridades e dependencias. Basta aprender a lidar com containers, e a forma de trabalho passa a ser padrão, independente da tecnologia utilizada nas aplicações. Por outro lado, deve-se entender conceitos de operators, segregação e segurança no ambiente Kubernetes, estratégias de deployment (rolling, blue-green, canary), como lidar com storages, etc.
 
 
 ##  Kubernetes Vanila e seus sabores
@@ -400,14 +405,43 @@ Não podemos deixar de fora os provedores de serviços na nuvem pública que tam
 
 **AWS App Mesh** - Se o seu ambiente está na AWS, vale a pena dar uma neste serviço que usa o Envoy como sidecar proxy: [AWS App Mesh](https://aws.amazon.com/app-mesh/?nc1=h_ls);
 
-**Azure Service Fabric Mesh** - Apesar de usar o nome Service Mesh, este é o que mais se difere dos demais. Está mais comparado a um Red Hat OpenShift e se faz necessário que você tenha um plano de dados de malha de serviço já em uso. É um serviço gerenciado e os desenvolvedores não tem acesso ao painel de controle: [Azure Service Fabric](https://azure.microsoft.com/services/service-fabric/)
+**Azure Service Fabric Mesh** - Apesar de usar o nome Service Mesh, este é o que mais se difere dos demais. Está mais comparado a um Red Hat OpenShift e se faz necessário que você tenha um plano de dados de malha de serviço já em uso. É um serviço gerenciado e os desenvolvedores não tem acesso ao painel de controle: [Azure Service Fabric](https://azure.microsoft.com/services/service-fabric/).
+
+## Quando não usar Kubernetes
+
+Com base na explicação de aplicações cloud-native note que, para se entregar arquiteturas cloud-native você não precisa necessariamente utilizar Kubernetes. Principalmente se você está no início da jornada para a cloud, Kubernetes (e seus vários flavors) podem não ser a solução de todas as questões  na jornada para a cloud, e pior, talvez até te traga mais pontos de atenção. 
+
+Se seu cenário ainda possui um baixo número de imagens e containers, talvez ainda não seja a hora de se adotar uma arquitetura mais robusta como Kubernetes. Além do aumento do consumo de recursos, seus times de Dev e Ops precisarão estar aptos a imergirem nesse novo paradigma de entrega de aplicações. Talvez seja apropriado iniciar com uma ferramenta como [Docker Swarm](https://docs.docker.com/get-started/swarm-deploy/). O Docker Swarm está disponível junto ao Docker engine que você instala, e sua utilização se dá através do próprio comando `Docker`:
+
+```
+$ docker swarm
+
+Usage:	docker swarm COMMAND
+
+Manage Swarm
+
+Commands:
+  ca          Display and rotate the root CA
+  init        Initialize a swarm
+  join        Join a swarm as a node and/or manager
+  join-token  Manage join tokens
+  leave       Leave the swarm
+  unlock      Unlock swarm
+  unlock-key  Manage the unlock key
+  update      Update the swarm
+```
+
+Você pode criar as máquinas que farão parte do cluster, instalar o Docker, e configurar o Swarm e a camada rede. Uma vez configurado seu Swarm, você pode escalar as replicas de pod e gerenciar em uma escala menor, se comparado ao Kubernetes, os seus containers. 
+
+Com a introdução do conceito de contêines e orquestração de contêineres ao seu time, naturalmente se evoluirá para a automação dos processos de construção e entrega destas imagens e contêineres. Com isso, o time terá a chance de praticar e absorver o conhecimento necessário para se imergir mais naturalmente em um cenário mais complexo de orquestradores robustos.
+
+Deve-se também ter em mente o cenário em que você já utilizou o Kubernetes e já tem um conhecimento mais aprofundado da ferramenta. Com isso, você já tem idéias de como melhorar ou facilitar os fluxos internos de orquestração, práticas de desenvolvimento, de entrega contínua. Tem idéias de UI que podem auxiliar o usuário ou práticas que podem acelerar a entrega de aplicações. Com base nisto, você pode, ao invés de usar o Kubernetes, partir para um dos flavors disponíveis e até mesmo criar o seu próprio flavor! 
 
 # Conclusão 
 
 Não existem dúvidas de que o futuro da tecnologia reside na cloud. Com o surgimento dos microserviços, cada vez mais precisamos do conhecimento do ecossistema que gira ao seu redor. Com o aumento no uso de contêineres e práticas de DevOps, cada vez mais o desenvolvedor precisa conhecer sobre plataforma, e o system admin precisa conhecer sobre desenvolvimento. 
 
 Se ainda não faz parte da sua realidade, aplicações cloud-ready e cloud-native com certeza farão em um futuro muito próximo. Junto a elas, todo o vasto ecossistema de contêineres, orquestração de conteineres e demais funcionalidades que giram ao redor destes serviços serão necessários. Esteja pronto para aderir ao movimento. 
-
 
 
 
