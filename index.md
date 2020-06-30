@@ -13,3 +13,5 @@
 - [Eventos de domínio e serviço de chamada para propostas ](chapter_01.md#domain-events-and-the-call-for-proposals-service)
 - [Armadilhas comuns](chapter_01.md#common-pitfalls)
 - [Resumo](chapter_01.md#sum-up)
+
+## Clean Code
