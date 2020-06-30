@@ -22,3 +22,35 @@
 - [Arquitetura Limpa](chapter_03.md#clean-architecture)
 - [Granularidade de camadas](chapter_03.md#granularidade-de-camadas)
 - [Conclusão](chapter_03.md#conclusão)
+
+## [*Capítulo 4: Refatoração*](chapter_04.md)
+- [Refatoração](chapter_04.md#refatoração)
+- [Conclusão](chapter_04.md#concluindo)
+
+## [*Capítulo 5: Microserviços*](chapter_05.md)
+- [Microserviços](chapter_05.md#microservices)
+
+## [*Capítulo 6: NoSQL x SQL*](chapter_06.md)
+- [NoSQL x SQL](chapter_06.md#nosql-vs-sql)
+
+## [*Capítulo 7: NoSQL x SQL*](chapter_07.md)
+- [Cloud](chapter_07.md#cloud)
+- [Kubernetes - Quando usar e quando não usar](chapter_07.md#kubernetes---quando-usar-e-quando-não-usar)
+- [Conclusão](chapter_07.md#conclusão)
+
+## [*Capítulo 8: A importância de se aprender conceitos ao invés de novos frameworks*](chapter_08.md)
+- [A importância de se aprender conceitos ao invés de novos frameworks](chapter_08.md#a-importância-de-se-aprender-conceitos-ao-invés-de-novos-frameworks)
+- [O ponto chave: usar frameworks, fazer as tarefas manualmente, ou melhor, criar seu próprio?](chapter_08.md#o-ponto-chave-usar-frameworks-fazer-as-tarefas-manualmente-ou-melhor-criar-seu-próprio)
+
+
+## [*Capítulo 9: Precisamos falar sobre atualizações*](chapter_09.md)
+- [Precisamos falar sobre atualizações](chapter_09.md#precisamos-falar-sobre-atualizações)
+- [Utilidade versus Hype](chapter_09.md#utilidade-versus-hype)
+
+## [*Capítulo 10: Destrinchando performance de aplicações*](chapter_10.md)
+- [Destrinchando performance de aplicações](chapter_10.md#destrinchando-performance-de-aplicações)
+- [Entendendo e separando os componentes.](chapter_10.md#entendendo-e-separando-os-componentes)
+- [Monitorando a performance por componente](chapter_10.md#monitorando-a-performance-por-componente)
+- [Monitorando a performance em sistemas distribuídos](chapter_10.md#monitorando-a-performance-em-sistemas-distribuídos)
+- [Mapeamento Objeto Relacional](chapter_10.md#mapeamento-objeto-relacional)
+- [Conclusão](chapter_10.md#conclusão)
