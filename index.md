@@ -14,4 +14,11 @@
 - [Armadilhas comuns](chapter_01.md#common-pitfalls)
 - [Resumo](chapter_01.md#sum-up)
 
-## Clean Code
+## [*Capítulo 2: Código Limpo*](chapter_02.md)
+- [Código Limpo](chapter_02.md#clean-code)
+- [Lombok: problema ou solução?](chapter_02.md#lombok-problema-ou-solução)
+
+## [*Capítulo 3: Arquitetura Limpa*](chapter_03.md)
+- [Arquitetura Limpa](chapter_03.md#clean-architecture)
+- [Granularidade de camadas](chapter_03.md#granularidade-de-camadas)
+- [Conclusão](chapter_03.md#conclusão)
