@@ -5,12 +5,12 @@
 - [Java na Nuvem](chapter_01.md#java-in-the-cloud)
 - [Containers e orquestração de containers](chapter_01.md#containers--containers-orchestration)
 - [Potencializando os benefícios do DDD](chapter_01.md#capitalizing-on-ddd-benefits)
-- [Do monolítico para Kurbernets usando DDD](chapter_01.md#from-monolith-to-k8s-using-ddd)
+- [Do monolito ao Kubernetes usando DDD](chapter_01.md#from-monolith-to-k8s-using-ddd)
 - [Suposições e Simplificações](chapter_01.md#assumptions-and-simplifications)
-- [Contextos limitados para começar a dividir seu monólito](chapter_01.md#bounded-contexts-to-start-splitting-your-monolith)
-- [Mapa de contexto para entender as interações de equipe e técnicas](chapter_01.md#context-map-to-understand-team-and-technical-interactions)
+- [Comece a dividir seu monolito com Bounded Contexts](chapter_01.md#bounded-contexts-to-start-splitting-your-monolith)
+- [Entendendo interações do time e interações técnicas usando Context Maps](chapter_01.md#context-map-to-understand-team-and-technical-interactions)
 - [Foco no valor para o negócio](chapter_01.md#focus-on-business-value)
-- [Eventos de domínio e serviço de chamada para propostas ](chapter_01.md#domain-events-and-the-call-for-proposals-service)
+- [Eventos de domínio e serviço de chamada de propostas (C4P) ](chapter_01.md#domain-events-and-the-call-for-proposals-service)
 - [Armadilhas comuns](chapter_01.md#common-pitfalls)
 - [Resumo](chapter_01.md#sum-up)
 
@@ -27,7 +27,7 @@
 - [Refatoração](chapter_04.md#refatoração)
 - [Conclusão](chapter_04.md#concluindo)
 
-## [*Capítulo 5: Microserviços*](chapter_05.md)
+## [*Capítulo 5: Microsserviços*](chapter_05.md)
 - [Microserviços](chapter_05.md#microservices)
 
 ## [*Capítulo 6: NoSQL x SQL*](chapter_06.md)
