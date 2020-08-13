@@ -42,6 +42,8 @@ O tema testes automatizados é muito amplo e merecia um capítulo ou mesmo um li
 
 ## Refatoração contínua do código
 
+Um ponto importante é que dificilmente a empresa ou stakeholder permitirá que se cria uma tarefa inteira para realizar a refatoração de um projeto. Afinal, para o usuário final pouco impacta a tecnologia ou a qualidade de código o projeto está usando. Uma boa estratégia é a famosa técnica do escoteiro. Essa técnica se baseia em ao passar por uma história que agrega valor para o produto os códigos relacionados que precisam de melhoria e clareza: refatore. Sempre salientando, que  por segurança é importante adicionar testes antes de fazer qualquer refatoração.
+
 ## Sistemas legados e o ímpeto do jovem
 
 ## Qual sua motivação para refatorar o código?
