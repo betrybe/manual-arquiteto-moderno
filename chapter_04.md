@@ -62,15 +62,5 @@ Um ponto importante é que dificilmente a empresa ou stakeholder permitirá que 
 ### Refatorando para usar uma biblioteca
 ...
 
-## Como medir a qualidade do seu código?
-
-    - numero de linhas por metodo;
-    - complexidade ciclomatica;
-    - Número de métodos por classe;
-    - Número de campos por classe;
-    - acoplamento eferente
-    - acoplamento aferente
-    - Lack of Cohesion of Methods;
-
 # Concluindo    
 
