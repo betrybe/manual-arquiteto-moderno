@@ -42,35 +42,22 @@ O tema testes automatizados é muito amplo e merecia um capítulo ou mesmo um li
 
 ## Refatoração contínua do código
 
-## Sistemas legados e o ímpeto do jovem
+Um ponto importante é que dificilmente a empresa ou stakeholder permitirá que se cria uma tarefa inteira para realizar a refatoração de um projeto. Afinal, para o usuário final pouco impacta a tecnologia ou a qualidade de código o projeto está usando. Uma boa estratégia é a famosa técnica do escoteiro. Essa técnica se baseia em ao passar por uma história que agrega valor para o produto os códigos relacionados que precisam de melhoria e clareza: refatore. Sempre salientando, que  por segurança é importante adicionar testes antes de fazer qualquer refatoração.
 
 ## Qual sua motivação para refatorar o código?
 
 
-### Refatorando para legibilidade
-...
 
-### Refatorando para flexibilidade
-...
+* Existem diversas motivações para realizar uma refatoração do código listaremos algumas dos principais motivos para isso abaixo:
 
-### Refatorando para performance
-...
-
-### Refatorando para remover duplicidade
-...
-
-### Refatorando para usar uma biblioteca
-...
-
-## Como medir a qualidade do seu código?
-
-    - numero de linhas por metodo;
-    - complexidade ciclomatica;
-    - Número de métodos por classe;
-    - Número de campos por classe;
-    - acoplamento eferente
-    - acoplamento aferente
-    - Lack of Cohesion of Methods;
+  * Refatorando para legibilidade e flexibilidade: Legibilidade traz diversos benefícios para o ciclo de vida de uma aplicação. Seja como agilidade na manutenabilidade, facilidade de depurar além do fator de bem estar dentro do time. Vale salientar que essa manutenção dificilmente entrará como uma história ou atividade, porém, se abster totalmente nessa atividade existe o fator Janelas partidas, ou seja, a medida que o código for piorando a legibilidade maior é a tendência que o próximo indivíduo que realizar manutenção abrirá mão da qualidade para se livrar essa atividade o mais rápido possível até que o código seja um risco pelo fator da falta de legibilidade.
+  * Refatorando para performance: Performance é sempre importante, porém, leve em consideração se essa melhoria resultará em complexidade ou algum outro problema como eventual problemas de consistências de dados. Como já diria o Donald Knuth a otimização prematura é a raiz de todo o mal. Assim, toda melhoria de performance é importante, porém, é leve em consideração os seus impactos e se faz sentido nesse momento.
+  * Refatorando para remover duplicidade: Reduzir código dentro do projeto é um ótimo ponto. Quando somos júniors tendemos a ficar felizes quando adicionamos código e quando ficamos mais experientes ficamos felizes com a redução de código que precisamos. Uma das estretégias de reduzir o código é, justamente, evitar a duplicação de código. Isso te garantirá um único ponto para refatoração, facilidade de teste além de performance, principalmente, se você trabalha dentro da JVM uma vez que existe o fator JIT.
+  * Refatorando para usar uma biblioteca: O melhor código, certamente, é aquele que não escrevemos. Reduzir a quantidade de código siginifica reduzir a complexidade do seu lado além de diminuir os pontos que darão erro. Isso é excelente, principalmente, quando essa biblioteca já esteja disponível dentro do seu projeto. Vale salientar, que um excesso de dependência também pode ser perigosa. Leve em consideração de quanto maior as suas depenências maior a estratégia para atualizar as bibliotecas além do Jar Hell.
 
 # Concluindo    
+
+
+
+Com isso concluímos o tópico sobre refatoração do código. Abordamos pontos importantes como a motivação de se refatorar o código além dos seus riscos. Como um bom desenvolvedor é sempre importante colocar na balança as motivações, evitar problemas futuros de manutenabilidade  e legibilidade do código e como sempre o bom senso é a melhor ferramenta do desenvolvedor.
 
