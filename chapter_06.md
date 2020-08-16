@@ -68,14 +68,14 @@ Sistemas que requerem algum tipo de cache utilizam bastante essa classe de banco
 * Scalaris
 * Voldemort
 
+Comparando o banco de dados relacional com o do tipo chave-valor, é possível perceber alguns pontos. O primeiro é que a estrutura do chave-valor é bastante simples. Não é possível realizar operações como `join` entre os `buckets` e o valor é composto por grande bloco de informação em vez de ser subdivido em colunas como na base de dados relacional.
+
 | Estrutura relacional | Estrutura chave-valor |
 | -------------------- | --------------------- |
 | Table                | Bucket                |
 | Row                  | Key/value pair        |
-| Column               | --                    |
-| Relationship         | ---                   |
-
-
+| Column               | ----                  |
+| Relationship         | ----                  |
 
 ### Família de Colunas - *Column Family*
 
