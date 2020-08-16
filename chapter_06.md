@@ -54,13 +54,11 @@ Cada uma desses classes tem aplicações diferentes e devemos sempre observar as
 
 ### *Key / Value*
 
-Essa primeira classe é considerada a mais simples. Os dados são armazenados num esquema de registros compostos por uma chave (identificador do registro) e um valor (todo o conteúdo pertencente àquela chave). Você consegue recuperar um registro do seu banco de dados através da chave. Consultas por algum conteúdo através do valor não são permitidas.
+![Estrutura de Chave-valor](images/chapter_06_01.png "Estrutura de Chave-valor")
 
-A maioria dos bancos de dados Chave / Valor utilizam-se do recurso de armazenamento *in-memory* (memória RAM) e, com isso, o acesso aos dados é extremamente rápido. Alguns cuidados, porém, devem ser tomados na questão da persistência desses dados, uma vez que eles estarão em uma área de memória volátil, não fazendo um transbordo para o disco (por default). Essa volatilidade se dá porque a **Memória RAM** é totalmente apagada quando os computadores são reiniciados ou desligados, ou seja, é uma área temporária.
+Os bancos do tipo chave-valor possuem uma estrutura similar ao `java.util.Map`, ou seja, a informação será recuperada apenas pela chave. Esse tipo de banco de dados pode ser utilizado, por exemplo, para gerenciar a sessão do usuário. Outro caso interessante é o DNS, cuja chave é o endereço, por exemplo, `www.google.com` e o valor é o IP desse servidor.
 
-Sistemas que requerem algum tipo de cache utilizam bastante essa classe de bancos de dados.
-
-#### Exemplos:
+Atualmente existem diversas implementações de banco de dados do tipo chave-valor, dentre os quais os mais famosos são:
 
 * AmazonDynamo
 * AmazonS3
@@ -77,13 +75,33 @@ Comparando o banco de dados relacional com o do tipo chave-valor, é possível p
 | Column               | ----                  |
 | Relationship         | ----                  |
 
-### Família de Colunas - *Column Family*
+### *Column Family*
 
-Subindo um pouco mais a complexidade dos dados armazenados, essa segunda classe armazena os dados como um conjunto de três "chaves": linha, coluna e *timestamp*. As linhas e colunas concentram os dados e as diferentes versões desses dados são identificadas pelo *timestamp*.
+![Estrutura família de colunas](images/chapter_06_03.png "Estrutura família de colunas")
 
-Destaque para o conceito de *masterless*, ou seja, não existe um único servidor no cluster que concentra a escrita; essas operações são atendidas pelo servidor que estiver mais "próximo" de onde a operação vier.
 
-Em sistemas em que dados analíticos em grande escala são o ponto chave, o uso dessa classe é altamente recomendável.
+Esse modelo se tornou popular através do _paper BigTable_ do Google, com o objetivo de montar um sistema de armazenamento de dados distribuído, projetado para ter um alto grau de escalabilidade e de volume de dados. Assim como o chave-valor, para realizar uma busca ou recuperar alguma informação dentro do banco de dados é necessário utilizar o campo que funciona como um identificador único que seria semelhante à chave na estrutura chave-valor. Porém, as semelhanças terminam por aí. As informações são agrupadas em colunas: uma unidade da informação que é composta pelo nome e a informação em si.
+
+Esses tipos de bancos de dados são importantes quando se lidam com um alto grau de volume de dados, de modo que seja necessário distribuir as informações entre diversos servidores. Mas vale salientar que a sua operação de leitura é bastante limitada, semelhante ao chave-valor, pois a busca da informação é definida a partir de um campo único ou uma chave. Existem diversos bancos de dados que utilizam essas estruturas, por exemplo:
+
+* Hbase
+* Cassandra
+* Scylla
+* Clouddata
+* SimpleDb
+* DynamoDB
+
+Dentre os tipos de bancos de dados do tipo família de coluna, o Apache Cassandra é o mais famoso. Assim, caso uma aplicação necessite lidar com um grande volume de dados e com fácil escalabilidade, o Cassandra é certamente uma boa opção.
+
+
+Ao contrapor o banco do tipo família de coluna com os bancos relacionais, é possível perceber que as operações, em geral, são muito mais rápidas. É mais simples trabalhar com grandes volumes de informações e servidores distribuídos em todo o mundo, porém, isso tem um custo: a leitura desse tipo de banco de dados é bem limitada. Por exemplo, não é possível realizar uniões entre família de colunas como no banco relacional. A família de coluna permite que se tenha um número ilimitado de coluna, que por sua vez é composta por nome e a informação, exatamente como mostra a tabela a seguir:
+
+| Estrutura relacional | Estrutura de família de colunas |
+| -------------------- | ------------------------------- |
+| Table                | Column Family                   |
+| Row                  | Column                          |
+| Column               | nome e valor da Column          |
+| Relacionamento       | Não tem suporte                 |
 
 ### Documentos - *Document*
 
