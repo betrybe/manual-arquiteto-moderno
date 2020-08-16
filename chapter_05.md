@@ -1,10 +1,6 @@
 # Microservices
 
-
-
 [Microservices](https://www.martinfowler.com/articles/microservices.html), ou em portugues, Microsserviços, são um novo jeito de construirmos nossas aplicações nos dias de hoje, pregam ser independentes e modeladas para o dominio de negócios (o que faz o DDD ser muito importante). Essas aplicações se comunicam entre si via protocolos de rede, e tem uma arquitetura que pode resolver problemas que você tenha. Os microsserviços são um dos tipos do SOA (service-oriented architeture), e tem como foco de colocar fronteiras bem especificas de negocios e promover a entrega independente destes serviços, trazendo a vantagem de pode ser agnóstico de tecnologia. Resumindo no ponto de vista de tecnologia, são capacidades de negócios encapsuladas em um ou mais endpoints, mas seguindos os seguintes pilares:
-
-
 
 * Flexibilidade
 * Escalabidade
@@ -24,60 +20,51 @@ Mas isso não significa que devemos esquecer as arquiteturas Monoliticas, é pre
 
 
 
-## Monolitos vs Microsserviços
+## Monolitos vs microsserviços
 
-Falar que está em uma arquitetura monolítica quer dizer que você tem uma artefato único que é a base de todos os seus componentes funcionais, que é deployada de uma vez só e roda em uma mesmo ambiente. Tudo em uma base de código única onde todas as alterações irão acontecer. 
+Falar que está em uma arquitetura monolítica quer dizer que você tem uma artefato único que é a base de todos os seus componentes funcionais, que é disponibilizada (deployed) de uma vez só e roda em um mesmo ambiente. Tudo em uma base de código única onde todas as alterações irão acontecer. 
 
-Um monolito deve ser considerado como uma solução válida se você está desenvolvendo uma aplicação muito simples, onde pode-se testar repidamente e fácilmente colocar essa aplicação no ar.
+Um monolito deve ser considerado como uma solução válida se você está desenvolvendo uma aplicação muito simples, onde pode-se testar rapidamente e fácilmente colocar essa aplicação no ar. Quando estamos discutindo sobre monolitos normalmente estamos falando de um código que é disponibilizado em um processo único. Você até pode ter várias instâncias rodando, mas o código continua sendo um processo único. 
 
-E quando estamos discutido sobre monolitos normalmente estamos falando de um código que é deployado em um processo único. Você até pode ter várias instâncias rodando, mas o código continua sendo um processo único. 
+Pode-se ter inclusive monolitos modulares, que não passa de se separar os códigos em módulos que podem ser executados separadamente, mas eles tem dependencia entre si e não podem ser disponibilizados separadamente. Inclusive podemos ter neste cenário inclusive aplicações distribuídas - que não podem ser alteradas ou disponibilizadas separadamente. Inclusive, este é um modelo de monolito que devemos evitar, pois trás uma complexidade muito grande ao sistema.
 
-Pode-se ter inclusive monolitos modulares, que não passa de se separar os códigos em módulos que podem ser executados separadamente, mas eles tem dependencia entre si e não podem ser deployados separadamente. Inclusive podemos ter neste cenário inclusive aplicações distribuidas, mas que não podem ser alteradas ou deploydas separadamente. Inclusive, esse é um modelo de monolito que se deve fugir, pois escala uma complexidade no sistema muito grande.
+Esse é o principal desafio do monolito: o acoplamento que ele gera, tanto em implementação quanto no deploy. Quando a aplicação começa a se tornar muito complexa, com vários times de desenvolvimento e muitas funcionalidades, as adições ou alterações começam a se tornar complicadas por causa do acoplamento existente. Escalar um ambiente destes começa a se tornar desafiador. 
 
-E esse é o principal desafio do monolito, o acoplamento que ele gera, tanto em implementação quanto no deploy, e quandoa aplicação começa a se tornar muito complexa, com vários times de desenvolvimento, muitas funcionalidades, as adições ou alterações começam a se tornar complicadas por causa do acoplamento que começa a existir. Escalar então um ambiente destes começa a se tornar desafiador. 
+É aqui que entra o conceito dos microsserviços que começa a desacoplar esses serviços e dar responsabilidade únicas para os "serviços". Nesta abordagem você pode alterar, disponibilizar e escalar de maneira independente todo o ecossistema, seguido sempre a premissa de não afetar os outros microsserviços.
 
-É aqui que entra a mão dos microsserviços em começar a desacoplar esses serviços e dar responsabilidade únicas para os "serviços", onde você pode alterar, deployar e escalar de maneira independente de todo o ecossistema. Justamente com a premissa de não afetar os outros microsserviços.
+## Vantagens 
 
+Vejamos algumas vantagens da utilização da abordagem de uma arquitetura orientada a microsserviços:
 
+- **Escalabilidade** - Devido à independência dos serviços, eles podem ser escalados conforme a necessidade e uso sem gerar impactos nos demais serviços. 
+- **Liberdade de selecionar tecnologias por projeto**: É possível escolher a melhor tecnologia para resolver determinado problema mesmo que seja diferente das tecnologias utilizadas nos demais serviços.
+- **Produtividade** - Esta abordagem suporta a existência de multiplos times multidiciplinares (também conhecido como squads) que podem atuar com um foco mais específico de negócio e devido à independência técnica, entregar com maior velocidade de entrega.
+- **Agilidade** - metodologias ágeis e suas diversas ramificações têm se mostrado cada mais populares. Ao se aliar este estilo de gerenciamento de projeto com a arquitetura em microsserviços, permitimos tecnicamente a existência de ciclos completos e mais curto para entrega de valor .
+- **Reusabilidade** - Os componentes, como por exemplo um serviço que processe a lógica de negócio, podem ser consumidos via APIs quando necessário evitando assim a duplicidade de código e impactos na manutenibilidade.
 
-## Quais as vantagens de se escolher por Microsserviços
+## Desafios
 
-As suas aplicações tem muito o que ganhar com a arquitetura em Microsserviços, e entre elas podemos elencar:
+A comunicação entre componentes de uma aplicação monolítica ocorrem in-memory, ou seja, não possuem o overhead da  **latência** existente na comunicação via rede, como ocorre no cenário de microsserviços. Quanto mais o número de serviços e a complexidade arquitetural aumentam, este problema pode ser mais catastrófico. Lidar com o tempo de resposta do serviço invocado no cliente em si é uma boa prática (como configuração de timeouts e retries) assim como, manter em dia os serviços de monitoramento e alertas da sua rede.
 
-- **Escalabilidade** - Se aproveitando das as funções são independentes, você pode fazer os serviços escalarem independente dos outros, conforme a necessidade e uso, e até mesmo escolher a melhor tecnologia para um serviço diferente das demais. 
-- **Produtividade** - Quando se fala em times grandes, ou empresas com muitos times, trabalhar com o modelo monolítico pode tomar muito tempo e esforço, e quebrar os serviços em vários e independentes ajuda a escalar os times de trabalho e reduz atritos, e até mesmo em um mesmo projeto, os membros são capazes de atuar em peças independentes.
--  **Agilidade** - Todos almejam chegar nos modelos ágeis de trabalho para alavancar a produtividade, e separar os serviços em pedaços menores permite que se separe as responsabilidades e trazer a eficiência de ciclos de desenvolvimento menores.
-- **Reusabilidade** - Trabalhar com microsserviços significa que você tem pequenos trechos de código espalhados por uma aplicação maior. E essas peças podem funcionar de maneira independente e dessa maneira ser usada em uma outra parte da aplicação ou compor os dados de outro serviço.
+Atente-se à separação por responsabilidade dos componentes de backend e de front-end. O **front-end** deve ser implementado de forma que, na falha de um dos serviços de back-end, os demais itens funcionem normalmente - garantindo a melhor experiência possível ao usuário final.
 
+A arquitetura de microsserviços é agnostica a linguagens e frameworks. Com isso, seu ambiente pode se tornar **poliglota**. Do ponto de vista arquitetural e de liderança ténica, tenha parcimônia na avaliação das tecnologias a serem utilizadas para que não se depare com um cenário onde há um serviço sem profissionais capacitados para mantê-lo. A definição do escopo e tamanho de um microsserviço deve ser mensurada 
 
+A definição do tamanho e escopo dos microsserviços pode ser uma tarefa que exija um pouco mais de esforço no início da jornada ao desacoplamento. Tenha em mente que o escopo e tamanho de um microsserviço deve ser mensurados a partir do princípio da responsabilidade única (**S**OLID). 
 
-## E os desafios que Microsserviços vão trazer
+Um dos desafios de governança é evitar a existência de aplicações orfãs em ambiente produtivo. Procure estabelecer times responsáveis por cada serviço, inclusive em sua fase produtiva. Desta forma caso ocorra um problema inesperado ou uma nova solicitação de mudança, será mais fácil identificar quem poderá assumir as tarefas.
 
-Claro que não estamos falando de uma “bala de prata” que resolve todos os problemas. E existem desafios que vão surgir quando se migra para este cenário. E um dos primeiros que tem-se que lidar é a comunicação entre os mesmo.
+## Quando evitar
 
-A comunicação entre eles não é instantânea, e como estamos falando de comunicação de rede, um ponto de preocupação que você terá que colocar em seus desenhos e soluções será a latência. E quanto mais seu ambiente crescer em complexidade, este problema pode se tornar grande em seu ambiente. Lidar com o fato de que sua rede pode e vai falhar causa muita dor de cabeça, mas precisa ser feito.
+Nenhuma arquitetura é apropriada a todos os cenários e organizações, portanto, vamos conhecer alguns fatores que nos alertam que a arquitetura de microsserviços pode não ser a mais apropriada. 
 
-Também não se pode esquecer que a estratégia de fazer microsserviços não diz respeito apenas ao backend, é necessário ter atenção ao Front-End. Não vale absolutamente nada se você deixar a sua interface como um monolito gigante, isso não vai lhe trazer vantagem nenhuma mesmo que todo o server-side esteja distrubuído, porque na hora do deploy a alteração pode quebrar a sua interface.
+Avalie o quanto o seu time de T.I. tem conhecimento das fronteiras que definem o negócio do software a ser implementado. Caso a visão seja muito restrita, fique alerta. Para maiores chances de sucesso na implementação desta arquitetura é necessário ter uma boa visão do domínio a ser implementado, para que seja possível identificar as possíveis partes a serem desacopladas.
 
-Umas das vantagens dos micro-serviços que é ser agnóstico de tecnologia. qie pode se transformar no seu calvário depois. Não adianta deixar que seu ambiente seja completamente poliglota, se depois ninguém vai saber manter e operar, e ainda começar a ter problemas de latência por uma linguagem mal utilizada. É preciso ser conciso e usar tecnologias que seu time e equipes de suporte dominem.
+Se você precisa testar uma idéia através de um MVP (Produto Viável Mínimo) , também deve-se avaliar com cautela esta arquitetura. Para a criação da maioria dos MVPs, o processo de desenvolvimento e entrega de software se mostra mais eficiente com a utilização de monolíticos. Uma vez validada a idéia do MVP, pode-se migrar para a abordagem microsserviços se a essa estratégia se mostrar necessária.
 
-Um dos pontos importantes, e que é sempre pergunta em reuniões é: “Mas qual é o tamanho que o microserviço precisa ter?”. E a maioria das pessoas confunde o “Micro” com o tamanho e acha que ele precisa ser do menor tamanho possível, acha que realmente tem relação com a quantidade de bytes que ele ocupa.
+Os desafios de monitoramento e observabilidade dos serviços distribuídos e até conteinerizados trarão a necessidade de um time com perfis e skills mais mescladas e que vão além de um crud tradicional implantado em um servidor de aplicações instalado em uma máquina virtual. Tecnologias como contêineres, orquestradores de contêineres e funcionalidades cloud-native devem ser habilidades existentes no seu time de T.I.
 
-Mas como é medido esse tamanho? Linhas de código? Tamanho em bytes? Nada disso, é o principio da responsabilidade única, esse é o tamanho que você precisa respeitar.
-
-Um grande ponto de atenção que é necessário, é a governança e manter quem será o dono do microserviço. Em ambientes altamente distribuídos, um serviço que está rodando em produção e não apresenta problema pode acabar ficando sem um dono e na hora de um problema ou possível manutenção, fica dificil achar quem é que assume a responsabilidade, então é preciso ter processos de governança bem fortes, para que você não acabe com aplicações órfãs em ambiente produtivo.
-
-
-
-## Quando não escolher por Microsserviços
-
-Um dos principais pontos para não se escolher ir para essa direção é quando não temos limites bem definidos de quais são as fronteiras que definem o seu negócio. Então é necessário ter uma visão completa de todo o seu domínio, e após isso começar a desacoplar as partes.
-
-Se você quer testar algo rápido no modelo de Startups, também não recomendo escolher por aqui, e sim ir para algo mais monolítico, ou descentralizado e depois de testado e estabelecido ir na direção de evoluir para microsserviços. Os microsserviços deveriam entrar depois que você encontrou aquilo que se encaixa ao seu negócio, então você consolida e ai sim coloca algo escalável para rodar.
-
-Se você criar aplicações que são empacotadas e entregues para seus clientes operar, microsserviços são uma péssima opção para você. Esse padrão de arquitetura traz algumas complexidades para você operar. Normalmente aplicações que são instaladas no cliente tem uma necessidade e um ambiente especifico para rodar, então neste caso, um arquitetura mais fechada e monolítica faz mais sentido.
-
-E o principal ponto a se escolher é não fazer porque está todo mundo fazendo. Você precisa ter um objetivo e analisar qual é o seu ganho em fazer isso, se não houver ganho, ou se você está fazendo só para dizer que fez, então a recomedação para você é: "não faça".
+Evitar esta arquitetura no início de um projeto não significa impossibilitar o seu uso futuramente. Vamos falar um pouco sobre estratégias para se realizar a migração de aplicações monolíticas para um cenário de aplicações menores e mais desacopladas.
 
 ## Planejando uma migração de um monolito para uma arquitetura de microservices
 
