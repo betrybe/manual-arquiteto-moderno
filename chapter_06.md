@@ -77,7 +77,7 @@ Comparando o banco de dados relacional com o do tipo chave-valor, é possível p
 
 ### *Column Family*
 
-![Estrutura família de colunas](images/chapter_06_03.png "Estrutura família de colunas")
+![Estrutura família de colunas](images/chapter_06_02.png "Estrutura família de colunas")
 
 
 Esse modelo se tornou popular através do _paper BigTable_ do Google, com o objetivo de montar um sistema de armazenamento de dados distribuído, projetado para ter um alto grau de escalabilidade e de volume de dados. Assim como o chave-valor, para realizar uma busca ou recuperar alguma informação dentro do banco de dados é necessário utilizar o campo que funciona como um identificador único que seria semelhante à chave na estrutura chave-valor. Porém, as semelhanças terminam por aí. As informações são agrupadas em colunas: uma unidade da informação que é composta pelo nome e a informação em si.
@@ -105,16 +105,35 @@ Ao contrapor o banco do tipo família de coluna com os bancos relacionais, é po
 
 ### Documentos - *Document*
 
-A classe mais flexível e com ampla aderência em vários casos de uso. Os dados são armazenados em estilo **JSON**, podendo ter vários níveis e sub-níveis, o que confere aos dados armazenados possibilidade de ter maior complexidade. A estrutura de um documento é muito parecida com o que armazenamos na classe Chave / Valor. Porém, com Documentos, não temos apenas uma chave e sim um conjunto de chaves e valores.
+![Estrutura de documentos {w=30%}](images/chapter_06_03.png "Estrutura de coleção de documentos")
 
-Por mais que *schemaless* seja um ponto presente na maioria dos bancos de dados NoSQL, na classe de Documentos temos esse conceito mais presente justamente pelo uso do **JSON** como padronização. Isso porque a inclusão, remoção ou alteração de tipos de dados são muito mais simples e fluídos utilizando **JSON**.
+Os bancos de dados orientados a documento têm sua estrutura muito semelhante a um arquivo JSON ou XML. Eles são composto por um grande número de campos, que são criados em tempo de execução, gerando uma grande flexibilidade, tanto para a leitura como para escrita da informação. 
 
-Sistemas que requerem uma gama muito grande de informações com diversos layouts e esquemas se encaixam muito bem nessa classe.
+Eles permitem que seja realizada a leitura da informação por campos que não sejam a chave. Algumas implementações, por exemplo, têm uma altíssima integração com motores de busca. Assim, esse tipo de banco de dados é crucial quando se realiza análise de dados ou logs de um sistema. Existem algumas implementações dos bancos de dados do tipo documento, sendo que o mais famoso é o MongoDB.
+
+* AmazonSimpleDb
+* ApacheCouchdb
+* MongoDb
+* Riak
+
+
+Ao comparar com uma base relacional, apesar de ser possível realizar uma busca por campos que não seja o identificador único, os bancos do tipo documentos não têm suporte a relacionamento. Outro ponto é que os bancos do tipo documento, no geral, são _schemeless_.
+
+| Estrutura relacional | Estrutura de documentos |
+| -------------------- | ----------------------- |
+| Table                | Collection              |
+| Row                  | Document                |
+| Column               | Key/value pair          |
+| Relationship         | --                      |
 
 ### Grafos - *Graph*
 
-A classe que consegue armazenar dados muito complexos. Os dados são compostos por **nós** (vértices do grafo), **relacionamentos** (arestas do grafo) e as **propriedades** ou **atributos** dos nós ou relacionamentos. Note que o **relacionamento** é o ponto central dessa classe. Nesses bancos de dados, o relacionamento é físico, sendo persistido como qualquer outro dado dentro do banco. Dessa forma, as consultas que requerem esses relacionamentos são extremamente performáticas.
+![Estutura de Grafos](images/chapter_06_04.png "Estutura de Grafos")
 
-Os **Grafos** estão muito mais presentes em seu dia-a-dia do que você possa imaginar. Empresas e aplicativos de transporte ou GPS, por exemplo, utilizam os algoritmos e bancos de dados de Grafos para diversas de suas operações, como encontrar o motorista mais perto de você, calcular o menor caminho de um ponto a outro e até mesmo fazer recomendações de produtos em sites de comércio eletrônico. Sistemas de recomendação e antifraude também têm encaixe perfeito para essa classe.
+Os bancos do tipo grafos são uma estrutura de dados que conecta um conjunto de vértices através de um conjunto de arestas. Os bancos modernos dessa categoria suportam estruturas de grafo multirrelacionais, onde existem diferentes tipos de vértices (representando pessoas, lugares, itens) e diferentes tipos de arestas. Os sistemas de recomendação que acontecem em redes sociais são o maior case para o banco do tipo grafo. Dos tipos de banco de dados mais famosos no mundo NoSQL, o grafo possui uma estrutura distinta com o relacional. 
 
----
+
+* Neo4j
+* InfoGrid
+* Sones
+* HyperGraphDB
