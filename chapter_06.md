@@ -138,6 +138,17 @@ Os bancos do tipo grafos são uma estrutura de dados que conecta um conjunto de 
 * Sones
 * HyperGraphDB
 
+
+
+### Multi-model database
+
+Alguns bancos de dados possuem a comum característica de ter suporte de um ou mais modelos apresentados anteriormente.
+
+#### Exemplos:
+
+* OrientDB
+* Couchbase
+
 ### Teorema do CAP
 
 ![Teorema do CAP](images/chapter_06_05.png "Teorema do CAP")
