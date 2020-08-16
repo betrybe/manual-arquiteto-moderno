@@ -60,6 +60,23 @@ A maioria dos bancos de dados Chave / Valor utilizam-se do recurso de armazename
 
 Sistemas que requerem algum tipo de cache utilizam bastante essa classe de bancos de dados.
 
+#### Exemplos:
+
+* AmazonDynamo
+* AmazonS3
+* Redis
+* Scalaris
+* Voldemort
+
+| Estrutura relacional | Estrutura chave-valor |
+| -------------------- | --------------------- |
+| Table                | Bucket                |
+| Row                  | Key/value pair        |
+| Column               | --                    |
+| Relationship         | ---                   |
+
+
+
 ### Família de Colunas - *Column Family*
 
 Subindo um pouco mais a complexidade dos dados armazenados, essa segunda classe armazena os dados como um conjunto de três "chaves": linha, coluna e *timestamp*. As linhas e colunas concentram os dados e as diferentes versões desses dados são identificadas pelo *timestamp*.
