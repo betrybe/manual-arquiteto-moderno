@@ -52,7 +52,7 @@ Os bancos de dados NoSQL estão divididos em 4 principais tipos (que no contexto
 
 Cada uma desses classes tem aplicações diferentes e devemos sempre observar as características da classe para tirar o melhor proveito dela.
 
-### Chave / Valor - *Key / Value*
+### *Key / Value*
 
 Essa primeira classe é considerada a mais simples. Os dados são armazenados num esquema de registros compostos por uma chave (identificador do registro) e um valor (todo o conteúdo pertencente àquela chave). Você consegue recuperar um registro do seu banco de dados através da chave. Consultas por algum conteúdo através do valor não são permitidas.
 
