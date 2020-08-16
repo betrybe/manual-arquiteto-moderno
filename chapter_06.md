@@ -166,3 +166,29 @@ De uma maneira geral, esse teorema explica que não existe mundo perfeito. Quand
 Por exemplo, o Apache Cassandra ele é AP, ou seja, sua arquitetura focará em tolerância a falha e disponibilidade. Existirão perdas na consistência, assim, em alguns momentos um nó retornará informação desatualizada.
 
 Porém, o Cassandra tem o recurso de nível de consistência, de modo que é possível fazer com que algumas requisições ao banco de dados sejam enviadas a todos os nós ao mesmo tempo, garantindo consistência. Vale ressaltar que fazendo isso ele perderá o `A`, de _aviability_ do teorema do CAP, da disponibilidade.
+
+
+
+### Escalabilidade vs Complexidade
+
+No mundo NoSQL cada estrutura tem o objetivo de resolver problemas particulares. Como o gráfico mostra, existe um balanço entre o modelo de complexidade: Modelos que permitem mais complexidade em modelagem e busca resultam e menos escalabilidade. Por exemplo, o chave-valor é mais escalável, porém, pouco complexo uma vez que as queires são baseadas apenas na chave.
+
+![Escalabilidade vs Complexidade](images/chapter_06_06.png "Escalabilidade vs Complexidade")
+
+### Master/Slave vs Masterless
+
+
+![Master/Slave vs Masterless](images/chapter_06_07.png "Master/Slave vs Masterless")
+
+Em linha geral a persistência o mundo NoSQL possui duas maneiras de comunicação entre os servidores:
+
+* *O Master/Slave*: é o modelo de comunicação da qual se caracteriza num controle unidirecional de um ou mais dispositivos. Em linhas gerais, o master é utilizado para a escrita e replicar as informações para todos os nós escravos, que por sua vez, são responsáveis por realizar a leitura da informação. Dessa maneira, garante uma maior consistência de dados, uma vez que o existe apenas um único ponto para a escrita é possível garantir comportamentos como, por exemplo, transação. Porém, existirá um ponto de falha, o master, uma vez que o servidor estiver fora do ar haverá problemas na escrita. Em bancos de dados modernos a eleição de um novo master é feita de maneira automática.
+* *Masterless*: é o modelo de comunicação da qual se caracteriza um controle multidirecional por um ou mais dispositivos. Ou seja, não existe um único nó responsável por leitura ou escrita, cada nó poderá ser responsável pelas duas operações. Assim, não existe nenhum ponto de falha, a elasticidade acontece de maneira natural, porém, a consistência da informação se torna mais difícil uma vez que é necessário um certo tempo para que os nós tenham a informação mais atualizada.
+
+
+
+### Conclusão
+
+Este capítulo teve como objetivo dar o pontapé inicial para os bancos de dados não relacionais. Foram discutidos conceitos, os tipos de bancos que existem até o momento e suas estruturas. Com esse novo paradigma de persistência, vêm novas possibilidades e novos desafios para as aplicações. 
+
+Esse tipo de banco de dados veio para enfrentar a nova era das aplicações, na qual velocidade ou o menor tempo de resposta possível é um grande diferencial. Com este capítulo introdutório, você está apto para seguir desbravando os bancos não relacionais, com o Cassandra.
