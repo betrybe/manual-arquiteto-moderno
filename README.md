@@ -1,140 +1,37 @@
 # Manual do Arquiteto Moderno
 
-## Proposta
-
 ## Objetivo
 
-Esta proposta é para a criação de um material que trás pontos de vista práticos propostos partir idéias existentes em renomados livros do mundo de desenvolvimento de software. Com base nestes livros e em resultados da aplicação destes conceitos na prática, será exposta a visão de arquitetos e engenheiros sêniors .
-Um ponto importante sobre esse livro é que não há intenção de se introduzir conceitos iniciais, tendo isto em mente, o publico alvo é um público já experimentado no mundo do software. É recomendado, previamente, a leitura dos seguintes livros:
+Neste livro você irá aprender sobre conceitos que fazem parte da vida de um profissional senior na carreira desenvolvimento e arquitetura de software. Este livro não é um sumário ou a re-escrita de livros reconhecidos no mercado, portanto, é essencial o entendimento prévio de alguns conceitos abordados no decorrer dos capítulos. O diferencial deste conteúdo é que toda a informação é proviniente da aplicação prática das tecnologias, conceitos e culturas apresentadas por como Java Efetivo, Clean Code, Domain Driven Design, Clean Architecture e Building Microservices. 
 
--   Java Efetivo;   
--   Clean Code;
--   DDD;
--   Clean Architecture;
--   Building Microservices;
--   The Twelve Factors;
+Alinhando teoria e prática, este livro trás visões arquiteturais e motivações que costumam levar a determinadas escolhas, além de apresentar seus respectivos trade-offs. 
 
-Alinhando teoria e prática, este livro trará visões arquiteturais, motivações que levam a determinadas escolhas e seus trade-offs. Não serão detalhados tutoriais ou usos de frameworks específicos.
+## O que você encontra no livro
 
-## Capítulos
+Este livro trás tópicos atuais e relevantes que te embasarão na tomada de decisão diária no papel de arquiteto de software.Veja a lista de tópicos discutidos no decorrer deste livro:
 
-A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram selecionados tópicos atuais e relevantes que irão te ajudar a tomar melhores decisões dia a dia como arquiteto.
+    1. A importância de aprender os conceitos ao invés de novos frameworks;
+    2. Domain Driven Design (DDD), where to go next?
+    3. Clean Code;
+    4. Clean Architecture;
+    5. Refatoração;
+    6. Banco de dados;
+    7. Microservices;
+    8. Cloud;
+    9. Precisamos falar sobre atualizações;
+    10. Destrinchando performance de aplicações;
 
-### 1 Domain Driven Design (DDD), where to go next?
+## O que você não vai encontrar nesse livro
 
-* Java in the Cloud, Containers and Container Orchestrators
-* From Monolith to K8s using DDD
-  * Bounded Context Practical implications
-    * Continuous Delivery, One Repository / One Service
-    * OpenAPIs
-  * Context Maps Practical Implications
-    * Consumer Driven Contract Testing
-    * API Gateway + Single Sign On
-* Focus on Business Value
-  * Common Pitfalls
+* Resumo do contéudo de livros mencionados, listados na bibliografia;
+* Explicação de conceitos considerados básicos como "O que é SOLID", "Como se conectar a um banco de dados". 
+* Tutoriais e guias passo a passo. 
 
 
-### 2 Clean Code
+## Contribuições
 
-* Dando adeus ao excesso de getters e setters
-* Definindo APIs a prova de bala
-* Lombok: problema ou solução?
+Este livro surgiu da iniciativa de Otávio Santana, e se materializou através da colaboração de profissionais seniores e reconhecidos na comunidade. Cada autor do livro possui uma opinião bem embasada e experiência de campo nas tecnologias e práticas descritas. 
 
-### 3 Clean Architecture
+O grupo de autores iniciais é composto por Otávio Santana, Karina Varela e Sérgio Lopes, se extendendo à grandes nomes como Elder Moraes, Maurício Salatino (Salaboy), Sandro Giacomozzi, Francisco (Professor) Isidro, Leandro Domingues.
 
-* Design de código: segregue a lógica de negócio
-* Testes
-	* Testando com mock 
-	* Teste de Unidades e de integração, qual a quantidade correta?
-	* Teste lógica de negócio, não de frameworks.
-
-
-### 4 Refatoração
-
-* Como negociar uma refatoração?
-* Como lidar com o legado
-* Estratégia do escoteiro
-* Abandonar todo o código e fazer um novo?
-
-
-### 5 Microservices
-
-* Monolitos vs Microsserviços
-* Quais as vantagens de se escolher por Microsserviços
-* E os desafios que Microsserviços vão trazer
-* Quando não escolher por Microsserviços
-* Planejando uma migração de um monolito para uma arquitetura de microservices
-* Por onde começar?
-* Práticas de Segurança
-
-
-### 6 Banco de dados
-
-* NoSQL vs SQL
-* Dicas de modelagem relacional e não relacional
-* Validação de dados é responsabilidade do banco ou da aplicação?
-* Lidando com dados em uma arquitetura de microservicos
-* Paginação
-
-
-### 7 Cloud
-
-* Cloud-Native ou Cloud-Enabled
-  * Cloud-Enabled
-  * Perspectivas sobre o conceito cloud-native
-  * Capabilities for cloud
-  * Princípios de Design e containerização de aplicações
-  * O ciclo de vida de uma aplicação cloud-native
-    * Funcionalidades de uma aplicação cloud-native
-    * O ciclo de vida de uma aplicação cloud-native
-        * Integração e Entrega Contínua
-        * Estratégias de Deployment
-
-  * A jornada cloud-native
-* IaaS, PaaS e SaaS: Uma perspectiva arquitetural
-  * IaaS - Infra as a Service
-  * PaaS - Platform as a Service
-  * SaaS - Software as a Service
-  * Conclusão sobre Iaas, Paas e Saas
-* Kubernetes - Quando usar e quando não usar
-  * Kubernetes Vanila e seus sabores
-  * Como escolher seu set de tecnologias
-    * Bonus Topic: Service Mesh
-      * Arquitetura
-      * Ferramentas
-  * Conclusão
-
-
-#### 8 A importância de aprender os conceitos ao invés de novos frameworks
-
-* Por que estudar Análise de Algoritmos, Estruturas de Dados, Sistemas Operacionais, Arquitetura de Computadores, Grafos, entre outros?
-* A importância de um estudo mais aprofundado em disciplinas teóricas
-
-* // Teorema do CAP e seus impactos na arquitetura
-
-* // DTO ou não DTO?
-
-* // Melhores práticas para se definir camadas da aplicação
-
-#### 9 Precisamos falar sobre atualizações
-
-* Os problemas de se permanecer em uma versão fixa de JVM
-* Ciclo de atualizações dos frameworks
-* Usando provas de conceito (POC) no ciclo de desenvolvimento
-* Definindo a tecnologia do próximo projeto
-* Balanceando a necessidade vs hype
-
-
-### 10 Destrinchando performance de aplicações
-
-* Conceitos
-* Testes de carga
-* Monitoramento
-* Boas práticas e melhorias
-
-## Livro Colaborativo
-
-A proposta é que este seja um livro colaborativo, onde haja uma revisão profissional de linguagem semântica e práticas de escrita sobre o conteúdo entregue. O grupo de autores será inicialmente composto por Otávio Santana, Karina Varela e Sérgio Lopes, sendo possível que novos colaboradores submetam conteúdo de sua expertise ao longo do processo de criação.
-
-
-
+Com a popularização da iniciativa, a comunidade passa a ativamente colaborar com a revisão do livro. Nosso muito obrigada a todos os contribuidores: https://github.com/otaviojava/manual-arquiteto-moderno/graphs/contributors

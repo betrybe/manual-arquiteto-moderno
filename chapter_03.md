@@ -1,70 +1,525 @@
-# Clean Architecture
+# Clean code
 
-É interessante como os conceitos de Clean Architecture podem ser relacionados em diversos aspectos com o livro de Domain Driven Design por Eric Evans. Podemos exemplificar esta relação quando no livro de DDD é citada diversas vezes a proposta de criação de uma linguagem próximo do negócio: a linguagem ubíqua. Já no livro Clean Architecture, por Robert C. Martin Series, se fala sobre separar o código de negócio com do que importa, ou seja, não amarrar regra de negócio com a tecnologia escolhida.
+São claros e reconhecidos os grandes benefícios obtidos por meio da utilização de boas práticas no código. Algo que logo se nota ao se trabalhar com um código limpo e fluido, são a melhor legibilidade de código e a maior facilidade de manutenção. Mas ao se construir aplicações e discutir práticas de arquitetura há um outro ponto que não podemos deixar de lado: a integridade dos dados que serão manipulados. Será que as boas práticas de código refletem de forma positiva na integridade destes dados? Um dos primordiais tópicos cobertos pelo livro [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship-ebook/dp/B001GSTOAM) é que, diferente da programação estruturada, a orientação a objetos expõe comportamento escondendo os dados. Com isto em mente, neste capítulo discorreremos sobre os benefícios da utilização de boas práticas de código e as vantagens obtidas ao se implementar modelos ricos.
 
-> **INFO**: Clean architecture é um livro muito bom e faz parte de uma "trilogia" cuja leitura é recomendada: Clean Code: A Handbook of Agile Software Craftsmanship (Robert C. Martin Series), The Clean Coder: A Code of Conduct for Professional Programmers (Robert C. Martin Series) e finalmente Clean Architecture: A Craftsman's Guide to Software Structure and Design (Robert C. Martin Series). 
->
-> Assumimos que o leitor tenha realizado leitura prévia do livro Clean Architecture. Esse capítulo não tem o objetivo de falar sobre o livro, mas expor como utilizamos e aplicamos seus conceitos com uma visão prática. 
+## Modelos Ricos
 
-Iniciaremos falando sobre a estratégia de dividir e conquistar. Esta estratégia possui muitas vantagens, e vamos citar duas dentre elas:
+Levando em consideração uma aplicação que adota práticas de clean code, os ganhos de performance são consideráveis uma vez que, por não se trafegar e validar dados em bancos de dados,  economiza-se tanto processamento de rede quanto de hardware. Durante o desenvolvimento há vários desafios em se "blindar" o código, como os inúmeros conceitos técnicos que são aplicados, e junção de negócio com o interesse na criação de uma linguagem ubíqua. Que tal aprofundar um pouco mais neste conceito através da criação de um exemplo? 
 
-* **Testes**: Uma das grandes vantagens nessa separação, certamente, se encontra na facilidade de testes principalmente os testes de unidade. Uma maior separação das camadas facilita, por exemplo, mockar as camadas de infraestrutura e fazer com que o teste seja barato, em outras palavras, fácil de criar e rápido de executar. Por consequência, esses testes tendem a ser executados constantemente, com a facilidade e com maior cobertura. 
-  É comum vivenciar projetos em que testes levam horas para serem executados acarretando consequências negativas. Testes que falham constantemente tendem a ser ignorados e testes não confiáveis farão com que o time nunca saiba se houve um problema de regressão ou se simplesmente é aquele “erro amigo”. 
+Vamos criar uma aplicação de gestão de jogadores de futebol. Teremos o conceito de `time`, e dentro de um `time` teremos as seguintes informações:
 
-> **TIP:** Vale salientar que não estamos criticando outros tipos de testes, porém, testes unitários tem vantagens. Ao consideramos que tecnologias como Hibernate,  Java e  JPA possuem seus próprios testes, lembre-se de que o que você de fato testar são as regras do seu negócio.
+- O nome do jogador é representado pelo atributo <code>name</code> da classe <code>Player</code>,
+- A posição (`position` da classe `Player`) que o jogador pertence (Goleiro, ataque, defesa e meio de campo), 
+- O ano que o jogador entrou no time representado pelo atributo <code>start</code> da classe <code>Player</code>, 
+- O ano que o jogador saiu do time representado pelo atributo <code>end</code> da classe <code>Player</code>, 
+- O número de gols que o jogador realizou no time representado pelo atributo <code>goals</code> da classe <code>Player</code>
+- O salário do jogador representado pelo atributo <code>salary</code> da classe <code>Player</code>,
+- O email para contato, no atributo  `email`
+- A relação com o time, representado pela classe `Team`.	
+- Lembrando da regra que diz que _um time não deve ter mais que vinte membros_.
 
-* **Baixo impacto em mudanças**: Com uma separação maior do negócio da tecnologia acarreta menores impactos em casos de mudança de tecnologia, como por exemplo, uma troca entre vendors de banco de dados. 
+Com base nas informações citadas, a primeira versão do modelo é mostrada a seguir:
 
-> **TIP:** Na área de arquitetura o pragmatismo é uma característica crucial. O maior foco de um arquiteto é resolver um problema usando a tecnologia como meio, não como fim. Deste modo o usuário não precisa, e muitas vezes, não quer saber qual o banco ou linguagem estão sendo utilizados.
+```java
+import java.math.BigDecimal;
 
-Observe a imagem a seguir:
+public class Player {
 
-![](images/chapter_03_01.jpg)
+    String name;
 
-*Fonte: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html*
+    Integer start;
 
-Usaremos a imagem acima para discorrer sobre pontos de atenção que valem a pena a serem aplicados em sua arquitetura:
+    Integer end;
+
+    String email;
+
+    String position;
+
+    Integer goals;
+
+    BigDecimal salary;
+}
+
+public class Team {
+
+    String name;
+
+    List<Player> players;
+}
+
+```
+
+À primeira vista o código podemos notar possíveis melhorias. Note que o atributo `position` é do tipo `String`, o que não faz sentido uma vez que as posições de jogadores serão sempre as mesmas: goleiro (goalkeeper), defesa (defender), meio de campo (midfielder) e atacante (forward). Podemos melhorar este cenário aplicando o conceito de [Value Objects](https://martinfowler.com/bliki/ValueObject.html) através da utilização de um `Enum`:
+
+```java
+public enum Position {
+    GOALKEEPER, DEFENDER, MIDFIELDER, FORWARD;
+}
+```
+
+Uma vez que definimos o modelo inicial, nosso próximo passo é analisar segurança e encapsulamento dos objetos. Esta é umas das bases para um bom código orientado a objetos: a possibilidade de "esconder" os dados e expor apenas os comportamentos. A criação dos métodos assessores (setter) devem ser considerados como último recurso para acesso ao objeto. Um outro ponto - deve-se avaliar a necessidade destes métodos serem públicos, ou seja, considere criá-los como `default` ou `protected` caso seja possível. 
+
+Sob esta perspectiva, vamos analisar algumas regras de negócio da nossa aplicação de exemplo: 
+
+- Os jogadores não mudam de e-mail, nome e de posição, e só é possível marcar um gol por vez. Repare que a criação de métodos setters não são importantes para esses atributos. 
+- O ano de saída pode estar vazio, porém, quando preenchido deverá ser posterior a data de entrada; 
+- Apenas o time (representado pela classe `Team`) é responsável por gerenciar os jogadores (`Player`), ou seja, será necessário criar métodos para se adicionar jogadores ao do time. 
+
+Vamos trabalhar na classe  `Team`. Teremos de criar de um método para adicionar vários players (`Player`) no `Team`. Também precisaremos de um método (get) que retorne os players. É importante validar a entrada de players uma vez que não faz sentido adicionar um player nulo. Devemos também garantir que apenas a classe `Team` adicione/remova players. Para isto, devemos garantir que essa classe retorne uma lista apenas de leitura, do contrário, teremos problemas com encapsulamento. Uma maneira de resolver isso seria retornar uma lista como no exemplo a seguir:
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
+public class Team {
+
+    private static final int SIZE = 20;
+
+    private String name;
+
+    private List<Player> players = new ArrayList<>();
+
+    @Deprecated
+    Team() {
+    }
+
+    private Team(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void add(Player player) {
+        Objects.requireNonNull(player, "player is required");
+
+        if (players.size() == SIZE) {
+            throw new IllegalArgumentException("The team is full");
+        }
+        this.players.add(player);
+    }
+
+    public List<Player> getPlayers() {
+        return Collections.unmodifiableList(players);
+    }
+
+    public static Team of(String name) {
+        return new Team(Objects.requireNonNull(name, "name is required"));
+    }
+}
+
+```
+
+INFO: Muitos frameworks precisam que o construtor padrão exista por questão de realizar a criação de uma instância a partir da API de Reflection. Como o objetivo é desencorajar o uso do construtor padrão ao invés do uso método de construção, o construtor será anotado com [Deprecated](https://www.baeldung.com/java-deprecated). A anotação Deprecated indica que esse método não deve ser utilizado.
+
+Com relação a classe `Player`, todos atributos terão getters padrão, com exceção do atributo <code>end</code> que terá um tratamento especial: o <code>getEnd</code> retornará um `Optional`, uma vez que o <code>end</code> pode ser nulo. Outro ponto é o método <code>setEnd</code>, ele só é integro caso o último ano seja igual ou maior que o ano de início do player, ou seja, se ele começou a jogar em 2004 não faz sentido ele ter terminado de jogar em 2002. Deste modo, o setter terá de fazer a validação no momento do acesso.
+
+```java
+import java.math.BigDecimal;
+import java.util.Objects;
+import java.util.Optional;
+
+public class Player {
+
+    private String name;
+
+    private Integer start;
+
+    private Integer end;
+
+    private String email;
+
+    private Position position;
+
+    private BigDecimal salary;
+
+    private int goal = 0;
 
 
-* Tenha uma estratégia de teste eficaz que segue a pirâmide de testes;
-*  As estruturas devem ser isoladas em módulos individuais. Quando (não se) mudarmos de ideia, só precisaremos fazer mudança em apenas um lugar;
-* "Arquitetura Gritante" também conhecida como <u>uso pretendido</u>[@Otavio #Revisar o sublinhado]. Ao olhar para a estrutura do pacote, percebe-se imediatamente o que o aplicativo faz, e não seus detalhes técnicos. É semelhante a quando se utiliza package by layer ao invés de package by feature. 
+    public String getName() {
+        return name;
+    }
 
-* Toda a lógica de negócios deve estar em um caso de uso, portanto, será fácil encontrar e não duplicar em nenhum outro lugar;
+    public Integer getStart() {
+        return start;
+    }
 
-* Será um bom monólito com casos de uso claros que você poderá dividir em microsserviços mais tarde, depois de aprender mais sobre eles;
+    public String getEmail() {
+        return email;
+    }
 
-## Granularidade de camadas
+    public Position getPosition() {
+        return position;
+    }
 
-Algo bastante discutido em livros de arquitetura em geral é a granularidade de camadas. Com o tempo se percebe que as camadas podem ajudar tanto em abstração e separação de responsabilidade de negócio quanto no aumento da complexidade do código. 
+    public BigDecimal getSalary() {
+        return salary;
+    }
 
-> **TIP:** Avalie sempre ao colocar mais camadas em uma aplicação e tenha atenção para que elas não se tornem uma arma de destruição ao invés de um item de ajuda.
+    public Optional<Integer> getEnd() {
+        return Optional.ofNullable(end);
+    }
 
-A estratégia descrita pelo livro Clean Architecture, é uma visão “fora para dentro”, ou seja, a camada framework acessa a camada de adaptação seguindo a linha do princípio da dependência.  Descreveremos, de uma maneira geral, as camadas a seguir.
+    public void setEnd(Integer end) {
+        if (end != null && end <= start) {
+            throw new IllegalArgumentException("the last year of a player must be equal or higher than the start.");
+        }
+        this.end = end;
+    }
+}
 
-### Entidades
+    public int getGoal() {
+        return goal;
+    }
 
-Caso você venha do DDD, não verá muita novidade nessa camada e nos conceitos. Ela é responsável por encapsular o domínio do negócio. O ponto principal é que essa camada é o core, ou seja, é a razão de fazer a aplicação em si. Ou seja, é nela que se concentra as regras de negócio e não deve mudar de acordo com itens externos, como por exemplo, mudança de banco de dados.
+public void goal() {
+       goal++;
+}
 
->  **TIP:** Particularmente, não achamos "crime federal" caso existam tecnologias que tendem a não mudar, por exemplo, bibliotecas utilitárias usadas por todas a empresa. Em uma aplicação menor, podem ser apenas interfaces e classes que tenham que ser utilizadas em todas as camadas, como a interface de um repositório.
+```
 
-### Casos de uso
+Uma vez definido os métodos de acesso, o próximo passo está na criação das instâncias de `Team` e `Player`. Como boa parte das informações são obrigatórias para se criar uma instância válida, o primeiro movimento natural seria a criação de um método construtor. Isso é válido com objetos simples como o `Team`, porém, a class `Player` tem mais complexidades como:
 
-Nesta camada se concentram as ações da regra de negócios. Uma maneira de pensar é de que esta seja uma continuação da camada de entidade. Muitas regras que envolvem as entidades ficam muito grandes para caberem apenas na entidade, isso sem falar no clássico problema de responsabilidade única que tanto falamos no [SOLID](https://en.wikipedia.org/wiki/SOLID).
+- A quantidade de parâmetros: pode gerar um construtor [polyadic](https://medium.com/coding-skills/clean-code-101-meaningful-names-and-functions-bf450456d90c) (construtor com mais de três argumentos) .
+- A complexidade das validações: não faz sentido um player começar a jogar antes de 1863, uma vez que o esporte nasceu esse ano.
 
-### Interface de adaptação
+Para resolver esses problemas, executaremos dois passos: utilização de tipos customizados e aplicação do padrão Builder.
 
-Um ponto de vista interessante é de que essa camada é uma grande implementação do padrão de projeto [Adapter](https://refactoring.guru/design-patterns/adapter). O seu maior objetivo é deixar as camadas de entidades e Casos de Uso mais transparente. Por exemplo, uma interface repositório pode ter diversas implementações seja uma base de dados relacional, seja não relacional. 
+### Tipos customizados
 
-O maior objetivo dessa camada é garantir que as mudanças de tecnologia não impactem as outras camadas. Afinal, para o usuário não importa se banco de dados é um Cassandra ou um PostgreSQL, mas num nível técnico é importante pensar nas diferentes estratégias de modelagem.
+A primeira estratégia é a criação de um tipo. Esta estratégia faz sentido quando um objeto tem grande complexidade, como por exemplo objetos que lidam com dinheiro e data. Trazer essa complexidade para entidade pode quebrar o princípio da responsabilidade única. Existe um artigo muito bom escrito por Martin Fowler, [When Make a Type](https://martinfowler.com/ieeeSoftware/whenType.pdf), que explica as vantagens sobre tais recursos. Também não queremos reinventar a roda, portanto, para se representar ano e dinheiro utilizaremos as APIs de Date/Time que nasceram do Java 8 e a Money-API. O único tipo que precisaremos criar é o tipo `e-mail`, como mostra o código a seguir:
 
-### Frameworks
+```java
+import java.util.Objects;
+import java.util.function.Supplier;
+import java.util.regex.Pattern;
+
+public final class Email implements Supplier<String> {
+
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private static final Pattern PATTERN = Pattern.compile(EMAIL_PATTERN);
+
+    private final String value;
+
+    @Override
+    public String get() {
+        return value;
+    }
+
+    private Email(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Email email = (Email) o;
+        return Objects.equals(value, email.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(value);
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    public static Email of(String value) {
+        Objects.requireNonNull(value, "o valor é obrigatório");
+        if (!PATTERN.matcher(value).matches()) {
+            throw new IllegalArgumentException("Email nao válido");
+        }
+
+        return new Email(value);
+    }
+}
+
+```
+
+Agora iremos utilizar estes tipos na classe `Player`. Ela ficará com o seguinte formato:
+
+```java
+import javax.money.MonetaryAmount;
+import java.time.Year;
+import java.util.Objects;
+import java.util.Optional;
+
+public class Player {
+
+    private String id;
+
+    private String name;
+
+    private Year start;
+
+    private Year end;
+
+    private Email email;
+
+    private Position position;
+
+    private MonetaryAmount salary;
+
+//...
+
+}
+
+```
+
+### Builder Pattern 
+
+O segundo e último passo será utilizar o padrão Builder para fazer com que as regras de validação estejam dentro desta classe. Ao adotar este padrão, garantiremos que o objeto só será instanciado quando os dados forem realmente validos, além de colocar a responsabilidade desta criação em uma classe. Esse padrão é muito interessante porque além de garantir a responsabilidade única, diminui a chance de um dos parâmetros serem trocados acidentalmente.	 	 
+
+Um ponto importante é que muitos dos frameworks de mapeamento como o Hibernate, OpenJPA, etc, requerem getters e setters além do construtor padrão. Uma solução para isso, seria criar um construtor com todos os parâmetros necessários em privado e um outro como default e com a anotação Deprecated, deixando claro para o desenvolvedor que aquele construtor não é bem-visto para uso. Veja no exemplo abaixo que o Builder fica como inner class da classe `Player`:
+
+```java
+import javax.money.MonetaryAmount;
+import java.time.Year;
+import java.util.Objects;
+import java.util.Optional;
+
+public class Player {
+
+    static final Year SOCCER_BORN = Year.of(1863);
+
+    //hide
+
+    private Player(String name, Year start, Year end, Email email, Position position, MonetaryAmount salary) {
+        this.name = name;
+        this.start = start;
+        this.end = end;
+        this.email = email;
+        this.position = position;
+        this.salary = salary;
+    }
+
+    @Deprecated
+    Player() {
+    }
+
+    public static PlayerBuilder builder() {
+        return new PlayerBuilder();
+    }
+
+    public static class PlayerBuilder {
+
+        private String name;
+
+        private Year start;
+
+        private Year end;
+
+        private Email email;
+
+        private Position position;
+
+        private MonetaryAmount salary;
+
+        private PlayerBuilder() {
+        }
+
+        public PlayerBuilder withName(String name) {
+            this.name = Objects.requireNonNull(name, "name is required");
+            return this;
+        }
+
+        public PlayerBuilder withStart(Year start) {
+            Objects.requireNonNull(start, "start is required");
+            if (Year.now().isBefore(start)) {
+                throw new IllegalArgumentException("you cannot start in the future");
+            }
+            if (SOCCER_BORN.isAfter(start)) {
+                throw new IllegalArgumentException("Soccer was not born on this time");
+            }
+            this.start = start;
+            return this;
+        }
+
+        public PlayerBuilder withEnd(Year end) {
+            Objects.requireNonNull(end, "end is required");
+
+            if (start != null && start.isAfter(end)) {
+                throw new IllegalArgumentException("the last year of a player must be equal or higher than the start.");
+            }
+
+            if (SOCCER_BORN.isAfter(end)) {
+                throw new IllegalArgumentException("Soccer was not born on this time");
+            }
+            this.end = end;
+            return this;
+        }
+
+        public PlayerBuilder withEmail(Email email) {
+            this.email = Objects.requireNonNull(email, "email is required");
+            return this;
+        }
+
+        public PlayerBuilder withPosition(Position position) {
+            this.position = Objects.requireNonNull(position, "position is required");
+            return this;
+        }
+
+        public PlayerBuilder withSalary(MonetaryAmount salary) {
+            Objects.requireNonNull(salary, "salary is required");
+            if (salary.isNegativeOrZero()) {
+                throw new IllegalArgumentException("A player needs to earn money to play; otherwise, it is illegal.");
+            }
+            this.salary = salary;
+            return this;
+        }
+
+        public Player build() {
+            Objects.requireNonNull(name, "name is required");
+            Objects.requireNonNull(start, "start is required");
+            Objects.requireNonNull(email, "email is required");
+            Objects.requireNonNull(position, "position is required");
+            Objects.requireNonNull(salary, "salary is required");
+
+            return new Player(name, start, end, email, position, salary);
+        }
+
+    }
+}
+
+```
+
+Desta forma, teremos a certeza de que quando a instância de um jogador (`Player`) for criada, ela será consistente e a prova de falhas.
+
+```java
+     CurrencyUnit usd = Monetary.getCurrency(Locale.US);
+     MonetaryAmount salary = Money.of(1 _000_000, usd);
+     Email email = Email.of("marta@marta.com");
+     Year start = Year.now();
+     Year end = start.plus(-1, ChronoUnit.YEARS);
+
+     Player marta = Player.builder().withName("Marta")
+         .withEmail(email)
+         .withSalary(salary)
+         .withStart(start)
+         .withPosition(Position.FORWARD)
+         .build();
+
+```
+
+Podemos aplicar este mesmo princípio na criação de um time (`Team`):
+
+```java
+  Team bahia = Team.of("Bahia");
+  Player marta = Player.builder().withName("Marta")
+      .withEmail(email)
+      .withSalary(salary)
+      .withStart(start)
+      .withPosition(Position.FORWARD)
+      .build();
+
+  bahia.add(marta);
+
+```
 
 
-Esta é a camada que “não importa” para o negócio. Em outras palavras, é a camada para o "meio" e não para o "fim". Ela é composta por ferramentas e tecnologias como banco de dados. O maior ponto para a estratégia dessa camada é evitar que ela passe para o menor número de camadas possíveis. É importante salientar que quanto menos código nessa camada melhor, ou seja, ele terá o necessário para interligar as tecnologias.
 
+### Utilizando Bean Validation
 
+Uma outra maneira de garantir a validação dos dados é utilizando recursos do [Bean Validation](https://beanvalidation.org/). O Bean Validation é uma especificação Java cujo objetivo é garantir que os atributos dentro da classe sejam válidos através da utilização exclusiva de anotações, ou seja, de uma maneira simples e reaproveitável. 
 
-## Conclusão
+É importante salientar que todas as regras citadas anteriormente continuam válidas com o uso dessa API e que é importante que sejam mantidas todas as boas práticas de orientação a objetos, como encapsulamento. Assim, o uso do Bean Validation pode ser vista como uma dupla verificação ou para que o Builder execute as validações oriundas do framework de modo que ele só retorne a instância caso todas as validações sejam bem sucedidas.
 
-O livro Clean Architecture traz uma boa referência para se aplicar em arquiteturas maduras e uma melhor estratégia de como utilizar e comunicar entre as camadas. Um ponto importante: não existe bala de prata e o livro em questão também não é um. O material é bastante rico e cheio de detalhes, porém, lembre-se que camadas tendem a aumentar a complexidade do seu código, afinal, quanto mais camadas são criadas mais camadas são mantidas. Como diria o livro [fundamentos de arquitetura de software](https://www.amazon.com/Fundamentals-Software-Architecture-Comprehensive-Characteristics/dp/1492043451), tudo é um trade-off e o bom senso ainda é a melhor ferramenta para que o arquiteto saiba *quando* e *como* aplicar conceitos e práticas.
+```java
+import javax.money.MonetaryAmount;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.PositiveOrZero;
+import java.time.Year;
+import java.util.Objects;
+import java.util.Optional;
+
+public class Player {
+
+    static final Year SOCCER_BORN = Year.of(1863);
+
+    @NotBlank
+    private String name;
+
+    @NotNull
+    @PastOrPresent
+    private Year start;
+
+    @PastOrPresent
+    private Year end;
+
+    @NotNull
+    private Email email;
+
+    @NotNull
+    private Position position;
+
+    @NotNull
+    private MonetaryAmount salary;
+
+    @PositiveOrZero
+    private int goal = 0;
+
+    //continue
+
+}
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
+public class Team {
+
+    static final int SIZE = 20;
+
+    @NotBlank
+    private String name;
+
+    @NotNull
+    @Size(max = SIZE)
+    private List<Player> players = new ArrayList<>();
+
+    //continue
+
+}
+
+```
+
+O código fonte deste exemplo está disponível no repositório: [https://github.com/soujava/bulletproof](https://github.com/soujava/bulletproof).
+
+TIP: Lembre-se da importância dos testes de unidade em todo o processo de desenvolvimento!
+
+Com a criação deste exemplo, demonstramos que apenas ao utilizar conceitos de orientação a objetos você estará criando um código a prova de falhas. Até esse momento todas práticas funcionam de maneira agnóstica ao banco de dados, ou seja, podemos utilizar essas boas práticas independente da tecnologia de persistência que será adotada.  
+
+## Lombok: problema ou solução?
+
+De uma maneira geral o projeto Lombok é uma biblioteca famosa e conhecida por reduzir a quantidade de linhas de código através da utilização de anotações. Esta ferramenta tem seus benefícios, uma vez que a redução de código pode facilitar a leitura. Um exemplo, é a anotação `Builder ` que permite a criação de classes mais intuitiva e no padrão Builder. Por outro lado, também vemos alguns problemas no uso deste projeto, itens estes que estão listados a seguir:
+
+* O código é gerado pelo projeto Lombok e não é visualizado pela IDE. Qualquer exceção que envolva essas classes tenderá a ser difícil de ser seguida pela pilha de exceção;
+
+* Existem anotações como `@Data` que permitem a quebra do encapsulamento das classes. Com isso, você deixará de programar utilizando-se o paradigma de programação orientada a objetos. É importante salientar as informações trazidas no capítulo sete do livro Clean Code: a maior diferença entre OOP e programação estruturada é que na primeira opção nós escondemos os dados para expor o comportamento;
+
+* Boa parte dos códigos como getters e setters podem ser gerados pela IDE;
+
+* Os poderes das anotações são muito tentadores, porém, encapsulamento não é sobre ter o atributo privado e com getter e setter públicos, mas sim, sobre garantir que atributos sejam acessados com a menor visibilidade possível.
+
+Queremos deixar claro que o objetivo desse tópico não é classificar o Lombok e seu relacionamento ou não com as boas práticas de programação. A intenção é mostrar que apesar de possuir suas vantagens - expostas em diversos sites - é importante ter em mente os problemas acarretados com a adoção desta tecnologia.
+
