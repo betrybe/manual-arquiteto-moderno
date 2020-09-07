@@ -1,46 +1,61 @@
-# Microservices
+# Arquitetura de microsserviços
 
-[Microsserviços](https://www.martinfowler.com/articles/microservices.html) é uma arquitetura que tem se estabeleceu como uma nova maneira de construirmos nossas aplicações. Este modelo tende a ser independentes e modeladas para o dominio de negócios (o que faz o DDD ser muito importante). Essas aplicações se comunicam entre si via protocolos de rede, e tem uma arquitetura que pode resolver problemas que você tenha. Os microsserviços são um dos tipos do SOA (service-oriented architeture), e tem como foco de colocar fronteiras bem especificas de negocios e promover a entrega independente destes serviços, trazendo a vantagem de pode ser agnóstico de tecnologia. Resumindo no ponto de vista de tecnologia, são capacidades de negócios encapsuladas em um ou mais endpoints, mas seguindos os seguintes pilares:
+Com a popularização da utilização de ambientes de cloud para entrega de software, a [arquitetura orientada a microsserviços](https://www.martinfowler.com/articles/microservices.html) passou a ser cada vez mais adotada. O quão confortável a comunidade de T.I. pode se sentir acerca da adoção desta arquitetura? 
 
-* Flexibilidade
-* Escalabidade
-* Simplicidade
+Com base na análise de [tendências de arquitetura e design de software realizada em Abril de 2020](https://www.infoq.com/articles/architecture-trends-2020/), podemos assumir que o conhecimento acerca dos benefícios e desafios da adoção deste modelo estão bem estabelecidos, uma vez que já sua adoção já chegou a categoria de usuários classificados como "Late Majority". Existem várias histórias de sucesso e de desastre de organizações que optaram pelo uso deste modelo, portanto, nosso ecossistema se encontra repleto de conhecimento como "por onde começar" e "lições aprendidas". 
 
-Neste cenário criamos aplicações que são desacopladas em pequenos serviços e cada um deles representando um objetivo de negócio. Onde eles podem ser desenvolvidos e facilmente mantidos de maneira individual, e podendo usar diferentes tipos de linguagem de programação.
+Antes de entrar em mais detalhes sobre esta arquitetura, vamos brevemente recapitular os desafios da arquitetura monolítica que antecederam a criação deste novo modelo arquitetural.  
 
-<center><img src="images/chapter_04_01.png" alt="Arquitetura Microsserviços"  /></center>
+## Arquitetura monolítica
 
+Em uma arquitetura monolítica encontramos uma aplicação cujo front-end e back-end são parte de um artefato único. Neste artefato estão contidos todos componentes funcionais, que são compilados e disponibilizados em conjunto. A escalabilidade é impactada uma vez que sempre que é necessário escalar esta aplicação, será necessário prover recursos para a execução de todos os seus componentes - mesmo aqueles que não precisavam ser escalados. Em aplicações monolíticas, todo o código é versionado em um único repositório. No cenário de persistencia, é muito comum se encontrar a relação de um banco para um monolito, porém, existem monolitos que trabalham acessando multiplos bancos de dados ( o que aumenta ainda mais o nível de complexidade de manutenção).
 
+![chapter_04_01](file:///Users/kvarela/projetos/contrib/manual-arquiteto-moderno/images/chapter_04_01.png?lastModify=1599433677)
 
-​												<center>*Arquitetura de Microserviços*</center>
+Com o passar dos ciclos de desenvolvimento, estas aplicações monolíticas tendem a crescer tanto em quantidade de linhas de código quanto em consumo de hardware, o que acarreta em:
 
-Mas isso não significa que devemos esquecer as arquiteturas Monoliticas, é preciso analisar os casos onde se encaixam cada um dos formates e analisar os pontos de atenção que são trazidos aos ambientes.
+- Menor manutenibilidade do código: as chances de se quebrar a aplicação ao realizar alterações pontuais passam a ser cada vez maiores. 
+- Quanto maior a aplicação, maior o número de testes unitários, o que acarreta um maior tempo de build sempre que se precisa compilar a aplicação;
+- Um maior tempo de build acarreta em um processo de entrega mais longo;
+- É comum que a área de negócio queira realizar testes de validação da aplicação ao se liberar uma nova versão. Esses testes também requerem mais esforço, uma vez que - apesar de uma porção pequena ter sido alterada - toda a aplicação foi atualizada. Desta forma, os testes de homologação se tornam mais demorados;
+- Evolução e migração dos dados requerem um maior planejamento prévio, uma vez que alterações em banco podem parar o funcionamento de toda aplicação;
+- A aplicação naturalmente passa a ocupar e consumir maior espaço em memória, e possuir um maior tempo de start-up.
+- Mudanças e entregas críticas exigem uma grande mobilização na organização e planejamento prévio para disponibilização em produção.
 
+Ao enfrentar estes desafios, muitos times acabam caindo na cilada dos "monolitos distribuidos": a aplicação é entregue em módulos, ou seja, o código passa a ser separado de forma que pode ser entregue separadamente. Mas cuidado: neste cenário, ainda existe dependência entre estes serviços - mudanças no serviço A podem impactar no serviço B! Evite este cenário, pois nele você encontrará ainda mais complexidade no controle de versões e disponibilização da aplicação que em uma arquitetura monolítica.
 
+E eis que notamos um dos maiores impasses: o acoplamento, em termos de código e de deploy. Quando a aplicação começa a se tornar muito complexa, com vários times de desenvolvimento e muitas funcionalidades, as adições ou alterações começam a se tornar cada vez mais custosas. Escalar um ambiente destes é desafiador. 
 
-## Monolitos vs microsserviços
+É aqui que entra o conceito dos microsserviços, que começa a desacoplar esses serviços e dar responsabilidade únicas para os serviços. Nesta abordagem você pode alterar, disponibilizar e escalar de maneira independente todo o ecossistema, seguido sempre a premissa de não afetar os outros microsserviços.
 
-Falar que está em uma arquitetura monolítica quer dizer que você tem uma artefato único que é a base de todos os seus componentes funcionais, que é disponibilizada (deployed) de uma vez só e roda em um mesmo ambiente. Tudo em uma base de código única onde todas as alterações irão acontecer. 
+## Microserviços
 
-Um monolito deve ser considerado como uma solução válida se você está desenvolvendo uma aplicação muito simples, onde pode-se testar rapidamente e fácilmente colocar essa aplicação no ar. Quando estamos discutindo sobre monolitos normalmente estamos falando de um código que é disponibilizado em um processo único. Você até pode ter várias instâncias rodando, mas o código continua sendo um processo único. 
+A arquitetura orientada a microsserviços trás como preceito a criação de aplicações desacopladas entre si e modeladas conforme o dominio de negócios. Essas aplicações se integram através de diferentes protocolos e os diversos padrões de comunicação (REST, GRPC, eventos assíncronos, entre outros) podem ser adotados. Com a adoção de uma arquitetura orientada a microsserviços é possível promover entregas mais velozes e frequentes, além de trazer ao desenvolvedor um ecossistema agnóstico de linguagem. 
 
-Pode-se ter inclusive monolitos modulares, que não passa de se separar os códigos em módulos que podem ser executados separadamente, mas eles tem dependencia entre si e não podem ser disponibilizados separadamente. Inclusive podemos ter neste cenário inclusive aplicações distribuídas - que não podem ser alteradas ou disponibilizadas separadamente. Inclusive, este é um modelo de monolito que devemos evitar, pois trás uma complexidade muito grande ao sistema.
+![chapter_04_01](images/chapter_04_02.png)
 
-Esse é o principal desafio do monolito: o acoplamento que ele gera, tanto em implementação quanto no deploy. Quando a aplicação começa a se tornar muito complexa, com vários times de desenvolvimento e muitas funcionalidades, as adições ou alterações começam a se tornar complicadas por causa do acoplamento existente. Escalar um ambiente destes começa a se tornar desafiador. 
+Como apontado por Sam Newman, em seu livro "Building Microservices", estes são conceitos que estão implícitos aos microsserviços:
 
-É aqui que entra o conceito dos microsserviços que começa a desacoplar esses serviços e dar responsabilidade únicas para os "serviços". Nesta abordagem você pode alterar, disponibilizar e escalar de maneira independente todo o ecossistema, seguido sempre a premissa de não afetar os outros microsserviços.
+* São modelados levando-se em consideração o domínio do negócio;
+* São altamente monitoráveis;
+* Seu deploy pode ser feito de maneira independente dos outros serviços;
+* Possui isolamento às falhas no ecossistema;
+* Detalhes de implementação são "escondidos";
+* Automação é essencial em todos os níveis;
 
-## Vantagens 
+Com essas características alcançamos uma arquitetura flexível e escalável. 
+
+> **TIP**: Tenha em mente que as vantagens expostas não necessariamente nos levam a um mundo onde as arquiteturas monolíticas não têm espaço. Na verdade, nós temos agora mais uma ferramenta em nossa caixa de ferramentas, uma forma diferente de se de entregar aplicações - que não necessariamente é a melhor forma para todos os cenários.
 
 Vejamos algumas vantagens da utilização da abordagem de uma arquitetura orientada a microsserviços:
 
-- **Escalabilidade** - Devido à independência dos serviços, eles podem ser escalados conforme a necessidade e uso sem gerar impactos nos demais serviços. 
+- **Escalabilidade** - Devido à independência dos serviços, eles podem ser escalados conforme a necessidade, sem causar impactos nos demais serviços. Por serem menores, também requerem menos recursos de harware.
 - **Liberdade de selecionar tecnologias por projeto**: É possível escolher a melhor tecnologia para resolver determinado problema mesmo que seja diferente das tecnologias utilizadas nos demais serviços.
-- **Produtividade** - Esta abordagem suporta a existência de multiplos times multidiciplinares (também conhecido como squads) que podem atuar com um foco mais específico de negócio e devido à independência técnica, entregar com maior velocidade de entrega.
+- **Produtividade** - Esta abordagem suporta a existência de multiplos times multidiciplinares (também conhecido como squads) que podem atuar com um foco mais específico de negócio e devido à independência técnica, entregar com maior velocidade.
 - **Agilidade** - metodologias ágeis e suas diversas ramificações têm se mostrado cada mais populares. Ao se aliar este estilo de gerenciamento de projeto com a arquitetura em microsserviços, permitimos tecnicamente a existência de ciclos completos e mais curto para entrega de valor .
 - **Reusabilidade** - Os componentes, como por exemplo um serviço que processe a lógica de negócio, podem ser consumidos via APIs quando necessário evitando assim a duplicidade de código e impactos na manutenibilidade.
 
-## Desafios
+### Desafios
 
 A comunicação entre componentes de uma aplicação monolítica ocorrem in-memory, ou seja, não possuem o overhead da  **latência** existente na comunicação via rede, como ocorre no cenário de microsserviços. Quanto mais o número de serviços e a complexidade arquitetural aumentam, este problema pode ser mais catastrófico. Lidar com o tempo de resposta do serviço invocado no cliente em si é uma boa prática (como configuração de timeouts e retries) assim como, manter em dia os serviços de monitoramento e alertas da sua rede.
 
@@ -52,7 +67,7 @@ A definição do tamanho e escopo dos microsserviços pode ser uma tarefa que ex
 
 Um dos desafios de governança é evitar a existência de aplicações orfãs em ambiente produtivo. Procure estabelecer times responsáveis por cada serviço, inclusive em sua fase produtiva. Desta forma caso ocorra um problema inesperado ou uma nova solicitação de mudança, será mais fácil identificar quem poderá assumir as tarefas.
 
-## Quando evitar
+### Quando evitar
 
 Nenhuma arquitetura é apropriada a todos os cenários e organizações, portanto, vamos conhecer alguns fatores que nos alertam que a arquitetura de microsserviços pode não ser a mais apropriada. 
 
@@ -119,8 +134,6 @@ Esse padrão é utilizado quando você precisa mudar algo baseado no comportamen
 Em vez de você interceptar ou mudar a requisição, você deixa ela acontecer normalmente, e baseado no resultado desta chamada, juntamos com a chamada ao microserviço externo e até mesmo alteramos o comportamento da resposta.
 
 Este padrão é usado normalmente quando você precisa mudar os dados, seja na chamada ou na resposta, e complementar essas informações sem alterar o seu monolito.
-
-
 
 ## Por onde começar?
 
