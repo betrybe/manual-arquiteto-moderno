@@ -167,7 +167,7 @@ With the rise in popularity of Kubernetes, it is also common to find Kubernetes 
 
 You, as a developer targeting Kubernetes as your deployment platform, are now responsible for a bunch of artifacts, not just your Java Service source code. 
 
-![o](images/chapter_02_04.png)
+![](images/chapter_02_04.png)
 
 In order to deploy your code to Kubernetes you will need to: 
 - Build and test your source code, if it is Java you can use, for example, Maven or Gradle to do that;
