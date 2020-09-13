@@ -1,87 +1,104 @@
-# Microservices
+# Arquitetura de microsserviços
+
+Com a popularização da utilização de ambientes de cloud para entrega de software, a [arquitetura orientada a microsserviços](https://www.martinfowler.com/articles/microservices.html) passou a ser cada vez mais adotada. O quão confortável a comunidade de T.I. pode se sentir acerca da adoção desta arquitetura? 
+
+Com base na análise de [tendências de arquitetura e design de software realizada em Abril de 2020](https://www.infoq.com/articles/architecture-trends-2020/), podemos assumir que o conhecimento acerca dos benefícios e desafios da adoção deste modelo estão bem estabelecidos, uma vez que já sua adoção já chegou a categoria de usuários classificados como "Late Majority". Existem várias histórias de sucesso e de desastre de organizações que optaram pelo uso deste modelo, portanto, nosso ecossistema se encontra repleto de conhecimento como "por onde começar" e "lições aprendidas". 
+
+Antes de entrar em mais detalhes sobre esta arquitetura, vamos brevemente recapitular os desafios da arquitetura monolítica que antecederam a criação deste novo modelo arquitetural.  
+
+## Arquitetura monolítica
+
+Em uma arquitetura monolítica encontramos uma aplicação cujo front-end e back-end são parte de um artefato único. Neste artefato estão contidos todos componentes funcionais, que são compilados e disponibilizados em conjunto. A escalabilidade é impactada uma vez que sempre que é necessário escalar esta aplicação, será necessário prover recursos para a execução de todos os seus componentes - mesmo aqueles que não precisavam ser escalados. No cenário de persistência, é muito comum se encontrar a relação de um banco para um monolito, porém, existem monolitos que trabalham acessando multiplos bancos de dados ( o que aumenta ainda mais o nível de complexidade de manutenção).
+
+![chapter_04_01](file:///Users/kvarela/projetos/contrib/manual-arquiteto-moderno/images/chapter_04_01.png?lastModify=1599433677)
+
+Com o passar dos ciclos de desenvolvimento, estas aplicações monolíticas tendem a crescer tanto em quantidade de linhas de código quanto em consumo de hardware, o que acarreta em:
+
+- Menor manutenibilidade do código: as chances de se quebrar a aplicação ao realizar alterações pontuais passam a ser cada vez maiores. 
+- Quanto maior a aplicação, maior o número de testes unitários, o que acarreta um maior tempo de build sempre que se precisa compilar a aplicação;
+- Um maior tempo de build acarreta em um processo de entrega mais longo;
+- É comum que a área de negócio queira realizar testes de validação da aplicação ao se liberar uma nova versão. Esses testes também requerem mais esforço, uma vez que - apesar de uma porção pequena ter sido alterada - toda a aplicação foi atualizada. Desta forma, os testes de homologação se tornam mais demorados;
+- Evolução e migração dos dados requerem um maior planejamento prévio, uma vez que alterações em banco podem parar o funcionamento de toda aplicação;
+- A aplicação naturalmente passa a ocupar e consumir maior espaço em memória, e possuir um maior tempo de start-up.
+- Mudanças e entregas críticas exigem uma grande mobilização na organização e planejamento prévio para disponibilização em produção.
+
+Ao enfrentar estes desafios, muitos times acabam caindo na cilada dos "monolitos distribuidos": a aplicação é entregue em módulos, ou seja, o código passa a ser separado de forma que pode ser entregue separadamente. Mas cuidado: neste cenário, ainda existe dependência entre estes serviços - mudanças no serviço A podem impactar no serviço B! Evite este cenário, pois nele você encontrará ainda mais complexidade no controle de versões e disponibilização da aplicação que em uma arquitetura monolítica.
+
+E eis que notamos um dos maiores impasses: o acoplamento, em termos de código e de deploy. Quando a aplicação começa a se tornar muito complexa, com vários times de desenvolvimento e muitas funcionalidades, as adições ou alterações começam a se tornar cada vez mais custosas. Escalar um ambiente destes é desafiador. 
+
+É aqui que entra o conceito dos microsserviços, que começa a desacoplar esses serviços e dar responsabilidade únicas para os serviços. Nesta abordagem você pode alterar, disponibilizar e escalar de maneira independente todo o ecossistema, seguido sempre a premissa de não afetar os outros microsserviços.
+
+//TODO UMA COLA MELHOR
+
+O mundo dos monolitos trazem diversos benefícios, como sempre cansamos de falar, todas escolhas resultam em um trade-off, ou seja, pontos fotes e pontos fracos dentro da sua arquitetura. Vendendo um 
+
+- ​	Facilidade de manutenção, afinal, quanto menos camadas físicas menos pontos para se verificar, especialmente, quando está pequeno
+- ​	Facilidade de sincronizar os dados entre o usuário e o sistema, a melhor maneira de trocar informações e mais rápidos é pela memória. Pensando num banco de dados relacacional, por exemplo, a sincronização de dados acontece de uma maneira bastante simples com os clássicos JOINs ao invés de realizar todo o processo de sincronização ou orquestarção.
+- Consistência de dados, tendem a ser facilitado se comparado à um sistema distribuido, salientando que sempre teremos o problema do CAP quando falamos de arquitetura distribuida e para aplicações que precisam, por exemplo, transação no o que no monolito seria um simples Roolback num sistema de microservices seria o caro e complexo padrão SAGA.
+- Iniciar um projeto tende a ser muito simples com o monolioto uma vez que precisamos pensar em menos camadas e componentes
+- O monitoramento dentro de uma única aplicação tende a ficar mais facilitada.
 
 
 
-[Microservices](https://www.martinfowler.com/articles/microservices.html), ou em portugues, Microsserviços, são um novo jeito de construirmos nossas aplicações nos dias de hoje, pregam ser independentes e modeladas para o dominio de negócios (o que faz o DDD ser muito importante). Essas aplicações se comunicam entre si via protocolos de rede, e tem uma arquitetura que pode resolver problemas que você tenha. Os microsserviços são um dos tipos do SOA (service-oriented architeture), e tem como foco de colocar fronteiras bem especificas de negocios e promover a entrega independente destes serviços, trazendo a vantagem de pode ser agnóstico de tecnologia. Resumindo no ponto de vista de tecnologia, são capacidades de negócios encapsuladas em um ou mais endpoints, mas seguindos os seguintes pilares:
 
 
+## Microserviços
 
-* Flexibilidade
-* Escalabidade
-* Simplicidade
+A arquitetura orientada a microsserviços trás como preceito a criação de aplicações desacopladas entre si e modeladas conforme o dominio de negócios. Essas aplicações se integram através de diferentes protocolos e os diversos padrões de comunicação (REST, GRPC, eventos assíncronos, entre outros) podem ser adotados. Com a adoção de uma arquitetura orientada a microsserviços é possível promover entregas mais velozes e frequentes, além de trazer ao desenvolvedor um ecossistema agnóstico de linguagem. 
 
+![chapter_04_01](images/chapter_04_02.png)
 
+Como apontado por Sam Newman, em seu livro "Building Microservices", estes são conceitos que estão implícitos aos microsserviços:
 
-Neste cenário criamos aplicações que são desacopladas em pequenos serviços e cada um deles representando um objetivo de negócio. Onde eles podem ser desenvolvidos e facilmente mantidos de maneira individual, e podendo usar diferentes tipos de linguagem de programação.
+* São modelados levando-se em consideração o domínio do negócio;
+* São altamente monitoráveis;
+* Seu deploy pode ser feito de maneira independente dos outros serviços;
+* Possui isolamento às falhas no ecossistema;
+* Detalhes de implementação são "escondidos";
+* Automação é essencial em todos os níveis;
 
-<center><img src="images/chapter_04_01.png" alt="Arquitetura Microsserviços"  /></center>
+Com essas características alcançamos uma arquitetura flexível e escalável. 
 
+> **TIP**: Tenha em mente que as vantagens expostas não necessariamente nos levam a um mundo onde as arquiteturas monolíticas não têm espaço. Na verdade, nós temos agora mais uma ferramenta em nossa caixa de ferramentas, uma forma diferente de se de entregar aplicações - que não necessariamente é a melhor forma para todos os cenários.
 
+Vejamos algumas vantagens da utilização da abordagem de uma arquitetura orientada a microsserviços:
 
-​												<center>*Arquitetura de Microserviços*</center>
+- **Escalabilidade vertical** - Devido à independência dos serviços, eles podem ser escalados conforme a necessidade, sem causar impactos nos demais serviços. Por serem menores, também requerem menos recursos de harware.
+- **Liberdade de selecionar tecnologias por projeto**: É possível escolher a melhor tecnologia para resolver determinado problema mesmo que seja diferente das tecnologias utilizadas nos demais serviços.
+- **Produtividade** - Esta abordagem suporta a existência de multiplos times multidiciplinares (também conhecido como squads) que podem atuar com um foco mais específico de negócio e devido à independência técnica, entregar com maior velocidade.
+- **Agilidade** - metodologias ágeis e suas diversas ramificações têm se mostrado cada mais populares. Ao se aliar este estilo de gerenciamento de projeto com a arquitetura em microsserviços, permitimos tecnicamente a existência de ciclos completos e mais curto para entrega de valor .
+- **Reusabilidade** - Os componentes, como por exemplo um serviço que processe a lógica de negócio, podem ser consumidos via APIs quando necessário evitando assim a duplicidade de código e impactos na manutenibilidade.
+- **Produtividade para times grandes**: tende a se tornar mais fácil e menos problemático atividades como merge/rebase de um projeto se cada time trabalhe no seu próprio repositório. É muito importante pensar na organização e suas estruturas que refletem diretamente nos serviços e nas suas integrações. É o caso muito comum de que a estrutura do time impacta como os software são organizados, muito bem explicado no Coways's law.
 
-Mas isso não significa que devemos esquecer as arquiteturas Monoliticas, é preciso analisar os casos onde se encaixam cada um dos formates e analisar os pontos de atenção que são trazidos aos ambientes.
+### Desafios da arquitetura de microserviços
 
+A comunicação entre componentes de uma aplicação monolítica ocorrem in-memory, ou seja, não possuem o overhead da  **latência** existente na comunicação via rede, como ocorre no cenário de microsserviços. Quanto mais o número de serviços e a complexidade arquitetural aumentam, este problema pode ser mais catastrófico. Lidar com o tempo de resposta do serviço invocado no cliente em si é uma boa prática (como configuração de timeouts e retries) assim como, manter em dia os serviços de monitoramento e alertas da sua rede.
 
+Atente-se à separação por responsabilidade dos componentes de backend e de front-end. O **front-end** deve ser implementado de forma que, na falha de um dos serviços de back-end, os demais itens funcionem normalmente - garantindo a melhor experiência possível ao usuário final.
 
-## Monolitos vs Microsserviços
+A arquitetura de microsserviços é agnostica a linguagens e frameworks. Com isso, seu ambiente pode se tornar **poliglota**. Do ponto de vista arquitetural e de liderança ténica, tenha parcimônia na avaliação das tecnologias a serem utilizadas para que não se depare com um cenário onde há um serviço sem profissionais capacitados para mantê-lo. A definição do escopo e tamanho de um microsserviço deve ser mensurada 
 
-Falar que está em uma arquitetura monolítica quer dizer que você tem uma artefato único que é a base de todos os seus componentes funcionais, que é deployada de uma vez só e roda em uma mesmo ambiente. Tudo em uma base de código única onde todas as alterações irão acontecer. 
+A definição do tamanho e escopo dos microsserviços pode ser uma tarefa que exija um pouco mais de esforço no início da jornada ao desacoplamento. Tenha em mente que o escopo e tamanho de um microsserviço deve ser mensurados a partir do princípio da responsabilidade única (**S**OLID). 
 
-Um monolito deve ser considerado como uma solução válida se você está desenvolvendo uma aplicação muito simples, onde pode-se testar repidamente e fácilmente colocar essa aplicação no ar.
+Um dos desafios de governança é evitar a existência de aplicações orfãs em ambiente produtivo. Procure estabelecer times responsáveis por cada serviço, inclusive em sua fase produtiva. Desta forma caso ocorra um problema inesperado ou uma nova solicitação de mudança, será mais fácil identificar quem poderá assumir as tarefas.
 
-E quando estamos discutido sobre monolitos normalmente estamos falando de um código que é deployado em um processo único. Você até pode ter várias instâncias rodando, mas o código continua sendo um processo único. 
+Cuidado com a granualização demasidada de projetos por repostitórios, essa decisão pode sair pela culatra quando existem mais repositórios que funcionário na empresa.
 
-Pode-se ter inclusive monolitos modulares, que não passa de se separar os códigos em módulos que podem ser executados separadamente, mas eles tem dependencia entre si e não podem ser deployados separadamente. Inclusive podemos ter neste cenário inclusive aplicações distribuidas, mas que não podem ser alteradas ou deploydas separadamente. Inclusive, esse é um modelo de monolito que se deve fugir, pois escala uma complexidade no sistema muito grande.
+### Quando evitar a arquitetura de microserviços
 
-E esse é o principal desafio do monolito, o acoplamento que ele gera, tanto em implementação quanto no deploy, e quandoa aplicação começa a se tornar muito complexa, com vários times de desenvolvimento, muitas funcionalidades, as adições ou alterações começam a se tornar complicadas por causa do acoplamento que começa a existir. Escalar então um ambiente destes começa a se tornar desafiador. 
+Nenhuma arquitetura é apropriada a todos os cenários e organizações, portanto, vamos conhecer alguns fatores que nos alertam que a arquitetura de microsserviços pode não ser a mais apropriada. 
 
-É aqui que entra a mão dos microsserviços em começar a desacoplar esses serviços e dar responsabilidade únicas para os "serviços", onde você pode alterar, deployar e escalar de maneira independente de todo o ecossistema. Justamente com a premissa de não afetar os outros microsserviços.
+Avalie o quanto o seu time de T.I. tem conhecimento das fronteiras que definem o negócio do software a ser implementado. Caso a visão seja muito restrita, fique alerta. Para maiores chances de sucesso na implementação desta arquitetura é necessário ter uma boa visão do domínio a ser implementado, para que seja possível identificar as possíveis partes a serem desacopladas.
 
+Se você precisa testar uma idéia através de um MVP (Produto Viável Mínimo) , também deve-se avaliar com cautela esta arquitetura. Para a criação da maioria dos MVPs, o processo de desenvolvimento e entrega de software se mostra mais eficiente com a utilização de monolíticos. Uma vez validada a idéia do MVP, pode-se migrar para a abordagem microsserviços se a essa estratégia se mostrar necessária.
 
+Os desafios de monitoramento e observabilidade dos serviços distribuídos e até conteinerizados trarão a necessidade de um time com perfis e skills mais mescladas e que vão além de um crud tradicional implantado em um servidor de aplicações instalado em uma máquina virtual. Tecnologias como contêineres, orquestradores de contêineres e funcionalidades cloud-native devem ser habilidades existentes no seu time de T.I.
 
-## Quais as vantagens de se escolher por Microsserviços
-
-As suas aplicações tem muito o que ganhar com a arquitetura em Microsserviços, e entre elas podemos elencar:
-
-- **Escalabilidade** - Se aproveitando das as funções são independentes, você pode fazer os serviços escalarem independente dos outros, conforme a necessidade e uso, e até mesmo escolher a melhor tecnologia para um serviço diferente das demais. 
-- **Produtividade** - Quando se fala em times grandes, ou empresas com muitos times, trabalhar com o modelo monolítico pode tomar muito tempo e esforço, e quebrar os serviços em vários e independentes ajuda a escalar os times de trabalho e reduz atritos, e até mesmo em um mesmo projeto, os membros são capazes de atuar em peças independentes.
--  **Agilidade** - Todos almejam chegar nos modelos ágeis de trabalho para alavancar a produtividade, e separar os serviços em pedaços menores permite que se separe as responsabilidades e trazer a eficiência de ciclos de desenvolvimento menores.
-- **Reusabilidade** - Trabalhar com microsserviços significa que você tem pequenos trechos de código espalhados por uma aplicação maior. E essas peças podem funcionar de maneira independente e dessa maneira ser usada em uma outra parte da aplicação ou compor os dados de outro serviço.
-
-
-
-## E os desafios que Microsserviços vão trazer
-
-Claro que não estamos falando de uma “bala de prata” que resolve todos os problemas. E existem desafios que vão surgir quando se migra para este cenário. E um dos primeiros que tem-se que lidar é a comunicação entre os mesmo.
-
-A comunicação entre eles não é instantânea, e como estamos falando de comunicação de rede, um ponto de preocupação que você terá que colocar em seus desenhos e soluções será a latência. E quanto mais seu ambiente crescer em complexidade, este problema pode se tornar grande em seu ambiente. Lidar com o fato de que sua rede pode e vai falhar causa muita dor de cabeça, mas precisa ser feito.
-
-Também não se pode esquecer que a estratégia de fazer microsserviços não diz respeito apenas ao backend, é necessário ter atenção ao Front-End. Não vale absolutamente nada se você deixar a sua interface como um monolito gigante, isso não vai lhe trazer vantagem nenhuma mesmo que todo o server-side esteja distrubuído, porque na hora do deploy a alteração pode quebrar a sua interface.
-
-Umas das vantagens dos micro-serviços que é ser agnóstico de tecnologia. qie pode se transformar no seu calvário depois. Não adianta deixar que seu ambiente seja completamente poliglota, se depois ninguém vai saber manter e operar, e ainda começar a ter problemas de latência por uma linguagem mal utilizada. É preciso ser conciso e usar tecnologias que seu time e equipes de suporte dominem.
-
-Um dos pontos importantes, e que é sempre pergunta em reuniões é: “Mas qual é o tamanho que o microserviço precisa ter?”. E a maioria das pessoas confunde o “Micro” com o tamanho e acha que ele precisa ser do menor tamanho possível, acha que realmente tem relação com a quantidade de bytes que ele ocupa.
-
-Mas como é medido esse tamanho? Linhas de código? Tamanho em bytes? Nada disso, é o principio da responsabilidade única, esse é o tamanho que você precisa respeitar.
-
-Um grande ponto de atenção que é necessário, é a governança e manter quem será o dono do microserviço. Em ambientes altamente distribuídos, um serviço que está rodando em produção e não apresenta problema pode acabar ficando sem um dono e na hora de um problema ou possível manutenção, fica dificil achar quem é que assume a responsabilidade, então é preciso ter processos de governança bem fortes, para que você não acabe com aplicações órfãs em ambiente produtivo.
-
-
-
-## Quando não escolher por Microsserviços
-
-Um dos principais pontos para não se escolher ir para essa direção é quando não temos limites bem definidos de quais são as fronteiras que definem o seu negócio. Então é necessário ter uma visão completa de todo o seu domínio, e após isso começar a desacoplar as partes.
-
-Se você quer testar algo rápido no modelo de Startups, também não recomendo escolher por aqui, e sim ir para algo mais monolítico, ou descentralizado e depois de testado e estabelecido ir na direção de evoluir para microsserviços. Os microsserviços deveriam entrar depois que você encontrou aquilo que se encaixa ao seu negócio, então você consolida e ai sim coloca algo escalável para rodar.
-
-Se você criar aplicações que são empacotadas e entregues para seus clientes operar, microsserviços são uma péssima opção para você. Esse padrão de arquitetura traz algumas complexidades para você operar. Normalmente aplicações que são instaladas no cliente tem uma necessidade e um ambiente especifico para rodar, então neste caso, um arquitetura mais fechada e monolítica faz mais sentido.
-
-E o principal ponto a se escolher é não fazer porque está todo mundo fazendo. Você precisa ter um objetivo e analisar qual é o seu ganho em fazer isso, se não houver ganho, ou se você está fazendo só para dizer que fez, então a recomedação para você é: "não faça".
+Evitar esta arquitetura no início de um projeto não significa impossibilitar o seu uso futuramente. Vamos falar um pouco sobre estratégias para se realizar a migração de aplicações monolíticas para um cenário de aplicações menores e mais desacopladas.
 
 ## Planejando uma migração de um monolito para uma arquitetura de microservices
 
-Existem alguns padrões e tecnicas para fazer uma migração para de um monolito para um microserviço. Vale lembrar que são padrões, então são idéias que se pode seguir para chegar ao objeto que é migrar, mas não quer dizer que um padrão seja universalmente a melhor idéia, dependendo do caso, você pode precisar mesclar idéias e padrões.
+Existem alguns padrões e tecnicas para fazer uma migração para de um monolito para um microserviço. 
 
 #### Padrão: Strangler Fig Application (Estrangulamento)
 
@@ -137,121 +154,30 @@ Este padrão é usado normalmente quando você precisa mudar os dados, seja na c
 
 
 
-## Por onde começar?
+## Os erros mais comuns com microservices
 
-O padrão de arquitetura de microserviços ele se encaixa para você se você tem um sistema que possui muitas funcionalidades, se você faz releases constantes, tem muitos subdomínios e linhas de negócio, se você tem times grandes e que precisam trabalhar em múltiplas funcionalidades do seu sistemas ao mesmo tempo, se seu projeto está sempre em expansão.
+ 
 
-E para isso algumas tecnologias vão te ajudar nessa missão, não são todas obrigatórias, mas elas ajudam nessa direção.
+É muito comum existir a lista mais comuns dos erros que todo software tem, principalmente, quando existe uma mudança de paradigma. Por exemplo, quando houve a migração para os bancos de dados NoSQL, certamente, o erro foi pensar em relacionamento em bancos de dados que não tem suporte a relacionamento como [Cassandra](http://cassandra.apache.org/). A lista a seguir apresenta os erros mais comuns que encontramos nos microservices:
 
-#### Containers
+- Quebra de domínio: o [DDD](https://www.infoq.com/minibooks/domain-driven-design-quickly/) trouxe vários benefícios, principalmente, trazer o código para próximo do negócio com a linguagem ubíqua. Dentro do DDD temos o conceito de domínios e quando movemos para microservices é muito normal quebrar de maneira errada o negócio no domínio. Esse tipo acontece, principalmente, quando fazemos a quebra de maneira precoce é o mesmo caso da modelagem no banco de dados que a fazemos, justamente, quando não temos muita informação do negócio. [Em seu artigo de definição de domínio o Martin Fowler](https://martinfowler.com/bliki/BoundedContext.html) menciona o *bounded context* , podemos ver isso num e-commecer quando separamos o controle de estoque do produto, porém, o que acontece se a regra obrigar que o produto só poderá ser exibido se tiver no estoque? Exato, toda vez que consultar um produto também precisará consultar no serviço de estoque resultando num total acoplamento entre os dois serviços. Em outras palavras, o serviço de produto e estoque não deveriam estar em dois serviços nesse contexto.
+- ​	Não automatizar: uma das boas práticas existentes quando falamos de microservices, certamente, é o [CI/CD](https://www.infoworld.com/article/3271126/what-is-cicd-continuous-integration-and-continuous-delivery-explained.html). Essas técnicas são realmente importantes, principalmente, uma vez que existe uma grande quantidade de máquinas a serem gerenciadas;
+- ​	Diversidade de linguagens: essa decisão é uma das mais intrigantes. Até o momento ,não conheço um único projeto cujo o objetivo é exibir alguma coisa no console, porém, é muito comum ouvir de grandes nomes recomendações baseados um “Hello World” ou pequeno. É importante ter muito cuidado com esse tipo de decisão; Afinal, quanto maior o número de linguagens dentro de uma empresa, significa que o time terá que conhecer diversos campos ou existirá silos de conhecimento. Existem diversas histórias do qual um sistema foi reescrito, simplesmente, por não ter um time técnico para manter ou por que a linguagem/framework foi descontinuada.
+- ​	[Sua aplicação não é grande suficiente para se tornar microservice](https://medium.com/swlh/stop-you-dont-need-microservices-dc732d70b3e0): nem toda aplicação grande precisará ser migrada ou criada com o objetivo de se tornar um ambiente de microserviço. Um exemplo disso são as aplicações legadas e que atendem a necessidade do cliente.
+- ​	Um dos grandes argumentos para escolher microservices está na possibilidade de escolher escalar um componente individualmente. Porém, eis que surge a seguinte pergunta: realmente  faz sentido escalar individualmente um componente?
+- ​	Microservices precisam de informações e como todo banco de dados distribuídos eles enfrentam a teoria do [CAP](https://en.wikipedia.org/wiki/CAP_theorem). Dado um cenário do qual  se realiza múltiplas atualizações em diversos serviços,  é comum acrescentar um novo item na arquitetura: o padrão [SAGA](https://dzone.com/articles/microservices-using-saga-pattern). Resultando numa maior complexidade e pontos de testes no seu ambiente.
+- ​	[Começar o projeto já como microservices tende a ser um grande erro](https://www.oreilly.com/content/should-i-use-microservices/), principalmente, na instabilidade na definição dos domínios. Um erro na quebra dos serviços faz com que exista uma grande dependência e acoplamento entre eles. Considere um contexto onde os dados a serem utilziados estão armazenados em múltiplas bases de dados, sendo pragmático este problema poderia ser facilmente resolvido em uma arquitetura monolítica um join num banco de dados relacional como MySQL ou PosgreSQL ou um subdocumento num banco de dados NoSQL como MongoDB.
 
-Microsserviços são normalmente vinculados a containers (mas não obrigatoriamente precisamos usar containers), onde vamos usar o empacotamento completo da solução para ele. Onde a solução mais utilizada no mercado é o [Docker](https://www.docker.com/), que vai lhe ajudar a subir maquinas virtuais leves e você controlar o deploy dos seus serviços de maneira mais eficiente.
+* Utilizar microservices apenas porque grandes empresas utilizam esse tipo de arquitetura. No mundo de arquitetura de software, uma decisão não deve ser tomada apenas pela popularidade na solução. Como [Edson Yanaga](https://twitter.com/yanaga) fala em seu [livro](https://developers.redhat.com/books/migrating-microservice-databases-relational-monolith-distributed-data/): “Certamente, sempre lemos grandes coisas sobre as arquiteturas de microservices implementadas por empresas como Netflix ou Amazon. Então, deixe-me fazer uma pergunta: quantas empresas no mundo podem ser Netflix e Amazon?”.
 
-Com o conceito de containers você consegue realmente abstrair sua aplicação do ambiente e dar a indenpencia que o time precisa. Usando o Docker, por exemplo, cada microserviço pode ser entregue de maneira independente no ambiente que vai ser o "host".
-
-E ele também ajuda que suas aplicações seja pequenas, tenham independências necessária e possam se comunicar umas com as outras. E aqui entra uma segunda ferramenta para ajudar a sua vida, pois quando você coloca suas aplicações em containers, será necessário gerenciar de alguma maneira esses pedaços de aplicação espalhados.
-
-#### Orquestração de Containers
-
-Agora imagine você no mesmo cenário que a Google, onde tudo lá roda em cima de containers, você vai precisar gerenciar tudo isso para não cai no caos. E é aqui que entra o Kubernetes, que aliás começou com o engenheiros da Googles, que vai lhe ajudar a agrupar seus containers em clusters que você pode gerenciar mais facilmente. 
-
-Vale lembrar que o Kubernetes não é uma alternativa para o Docker, e uma ferramenta não substituí a outra, na verdade elas são complementares. Você pode usar as duas separadas, mas a chave do sucesso e juntar as duas. No Docker se cria o container da aplicação, e com o Kubernetes você automatiza as operação de manutenção, networking, segurança, escalabilidade. 
-
-#### Construindo o Serviço
-
-Mas claro que para isso você precisa construir aplicações que sejam leves e fáceis de se levar para um container e colocar nesse mundo. E para isso existem muitos sabores para você escolher, mas os mais populares usados pelas comunidades, vamos encontrar:
-
-- [Spring Cloud com Spring Boot](https://spring.io/projects/spring-cloud) -  O framework da Spring é um dos mais completos para se criar aplicações distribuídas e seus microsserviços. Fornecendo a você todo o ferramental para que você possa colocar seu serviços para funcionar.
-- [.Net Core](https://dotnet.microsoft.com/download/dotnet-core) - A versão Open Source da Microsoft para o .NET framework e também entregar uma versão mais leve e adequada para o mundo dos microsserviços.
-- [Vert.x](https://vertx.io/) - Este é um framework poliglota que roda em cima da JVM focado para que você crie seus serviços para um ambiente orientado a eventos de maneira reativa.
-- [Akka](https://akka.io/) - Este framework também é feito para ambientes orientados a eventos, voltando a programação reativa. Também roda em cima da JVM, mas para aplicações baseados em Java ou Scala.
-- [Quarkus](https://quarkus.io/) - Novo player neste mercado, mas é uma stack nativa para Kubernetes e baseado em JVM. Onde você pode seguir por padrões tanto reativos como imperativos.
-- [Falcon](https://falcon.readthedocs.io/en/stable/) - Essa é uma biblioteca para Python que permite que você construa seus serviços com alta performance.
-- [Go](https://golang.org/) - Linguagem criada pela Google, baseada em C, que pode lhe dar serviços leves e rapidos, permitindo o uso de programação funcional.
-- [Moleculer](https://moleculer.services/) - Para quem gosta de usar o Node.js para construir seus serviços, esse framework pode ajudar a construir serviços leve.
-
-Podemos citar ainda vários outros frameworks, o importante no caso de microserviços é manter os conceitos e pilares para que as aplicações possam ter responsabilidade única, serem independentes e performáticas.
-
-E depois que seu serviço estiver construído e já montado dentro de uma container, será necessário escolher onde você irá colocar esse serviço para funcionar, e pode ser aonde a sua infra-estrutura estiver, seja na Cloud, seja em uma Nuvem Privada, seja na sua propria estrutura on-premise, não importa. Claro que para cada ambiente diferentes, você irá encontrar desafios para fazer com que os conceitos sejam aplicados.
-
-Mas a grande chave aqui é escolher um framework e colocar em uma ambiente que sua equipe seja capaz de dar suporte e conheça como usar e monitorar, olhar performance. Pois escolher uma tecnologia, ou framework que você não conhece, vai ter uma curva de aprendizado e pode ser que seu time não tenho o tempo necessário para aprender e terá que lidar com ela em produção.
-
-Ambientes Privados ou On-Premise são mais trabalhosas para se manter um escalabidade, mas não são impossíveis de serem feitos, se os pilares são mantidos, você está sim fazendo microsserviços.
-
-## Práticas de Segurança
-
-Código seguro deveria ser uma regra em qualquer design de aplicação, em alguns ramos são tão importantes quanto qualquer regra de qualidade que se possa ter. E para microsserviços não é diferente e aqui não existe nenhum segredo, é a mesma regra para qualquer desenho de aplicação, no mínimo se deve olhar para o [Top 10 do OWASP](https://owasp.org/www-project-top-ten/) e seguir essas recomendações no seu projeto. O mínimo que o seu desenvolvedor precisa saber é sobre essas vulnerabilidades.
-
-Sério mesmo, não há nada novo aqui, e qualquer um que esteja tentando lhe convencer de um "Cross Microservice Injection" ou algo do tipo, está tentando lhe enrolar. 
-
-No caso de Microsserviços há abordagem que muda é em relação a Autorização e Autenticação, e vamos discurtir isso mais a frente.
-
-Uma dica importante sempre que se olha em termos de código seguro, é colocar algo na sua esteira de CI/CD e fazer a validação do seu código para procurar isso, e não só verificar se apenas o seu código traz vulnerabilidades, é interessante olhar se a bibliotecas de terceiros que você possa estar usando não podem estar causando algum problema no seu ambiente.
-
-E ferramentas para isso tem várias, entre elas temos o [Fortify](https://www.microfocus.com/en-us/solutions/application-security), [Snyk](https://snyk.io/), [JFrog Xray](https://jfrog.com/xray/). Porque as vezes uma dependencia desatualizada pode colocar seu serviço em posição de risco, então olhar a melhor prática no código, e uma ferramenta para ajudar a apontar onde melhorar, formam um time imbatível.
-
-Outra prática que eu vejo em algumas empresas, principalmente quando os serviços estão expostos apenas internarmente e não para fora, é não usar o HTTPS, ou melhor, use um TLS (Transport Layer Security). E para que você precisa disso, privacidade, integridade e idenficicação.
-
-E quando estamos falando de microsserviços, um cenário que vai acabar sempre existindo é termos que falar com servidores de autorização, e podemos estar falando de um API Key, ou de um "client secret", ou até mesmo credenciais para uma autenticação básica. Então a primeira regra básica não deixe essas chaves no seu repositório de fonte, esses caras precisam ser variáveis de ambientes ou chaves de configuração externa, e elas devem estar sempre encriptadas.
-
-Como estamos falando de containers, as práticas valem também para lá e nunca rode seu container como "root". Você precisa assumir a premissa de que seu sistema nunca é 100% seguro, alguém vai conseguir explorar algo. Então você não pode só prevenir, você precisa detectar e reagir a isso.
-
-A chave são seguir ao menos cinco pilares:
-
-- Seguro por desenho
-- Vasculhe suas dependências
-- Use sempre HTTPS
-- Use Tokens de Acesso e Identidade
-- Proteja e Encripte seus segredos.
-
-#### Soluções para Autenticação e Autorização
-
-Para o mundo de microsserviços o principal ponto é verificar quem você é (Autenticação) e aquilo que você pode fazer (Autorização). E dentro da arquitetura de microsserviços você vai estar espalhado em muito serviços pela rede e terá que lidar com alguns problemas em relação a como resolver isso.
-
-Autenticação e Autorização precisam ser resolvidos em cada um dos microsserviços, e parte dessa lógica global vai ter que replicada em todas os serviços, e neste caso um jeito para se resolver isso é criar bibliotecas para padronizar essa implementação, só que isso vai fazer que você perca um pouco da flexibilidade de quais tecnologias usar, pois a linguagem ou framework precisa suportar essa biblioteca padrão.
-
-Outro cuidado que o uso da biblioteca lhe ajuda é a não quebrar o principio da responsabilidade única, já que o serviço deveria se preocupar apenas com a lógica de negócio.
-
-E outro ponto que é necessário ser analisado é que os microsserviços devem ser *stateless*, então é necessário usar soluções que consigam manter isso.
-
-Podemos abordar a Autorização e Autenticação pelo modelo de sessão distribuída, usando ferramentas para você armazenar essa sessão, e onde você pode abordar manter a sessão das seguintes maneiras:
-
-**Sticky Session** - A idéia aqui é usar o load balancer e manter o usuário sempre no mesmo servidor que veio o request. Só que esse cara vai fazer você só conseguir expandir horizontalmente.
-
-**Replicação de Sessão** - Ou seja, toda instância salva a sessão e sincroniza através da rede. Só que aqui vai lhe causar um "overhead" de rede. Quanto mais instancias, mais terá que replicar e se terá que lidar com a latencia disso.
-
-**Sessão Centralizada** - Isso significa que os dados podem ser recuperados em um repositório compartilhado. Em vários cenários, esse é um ótimo desenho, porque se pode dar alto desempenho para as aplicações, onde você deixa o status do login escondido dentro dessa sessão. Mas claro que existe a desvantagem que você precisa criar mecanismos para proteger essa sessão e replicar entre as aplicações, que pode também adicionar latências na sua rede.
-
-Mas quando estamos neste cenário de microsserviços, a recomendação passa a ser o uso de Tokens, onde a maior diferença para o modelo de sessão descrito acima, é que deixamos de ter algo centralizado em um servidor, e passamos a responsabilidade para o próprio usuário.
-
-O Token vai ter a informação de identificação de usuário, e toda vez que chega ao servidor, podemos validar no server a identidade e a autorização. O token é encriptado e podem seguir um padrão como o [JWT](https://jwt.io/).
-
-E usando token conseguimos delegar a responsabilide do estado do usuário, para algum processo que possa a validade do mesmo. Habilitamos vários tipos de validações de segurança que podem ser colocadas na malha (Service Mesh) ou no seu gateway de entrada e retirar essas responsabilidades dos serviços e aplicações e mesmo assim ainda continuar garantido a segurança.
-
-Com o uso do JWT você passa a ter um "client token" onde você vai passar a algum servidor para que ele possa fazer a validação/criação do mesmo. 
-
-E quando se fala em Tokens, a chave é não querer reinventar a roda, e sim usar aquilo que já está consolidadado, é onde entra o OpenId e o OAuth/OAuth2. O Oauth 2 é praticamente o padrão mais utilizado para autenticação.
-
-O padrão de OpenID é aquele usando quando você pode se conectar ou usar o token para se logar em vários sites ou serviços. Mas no seu padrão local, a recomendação é o OAuth, que estabelece um protocolo para que você tenha acesso aos recursos que você precisa, e ele trabalha com quatro papéis:
-
-**Resource Owner** - Este é o papel que controla os acessos aos recursos.
-
-**Resource Server** - É onde fica os serviços a serem acessados, ou seja, aqui são onde estão as suas API's, aplicações e etc.
-
-**Client** - É quem faz a solicitação ao Resource Owner do recurso que ele precisa consumir.
-
-**Authorization Server** - Quem gera os tokens de acesso, permite que o Client chegue ao recursos que foram permitidos, com o nível de acesso definido.
-
-E como funciona isso, basicamente o "client" solicita ao Resource Owner acesso ao recurso, e este quando autoriza envia para o "Client" o "authorization grant", que é a credencial que representa que o Resource Owner autorizou a passagem. Então o "Client" vai solicitar ao Authoration Server um Token de acesso, tudo sendo válido, o Client recebe o seu token de acesso, que vai ser repassado para o Resource Server para que ele possa consumir aquilo que foi solicitado.
-
-E existem 4 tipos fluxos para obtermos o token de acesso no padrão OAuth. Temos o Authorization Code, que é o tipo mais comum. O Implicit que é muito utlizado por aplicações SPA. O Resource Owner, que estabelece a confiança entre as aplicações e o Client Credentials que é usado para falar de um serviço para outro.
-
-Tirando a parte de Autenticação e Autorização, que precisam de um cuidado a parte, segurança de microsserviços é como a segurança de qualquer aplicação e precisamos estar atentos a isso.
-
-------
+# Conclusão
 
 Como visto acima, a arquitetura de microsserviços traz bastante benefícios para o seu ambiente e lhe oferece a vantagem de deixar o desenvolvimento independente quando se tem vários times e funcionalidade, e essa independencia se estende também para o deploy da aplicação. Ou seja, você da velocidade para seu times e agilidade, consegue ter código de melhor qualidade já que ele vai estar organizado ao redor da funcionalidade. Tem-se a vantagem de ser fácil de escalar apenas no ponto em que se precisa, e ainda poder ser aplicacado na tecnologia que você tem mais domínio.
 
 Mas, como já dito anteriormente, não é nenhuma bala de prata, ele traz complexidades para o ambiente e novas preocupações em termos de segurança. Imagine um projeto gigante com múltiplas instâncias e centenas de microsserviços, como você irá monitorar? Em caso de erro, como você vai encontrar, desviar ou mesmo tratar o erro?
 
 Se usado da maneira correta, e tratado de perto os pontos de atenção, esse padrão de arquitetura tem muito a agregar no seus projetos.
+
+Microservices como toda decisão de arquitetura sem suas vantagens e desvantagens como Martin Fowler fala:  
+
+> Os microservices introduzem eventuais problemas de consistência, por causa de sua louvável insistência no gerenciamento de dados descentralizado. Com um monólito, podemos atualizar várias coisas juntas em uma única transação. Os microservices exigem vários recursos para atualizar, e as transações distribuídas são desaprovadas (por um bom motivo). Portanto, agora, os desenvolvedores precisam estar cientes dos problemas de consistência e descobrir como detectar quando as coisas estão fora de sincronia antes de fazer qualquer coisa que o código se arrependa. - [Martin Fowler](https://martinfowler.com/articles/microservice-trade-offs.html#consistency)
