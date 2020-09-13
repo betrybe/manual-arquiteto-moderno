@@ -10,7 +10,7 @@ Antes de entrar em mais detalhes sobre esta arquitetura, vamos brevemente recapi
 
 Em uma arquitetura monolítica encontramos uma aplicação cujo front-end e back-end são parte de um artefato único. Neste artefato estão contidos todos componentes funcionais, que são compilados e disponibilizados em conjunto. A escalabilidade é impactada uma vez que sempre que é necessário escalar esta aplicação, será necessário prover recursos para a execução de todos os seus componentes - mesmo aqueles que não precisavam ser escalados. No cenário de persistência, é muito comum se encontrar a relação de um banco para um monolito, porém, existem monolitos que trabalham acessando multiplos bancos de dados ( o que aumenta ainda mais o nível de complexidade de manutenção).
 
-![chapter_04_01](file:///Users/kvarela/projetos/contrib/manual-arquiteto-moderno/images/chapter_04_01.png?lastModify=1599433677)
+![chapter_07_01](images/chapter_07_01.png)
 
 Com o passar dos ciclos de desenvolvimento, estas aplicações monolíticas tendem a crescer tanto em quantidade de linhas de código quanto em consumo de hardware, o que acarreta em:
 
@@ -46,7 +46,7 @@ O mundo dos monolitos trazem diversos benefícios, como sempre cansamos de falar
 
 A arquitetura orientada a microsserviços trás como preceito a criação de aplicações desacopladas entre si e modeladas conforme o dominio de negócios. Essas aplicações se integram através de diferentes protocolos e os diversos padrões de comunicação (REST, GRPC, eventos assíncronos, entre outros) podem ser adotados. Com a adoção de uma arquitetura orientada a microsserviços é possível promover entregas mais velozes e frequentes, além de trazer ao desenvolvedor um ecossistema agnóstico de linguagem. 
 
-![chapter_04_01](images/chapter_04_02.png)
+![](images/chapter_07_02.png)
 
 Como apontado por Sam Newman, em seu livro "Building Microservices", estes são conceitos que estão implícitos aos microsserviços:
 
