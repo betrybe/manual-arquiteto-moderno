@@ -8,7 +8,7 @@ Antes de entrar em mais detalhes sobre esta arquitetura, vamos brevemente recapi
 
 ## Arquitetura monolítica
 
-Em uma arquitetura monolítica encontramos uma aplicação cujo front-end e back-end são parte de um artefato único. Neste artefato estão contidos todos componentes funcionais, que são compilados e disponibilizados em conjunto. A escalabilidade é impactada uma vez que sempre que é necessário escalar esta aplicação, será necessário prover recursos para a execução de todos os seus componentes - mesmo aqueles que não precisavam ser escalados. Em aplicações monolíticas, todo o código é versionado em um único repositório. No cenário de persistencia, é muito comum se encontrar a relação de um banco para um monolito, porém, existem monolitos que trabalham acessando multiplos bancos de dados ( o que aumenta ainda mais o nível de complexidade de manutenção).
+Em uma arquitetura monolítica encontramos uma aplicação cujo front-end e back-end são parte de um artefato único. Neste artefato estão contidos todos componentes funcionais, que são compilados e disponibilizados em conjunto. A escalabilidade é impactada uma vez que sempre que é necessário escalar esta aplicação, será necessário prover recursos para a execução de todos os seus componentes - mesmo aqueles que não precisavam ser escalados. No cenário de persistência, é muito comum se encontrar a relação de um banco para um monolito, porém, existem monolitos que trabalham acessando multiplos bancos de dados ( o que aumenta ainda mais o nível de complexidade de manutenção).
 
 ![chapter_04_01](file:///Users/kvarela/projetos/contrib/manual-arquiteto-moderno/images/chapter_04_01.png?lastModify=1599433677)
 
@@ -55,7 +55,7 @@ Vejamos algumas vantagens da utilização da abordagem de uma arquitetura orient
 - **Agilidade** - metodologias ágeis e suas diversas ramificações têm se mostrado cada mais populares. Ao se aliar este estilo de gerenciamento de projeto com a arquitetura em microsserviços, permitimos tecnicamente a existência de ciclos completos e mais curto para entrega de valor .
 - **Reusabilidade** - Os componentes, como por exemplo um serviço que processe a lógica de negócio, podem ser consumidos via APIs quando necessário evitando assim a duplicidade de código e impactos na manutenibilidade.
 
-### Desafios
+### Desafios da arquitetura de microserviços
 
 A comunicação entre componentes de uma aplicação monolítica ocorrem in-memory, ou seja, não possuem o overhead da  **latência** existente na comunicação via rede, como ocorre no cenário de microsserviços. Quanto mais o número de serviços e a complexidade arquitetural aumentam, este problema pode ser mais catastrófico. Lidar com o tempo de resposta do serviço invocado no cliente em si é uma boa prática (como configuração de timeouts e retries) assim como, manter em dia os serviços de monitoramento e alertas da sua rede.
 
@@ -67,7 +67,7 @@ A definição do tamanho e escopo dos microsserviços pode ser uma tarefa que ex
 
 Um dos desafios de governança é evitar a existência de aplicações orfãs em ambiente produtivo. Procure estabelecer times responsáveis por cada serviço, inclusive em sua fase produtiva. Desta forma caso ocorra um problema inesperado ou uma nova solicitação de mudança, será mais fácil identificar quem poderá assumir as tarefas.
 
-### Quando evitar
+### Quando evitar a arquitetura de microserviços
 
 Nenhuma arquitetura é apropriada a todos os cenários e organizações, portanto, vamos conhecer alguns fatores que nos alertam que a arquitetura de microsserviços pode não ser a mais apropriada. 
 
@@ -135,118 +135,7 @@ Em vez de você interceptar ou mudar a requisição, você deixa ela acontecer n
 
 Este padrão é usado normalmente quando você precisa mudar os dados, seja na chamada ou na resposta, e complementar essas informações sem alterar o seu monolito.
 
-## Por onde começar?
-
-O padrão de arquitetura de microserviços ele se encaixa para você se você tem um sistema que possui muitas funcionalidades, se você faz releases constantes, tem muitos subdomínios e linhas de negócio, se você tem times grandes e que precisam trabalhar em múltiplas funcionalidades do seu sistemas ao mesmo tempo, se seu projeto está sempre em expansão.
-
-E para isso algumas tecnologias vão te ajudar nessa missão, não são todas obrigatórias, mas elas ajudam nessa direção.
-
-#### Containers
-
-Microsserviços são normalmente vinculados a containers (mas não obrigatoriamente precisamos usar containers), onde vamos usar o empacotamento completo da solução para ele. Onde a solução mais utilizada no mercado é o [Docker](https://www.docker.com/), que vai lhe ajudar a subir maquinas virtuais leves e você controlar o deploy dos seus serviços de maneira mais eficiente.
-
-Com o conceito de containers você consegue realmente abstrair sua aplicação do ambiente e dar a indenpencia que o time precisa. Usando o Docker, por exemplo, cada microserviço pode ser entregue de maneira independente no ambiente que vai ser o "host".
-
-E ele também ajuda que suas aplicações seja pequenas, tenham independências necessária e possam se comunicar umas com as outras. E aqui entra uma segunda ferramenta para ajudar a sua vida, pois quando você coloca suas aplicações em containers, será necessário gerenciar de alguma maneira esses pedaços de aplicação espalhados.
-
-#### Orquestração de Containers
-
-Agora imagine você no mesmo cenário que a Google, onde tudo lá roda em cima de containers, você vai precisar gerenciar tudo isso para não cai no caos. E é aqui que entra o Kubernetes, que aliás começou com o engenheiros da Googles, que vai lhe ajudar a agrupar seus containers em clusters que você pode gerenciar mais facilmente. 
-
-Vale lembrar que o Kubernetes não é uma alternativa para o Docker, e uma ferramenta não substituí a outra, na verdade elas são complementares. Você pode usar as duas separadas, mas a chave do sucesso e juntar as duas. No Docker se cria o container da aplicação, e com o Kubernetes você automatiza as operação de manutenção, networking, segurança, escalabilidade. 
-
-#### Construindo o Serviço
-
-Mas claro que para isso você precisa construir aplicações que sejam leves e fáceis de se levar para um container e colocar nesse mundo. E para isso existem muitos sabores para você escolher, mas os mais populares usados pelas comunidades, vamos encontrar:
-
-- [Spring Cloud com Spring Boot](https://spring.io/projects/spring-cloud) -  O framework da Spring é um dos mais completos para se criar aplicações distribuídas e seus microsserviços. Fornecendo a você todo o ferramental para que você possa colocar seu serviços para funcionar.
-- [.Net Core](https://dotnet.microsoft.com/download/dotnet-core) - A versão Open Source da Microsoft para o .NET framework e também entregar uma versão mais leve e adequada para o mundo dos microsserviços.
-- [Vert.x](https://vertx.io/) - Este é um framework poliglota que roda em cima da JVM focado para que você crie seus serviços para um ambiente orientado a eventos de maneira reativa.
-- [Akka](https://akka.io/) - Este framework também é feito para ambientes orientados a eventos, voltando a programação reativa. Também roda em cima da JVM, mas para aplicações baseados em Java ou Scala.
-- [Quarkus](https://quarkus.io/) - Novo player neste mercado, mas é uma stack nativa para Kubernetes e baseado em JVM. Onde você pode seguir por padrões tanto reativos como imperativos.
-- [Falcon](https://falcon.readthedocs.io/en/stable/) - Essa é uma biblioteca para Python que permite que você construa seus serviços com alta performance.
-- [Go](https://golang.org/) - Linguagem criada pela Google, baseada em C, que pode lhe dar serviços leves e rapidos, permitindo o uso de programação funcional.
-- [Moleculer](https://moleculer.services/) - Para quem gosta de usar o Node.js para construir seus serviços, esse framework pode ajudar a construir serviços leve.
-
-Podemos citar ainda vários outros frameworks, o importante no caso de microserviços é manter os conceitos e pilares para que as aplicações possam ter responsabilidade única, serem independentes e performáticas.
-
-E depois que seu serviço estiver construído e já montado dentro de uma container, será necessário escolher onde você irá colocar esse serviço para funcionar, e pode ser aonde a sua infra-estrutura estiver, seja na Cloud, seja em uma Nuvem Privada, seja na sua propria estrutura on-premise, não importa. Claro que para cada ambiente diferentes, você irá encontrar desafios para fazer com que os conceitos sejam aplicados.
-
-Mas a grande chave aqui é escolher um framework e colocar em uma ambiente que sua equipe seja capaz de dar suporte e conheça como usar e monitorar, olhar performance. Pois escolher uma tecnologia, ou framework que você não conhece, vai ter uma curva de aprendizado e pode ser que seu time não tenho o tempo necessário para aprender e terá que lidar com ela em produção.
-
-Ambientes Privados ou On-Premise são mais trabalhosas para se manter um escalabidade, mas não são impossíveis de serem feitos, se os pilares são mantidos, você está sim fazendo microsserviços.
-
-## Práticas de Segurança
-
-Código seguro deveria ser uma regra em qualquer design de aplicação, em alguns ramos são tão importantes quanto qualquer regra de qualidade que se possa ter. E para microsserviços não é diferente e aqui não existe nenhum segredo, é a mesma regra para qualquer desenho de aplicação, no mínimo se deve olhar para o [Top 10 do OWASP](https://owasp.org/www-project-top-ten/) e seguir essas recomendações no seu projeto. O mínimo que o seu desenvolvedor precisa saber é sobre essas vulnerabilidades.
-
-Sério mesmo, não há nada novo aqui, e qualquer um que esteja tentando lhe convencer de um "Cross Microservice Injection" ou algo do tipo, está tentando lhe enrolar. 
-
-No caso de Microsserviços há abordagem que muda é em relação a Autorização e Autenticação, e vamos discurtir isso mais a frente.
-
-Uma dica importante sempre que se olha em termos de código seguro, é colocar algo na sua esteira de CI/CD e fazer a validação do seu código para procurar isso, e não só verificar se apenas o seu código traz vulnerabilidades, é interessante olhar se a bibliotecas de terceiros que você possa estar usando não podem estar causando algum problema no seu ambiente.
-
-E ferramentas para isso tem várias, entre elas temos o [Fortify](https://www.microfocus.com/en-us/solutions/application-security), [Snyk](https://snyk.io/), [JFrog Xray](https://jfrog.com/xray/). Porque as vezes uma dependencia desatualizada pode colocar seu serviço em posição de risco, então olhar a melhor prática no código, e uma ferramenta para ajudar a apontar onde melhorar, formam um time imbatível.
-
-Outra prática que eu vejo em algumas empresas, principalmente quando os serviços estão expostos apenas internarmente e não para fora, é não usar o HTTPS, ou melhor, use um TLS (Transport Layer Security). E para que você precisa disso, privacidade, integridade e idenficicação.
-
-E quando estamos falando de microsserviços, um cenário que vai acabar sempre existindo é termos que falar com servidores de autorização, e podemos estar falando de um API Key, ou de um "client secret", ou até mesmo credenciais para uma autenticação básica. Então a primeira regra básica não deixe essas chaves no seu repositório de fonte, esses caras precisam ser variáveis de ambientes ou chaves de configuração externa, e elas devem estar sempre encriptadas.
-
-Como estamos falando de containers, as práticas valem também para lá e nunca rode seu container como "root". Você precisa assumir a premissa de que seu sistema nunca é 100% seguro, alguém vai conseguir explorar algo. Então você não pode só prevenir, você precisa detectar e reagir a isso.
-
-A chave são seguir ao menos cinco pilares:
-
-- Seguro por desenho
-- Vasculhe suas dependências
-- Use sempre HTTPS
-- Use Tokens de Acesso e Identidade
-- Proteja e Encripte seus segredos.
-
-#### Soluções para Autenticação e Autorização
-
-Para o mundo de microsserviços o principal ponto é verificar quem você é (Autenticação) e aquilo que você pode fazer (Autorização). E dentro da arquitetura de microsserviços você vai estar espalhado em muito serviços pela rede e terá que lidar com alguns problemas em relação a como resolver isso.
-
-Autenticação e Autorização precisam ser resolvidos em cada um dos microsserviços, e parte dessa lógica global vai ter que replicada em todas os serviços, e neste caso um jeito para se resolver isso é criar bibliotecas para padronizar essa implementação, só que isso vai fazer que você perca um pouco da flexibilidade de quais tecnologias usar, pois a linguagem ou framework precisa suportar essa biblioteca padrão.
-
-Outro cuidado que o uso da biblioteca lhe ajuda é a não quebrar o principio da responsabilidade única, já que o serviço deveria se preocupar apenas com a lógica de negócio.
-
-E outro ponto que é necessário ser analisado é que os microsserviços devem ser *stateless*, então é necessário usar soluções que consigam manter isso.
-
-Podemos abordar a Autorização e Autenticação pelo modelo de sessão distribuída, usando ferramentas para você armazenar essa sessão, e onde você pode abordar manter a sessão das seguintes maneiras:
-
-**Sticky Session** - A idéia aqui é usar o load balancer e manter o usuário sempre no mesmo servidor que veio o request. Só que esse cara vai fazer você só conseguir expandir horizontalmente.
-
-**Replicação de Sessão** - Ou seja, toda instância salva a sessão e sincroniza através da rede. Só que aqui vai lhe causar um "overhead" de rede. Quanto mais instancias, mais terá que replicar e se terá que lidar com a latencia disso.
-
-**Sessão Centralizada** - Isso significa que os dados podem ser recuperados em um repositório compartilhado. Em vários cenários, esse é um ótimo desenho, porque se pode dar alto desempenho para as aplicações, onde você deixa o status do login escondido dentro dessa sessão. Mas claro que existe a desvantagem que você precisa criar mecanismos para proteger essa sessão e replicar entre as aplicações, que pode também adicionar latências na sua rede.
-
-Mas quando estamos neste cenário de microsserviços, a recomendação passa a ser o uso de Tokens, onde a maior diferença para o modelo de sessão descrito acima, é que deixamos de ter algo centralizado em um servidor, e passamos a responsabilidade para o próprio usuário.
-
-O Token vai ter a informação de identificação de usuário, e toda vez que chega ao servidor, podemos validar no server a identidade e a autorização. O token é encriptado e podem seguir um padrão como o [JWT](https://jwt.io/).
-
-E usando token conseguimos delegar a responsabilide do estado do usuário, para algum processo que possa a validade do mesmo. Habilitamos vários tipos de validações de segurança que podem ser colocadas na malha (Service Mesh) ou no seu gateway de entrada e retirar essas responsabilidades dos serviços e aplicações e mesmo assim ainda continuar garantido a segurança.
-
-Com o uso do JWT você passa a ter um "client token" onde você vai passar a algum servidor para que ele possa fazer a validação/criação do mesmo. 
-
-E quando se fala em Tokens, a chave é não querer reinventar a roda, e sim usar aquilo que já está consolidadado, é onde entra o OpenId e o OAuth/OAuth2. O Oauth 2 é praticamente o padrão mais utilizado para autenticação.
-
-O padrão de OpenID é aquele usando quando você pode se conectar ou usar o token para se logar em vários sites ou serviços. Mas no seu padrão local, a recomendação é o OAuth, que estabelece um protocolo para que você tenha acesso aos recursos que você precisa, e ele trabalha com quatro papéis:
-
-**Resource Owner** - Este é o papel que controla os acessos aos recursos.
-
-**Resource Server** - É onde fica os serviços a serem acessados, ou seja, aqui são onde estão as suas API's, aplicações e etc.
-
-**Client** - É quem faz a solicitação ao Resource Owner do recurso que ele precisa consumir.
-
-**Authorization Server** - Quem gera os tokens de acesso, permite que o Client chegue ao recursos que foram permitidos, com o nível de acesso definido.
-
-E como funciona isso, basicamente o "client" solicita ao Resource Owner acesso ao recurso, e este quando autoriza envia para o "Client" o "authorization grant", que é a credencial que representa que o Resource Owner autorizou a passagem. Então o "Client" vai solicitar ao Authoration Server um Token de acesso, tudo sendo válido, o Client recebe o seu token de acesso, que vai ser repassado para o Resource Server para que ele possa consumir aquilo que foi solicitado.
-
-E existem 4 tipos fluxos para obtermos o token de acesso no padrão OAuth. Temos o Authorization Code, que é o tipo mais comum. O Implicit que é muito utlizado por aplicações SPA. O Resource Owner, que estabelece a confiança entre as aplicações e o Client Credentials que é usado para falar de um serviço para outro.
-
-Tirando a parte de Autenticação e Autorização, que precisam de um cuidado a parte, segurança de microsserviços é como a segurança de qualquer aplicação e precisamos estar atentos a isso.
-
-------
+# Conclusão
 
 Como visto acima, a arquitetura de microsserviços traz bastante benefícios para o seu ambiente e lhe oferece a vantagem de deixar o desenvolvimento independente quando se tem vários times e funcionalidade, e essa independencia se estende também para o deploy da aplicação. Ou seja, você da velocidade para seu times e agilidade, consegue ter código de melhor qualidade já que ele vai estar organizado ao redor da funcionalidade. Tem-se a vantagem de ser fácil de escalar apenas no ponto em que se precisa, e ainda poder ser aplicacado na tecnologia que você tem mais domínio.
 
