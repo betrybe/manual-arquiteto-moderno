@@ -19,7 +19,7 @@ Iniciaremos falando sobre a estratégia de dividir e conquistar. Esta estratégi
 
 Observe a imagem a seguir:
 
-![](images/chapter_03_01.jpg)
+![](images/chapter_04_01.jpg)
 
 *Fonte: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html*
 
