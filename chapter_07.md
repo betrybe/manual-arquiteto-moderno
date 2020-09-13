@@ -28,6 +28,20 @@ E eis que notamos um dos maiores impasses: o acoplamento, em termos de código e
 
 É aqui que entra o conceito dos microsserviços, que começa a desacoplar esses serviços e dar responsabilidade únicas para os serviços. Nesta abordagem você pode alterar, disponibilizar e escalar de maneira independente todo o ecossistema, seguido sempre a premissa de não afetar os outros microsserviços.
 
+//TODO UMA COLA MELHOR
+
+O mundo dos monolitos trazem diversos benefícios, como sempre cansamos de falar, todas escolhas resultam em um trade-off, ou seja, pontos fotes e pontos fracos dentro da sua arquitetura. Vendendo um 
+
+- ​	Facilidade de manutenção, afinal, quanto menos camadas físicas menos pontos para se verificar, especialmente, quando está pequeno
+- ​	Facilidade de sincronizar os dados entre o usuário e o sistema, a melhor maneira de trocar informações e mais rápidos é pela memória. Pensando num banco de dados relacacional, por exemplo, a sincronização de dados acontece de uma maneira bastante simples com os clássicos JOINs ao invés de realizar todo o processo de sincronização ou orquestarção.
+- Consistência de dados, tendem a ser facilitado se comparado à um sistema distribuido, salientando que sempre teremos o problema do CAP quando falamos de arquitetura distribuida e para aplicações que precisam, por exemplo, transação no o que no monolito seria um simples Roolback num sistema de microservices seria o caro e complexo padrão SAGA.
+- Iniciar um projeto tende a ser muito simples com o monolioto uma vez que precisamos pensar em menos camadas e componentes
+- O monitoramento dentro de uma única aplicação tende a ficar mais facilitada.
+
+
+
+
+
 ## Microserviços
 
 A arquitetura orientada a microsserviços trás como preceito a criação de aplicações desacopladas entre si e modeladas conforme o dominio de negócios. Essas aplicações se integram através de diferentes protocolos e os diversos padrões de comunicação (REST, GRPC, eventos assíncronos, entre outros) podem ser adotados. Com a adoção de uma arquitetura orientada a microsserviços é possível promover entregas mais velozes e frequentes, além de trazer ao desenvolvedor um ecossistema agnóstico de linguagem. 
@@ -135,6 +149,26 @@ Em vez de você interceptar ou mudar a requisição, você deixa ela acontecer n
 
 Este padrão é usado normalmente quando você precisa mudar os dados, seja na chamada ou na resposta, e complementar essas informações sem alterar o seu monolito.
 
+
+
+## Os erros mais comuns com microservices
+
+ 
+
+É muito comum existir a lista mais comuns dos erros que todo software tem, principalmente, quando existe uma mudança de paradigma. Por exemplo, quando houve a migração para os bancos de dados NoSQL, certamente, o erro foi pensar em relacionamento em bancos de dados que não tem suporte a relacionamento como [Cassandra](http://cassandra.apache.org/). A lista a seguir apresenta os erros mais comuns que encontramos nos microservices:
+
+ 
+
+- ​	Quebra de domínio: o [DDD](https://www.infoq.com/minibooks/domain-driven-design-quickly/) trouxe vários benefícios, principalmente, trazer o código para próximo do negócio com a linguagem ubíqua. Dentro do DDD temos o conceito de domínios e quando movemos para microservices é muito normal quebrar de maneira errada o negócio no domínio. Esse tipo acontece, principalmente, quando fazemos a quebra de maneira precoce é o mesmo caso da modelagem no banco de dados que a fazemos, justamente, quando não temos muita informação do negócio. [Em seu artigo de definição de domínio o Martin Fowler](https://martinfowler.com/bliki/BoundedContext.html) menciona o *bounded context* , podemos ver isso num e-commecer quando separamos o controle de estoque do produto, porém, o que acontece se a regra obrigar que o produto só poderá ser exibido se tiver no estoque? Exato, toda vez que consultar um produto também precisará consultar no serviço de estoque resultando num total acoplamento entre os dois serviços. Em outras palavras, o serviço de produto e estoque não deveriam estar em dois serviços nesse contexto.
+- ​	Não automatizar: uma das boas práticas existentes quando falamos de microservices, certamente, é o [CI/CD](https://www.infoworld.com/article/3271126/what-is-cicd-continuous-integration-and-continuous-delivery-explained.html). Essas técnicas são realmente importantes, principalmente, uma vez que existe uma grande quantidade de máquinas a serem gerenciadas;
+- ​	Diversidade de linguagens: essa decisão é uma das mais intrigantes. Até o momento ,não conheço um único projeto cujo o objetivo é exibir alguma coisa no console, porém, é muito comum ouvir de grandes nomes recomendações baseados um “Hello World” ou pequeno. É importante ter muito cuidado com esse tipo de decisão; Afinal, quanto maior o número de linguagens dentro de uma empresa, significa que o time terá que conhecer diversos campos ou existirá silos de conhecimento. Existem diversas histórias do qual um sistema foi reescrito, simplesmente, por não ter um time técnico para manter ou por que a linguagem/framework foi descontinuada.
+- ​	[Sua aplicação não é grande suficiente para se tornar microservice](https://medium.com/swlh/stop-you-dont-need-microservices-dc732d70b3e0): nem toda aplicação grande precisará ser migrada ou criada com o objetivo de se tornar um ambiente de microserviço. Um exemplo disso são as aplicações legadas e que atendem a necessidade do cliente.
+- ​	Um dos grandes argumentos para escolher microservices está na possibilidade de escolher escalar um componente individualmente. Porém, eis que surge a seguinte pergunta: realmente  faz sentido escalar individualmente um componente?
+- ​	Microservices precisam de informações e como todo banco de dados distribuídos eles enfrentam a teoria do [CAP](https://en.wikipedia.org/wiki/CAP_theorem). Dado um cenário do qual  se realiza múltiplas atualizações em diversos serviços,  é comum acrescentar um novo item na arquitetura: o padrão [SAGA](https://dzone.com/articles/microservices-using-saga-pattern). Resultando numa maior complexidade e pontos de testes no seu ambiente.
+- ​	[Começar o projeto já como microservices tende a ser um grande erro](https://www.oreilly.com/content/should-i-use-microservices/), principalmente, na instabilidade na definição dos domínios. Um erro na quebra dos serviços faz com que exista uma grande dependência e acoplamento entre eles. Considere um contexto onde os dados a serem utilziados estão armazenados em múltiplas bases de dados, sendo pragmático este problema poderia ser facilmente resolvido em uma arquitetura monolítica um join num banco de dados relacional como MySQL ou PosgreSQL ou um subdocumento num banco de dados NoSQL como MongoDB.
+
+* Utilizar microservices apenas porque grandes empresas utilizam esse tipo de arquitetura. No mundo de arquitetura de software, uma decisão não deve ser tomada apenas pela popularidade na solução. Como [Edson Yanaga](https://twitter.com/yanaga) fala em seu [livro](https://developers.redhat.com/books/migrating-microservice-databases-relational-monolith-distributed-data/): “Certamente, sempre lemos grandes coisas sobre as arquiteturas de microservices implementadas por empresas como Netflix ou Amazon. Então, deixe-me fazer uma pergunta: quantas empresas no mundo podem ser Netflix e Amazon?”.
+
 # Conclusão
 
 Como visto acima, a arquitetura de microsserviços traz bastante benefícios para o seu ambiente e lhe oferece a vantagem de deixar o desenvolvimento independente quando se tem vários times e funcionalidade, e essa independencia se estende também para o deploy da aplicação. Ou seja, você da velocidade para seu times e agilidade, consegue ter código de melhor qualidade já que ele vai estar organizado ao redor da funcionalidade. Tem-se a vantagem de ser fácil de escalar apenas no ponto em que se precisa, e ainda poder ser aplicacado na tecnologia que você tem mais domínio.
@@ -142,3 +176,7 @@ Como visto acima, a arquitetura de microsserviços traz bastante benefícios par
 Mas, como já dito anteriormente, não é nenhuma bala de prata, ele traz complexidades para o ambiente e novas preocupações em termos de segurança. Imagine um projeto gigante com múltiplas instâncias e centenas de microsserviços, como você irá monitorar? Em caso de erro, como você vai encontrar, desviar ou mesmo tratar o erro?
 
 Se usado da maneira correta, e tratado de perto os pontos de atenção, esse padrão de arquitetura tem muito a agregar no seus projetos.
+
+Microservices como toda decisão de arquitetura sem suas vantagens e desvantagens como Martin Fowler fala:  
+
+> Os microservices introduzem eventuais problemas de consistência, por causa de sua louvável insistência no gerenciamento de dados descentralizado. Com um monólito, podemos atualizar várias coisas juntas em uma única transação. Os microservices exigem vários recursos para atualizar, e as transações distribuídas são desaprovadas (por um bom motivo). Portanto, agora, os desenvolvedores precisam estar cientes dos problemas de consistência e descobrir como detectar quando as coisas estão fora de sincronia antes de fazer qualquer coisa que o código se arrependa. - [Martin Fowler](https://martinfowler.com/articles/microservice-trade-offs.html#consistency)
