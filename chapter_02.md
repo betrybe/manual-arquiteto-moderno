@@ -59,7 +59,7 @@ I recommend the following article: [“The Business Value of using DDD”](https
 The next section covers an example that I’ve created based on my experience while rearchitecting Java monolithic applications to a more distributed approach. The example is fictional, any similarity with reality is just a coincidence :) We encourage you to abstract the concepts and patterns away from the example scenario and map them to your own domain. At the end of the day, this is just an example, albeit a complex and fully functional one.
 
 
-## From Monolith to K8s using DDD
+## Evolving your monolith on practice, using DDD
 
 This section covers an example scenario that helps us to explain some of the concepts in action. You can map these concepts to your business domain and copy the actual technical solution from the example for some of the challenges presented. 
 
@@ -167,7 +167,7 @@ With the rise in popularity of Kubernetes, it is also common to find Kubernetes 
 
 You, as a developer targeting Kubernetes as your deployment platform, are now responsible for a bunch of artifacts, not just your Java Service source code. 
 
-![chapter_02_04](images/chapter_02_04.png)
+![o](images/chapter_02_04.png)
 
 In order to deploy your code to Kubernetes you will need to: 
 - Build and test your source code, if it is Java you can use, for example, Maven or Gradle to do that;
