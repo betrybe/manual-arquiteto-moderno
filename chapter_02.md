@@ -52,14 +52,14 @@ Kubernetes success is based on the fact that each major cloud provider provides 
 
 ### Capitalizing on DDD benefits
 
-If you follow the DDD path, you need to capitalize on some of the promises that DDD gave you to start with and make sure that you are ripping the benefits. If we cannot continuously deliver new versions of our services without stopping the entire application, we are just making our life more complicated for nothing. If we are not delivering concrete business value as a result of following DDD, all the changes suggested in this chapter are not worth the effort or the time. 
+If you follow the DDD path, you need to take advantage on some of the promises that DDD gave you to start with and make sure that you are ripping the benefits. If we cannot continuously deliver new versions of our services without stopping the entire application, we are just making our life more complicated for nothing. If we are not delivering concrete business value as a result of following DDD, all the changes suggested in this chapter are not worth the effort or the time. 
 
 I recommend the following article: [“The Business Value of using DDD”](https://www.informit.com/articles/article.aspx?p=1944876&seqNum=4), which gives a high-level overview of the benefits of adopting DDD, not for you as a developer, but for your business. 
 
 The next section covers an example that I’ve created based on my experience while rearchitecting Java monolithic applications to a more distributed approach. The example is fictional, any similarity with reality is just a coincidence :) We encourage you to abstract the concepts and patterns away from the example scenario and map them to your own domain. At the end of the day, this is just an example, albeit a complex and fully functional one.
 
 
-## From Monolith to K8s using DDD
+## Evolving your monolith on practice, using DDD
 
 This section covers an example scenario that helps us to explain some of the concepts in action. You can map these concepts to your business domain and copy the actual technical solution from the example for some of the challenges presented. 
 
@@ -167,7 +167,7 @@ With the rise in popularity of Kubernetes, it is also common to find Kubernetes 
 
 You, as a developer targeting Kubernetes as your deployment platform, are now responsible for a bunch of artifacts, not just your Java Service source code. 
 
-![chapter_02_04](images/chapter_02_04.png)
+![](images/chapter_02_04.png)
 
 In order to deploy your code to Kubernetes you will need to: 
 - Build and test your source code, if it is Java you can use, for example, Maven or Gradle to do that;
