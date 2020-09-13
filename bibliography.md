@@ -2,16 +2,16 @@
 
 
 
-- Java Efetivo;   
-- Clean Code;
-- Domain Driven Design (DDD): 
+- [Java Efetivo](https://www.amazon.com/Effective-Java-2nd-Joshua-Bloch/dp/0321356683/ref=pd_lpo_14_t_0/137-8030169-2504860?_encoding=UTF8&pd_rd_i=0321356683&pd_rd_r=b3c8dab8-c0c9-4a4d-a018-a3ca61d90b58&pd_rd_w=NUGFI&pd_rd_wg=kRfae&pf_rd_p=7b36d496-f366-4631-94d3-61b87b52511b&pf_rd_r=CJ8160X0PF9Z2VMM0FQC&psc=1&refRID=CJ8160X0PF9Z2VMM0FQC);   
+- [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/ref=sr_1_1?dchild=1&keywords=clean+code&qid=1600030324&s=books&sr=1-1);
+- [Domain Driven Design (DDD)](https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215/ref=sr_1_1?dchild=1&keywords=DDD&qid=1600030336&s=books&sr=1-1): 
   - [Implementing DDD](https://www.amazon.co.uk/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577) 
   - [DDD Distilled](https://www.amazon.co.uk/Domain-Driven-Design-Distilled-Vaughn-Vernon/dp/0134434420/ref=pd_lpo_14_t_1/262-0200870-8496500?_encoding=UTF8&pd_rd_i=0134434420&pd_rd_r=c7957a5b-3f2f-4008-8c93-8a9b5792c448&pd_rd_w=JKKyX&pd_rd_wg=dFALp&pf_rd_p=7b8e3b03-1439-4489-abd4-4a138cf4eca6&pf_rd_r=W41G9RPNEBHEF8Y5DXG8&psc=1&refRID=W41G9RPNEBHEF8Y5DXG8)
   - [The Business Value of Using DDD](https://www.informit.com/articles/article.aspx?p=1944876&seqNum=4)
-- Clean Architecture;
-- Building Microservices;
-- The Twelve Factors;
-- Monolith to Microservices (Sam Newman)
+- [Clean Architecture](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164/ref=sr_1_1?crid=V32SL0V5C426&dchild=1&keywords=clean+architecture&qid=1600030309&s=books&sprefix=clean+a%2Cstripbooks-intl-ship%2C270&sr=1-1);
+- [Building Microservices](https://www.amazon.com/Building-Microservices-Designing-Fine-Grained-Systems/dp/1491950358/ref=sr_1_1?dchild=1&keywords=Building+Microservices&qid=1600030352&s=books&sr=1-1);
+- [The Twelve Factors](https://12factor.net/);
+- [Monolith to Microservices (Sam Newman)](https://www.amazon.com/Monolith-Microservices-Evolutionary-Patterns-Transform/dp/1492047848/ref=sr_1_1?dchild=1&keywords=Monolith+to+Microservices&qid=1600030381&s=books&sr=1-1)
 - [Cloud-Native Continuous Integration and Delivery: Build, test, and deploy cloud-native applications in the cloud-native way](https://www.amazon.com.br/gp/product/B07HHDVSJK?ref_=kcp_mac_dp), Onur Yılmaz
 - [Kubernetes Patterns: Reusable Elements for Designing Cloud-Native Applications](https://www.amazon.com.br/Kubernetes-Patterns-Designing-Cloud-Native-Applications-ebook/dp/B07QH3JCC6/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=kubernetes+patterns&qid=1591755073&s=digital-text&sr=1-1), por Bilgin Ibryam, Roland Huß
 - [Teaching an Elephant to Dance: Intentional evolution across teams, processes, and applications](https://www.redhat.com/cms/managed-files/mi-middleware-teaching-elephant-to-dance-ebook-f8980kc-201709-en.pdf), por Burr Sutter e Deon Ballard
