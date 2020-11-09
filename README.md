@@ -35,3 +35,7 @@ Este livro surgiu da iniciativa de Otávio Santana, e se materializou através d
 O grupo de autores iniciais é composto por Otávio Santana, Karina Varela e Sérgio Lopes, se extendendo à grandes nomes como Elder Moraes, Maurício Salatino (Salaboy), Sandro Giacomozzi, Francisco (Professor) Isidro, Leandro Domingues.
 
 Com a popularização da iniciativa, a comunidade passa a ativamente colaborar com a revisão do livro. Nosso muito obrigada a todos os contribuidores: https://github.com/otaviojava/manual-arquiteto-moderno/graphs/contributors
+
+
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
