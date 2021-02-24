@@ -85,7 +85,7 @@ Além destes exemplos mais "simples" (e destaco a importância de se colocar o t
 		 System.out.println("Achei = " + quantosAchei +" em "+(fim-inicio));
 
 Este simples algoritmo popula uma lista com 100.000 objetos do tipo produto e realiza 10.000 buscas de um produto inexistente nesta lista. Como é uma estrutura linear (e voltamos na análise de algoritmos), a busca obrigatoriamente tem que passar por todos os objetos até concluir que ele não existe na lista. Um algoritmo deste pode levar alguns bons segundos para executar (um teste em uma máquina comum pode levar entre 2 e 5 segundos para executar).
-É possível melhorar o desempenho desta busca? Claro que sim. Poderíamos usar, ao invés de busca linear, um algoritmo de busca binária. Entretanto para esta estratégia nosso conjunto precisaria estar previamente ordenado.
+É possível melhorar o desempenho desta busca? Claro que sim. Poderíamos usar, ao invés de busca linear, um algoritmo de busca binária. Entretanto para esta estratégia nosso conjunto precisaria estar previamente ordenado. 
 
 Agora, se pensarmos em outra estrutura, como um mapa Hash, qual a vantagem? Vamos observar este código.
 
