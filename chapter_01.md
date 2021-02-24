@@ -12,7 +12,7 @@ Podemos interconectar disciplinas de Análise de Algoritmos com Programação Or
 
 Considere o exemplo de uma busca de objetos em um banco através de um ORM. Dependendo da aplicação, compartilhamento de recursos, escalabilidade e também concorrência, temos que pensar em eficiência de algoritmos mesmo antes de sua implementação. 
 
-Ter consciência de que um `Lazy Fetch` com Hibernate, por exemplo pode gerar uma complexidade assintótica muito maior do que um `Eager Fetch` é fundamental para um senior developer. Isso porque, por exemplo, em um sistema de recuperação de cabeçalhos de pedidos e seus respectivos itens, ocorre uma sequência de acessos ao banco de dados muito volumosa na primeira abordagem (*lazy*). Acessos para recuperar todos os cabeçalhos de pedidos e, para cada pedido mais uma sequência de acessos ao banco de dados. Se observarmos um algoritmo com essas características, veremos algo próximo ao pseudocódigo a seguir:
+Ter consciência de que um `Lazy Fetch` com Hibernate, por exemplo pode gerar uma complexidade assintótica muito maior do que um `Eager Fetch` é fundamental para um senior developer. Isso porque, por exemplo, em um sistema de recuperação de cabeçalhos de pedidos e seus respectivos itens, ocorre uma sequência de acessos ao banco de dados muito volumosa na primeira abordagem (*lazy*). Acessos para recuperar todos os cabeçalhos de pedidos e, para cada pedido mais uma sequência de acessos ao banco de dados. Se observarmos um algoritmo com essas características, veremos algo próximo ao pseudocódigo a seguir: 
 
 	1. recuperar conjunto de pedidos e armazenar em listaP
 	2. para cada pedido P em listaP faça
