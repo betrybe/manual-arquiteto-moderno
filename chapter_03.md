@@ -1,10 +1,10 @@
 # Clean code
 
-São claros e reconhecidos os grandes benefícios obtidos por meio da utilização de boas práticas no código. Algo que logo se nota ao se trabalhar com um código limpo e fluido é a melhor legibilidade de código e a maior facilidade de manutenção. Mas, ao construir aplicações e discutir práticas de arquitetura, há um outro ponto que não podemos deixar de lado: a integridade dos dados que serão manipulados. Será que as boas práticas de código refletem de forma positiva na integridade desses dados? Um dos primordiais tópicos cobertos pelo livro [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship-ebook/dp/B001GSTOAM) é que, diferentemente da programação estruturada, a orientação a objetos expõe comportamento escondendo os dados. Com isso em mente, neste capítulo discorreremos sobre os benefícios da utilização de boas práticas de código e as vantagens obtidas ao se implementarem modelos ricos.
+São claros e reconhecidos os grandes benefícios obtidos por meio da utilização de boas práticas no código. Algo que logo se nota ao se trabalhar com um código limpo e fluido é a melhor legibilidade de código e a maior facilidade de manutenção. Mas, ao construir aplicações e discutir práticas de arquitetura, há um outro ponto que não podemos deixar de lado: a integridade dos dados que serão manipulados. Será que as boas práticas de código refletem de forma positiva na integridade desses dados? Um dos tópicos primordiais tópicos cobertos pelo livro [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship-ebook/dp/B001GSTOAM) é que, diferentemente da programação estruturada, a orientação a objetos expõe comportamento escondendo os dados. Com isso em mente, neste capítulo discorreremos sobre os benefícios da utilização de boas práticas de código e as vantagens obtidas ao se implementarem modelos ricos.
 
 ## Modelos Ricos
 
-Levando em consideração uma aplicação que adota práticas de clean code, os ganhos de performance são consideráveis, uma vez que, por não trafegar e validar dados em bancos de dados, há economia tanto de processamento de rede quanto de hardware. Durante o desenvolvimento, há vários desafios em se "blindar" o código, como os inúmeros conceitos técnicos que são aplicados, e junção de negócio com o interesse na criação de uma linguagem ubíqua. Que tal aprofundar um pouco mais nesse conceito através da criação de um exemplo? 
+Levando em consideração uma aplicação que adota práticas de clean code, os ganhos de performance são consideráveis, uma vez que, por não trafegar e validar dados em bancos de dados, há economia tanto de processamento de rede quanto de hardware. Durante o desenvolvimento, há vários desafios em se "blindar" o código, como os inúmeros conceitos técnicos que são aplicados e a junção de negócio com o interesse na criação de uma linguagem ubíqua. Que tal aprofundar um pouco mais nesse conceito através da criação de um exemplo? 
 
 Vamos criar uma aplicação de gestão de jogadores de futebol. Teremos o conceito de `time`, e dentro de um `time` teremos as seguintes informações:
 
@@ -16,7 +16,7 @@ Vamos criar uma aplicação de gestão de jogadores de futebol. Teremos o concei
 - O salário do jogador, representado pelo atributo <code>salary</code> da classe <code>Player</code>;
 - O email para contato, no atributo `email`;
 - A relação com o time, representada pela classe `Team`;	
-- Lembrando a regra que diz que _um time não deve ter mais que vinte membros_.
+- Lembrando a regra, _um time não deve ter mais que vinte membros_.
 
 Com base nas informações citadas, a primeira versão do modelo é mostrada a seguir:
 
@@ -65,7 +65,7 @@ Sob essa perspectiva, vamos analisar algumas regras de negócio da nossa aplica�
 - O ano de saída pode estar vazio, porém, quando preenchido, deverá ser posterior à data de entrada; 
 - Apenas o time (representado pela classe `Team`) é responsável por gerenciar os jogadores (`Player`), ou seja, será necessário criar métodos para adicionar jogadores ao time. 
 
-Vamos trabalhar na classe `Team`. Teremos de criar de um método para adicionar vários players (`Player`) no `Team`. Também precisaremos de um método (get) que retorne os players. É importante validar a entrada de players, uma vez que não faz sentido adicionar um player nulo. Devemos também garantir que apenas a classe `Team` adicione/remova players. Para isso, devemos garantir que essa classe retorne uma lista apenas de leitura, do contrário, teremos problemas com encapsulamento. Uma maneira de resolver isso seria retornar uma lista como no exemplo a seguir:
+Vamos trabalhar na classe `Team`. Teremos de criar de um método para adicionar vários players (`Player`) no `Team`. Também precisaremos de um método (get) que retorne os players. É importante validar a entrada de players, uma vez que não faz sentido adicionar um player nulo. Devemos também garantir que apenas a classe `Team` adicione/remova players. Para isso, devemos assegurar que essa classe retorne uma lista apenas de leitura, do contrário teremos problemas com encapsulamento. Uma maneira de resolver isso seria retornar uma lista como no exemplo a seguir:
 
 ```java
 import java.util.ArrayList;
@@ -183,14 +183,14 @@ public void goal() {
 
 Uma vez definidos os métodos de acesso, o próximo passo está na criação das instâncias de `Team` e `Player`. Como boa parte das informações são obrigatórias para se criar uma instância válida, o primeiro movimento natural seria a criação de um método construtor. Isso é válido com objetos simples, como o `Team`, porém a class `Player` tem mais complexidades, como:
 
-- A quantidade de parâmetros: pode gerar um construtor [polyadic](https://medium.com/coding-skills/clean-code-101-meaningful-names-and-functions-bf450456d90c) (construtor com mais de três argumentos) .
+- A quantidade de parâmetros: pode gerar um construtor [polyadic](https://medium.com/coding-skills/clean-code-101-meaningful-names-and-functions-bf450456d90c) (construtor com mais de três argumentos).
 - A complexidade das validações: não faz sentido um player começar a jogar antes de 1863, uma vez que o esporte nasceu nesse ano.
 
 Para resolver esses problemas, executaremos dois passos: utilização de tipos customizados e aplicação do padrão Builder.
 
 ### Tipos customizados
 
-A primeira estratégia é a criação de um tipo. Essa estratégia faz sentido quando um objeto tem grande complexidade, como por exemplo objetos que lidam com dinheiro e data. Trazer essa complexidade para entidade pode quebrar o princípio da responsabilidade única. Existe um artigo muito bom escrito por Martin Fowler, [When Make a Type](https://martinfowler.com/ieeeSoftware/whenType.pdf), que explica as vantagens de tais recursos. Também não queremos reinventar a roda, portanto, para representar ano e dinheiro utilizaremos as APIs de Date/Time que nasceram do Java 8 e a Money-API. O único tipo que precisaremos criar é o tipo `e-mail`, como mostra o código a seguir:
+A primeira estratégia é a criação de um tipo. Essa estratégia faz sentido quando um objeto tem grande complexidade, como por exemplo objetos que lidam com dinheiro e data. Trazer essa complexidade para a entidade pode quebrar o princípio da responsabilidade única. Existe um artigo muito bom escrito por Martin Fowler, [When Make a Type](https://martinfowler.com/ieeeSoftware/whenType.pdf), que explica as vantagens de tais recursos. Também não queremos reinventar a roda, portanto, para representar ano e dinheiro utilizaremos as APIs de Date/Time que nasceram do Java 8 e a Money-API. O único tipo que precisaremos criar é o tipo `e-mail`, como mostra o código a seguir:
 
 ```java
 import java.util.Objects;
@@ -511,7 +511,7 @@ Com a criação desse exemplo, demonstramos que apenas ao utilizar conceitos de 
 
 ## Lombok: problema ou solução?
 
-De uma maneira geral, o projeto Lombok é uma biblioteca famosa e conhecida por reduzir a quantidade de linhas de código através da utilização de anotações. Essa ferramenta tem seus benefícios, uma vez que a redução de código pode facilitar a leitura. Um exemplo é a anotação `Builder`, que permite a criação de classes mais intuitiva e no padrão Builder. Por outro lado, também vemos alguns problemas no uso desse projeto, itens estes que estão listados a seguir:
+De uma maneira geral, o projeto Lombok é uma biblioteca famosa e conhecida por reduzir a quantidade de linhas de código através da utilização de anotações. Essa ferramenta tem seus benefícios, uma vez que a redução de código pode facilitar a leitura. Um exemplo é a anotação `Builder`, que permite a criação de classes mais intuitiva e no padrão Builder. Por outro lado, também vemos alguns problemas no uso desse projeto, itens que estão listados a seguir:
 
 * O código é gerado pelo projeto Lombok e não é visualizado pela IDE. Qualquer exceção que envolva essas classes tenderá a ser difícil de ser seguida pela pilha de exceção;
 
@@ -519,7 +519,7 @@ De uma maneira geral, o projeto Lombok é uma biblioteca famosa e conhecida por 
 
 * Boa parte dos códigos como getters e setters podem ser gerados pela IDE;
 
-* Os poderes das anotações são muito tentadores, porém, encapsulamento não é sobre ter o atributo privado e com getter e setter públicos, mas sim sobre garantir que atributos sejam acessados com a menor visibilidade possível.
+* Os poderes das anotações são muito tentadores, porém encapsulamento não é sobre ter o atributo privado e com getter e setter públicos, mas sim sobre garantir que atributos sejam acessados com a menor visibilidade possível.
 
 Queremos deixar claro que o objetivo deste tópico não é classificar o Lombok e seu relacionamento ou não com as boas práticas de programação. A intenção é mostrar que, apesar de possuir suas vantagens - expostas em diversos sites -, é importante ter em mente os problemas acarretados com a adoção dessa tecnologia.
 
