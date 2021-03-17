@@ -26,7 +26,7 @@ Situações como essa são mais comuns do que se pode imaginar. Lidar com sistem
 
 Quanto menos conhecimento sobre sistema o(a) desenvolvedor(a) tem, maior é sua insegurança na hora de alterar código e menores são as garantias de que suas alterações não causarão mais estragos ao sistema, que já se encontra frágil pelo tempo. Mesmo pequenas refatorações com o intuito de melhorar a clareza ou a simplicidade do código podem gerar novos bugs, reintroduzir bugs antigos no sistema ou impactar o sistema de forma negativa.
 
-Se refatorar código traz riscos, como a pessoa desenvolvedora pode garantir que erros não serão introduzidos nas suas refatorações?
+Se refatorar código traz riscos, como se pode garantir que erros não serão introduzidos nas suas refatorações?
 
 A verdade é que refatorar código sem uma garantia concreta de que o comportamento atual não vá mudar é um ato imprudente, pois não adianta nada melhorar o código se algo que já existe é quebrado. Essa garantia pode ser obtida de diversas maneiras, como uma equipe de QA (testers) ou um ambiente de homologação para que clientes possam validar a mudança, mas sem dúvida uma das melhores alternativas a um preço justo é através do uso de **Testes Automatizados**. Uma bateria de testes de regressão mostraria rapidamente se uma determinada mudança (ou refatoração) no código mudou o comportamento da funcionalidade ou mesmo impactou outras partes do sistema. Com isso, qualquer erro introduzido seria imediatamente apontado, facilitando a correção a cada passo da refatoração de maneira imediata.
 
