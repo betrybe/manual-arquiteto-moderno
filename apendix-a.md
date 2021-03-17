@@ -14,7 +14,7 @@ E ferramentas para isso há várias, entre elas temos o [Fortify](https://www.mi
 
 Outra prática que eu vejo em algumas empresas, principalmente quando os serviços estão expostos apenas internarmente e não para fora, é não usar o HTTPS, ou melhor, usar um TLS (Transport Layer Security). E para que você precisa disso? Para ter privacidade, integridade e identificação.
 
-E quando estamos falando de microsserviços, um cenário que vai acabar sempre existindo diz respeito à necessidade de falar com servidores de autorização, e podemos estar falando de um API Key, ou de um "client secret", ou até mesmo de credenciais para uma autenticação básica. Então a primeira regra básica é: não deixe essas chaves no seu repositório de fonte, esses caras precisam ser variáveis de ambientes ou chaves de configuração externa, e elas devem estar sempre encriptadas.
+E quando estamos falando de microsserviços, um cenário que vai acabar sempre existindo diz respeito à necessidade de falar com servidores de autorização, e podemos estar falando de um API Key, ou de um "client secret", ou até mesmo de credenciais para uma autenticação básica. Então a primeira regra básica é: não deixe essas chaves no seu repositório de fonte, esses itens precisam ser variáveis de ambientes ou chaves de configuração externa, e elas devem estar sempre encriptadas.
 
 Como estamos falando de containers, as práticas valem também para lá, e nunca rode seu container como "root". Você precisa assumir a premissa de que seu sistema nunca é 100% seguro, alguém vai conseguir explorar algo. Então você não pode só prevenir, você precisa detectar e reagir a isso.
 
