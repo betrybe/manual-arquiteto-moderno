@@ -38,7 +38,7 @@ Devemos descatar duas principais vantagens de um cluster, especialmente em ambie
 
 * **Tolerância a falhas** (_Fault Tolerance_): como há mais de um servidor ou instância para os usuários se conectarem, o cluster de bancos de dados oferece uma alternativa no caso de falha em um servidor. Quando se lida com dezenas de milhares de máquinas em um único [_data center_](https://pt.wikipedia.org/wiki/Centro_de_processamento_de_dados), tais falhas são um problema presente;
 
-* **Balanceamento de carga** (_Load Balancing_): o cluster geralmente é configurado para permitir que quem o utiliza seja automaticamente alocado ao servidor com o mínimo de uso para que, assim, se otimize o uso da estrutura disponível para o banco.
+* **Balanceamento de carga** (_Load Balancing_): o cluster geralmente é configurado para permitir que a aplicação cliente seja automaticamente alocado ao servidor com o mínimo de uso para que, assim, se otimize o uso da estrutura disponível para o banco.
 
 #### Detalhando o conceito BASE
 
