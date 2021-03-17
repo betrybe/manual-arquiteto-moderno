@@ -2,7 +2,7 @@ Apêndice A: Segurança
 
 ## Práticas de Segurança
 
-Código seguro deveria ser uma regra em qualquer design de aplicação, pois em alguns ramos são tão importantes quanto qualquer regra de qualidade que se possa ter. Para microsserviços não é diferente, e aqui não existe nenhum segredo, é a mesma regra para qualquer desenho de aplicação: no mínimo se deve olhar para o [Top 10 do OWASP](https://owasp.org/www-project-top-ten/) e seguir essas recomendações no seu projeto. O mínimo que a pessoa desenvolvedora precisa saber é sobre essas vulnerabilidades.
+Código seguro deveria ser uma regra em qualquer design de aplicação, pois em alguns ramos são tão importantes quanto qualquer regra de qualidade que se possa ter. Para microsserviços não é diferente, e aqui não existe nenhum segredo, é a mesma regra para qualquer desenho de aplicação: no mínimo se deve olhar para o [Top 10 do OWASP](https://owasp.org/www-project-top-ten/) e seguir essas recomendações no seu projeto. É essencial que profissionais que trabalham com desenvolvimento conheçam as vulnerabilidades descritas no OWASP.
 
 Sério mesmo, não há nada novo aqui, e qualquer pessoa que esteja tentando convencer você de um "Cross Microservice Injection" ou algo do tipo está tentando te enrolar. 
 
