@@ -48,7 +48,7 @@ Mas quando estamos neste cenário de microsserviços, a recomendação passa a s
 
 O Token vai ter a informação de identificação de quem usa, e toda vez que chega ao servidor, podemos validar no server a identidade e a autorização. O token é encriptado e pode seguir um padrão como o [JWT](https://jwt.io/).
 
-E usando token conseguimos delegar a responsabilide do estado de quem utiliza, para algum processo que possa a validade do mesmo. Habilitamos vários tipos de validações de segurança que podem ser colocadas na malha (Service Mesh) ou no seu gateway de entrada e retirar essas responsabilidades dos serviços e aplicações e mesmo assim ainda continuar garantindo a segurança.
+E usando token conseguimos delegar a responsabilide do estado da pessoa (user) logada, para algum processo que possa a validade do mesmo. Habilitamos vários tipos de validações de segurança que podem ser colocadas na malha (Service Mesh) ou no seu gateway de entrada e retirar essas responsabilidades dos serviços e aplicações e mesmo assim ainda continuar garantindo a segurança.
 
 Com o uso do JWT, você passa a ter um "client token", e você vai passar a algum servidor para que ele possa fazer a validação/criação do mesmo. 
 
