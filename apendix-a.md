@@ -24,7 +24,7 @@ A chave é seguir ao menos cinco pilares:
 - Vasculhe suas dependências;
 - Use sempre HTTPS;
 - Use Tokens de Acesso e Identidade;
-- Proteja e encripte seus segredos.
+- Proteja e criptografe seus segredos.
 
 #### Soluções para Autenticação e Autorização
 
