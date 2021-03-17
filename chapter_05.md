@@ -24,7 +24,7 @@ Situações como essa são mais comuns do que se pode imaginar. Lidar com sistem
 
 ## A importância dos testes automatizados na hora refatorar
 
-Quanto menos conhecimento sobre sistema a pessoa desenvolvedora tem, maior é sua insegurança na hora de alterar código e menores são as garantias de que suas alterações não causarão mais estragos ao sistema, que já se encontra frágil pelo tempo. Mesmo pequenas refatorações com o intuito de melhorar a clareza ou a simplicidade do código podem gerar novos bugs, reintroduzir bugs antigos no sistema ou impactar o sistema de forma negativa.
+Quanto menos conhecimento sobre sistema o(a) desenvolvedor(a) tem, maior é sua insegurança na hora de alterar código e menores são as garantias de que suas alterações não causarão mais estragos ao sistema, que já se encontra frágil pelo tempo. Mesmo pequenas refatorações com o intuito de melhorar a clareza ou a simplicidade do código podem gerar novos bugs, reintroduzir bugs antigos no sistema ou impactar o sistema de forma negativa.
 
 Se refatorar código traz riscos, como a pessoa desenvolvedora pode garantir que erros não serão introduzidos nas suas refatorações?
 
