@@ -65,7 +65,7 @@ Vejamos algumas vantagens da utilização da abordagem de uma arquitetura orient
 
 A comunicação entre componentes de uma aplicação monolítica ocorrem in-memory, ou seja, não possuem o overhead da **latência** existente na comunicação via rede, como ocorre no cenário de microsserviços. Quanto mais o número de serviços e a complexidade arquitetural aumentam, mais catastrófico pode ser esse problema. Lidar com o tempo de resposta do serviço invocado no cliente em si é uma boa prática (como configuração de timeouts e retries), assim como manter em dia os serviços de monitoramento e alertas da sua rede.
 
-Atente-se à separação por responsabilidade dos componentes de back-end e de front-end. O **front-end** deve ser implementado de forma que, na falha de um dos serviços de back-end, os demais itens funcionem normalmente - garantindo a melhor experiência possível à pessoa usuária final.
+Atente-se à separação por responsabilidade dos componentes de back-end e de front-end. O **front-end** deve ser implementado de forma que, na falha de um dos serviços de back-end, os demais itens funcionem normalmente - garantindo a melhor experiência possível.
 
 A arquitetura de microsserviços é agnóstica a linguagens e frameworks. Com isso, seu ambiente pode se tornar **poliglota**. Do ponto de vista arquitetural e de liderança técnica, tenha parcimônia na avaliação das tecnologias a serem utilizadas para que não se depare com um cenário onde há um serviço sem profissionais capacitados para mantê-lo. A definição do escopo e tamanho de um microsserviço deve ser mensurada. 
 
