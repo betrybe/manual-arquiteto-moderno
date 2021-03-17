@@ -38,7 +38,7 @@ E outro ponto que é preciso analisar é que os microsserviços devem ser *state
 
 Podemos abordar a Autorização e Autenticação pelo modelo de sessão distribuída, usando ferramentas para você armazenar essa sessão. Você pode abordar/manter a sessão das seguintes maneiras:
 
-**Sticky Session** - A ideia aqui é usar o load balancer e manter quem utiliza sempre no mesmo servidor em que veio o request. Só que esse cara vai fazer você só conseguir expandir horizontalmente.
+**Sticky Session** - A ideia aqui é usar o load balancer e manter as conexões de origem sempre no mesmo servidor onde veio o primeiro request. Só que esta configuração só te permite escalar horizontalmente.
 
 **Replicação de Sessão** - Toda instância salva a sessão e sincroniza através da rede. Só que aqui isso vai causar um "overhead" de rede. Quanto mais instâncias, mais será preciso replicar e lidar com a latência disso.
 
