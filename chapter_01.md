@@ -47,7 +47,7 @@ Nesse caso, analisando a complexidade assintótica, temos:
 		N execuções da linha 5
 
 Portanto, se somarmos todas as execuções, temos 1 + (N+1) + N * (1 + (N+1) + N), o que resulta num polinômio cujo maior expoente é 2 (Nˆ2). Logo, nosso algoritmo de busca de pedidos, itens e impostos pode ser considerado um algoritmo de ordem quadrática. 
-Isso porque apenas pensamos na recuperação da informação. Nem pensamos ainda na iteração desses valores, o que pode elevar ainda mais o tempo computacional. Agora imagine esse cenário em um sistema Web com algumas dezenas de milhares de pessoas usuárias conectadas. Se fizermos acessos ao disco (que é um dispositivo bastante lento, se comparado ao acesso à memória) de forma ineficiente para uma única requisição, como será o desempenho da aplicação para diversas requisições simultâneas?
+Isso porque apenas pensamos na recuperação da informação. Nem pensamos ainda na iteração desses valores, o que pode elevar ainda mais o tempo computacional. Agora imagine esse cenário em um sistema Web com algumas dezenas de milhares de pessoas conectadas. Se fizermos acessos ao disco (que é um dispositivo bastante lento, se comparado ao acesso à memória) de forma ineficiente para uma única requisição, como será o desempenho da aplicação para diversas requisições simultâneas?
 
 A que conclusão podemos chegar depois de toda essa discussão? Talvez não seja tarefa do dia a dia de um senior realizar a análise assintótica de algoritmos através da obtenção dos polinômios. Porém, para quem irá trabalhar com problemas mais complexos que a maioria dos casos do dia a dia, identificar complexidades (mesmo que de forma mais superficial, inicialmente) de algoritmos é fundamental para ter uma visão criteriosa de quais decisões tomar.
 
