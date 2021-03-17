@@ -52,7 +52,7 @@ Isso porque apenas pensamos na recuperação da informação. Nem pensamos ainda
 A que conclusão podemos chegar depois de toda essa discussão? Talvez não seja tarefa do dia a dia de um senior realizar a análise assintótica de algoritmos através da obtenção dos polinômios. Porém, para quem irá trabalhar com problemas mais complexos que a maioria dos casos do dia a dia, identificar complexidades (mesmo que de forma mais superficial, inicialmente) de algoritmos é fundamental para ter uma visão criteriosa de quais decisões tomar.
 
 ## A importância de um estudo mais aprofundado em disciplinas teóricas
-Sabemos que Estruturas de Dados é um assunto que, para muitos (as) estudantes em formação, é tenebroso e extremamente abstrato. Porém a necessidade de termos conhecimento das estruturas básicas e avançadas é fundamental para também entendermos as ferramentas que utilizamos em sistemas atuais.
+Sabemos que Estruturas de Dados é um assunto que, para muitos(as) estudantes em formação, é tenebroso e extremamente abstrato. Porém a necessidade de termos conhecimento das estruturas básicas e avançadas é fundamental para também entendermos as ferramentas que utilizamos em sistemas atuais.
 
 Quer exemplos? 
 - **Filas**: Apache Kafka, Rabbit MQ, MQTT, entre outros, são exemplos de ferramentas que utilizam os conceitos de `filas` em suas implementações. Não apenas filas únicas, mas filas com prioridades, que também são objeto de estudo no período da graduação.
