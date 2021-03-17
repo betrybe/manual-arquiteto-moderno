@@ -55,4 +55,4 @@ Existem diversas motivações para realizar uma refatoração do código, e list
 
 # Concluindo    
 
-Com isso concluímos o tópico sobre refatoração do código. Abordamos pontos importantes, como a motivação de se refatorar o código além dos seus riscos. Como bons profissionais de desenvolvimento, é sempre importante colocar na balança as motivações e evitar problemas futuros de manutenabilidade e legibilidade do código. Como sempre, o bom senso é a melhor ferramenta da pessoa desenvolvedora.
+Com isso concluímos o tópico sobre refatoração do código. Abordamos pontos importantes, como a motivação de se refatorar o código além dos seus riscos. Como bons profissionais de desenvolvimento, é sempre importante colocar na balança as motivações e evitar problemas futuros de manutenabilidade e legibilidade do código. Como sempre, o bom senso será sua melhor ferramenta.
