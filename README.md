@@ -30,7 +30,7 @@ Este livro apresenta tópicos atuais e relevantes que embasarão você na tomada
 
 ## Contribuições
 
-Este livro surgiu da iniciativa de Otávio Santana e se materializou através da colaboração de pessoas profissionais seniores e reconhecidas na comunidade. Cada pessoa que escreveu o livro possui uma opinião bem embasada e experiência de campo nas tecnologias e práticas descritas. 
+Este livro surgiu da iniciativa de Otávio Santana e se materializou através da colaboração de profissionais seniores e com amplo reconhecimento na comunidade. Cada autor e autora que escreveu o livro possui uma opinião bem embasada e experiência de campo nas tecnologias e práticas descritas. 
 
 O grupo de autores iniciais é composto por Otávio Santana, Karina Varela e Sérgio Lopes, se extendendo a grandes nomes como Elder Moraes, Maurício Salatino (Salaboy), Sandro Giacomozzi, Francisco (Professor) Isidro, Leandro Domingues.
 
