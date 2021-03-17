@@ -145,7 +145,7 @@ Mas você, como dev, pode se perguntar: "E quando eu farei uma nova linguagem?".
 
 ## O ponto-chave: usar frameworks, fazer as tarefas manualmente, ou melhor, criar seu próprio?
 
-Difícil de responder, porém com uma tendência a buscar desafios. Uma pessoa desenvolvedora torna-se sênior com mais rapidez quando entende profundamente como as tecnologias, bibliotecas e frameworks funcionam nos bastidores. Portanto, tentaremos responder a essa pergunta (ou talvez até uma provocação) analisando-a por três diferentes visões.
+Difícil de responder, porém com uma tendência a buscar desafios. Profissionais de desenvolvimento tornam-se sênior com mais rapidez quando entendem profundamente como as tecnologias, bibliotecas e frameworks funcionam nos bastidores. Portanto, tentaremos responder a essa pergunta (ou talvez até uma provocação) analisando-a por três diferentes visões.
 
 **Visão do conhecimento**: Obviamente, você pode (e deve!) criar seu próprio framework pelo menos uma vez na vida, mesmo que a única pessoa a usar esse framework seja você. Qual o motivo? Este mesmo: conhecimento. Silvio Meira (um dos principais influenciadores em Computação do Brasil e do mundo) já disse em uma palestra que "*o profissional de computação que nunca desenvolveu um compilador não pode se considerar um profissional completo, pois um compilador exige que você conheça toda a grade de um curso de Ciência da Computação*". E ouso complementar: desenvolva também uma *Game Engine*, pois existe a parte de Álgebra Linear e Computação Gráfica que é pouco aplicada em um compilador. Um compilador, assim como uma Game Engine, exige que a pessoa desenvolvedora *Ligue os Pontos* conceituais que sempre ficaram negligenciados.
 
