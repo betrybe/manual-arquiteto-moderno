@@ -113,7 +113,7 @@ Pela própria definição de Hash, há um cálculo para determinar, através de 
 
 Desse modo, independentemente do tamanho do conjunto, o tempo de acesso sempre será o mesmo (o que traz um desempenho excepcional, se comparado ao desempenho de busca em uma lista). 
 
-Não somente Hash, como também Árvores binárias, AVLs, ou mesmo B-Trees, para que a pessoa desenvolvedora sênior tenha condições mínimas de definir estratégias de índices em tabelas de bancos de dados relacionais.
+Não somente Hash, como também Árvores binárias, AVLs, ou mesmo B-Trees, para que dev sêniors tenham condições mínimas de definir estratégias de índices em tabelas de bancos de dados relacionais.
 
 Agora, estou buscando valorizar bastante a Análise de Algoritmos, correto? Quer um exemplo de onde a Análise de Algoritmos pode não ser suficiente para uma solução?
 
