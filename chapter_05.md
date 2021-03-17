@@ -4,7 +4,7 @@ Após alguns anos de estrada, quem desenvolve percebe que passa grande parte do 
 
 Não à toa, uma simples alteração no código, como adicionar um `if`, pode levar horas ou mesmo dias. Geralmente, esse alto custo para manter o software é consequência de uma péssima qualidade do código que foi escrito, afinal, quanto maior a dificuldade em ler e entender um trecho de código, maior será o tempo gasto para alterá-lo. E não se engane, mesmo um(a) dev que implementou a funcionalidade no sistema pode ter dificuldades para ler o código após alguns meses.
 
-Para diminuir o custo nas alterações do sistema, é necessário **investir na qualidade e na clareza do código produzido**, seja no código atual, seja na introdução de novas linhas de código. Em outros termos, a pessoa desenvolvedora deve melhorar o código já pronto e que funciona em produção sem mudar o seu comportamento. Essa técnica, conhecida por grande número de profissionais, é chamada de **Refatoração** (ou, em inglês, Refactoring).
+Para diminuir o custo nas alterações do sistema, é necessário **investir na qualidade e na clareza do código produzido**, seja no código atual, seja na introdução de novas linhas de código. Em outros termos, deve-se melhorar o código já pronto e que funciona em produção sem mudar o seu comportamento. Essa técnica, conhecida por grande número de profissionais, é chamada de **Refatoração** (ou, em inglês, Refactoring).
 
 Uma das definições mais aceitas na indústria para "Refatoração" é a de **Martin Fowler**, em seu livro **Refactoring: Improving the Design of Existing Code**, segundo a qual:
 
