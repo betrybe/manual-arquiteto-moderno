@@ -70,7 +70,7 @@ Cada classe acima possui uma aplicação diferente, portanto, devemos entender a
 
 ![Estrutura de Chave-valor](images/chapter_06_01.png "Estrutura de Chave-valor")
 
-Os bancos do tipo chave-valor possuem uma estrutura similar à da classe `java.util.Map` do Java, ou seja, a *informação* (`value`) será recuperada apenas pela *chave* (`key`). Esse tipo de banco de dados pode ser utilizado, por exemplo, para gerenciar sessões de pessoas usuárias. Outro exemplo de utilização é aliado a um DNS, onde a chave é o endereço, por exemplo, `www.google.com`, e o valor é o IP desse servidor.
+Os bancos do tipo chave-valor possuem uma estrutura similar à da classe `java.util.Map` do Java, ou seja, a *informação* (`value`) será recuperada apenas pela *chave* (`key`). Esse tipo de banco de dados pode ser utilizado, por exemplo, para gerenciar sessões de usuários logados. Outro exemplo de utilização é aliado a um DNS, onde a chave é o endereço, por exemplo, `www.google.com`, e o valor é o IP desse servidor.
 
 Atualmente existem diversas implementações de banco de dados do tipo chave-valor, dentre os quais os mais famosos são:
 
