@@ -46,7 +46,7 @@ Podemos abordar a Autorização e Autenticação pelo modelo de sessão distribu
 
 Mas quando estamos neste cenário de microsserviços, a recomendação passa a ser o uso de Tokens. A maior diferença para o modelo de sessão descrito acima é que deixamos de ter algo centralizado em um servidor e passamos a responsabilidade para a própria pessoa que vai utilizá-lo.
 
-O Token vai ter a informação de identificação de quem usa, e toda vez que chega ao servidor, podemos validar no server a identidade e a autorização. O token é encriptado e pode seguir um padrão como o [JWT](https://jwt.io/).
+O Token vai ter a informação de identificação da pessoa (user) que está logada, e toda vez que chega ao servidor, podemos validar no server a identidade e a autorização. O token é encriptado e pode seguir um padrão como o [JWT](https://jwt.io/).
 
 E usando token conseguimos delegar a responsabilide do estado da pessoa (user) logada, para algum processo que possa a validade do mesmo. Habilitamos vários tipos de validações de segurança que podem ser colocadas na malha (Service Mesh) ou no seu gateway de entrada e retirar essas responsabilidades dos serviços e aplicações e mesmo assim ainda continuar garantindo a segurança.
 
