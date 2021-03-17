@@ -12,7 +12,7 @@ Uma das definições mais aceitas na indústria para "Refatoração" é a de **M
 
 Com base nas palavras de Fowlerm, podemos entender que refatoração é o processo de modificar um trecho de código já escrito, executando pequenos passos (**baby steps**) sem modificar o comportamento atual do sistema. É uma técnica utilizada para melhorar algum aspecto do código, entre os quais podemos citar melhorias na clareza do código para facilitar a leitura, ou também ajustes no design das classes a fim de trazer maior flexibilidade ao sistema.
 
-## Medo de alterar código de outra pessoa programadora
+## Medo de alterar o código que não é seu
 
 Quem desenvolve, em algum momento da sua carreira, entrou ou entrará no meio de um projeto de software. Isso quer dizer que essa pessoa chegou de paraquedas para desenvolver, corrigir e manter funcionalidades em cima de uma base de código existente, que pode ter desde 6 meses até 20 anos de vida. 
 
