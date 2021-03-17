@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Neste livro você irá aprender sobre conceitos que fazem parte da vida de uma pessoal profissional sênior na carreira desenvolvimento e arquitetura de software. Este livro não é um sumário ou a reescrita de livros reconhecidos no mercado, portanto, é essencial o entendimento prévio de alguns conceitos abordados no decorrer dos capítulos. O diferencial deste conteúdo é que toda a informação é proveniente da aplicação prática das tecnologias, conceitos e culturas apresentadas como Java Efetivo, Clean Code, Domain Driven Design, Clean Architecture e Building Microservices. 
+Neste livro você irá aprender sobre conceitos que fazem parte da vida de profissionais sênior na carreira desenvolvimento e arquitetura de software. Este livro não é um sumário ou a reescrita de livros reconhecidos no mercado, portanto, é essencial o entendimento prévio de alguns conceitos abordados no decorrer dos capítulos. O diferencial deste conteúdo é que toda a informação é proveniente da aplicação prática das tecnologias, conceitos e culturas apresentadas como Java Efetivo, Clean Code, Domain Driven Design, Clean Architecture e Building Microservices. 
 
 Alinhando teoria e prática, este livro traz visões arquiteturais e motivações que costumam levar a determinadas escolhas, além de apresentar seus respectivos trade-offs. 
 
