@@ -15,7 +15,7 @@ Iniciaremos falando sobre a estratégia de dividir e conquistar. Essa estratégi
 
 * **Baixo impacto em mudanças**: Uma separação maior do negócio da tecnologia acarreta menores impactos em casos de mudança de tecnologia, como, por exemplo, uma troca entre vendors de banco de dados. 
 
-> **TIP:** Na área de arquitetura, o pragmatismo é uma característica crucial. O maior foco de um arquiteto é resolver um problema usando a tecnologia como meio, não como fim. Deste modo, quem utiliza não precisa, e muitas vezes, não quer saber qual o banco ou linguagem estão sendo utilizados.
+> **TIP:** Na área de arquitetura, o pragmatismo é uma característica crucial. O maior foco de um arquiteto é resolver um problema usando a tecnologia como meio, não como fim. Deste modo, usuários(as) finais não precisam, e muitas vezes, não querem saber qual o banco ou linguagem estão sendo utilizados.
 
 Observe a imagem a seguir:
 
