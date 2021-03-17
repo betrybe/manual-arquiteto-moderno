@@ -20,7 +20,7 @@ Como estamos falando de containers, as práticas valem também para lá, e nunca
 
 A chave é seguir ao menos cinco pilares:
 
-- Segure por desenho;
+- Segurança por design (Secure by design);
 - Vasculhe suas dependências;
 - Use sempre HTTPS;
 - Use Tokens de Acesso e Identidade;
