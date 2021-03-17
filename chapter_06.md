@@ -178,7 +178,7 @@ Esse teorema afirma que é impossível que o armazenamento de dados distribuído
 * *Disponibilidade*: cada pedido recebe uma resposta (sem erro) - sem garantia de que contém a escrita mais recente.
 * *Tolerância à partição*: o sistema continua a funcionar e a manter suas garantias de consistência, apesar das partições de rede. Os sistemas distribuídos que garantem a tolerância continuam operando, mesmo que aconteça alguma falha em um dos nós, uma vez que existe, pelo menos, um nó para operar o mesmo trabalho e garantir o perfeito funcionamento do sistema.
 
-De uma maneira geral, esse teorema explica que não existe mundo perfeito. Quando se escolhe uma característica, perde-se em outra, como consequência. Em um mundo ideal, um banco de dados distribuído conseguiria suportar as três características, porém, na realidade, é importante para a pessoa desenvolvedora saber o que perderá quando escolher entre um e outro.
+De uma maneira geral, esse teorema explica que não existe mundo perfeito. Quando se escolhe uma característica, perde-se em outra, como consequência. Em um mundo ideal, um banco de dados distribuído conseguiria suportar as três características, porém, na realidade, é importante saber o que se perderá quando escolher entre um e outro.
 
 Por exemplo, o Apache Cassandra é AP, ou seja, sua arquitetura focará em tolerância a falha e disponibilidade. Existirão perdas na consistência, assim, em alguns momentos um nó retornará informação desatualizada.
 
