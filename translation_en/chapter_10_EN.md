@@ -40,11 +40,11 @@ Remembering that it is not simply saying 'login needs to be done in less than a 
 
 This chapter will use [jMeter](https://jmeter.apache.org/), widely used to create different types of load tests and measure performance. The objective here is not to be a jMeter tutorial but to show how it is possible to generate and visualize data. Below, a simple example of measuring login time considering ten users:
 
-![](images/chapter_10_01.png)
+![](../images/chapter_10_01.png)
 
 When running the test above, we can see the results in the Summary Report:
 
-![](images/chapter_10_02.png)
+![](../images/chapter_10_02.png)
 
 Some essential data at this point:
 
@@ -58,7 +58,7 @@ Some essential data at this point:
 
 We can even have richer graphics, using the [PerfMon](https://jmeter-plugins.org/wiki/PerfMon/) plugin, for example:
 
-![](images/chapter_10_03.png)
+![](../images/chapter_10_03.png)
 
 In the graph above, we can see that most requests were between 600 and 700 milliseconds in a test scenario with 1000 requests.
 We can have even more beautiful and real-time graphics using [grafana](https://grafana.com/) as a graphic viewer.
@@ -67,7 +67,7 @@ See that we captured the total time of a login process; however, if the login is
 
 We measure the total time of login, and we need to improve the response time. To do this, we need to test each component of the architecture separately to determine where it is possible to decrease the time. With just one tool, it may not be possible to measure the performance of your application. You are likely to use a loading tool to stress the application and several others to collect the data. As an example, we can have an application that has an API for login with database access. However, we can have much more complex scenarios. The image below is a representation of the architecture to serve millions of users:
 
-![](images/chapter_10_04.png)
+![](../images/chapter_10_04.png)
 
 **Credits:** https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/
 
@@ -77,15 +77,15 @@ However, this architecture wasn’t defined at the first attempt. It took many e
 
 As demonstrated above, an architecture for millions of users isn’t defined at the first attempt. It is necessary to stress and measure to check where the loaded points are. Several options show where the application bottlenecks are. One of the several options is [javamelody](https://github.com/javamelody/javamelody), which can be used in standalone mode with your Java application; it is free and effortless to use.
 
-![](images/chapter_10_05.png)
+![](../images/chapter_10_05.png)
 
 In the image above, we can see that one of the SQL queries took, on average, longer than usual compared to others. We can find out where this SQL command came from, as well as execute the SQL command in 'Explain' mode, in order to reveal that the query is doing a 'full scan' and that it will be necessary to adjust the query or create specific indexes in the table.
 
-![](images/chapter_10_06.png)
+![](../images/chapter_10_06.png)
 
 In the other example below, we can see a substantial deviation in the 'findById' method, which, in turn, does not use a MySQL database but another external data source. With this information in hand, it is already possible to analyze each behavior in isolation.
 
-![](images/chapter_10_07.png)
+![](../images/chapter_10_07.png)
 
 There are many monitoring tools, and what remains here as an example is that, in some cases, you will need to go into detail and make some fine adjustments to the infrastructure or even the code.
 
@@ -94,7 +94,7 @@ There are many monitoring tools, and what remains here as an example is that, in
 Distributed systems, currently more popular with microservices, are complex and challenging to monitor performance. In this case, we will need more sophisticated mechanisms, such as a distributed tracing. There are also several solutions here, e.g., the famous APMs, such as New Relic, AppDynamics, DataDog, and Dynatrace. Remember that many cloud providers offer performance analysis tools, such as AWS Performance Insights.
 In the OpenSource world, it is worth highlighting [Jaeger Tracing](https://www.jaegertracing.io/), whose specialty is to monitor distributed services running on a Kubernetes infrastructure, for example.
 
-![](images/chapter_10_08.png)
+![](../images/chapter_10_08.png)
 
 We can observe in which of the services the response time is not adequate and take the necessary actions.
 

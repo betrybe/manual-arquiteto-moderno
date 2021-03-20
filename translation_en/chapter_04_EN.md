@@ -16,7 +16,7 @@ We will start by talking about the strategy of dividing and conquering. That str
 
 Look at the following image:
 
-![](images/chapter_04_01.jpg)
+![](../images/chapter_04_01.jpg)
 
 *Source: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html*
 

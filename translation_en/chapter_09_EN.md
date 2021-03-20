@@ -100,7 +100,7 @@ The company JRebel published in 2020 the results of a survey conducted with hund
 
   
 
-![alt text](images/chapter_09_01.png)
+![alt text](../images/chapter_09_01.png)
 
 Source: [https://www.jrebel.com/blog/2020-java-technology-report](https://www.jrebel.com/blog/2020-java-technology-report)
 
@@ -110,7 +110,7 @@ Another interesting survey, published in 2020 by Snyk, brought the following res
 
   
 
-![alt text](images/chapter_09_02.png)
+![alt text](../images/chapter_09_02.png)
 
 Source: [https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/](https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/)
 
@@ -136,7 +136,7 @@ And why is that? I would say the main reasons are listed in the same Snyk survey
 
   
 
-![alt text](images/chapter_09_03.png)
+![alt text](../images/chapter_09_03.png)
 
 Source: [https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/](https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/)
 

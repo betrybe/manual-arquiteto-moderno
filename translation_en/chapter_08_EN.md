@@ -151,7 +151,7 @@ The `runtime` will be the implementation of the MicroProfile specification.
 
   
 
-![/chapter_08_04](images/chapter_08_04.png)
+![/chapter_08_04](../images/chapter_08_04.png)
 
   
 
@@ -175,7 +175,7 @@ In addition to using the MicroProfile specification for delivering cloud-native 
 
   
 
-![chapter_08_06](images/chapter_08_06.png)
+![chapter_08_06](../images/chapter_08_06.png)
 
   
 
@@ -449,7 +449,7 @@ The best way to think of the cloud in terms of abstraction for business is certa
 
   
 
-![](images/chapter_08_01.png)
+![](../images/chapter_08_01.png)
 
   
 
@@ -461,7 +461,7 @@ When we talk about the cloud and its services, note that the lower the abstracti
 
   
 
-![](images/chapter_08_02.png)
+![](../images/chapter_08_02.png)
 
   
 
@@ -633,7 +633,7 @@ CNCF takes on projects and classifies them as **graduated**, **incubating**, or 
 
   
 
-![chasm-cncf](images/chapter_08_05.png)
+![chasm-cncf](../images/chapter_08_05.png)
 
   
 
@@ -737,7 +737,7 @@ To implement the ORASTAR rules, we have the architecture of a control panel and 
   
   
 
-![](images/chapter_08_03.png)
+![](../images/chapter_08_03.png)
 
   
 
@@ -801,33 +801,30 @@ If your scenario still has a low number of images and containers, it may not be 
 
 $ docker swarm
 
-  
 
 Usage:  docker swarm COMMAND
 
-  
 
 Manage Swarm
 
-  
 
 Commands:
 
-ca Display and rotate the root CA
+	ca Display and rotate the root CA
 
-init Initialize a swarm
+	init Initialize a swarm
 
-join Join a swarm as a node and/or manager
+	join Join a swarm as a node and/or manager
 
-join-token Manage join tokens
+	join-token Manage join tokens
 
-leave Leave the swarm
+	leave Leave the swarm
 
-unlock Unlock swarm
+	unlock Unlock swarm
 
-unlock-key Manage the unlock key
+	unlock-key Manage the unlock key
 
-update Update the swarm
+	update Update the swarm
 
 ```
 

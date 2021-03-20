@@ -10,7 +10,7 @@ Before diving into this architecture, let's briefly recap the challenges of mono
 
 In a monolithic architecture, we find an application whose front-end and back-end are part of a single artifact. This artifact contains all functional components, which are compiled and made available together. Scalability is impacted because whenever this application needs scaling, resources for the execution of all its components must be provided - even those that didn’t need scaling. In the persistence scenario, finding the relationship between a database and a monolith is pervasive. Still, some monoliths work accessing multiple databases (which further increases the level of maintenance complexity).
 
-![chapter_07_01](images/chapter_07_01.png)
+![chapter_07_01](../images/chapter_07_01.png)
 
 Let's talk about the benefits of this architecture:
 
@@ -39,7 +39,7 @@ This is where the concept of microservices comes in, which begins to decouple th
 
 Microservice oriented architecture has as its precept the creation of applications decoupled from each other and modeled according to the business domain. These applications are integrated through different protocols, and the various communication patterns (REST, GRPC, asynchronous events, among others) can be adopted. With the adoption of a microservice oriented architecture, it is possible to promote faster and more frequent deliveries and bring an agnostic language ecosystem.
 
-![](images/chapter_07_02.png)
+![](../images/chapter_07_02.png)
 
 As pointed out by Sam Newman in his book "Building Microservices", these are concepts that are implicit in microservices:
 

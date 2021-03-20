@@ -69,7 +69,7 @@ Each class above has a different application, so we must understand each class's
 
 #### `Key / Value` Class
 
-![Key-value structure](images/chapter_06_01.png "Key-value structure")
+![Key-value structure](../images/chapter_06_01.png "Key-value structure")
 
 Key-value databases have a structure similar to Java's `java.util.Map` class, that is, the *information* (`value`) will be retrieved only by the *key*. This type of database can be used, for example, to manage user sessions. Another example is coupled with a DNS, where the key is the address, for example, `www.google.com`, and the value is the IP of that server.
 
@@ -94,7 +94,7 @@ In this database class, it is impossible to run operations such as `join` betwee
 
 #### `Column Family` Class
 
-![Column family structure](images/chapter_06_02.png "Column family structure")
+![Column family structure](../images/chapter_06_02.png "Column family structure")
 
 This model became popular after the paper [Bigtable: A Distributed Storage System for Structured Data](https://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf), created by Google employees, aiming to assemble a distributed data storage system designed to have a high degree of scalability and data volume. Just like the key-value one, to search or retrieve some information within the database, it is necessary to use the field that functions as a unique identifier - similarly to the key in the key-value structure. However, the similarities end there.
 
@@ -125,7 +125,7 @@ By comparing the column family databases with the relational ones, it is possibl
 
 Document-oriented databases have a structure very similar to a JSON or XML file. They are composed of many fields, which are created at run time, generating great flexibility both for reading and writing information.
 
-![Document structure {w=30%}](images/chapter_06_03.png "Document collection structure")
+![Document structure {w=30%}](../images/chapter_06_03.png "Document collection structure")
 
 They allow information to be read by fields that are not the key. Some implementations, for example, have a very high integration with search engines, which makes them crucial for data analysis or system logs. Below are some implementations of document databases:
 
@@ -147,7 +147,7 @@ Another characteristic of document databases is that, in general, they are schem
 
 #### `Graph` Class
 
-![Graph Structure](images/chapter_06_04.png "Graph Structure")
+![Graph Structure](../images/chapter_06_04.png "Graph Structure")
 
 The graph database is a data structure that connects a set of vertices through a set of edges. Modern databases in this category support multi-relational graph structures, where there are different types of vertices (representing people, places, items) and different types of edges. The social network recommender systems are the biggest use cases. Check some graph database examples below:
 
@@ -167,7 +167,7 @@ Some databases have the common characteristic of supporting one or more presente
 
 ### CAP theorem
 
-![CAP theorem](images/chapter_06_05.png "CAP theorem")
+![CAP theorem](../images/chapter_06_05.png "CAP theorem")
 
 One of the great challenges of NoSQL databases is that they deal with distributed persistence, i.e., the information is located on more than one server. Several studies were created to tackle this challenge. The most famous one was a theory created in 1999: the CAP theorem.
 
@@ -187,7 +187,7 @@ However, Cassandra has the consistency level feature so that it is possible to s
 
 In the NoSQL world, each database class solves specific problems. As the graph below shows, there is a balance between the complexity model: models that allow more complexity in modeling and searching result in less scalability. As an example, we have the key-value class database, which is more scalable; however, allowing less complexity since the queries are based only on the key.
 
-![Scalability vs Complexity](images/chapter_06_06.png "Scalability vs Complexity")
+![Scalability vs Complexity](../images/chapter_06_06.png "Scalability vs Complexity")
 
 ### Master/Slave vs. Masterless
 
@@ -195,7 +195,7 @@ In general, the persistence of the NoSQL world has two ways of communicating bet
 
 
 
-![Master/Slave vs Masterless](images/chapter_06_07.png "Master/Slave vs Masterless")
+![Master/Slave vs Masterless](../images/chapter_06_07.png "Master/Slave vs Masterless")
 
 
 * *Master/Slave*: this communication model is characterized by a unidirectional control of one or more devices. Generally speaking, the master node is used for writing and replicating information for all slave nodes, which, in turn, are responsible for reading the information. Consequently, it is possible to guarantee greater data consistency. As there is a single point for writing, it is possible to support behaviors, such as a transaction. However, there is a point of failure: the master. If the server goes down, we will have problems with writing. In these scenarios, modern databases can automatically choose a new master node.

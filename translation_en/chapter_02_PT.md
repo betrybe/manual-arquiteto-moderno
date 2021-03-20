@@ -72,7 +72,7 @@ Como esperado, criar uma aplicação completa é um trabalho árduo e geralmente
 Começamos nossa jornada com uma aplicação Java monolítica. O cenário que iremos abordar pertence a uma empresa que se encarrega de fornecer uma plataforma para a criação de sites de conferências. Imagine que cada um de nossos clientes exija que hospedemos e escalonemos seu site de conferências.
 Todos nós vimos grandes aplicações Java Web e, neste cenário, a aplicação se parece com isto:
 
-![chapter_02_01](images/chapter_02_01a.png)
+![chapter_02_01](../images/chapter_02_01a.png)
 
 O Facade (fachada) “Customer Management” se encarrega de isolar os diferentes clientes uns dos outros. Em algumas empresas, isso é definido como uma plataforma ou aplicação multi-tenant (multilocatário). Infelizmente, isso é bastante comum no espaço Java. Por razões históricas, as implementações acabaram crescendo em monólitos grandes e assustadores que vieram com muitos problemas de escalabilidade, bem como desafios de isolamento de tráfego e dados. Não importa o quão sofisticada seja a aparência de nossa plataforma, ela está apenas rodando em uma única JVM. Você não tem como dimensionar cada cliente individualmente - você dimensiona tudo ou nada.
 
@@ -117,7 +117,7 @@ Do ponto de vista arquitetônico, isso pode significar um site de conferência m
 > **DICA**: Essa estratégia leva a vários serviços desde o primeiro dia, então isso é algo com o qual você e suas equipes devem se acostumar.
 
 Nossos sites de conferências independentes serão semelhantes a este:
-![chapter_02_02](images/chapter_02_02.png)
+![chapter_02_02](../images/chapter_02_02.png)
 
 Como você pode ver no diagrama anterior, está bastante claro que há mudanças arquitetônicas importantes. É bastante comum ter a Interface do Usuário, neste caso, a caixa “Conference Site” separada dos serviços principais. Na maioria das vezes, esse componente voltado para o usuário agirá como um roteador, encaminhando solicitações do site de conferência para serviços que não são expostos diretamente aos usuários.
 
@@ -144,7 +144,7 @@ O Bounded Context Call for Proposals permitirá que uma equipe implemente todas 
 
 Assim que você começa a projetar a funcionalidade Call for Proposals, você percebe que precisará consumir e interagir com outras equipes. Logo no início, os seguintes Bounded Contexts são identificados:
 
-![chapter_02_03](images/chapter_02_03.png)
+![chapter_02_03](../images/chapter_02_03.png)
 
 Cada um desses Bounded Contexts deve pertencer a equipes diferentes e precisamos ter certeza de que eles têm autonomia suficiente para progredir, criar novas versões com novos recursos e implantar componentes de software concretos para os ambientes de nossos clientes.
 
@@ -167,7 +167,7 @@ Com o aumento da popularidade do Kubernetes, também é comum encontrar o Manife
 
 Você, como desenvolvedor que visa o Kubernetes como sua plataforma de implantação, agora é responsável por vários artefatos, não apenas pelo código-fonte do serviço Java.
 
-![](images/chapter_02_04.png)
+![](../images/chapter_02_04.png)
 
 Para fazer o deploy do seu código no Kubernetes, você precisará:
 - Construir e testar seu código fonte, se for Java você pode usar, por exemplo, Maven ou Gradle para fazer isso;
@@ -196,7 +196,7 @@ Uma das convenções usadas pelo Jenkins X é chamada “Trunk Based Development
 
 No fim das contas, Jenkins X usa ambas as convenções, “Um Repositório / Um Serviço” mais “Trunk Based Development”, para levar seu serviço do código-fonte para uma instância em execução dentro de um Cluster Kubernetes.
 
-![chapter_02_05](images/chapter_02_05.png)
+![chapter_02_05](../images/chapter_02_05.png)
 
 Em nosso exemplo, os links a seguir demonstram todos esses conceitos em ação
 
@@ -241,7 +241,7 @@ Em projetos da vida real, essas interfaces de usuário e documentos de especific
 
 A captura de tela a seguir mostra a interface de usuário da API aberta que é fornecida apenas incluindo a dependência anterior. Essa tela pode ser acessada apontando seu navegador para host:port/swagger-ui.html e fornece um cliente simples para interagir com seus serviços, entender quais terminais estão expostos e quais dados esses terminais esperam e retornam.
 
-![chapter_02_06](images/chapter_02_06.png)
+![chapter_02_06](../images/chapter_02_06.png)
 
 Sinta-se à vontade para clonar um dos serviços deste exemplo e executá-lo com o comando `mvn spring-boot: run` para explorar as definições de APIs de cada serviço. Por padrão, cada serviço iniciará na porta 8080, portanto, você deve apontar seu navegador para http://localhost:8080/swagger-ui.html
 
@@ -256,7 +256,7 @@ Como você pode imaginar, as APIs são extremamente importantes, mas entender qu
 Mapas de Contexto bem definidos ajudam muito a planejar e compreender como esses Bounded Contexts “isolados” e as equipes que trabalham neles irão interagir no dia a dia.
 
 Para nosso exemplo, o seguinte mapa de contexto faria sentido:
-![chapter_02_07](images/chapter_02_07.png)
+![chapter_02_07](../images/chapter_02_07.png)
 
 Este diagrama descreve as relações entre o Bounded Context simples que temos para nossa aplicação do site de conferência. Aqui podemos ver que existe uma relação **Cliente/Fornecedor** entre a Call for Proposals e o Bounded Context da Agenda da Conferência. Onde a Call for Proposals **é um consumidor** da Agenda da Conferência do serviço upstream. Entre essas duas equipes, existe também uma relação de **Parceria(Partnership)**, pois elas precisam colaborar para fazer as coisas. Isso significa que a comunicação entre essas duas equipes é importante e elas devem ser capazes de influenciar o roteiro uma da outra.
 
@@ -405,19 +405,19 @@ A interface do usuário que cobre este cenário simples é assim:
 
 * A página principal dentro do Site da conferência exibe a Agenda dividida por dias. Os itens da pauta são os que já estão confirmados e foram aprovados pelo comitê.
 
-  ![chapter_02_08](images/chapter_02_08.png)
+  ![chapter_02_08](../images/chapter_02_08.png)
 
 * A página principal também permite que palestrantes em potencial enviem propostas, preenchendo um formulário:
 
-  ![chapter_02_09](images/chapter_02_09.png)
+  ![chapter_02_09](../images/chapter_02_09.png)
 
 * Assim que a proposta for enviada, o palestrante em potencial precisará aguardar a aprovação ou rejeição do comitê. Os membros do comitê têm uma página de back-office onde podem aprovar ou rejeitar cada proposta enviada:
 
-  ![chapter_02_10](images/chapter_02_10.png)
+  ![chapter_02_10](../images/chapter_02_10.png)
 
 * A página de back-office também oferece aos membros do Conselho a opção de enviar notificações por e-mail aos palestrantes em potencial.
 
-  ![chapter_02_11](images/chapter_02_11.png)
+  ![chapter_02_11](../images/chapter_02_11.png)
 
 
 
@@ -426,7 +426,7 @@ Mais uma vez, você pode notar a simplificação deste cenário propositalmente 
 #### Arquitetura e Serviços
 
 De uma perspectiva arquitetônica, parece mais assim:
-![chapter_01_12](images/chapter_01_12.png)
+![chapter_01_12](../images/chapter_01_12.png)
 
 Onde a Interface do Usuário com alguma capacidade de roteamento é necessária para encaminhar solicitações ao Serviço Call for Proposals (C4P) para o Serviço de Agenda ou Emails. Neste exemplo, todas as comunicações acontecem por meio de invocações HTTP/Rest.
 
