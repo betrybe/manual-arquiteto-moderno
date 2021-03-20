@@ -1,6 +1,6 @@
 # The importance of learning concepts instead of new frameworks
 
-Writing this chapter may not be one of the most straightforward tasks since developers with a high level of experience (senior developers) are the target audience for this material. The intention, therefore, is not for an academic to say what a professional should study. But, mainly, to generate self-criticism on many subjects that could be explored in greater depth (and even the application of the famous expression "connect the dots") while we were in the training process (at the university).
+Writing this chapter may not be one of the most straightforward tasks since developers with a high level of experience (senior developers) are the target audience for this material. The intention, therefore, is not for an academic to say what professionals should study. But, mainly, to generate self-criticism on many subjects that could be explored in greater depth (and even the application of the famous expression "connect the dots") while we were in the training process (at the university).
 
 Well, how to start? A development professional's training is based on their background in a computer science (or engineering) course (or another bachelor's degree in the field). Many of these answers may be in subjects already forgotten by us as students and even by professionals.
 

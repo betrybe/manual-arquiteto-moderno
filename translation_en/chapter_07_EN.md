@@ -64,7 +64,7 @@ Let's look at some advantages of using the microservice oriented architecture ap
 
 ### Challenges in a microservice architecture
 
-The communication between components of a monolithic application occurs in-memory; that is, they don’t have the **latency** overhead present in network communication, as occurs in the microservices scenario. The more the number of services and architectural complexity increases, the more catastrophic this problem can be. Dealing with the response time of the service invoked on the client itself is a good practice (such as setting up timeouts and retries), and keeping up with your network's monitoring and alert services.
+The communication between components of a monolithic application occurs in-memory; that is, they don’t have the **latency** overhead present in network communication, as occurs in the microservices scenario. The more the number of services and architectural complexity increases, the more catastrophic this problem can be. Dealing with the response time of the service invoked on the client per se is a good practice (such as setting up timeouts and retries), and keeping up with your network's monitoring and alert services.
 
 Pay attention to the separation of duties of the back-end and front-end components. The **front-end** must be implemented so that, in the event of failure of one of the back-end services, the other items work normally - guaranteeing the best possible experience for the end user.
 
