@@ -765,7 +765,7 @@ It is a centralized control panel that allows you to manage and coordinate the a
 
   
 
-> **TIP:** in order to choose one of the services, check out the feature comparison among them in the article [Kubernetes Service Mesh: A Comparison of Istio, Linkerd, and Consul](https://platform9.com/blog/ Kubernetes-service-mesh-a-comparison-of-istio-linkerd-and-consul).
+> **TIP:** in order to choose one of the services, check out the feature comparison among them in the article [Kubernetes Service Mesh: A Comparison of Istio, Linkerd, and Consul](https://platform9.com/blog/Kubernetes-service-mesh-a-comparison-of-istio-linkerd-and-consul).
 
   
 
@@ -810,21 +810,21 @@ Manage Swarm
 
 Commands:
 
-	ca Display and rotate the root CA
+  ca Display and rotate the root CA
 
-	init Initialize a swarm
+  init Initialize a swarm
 
-	join Join a swarm as a node and/or manager
+  join Join a swarm as a node and/or manager
 
-	join-token Manage join tokens
+  join-token Manage join tokens
 
-	leave Leave the swarm
+  leave Leave the swarm
 
-	unlock Unlock swarm
+  unlock Unlock swarm
 
-	unlock-key Manage the unlock key
+  unlock-key Manage the unlock key
 
-	update Update the swarm
+  update Update the swarm
 
 ```
 
