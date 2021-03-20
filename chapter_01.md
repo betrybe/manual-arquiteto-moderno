@@ -1,6 +1,6 @@
 # A importância de aprender conceitos ao invés de novos frameworks
 
-Escrever este capítulo pode não ser uma das tarefas mais fáceis, uma vez que o público-alvo deste material é o de desenvolvedores com alto nível de experiência (*Senior Developers*). A intenção, portanto, deste texto não é de um acadêmico dizer o que uma pessoal profissional deve estudar, mas, principalmente, gerar uma autocrítica sobre muitos assuntos que poderiam ser explorados com maior profundidade (e até mesmo a aplicação da famosa expressão "ligar os pontos") enquanto estávamos em processo de formação (na universidade).
+Escrever este capítulo pode não ser uma das tarefas mais fáceis, uma vez que o público-alvo deste material é o de desenvolvedores com alto nível de experiência (*Senior Developers*). A intenção, portanto, deste texto não é de um acadêmico dizer o que profissionais devem estudar, mas, principalmente, gerar uma autocrítica sobre muitos assuntos que poderiam ser explorados com maior profundidade (e até mesmo a aplicação da famosa expressão "ligar os pontos") enquanto estávamos em processo de formação (na universidade).
 
 Pois bem, como iniciar? Basicamente, a formação de profissionais de desenvolvimento tem como base seu *background* em um curso de Ciência (ou Engenharia) da Computação (ou outro bacharelado na área). Muitas dessas respostas podem estar em disciplinas já esquecidas por nós, como estudantes, e mesmo por profissionais. 
 
