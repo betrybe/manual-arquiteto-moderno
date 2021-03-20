@@ -141,7 +141,7 @@ Considerando que sua aplicação está pronta para deploy:
 
   > **TIP:** Tendo em mente uma melhor utilização de recursos, deve-se destacar que: a imagem-base utilizada para construir a aplicação *não* deve ser a mesma imagem-base utilizada para se executar a aplicação. Ferramentas para construção e empacotamento (como maven, npm etc.) que não são utilizadas na execução da aplicação *não* devem estar incluídas na imagem-base de execução.
 
-* Após empacotar a aplicação, a ferramenta de integração é responsável pela criação do container com base na imagem-base que inclua esse novo pacote (i.e. `.jar`). 
+* Após empacotar a aplicação, a ferramenta de integração é responsável pela criação do container com base na imagem-base que inclua esse novo pacote (i.e. `.jar`).  
 
   > **TIP:** É recomendado que a imagem-base gerada seja armazenada em um registro de imagens.
 
