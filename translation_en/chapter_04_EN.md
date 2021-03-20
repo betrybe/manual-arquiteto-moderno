@@ -43,7 +43,7 @@ The strategy described by the Clean Architecture book is an “outside to inside
 
 If you come from DDD, you will not see much news in this layer and the concepts. It is responsible for encapsulating the business domain. The main point is that this layer is the core, that is, the reason for making the application itself. In other words, this is where the business rules are concentrated, and it should not change according to external items, such as modifying the database.
 
-> ** TIP: ** in particular, we don’t think it’s a "federal crime" to have technologies that tend not to change, for example, utility libraries used by the whole company. Just interfaces and classes might be used in all layers in a smaller application, like a repository’s interface.
+> **TIP:** in particular, we don’t think it’s a "federal crime" to have technologies that tend not to change, for example, utility libraries used by the whole company. Just interfaces and classes might be used in all layers in a smaller application, like a repository’s interface.
 
 ### Use cases
 

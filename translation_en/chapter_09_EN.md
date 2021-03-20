@@ -1,7 +1,3 @@
-EN
-
-  
-
 # We need to talk about updates
 
   

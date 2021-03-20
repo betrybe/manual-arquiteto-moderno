@@ -1,3 +1,4 @@
+
 # Unraveling application performance
 
 ## Introduction and concepts
@@ -6,7 +7,7 @@ Many companies use the "leave performance for later" approach to addressing poss
 
 Before going any further, let's review some important concepts about application performance.
 
-** Throughput **: it is the throughput or transfer rate your application can give to requests. The number of requests per second/minute or hour. The higher this number, the better. Generally, in load testing tools, throughput is measured as follows: throughput = (number of requests)/(total time).
+**Throughput**: it is the throughput or transfer rate your application can give to requests. The number of requests per second/minute or hour. The higher this number, the better. Generally, in load testing tools, throughput is measured as follows: throughput = (number of requests)/(total time).
 
 **Latency**: The time it takes for a data packet to go from one point to another. Unlike throughput, the higher the latency, the worse the performance. In distributed systems, this can be a significant problem.
 

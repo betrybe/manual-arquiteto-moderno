@@ -1,22 +1,12 @@
 # Cloud
 
-  
-
 Once we talked about DDD, microservices, good practices, code design, and software architecture, we have the basis to continue and address one of the most discussed topics in the technology scenario: cloud computing.
-
-  
 
 We will discuss what to consider when transposing application architecture to a cloud environment, popular perspectives regarding cloud-native applications and why this concept is linked to tools like Kubernetes. Patterns and functionalities expected in an application will also be described so that they are first-class citizens in a cloud environment.
 
-  
-
 > **INFO:** this chapter does not aim to teach how to deploy services in a Kubernetes cluster, configure services on AWS, or create cloud-native applications from scratch. The purpose of this chapter is to provide architectural information that will support your decisions and model your services and platforms. With the knowledge provided here, you will be prepared and confident to start or continue your cloud-native journey, regardless of the solution or language adopted.
 
-  
-
 The "cloud-native" buzz-word started to establish itself around 2014, and its growing popularity is in its best scenario. To achieve greater market space, companies began to label their products as cloud-native when, in fact, they are only cloud-enabled technologies.
-
-  
 
 > **TIP:** One way to assess a term's popularity is to validate the number of searches over time and the interest by region.
 
@@ -24,23 +14,14 @@ The "cloud-native" buzz-word started to establish itself around 2014, and its gr
 
 > https://trends.google.com.br/trends/explore?date=all&q=cloud-native
 
-  
-
 Understanding these concepts will help you understand your applications' situation and support a journey to the cloud. We will discuss these categorizations, their ideas, and their differences.
 
-  
 
 ## Cloud-Native or Cloud-Enabled?
 
-  
-
 An application can be categorized according to its suitability level for a cloud environment as being *cloud-enabled* or *cloud-native* (a.k.a. *cloud-ready*).
 
-  
-
 ### Cloud-Enabled
-
-  
 
 A containerized application runs in the cloud but was initially created to run in a traditional environment, such as a local data center, virtual machines with a cluster of conventional application servers. These applications can be categorized as *cloud-enabled* and have higher resource consumption (CPU, memory, storage) than cloud-native applications.
 
@@ -48,19 +29,11 @@ A containerized application runs in the cloud but was initially created to run i
 
 A cloud-enabled application has gone through refactorings and adjustments to run in a containerized environment and also to support orchestration by platforms such as Kubernetes. After all, it is no longer the traditional WildFly cluster (a.k.a. JBoss EAP) or clustered GlassFish (Weblogic), which allows you to use the network or file system at your convenience. Now, these services run in pods, in ephemeral containers.
 
-  
-
 Despite the "cons" of having a cloud-enabled application, the cost or effort of refactoring the entire application is not viable. In this way, the application can run in the cloud but can’t enjoy all its benefits.
-
-  
 
 > **INFO:** [Kubernetes](https://kubernetes.io/): it is an open-source container orchestration tool and works very well with [Docker](https://www.docker.com /). It is currently the most popular tool in the community. Other examples of container orchestration tools are Docker Swarm, Mesos, and Amazon ECS.
 
-  
-
 To better understand everything that a cloud-enabled application is *not* able to use natively, let's talk about the cloud-native concept.
-
-  
 
 ### Perspectives on the cloud-native concept
 
@@ -874,10 +847,7 @@ You should also keep in mind the scenario in which you have already used Kuberne
 
 # Conclusion
 
-  
 
 There is no doubt that the future of technology lies in the cloud. With the emergence of microservices, we increasingly need knowledge of the ecosystem that revolves around it. With the increase in containers and DevOps practices, more and more developers need to know about the platform, and the system admin needs to know about development.
-
-  
 
 If they are not yet part of your reality, cloud-ready and cloud-native applications are sure to be very soon. Together with them, the entire vast ecosystem of containers, container orchestration, and other functionalities that revolve around these services will be necessary. Be ready to join the movement.

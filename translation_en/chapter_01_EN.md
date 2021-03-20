@@ -14,37 +14,37 @@ Consider the example of searching for objects in a database through an ORM. Depe
 
 Being aware that a `lazy fetch` with Hibernate, for instance, can generate much more asymptotic complexity than an `eager fetch` is paramount to a senior developer. That is because, for example, in a system for retrieving order headers and their respective items, a very large sequence of accesses to the database occurs in the first approach (lazy). Accesses to retrieve all order headers, and, for each order, one more sequence of accesses to the database. If we look at an algorithm with these characteristics, we will see something close to the following pseudocode:
 
-1. retrieve a set of orders and store them in listP
-2. for each order P in listP do
-3. retrieve items I[] from order P from its ID
-4. end-for
+	1. retrieve a set of orders and store them in listP
+	2. for each order P in listP do
+	3. retrieve items I[] from order P from its ID
+	4. end-for
 
 In a very general way, the execution of the instructions can be described as follows:
 
-1 execution of line 1
-N+1 executions of line 2 (for always has the test that returns false)
-N executions of line 3
+	1 execution of line 1
+	N+1 executions of line 2 (for always has the test that returns false)
+	N executions of line 3
 
 Thus, the complexity of this algorithm is O(n). This means that, as the set of values recovered in line 1 increases, the computational time increases proportionally.
 
 We can also extrapolate this algorithm and, for each item, retrieve the entire list of taxes, which can generate an algorithm of quadratic complexity O(n2). Look:
 
-1. retrieve a set of orders and store them in listP
-2. for each order P in listP[] do
-3. 		retrieve items I[] from order P from its ID
-4. 	for each item I of P, do
-5. 		retrieve list L of taxes from I[]
-6. 	end-for
-7. end-for
+	1. retrieve a set of orders and store them in listP
+	2. for each order P in listP[] do
+	3. 		retrieve items I[] from order P from its ID
+	4. 	for each item I of P, do
+	5. 		retrieve list L of taxes from I[]
+	6. 	end-for
+	7. end-for
 
 In this case, analyzing the asymptotic complexity, we have:
 
-1 execution of line 1
-N+1 executions of line 2
-N executions of lines 3 to 5, which implies:
-1 execution of line 3
-N + 1 executions of line 4
-N executions of line 5
+	1 execution of line 1
+	N+1 executions of line 2
+	N executions of lines 3 to 5, which implies:
+	1 execution of line 3
+	N + 1 executions of line 4
+	N executions of line 5
 
 Therefore, if we add up all the executions, we have 1 + (N+1) + N * (1 + (N+1) + N), which results in a polynomial whose greatest exponent is 2 (Nˆ2). So, our order, item, and tax search algorithm can be considered a quadratic time algorithm. That's because we only think about retrieving information. We haven't even thought of these values iteration, which can further increase computational time. Now imagine this scenario on a web system with a few tens of thousands of users connected. If we access the disk (which is a very slow device compared to memory access) inefficiently for a single request, how will the application perform on several simultaneous requests?
 
@@ -60,53 +60,53 @@ Want examples?
 
 In addition to these more "simple" examples (and I highlight the importance of quoting the term), we have more complex ones, which generate many performance differences in applications. For example: what is the difference between using Lists (whether they are Vectors or linked lists) and hash? The main difference is in the search performance. Take a look at this small example of a Java benchmark :
 
-ArrayList<Produto> lista;
-	lista = new ArrayList<Produto>();
-	for (int i = 0; i < 100000; i++) {
-	    Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
-	    lista.add(p);
-	}
-	int quantosAchei=0; // numero de ocorrencias encontradas
-	// inicio da medicao do tempo
-	long inicio = System.currentTimeMillis();
-	Produto busca;
-	for (int cont = 0; cont < 10000; cont++) {
-	    for (int i = 0; i < lista.size(); i++) {
-	        Produto tmp = lista.get(i);
-	        if (tmp.getId() == -1) { // forcando buscar um ID que nao existe na lista -> o pior caso
-	             busca = tmp;
-	             quantosAchei++;
-	             break;
-	         }
-	     }
-	 }
-	 long fim = System.currentTimeMillis();
-	 // fim da medicao do tempo
-	 System.out.println("Achei = " + quantosAchei +" em "+(fim-inicio));
+	ArrayList<Produto> lista;
+		lista = new ArrayList<Produto>();
+		for (int i = 0; i < 100000; i++) {
+		    Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
+		    lista.add(p);
+		}
+		int quantosAchei=0; // numero de ocorrencias encontradas
+		// inicio da medicao do tempo
+		long inicio = System.currentTimeMillis();
+		Produto busca;
+		for (int cont = 0; cont < 10000; cont++) {
+		    for (int i = 0; i < lista.size(); i++) {
+		        Produto tmp = lista.get(i);
+		        if (tmp.getId() == -1) { // forcando buscar um ID que nao existe na lista -> o pior caso
+		             busca = tmp;
+		             quantosAchei++;
+		             break;
+		         }
+		     }
+		 }
+		 long fim = System.currentTimeMillis();
+		 // fim da medicao do tempo
+		 System.out.println("Achei = " + quantosAchei +" em "+(fim-inicio));
 
 That simple algorithm populates a list with 100,000 product-type objects and performs 10,000 searches for a product that does not exist in that list. As it is a linear structure (and we return to the analysis of algorithms), the search must go through all objects until it concludes that it does not exist in the list. An algorithm like this can take a few good seconds to run (a test on a regular machine can take between 2 and 5 seconds to run). Is it possible to improve the performance of this search? Of course. We could use, instead of linear search, a binary search algorithm. Nevertheless, for this strategy, our set would need to be previously ordered.
 
 Now, if we think of another structure, like a HashMap, what is the advantage? Let's look at this code.
 
-HashMap<Integer, Produto> mapa;
-	mapa = new HashMap<Integer, Produto>();
-	for (int i = 0; i < 1000000; i++) {
-	   Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
-	   mapa.put(p.getId(), p);
-	}
-	int quantosAchei=0;
-	
-	// inicio da medicao
-	long inicio = System.currentTimeMillis();
-	for (int cont=0; cont< 10000; cont++) {
-		Produto busca = mapa.get(-1); // novamente forcando a busca de um elemento que nao existe
-		if (busca != null) {
-			quantosAchei++;
+	HashMap<Integer, Produto> mapa;
+		mapa = new HashMap<Integer, Produto>();
+		for (int i = 0; i < 1000000; i++) {
+		   Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
+		   mapa.put(p.getId(), p);
 		}
-	}
-	long fim = System.currentTimeMillis();
-	// fim da medicao
-	System.out.println("Achei = "+quantosAchei+" em "+(fim-inicio));
+		int quantosAchei=0;
+		
+		// inicio da medicao
+		long inicio = System.currentTimeMillis();
+		for (int cont=0; cont< 10000; cont++) {
+			Produto busca = mapa.get(-1); // novamente forcando a busca de um elemento que nao existe
+			if (busca != null) {
+				quantosAchei++;
+			}
+		}
+		long fim = System.currentTimeMillis();
+		// fim da medicao
+		System.out.println("Achei = "+quantosAchei+" em "+(fim-inicio));
 
 By hash's definition, there is a calculation to determine what memory position it will occupy through the object's key attribute. Once this position has been determined, access is direct to the object (or the absence of it). Therefore, an object's computational access time in a hash map is O(1), i.e., constant!
 

@@ -1,5 +1,3 @@
-PT
-
 # Tenho lido sobre DDD, para onde devo ir a seguir?
 
 Você já codifica Java há muitos anos, já leu sobre Domain-Driven Design (DDD) e deseja aplicar isso a um projeto da vida real. Como isso funciona? O que realmente significa aplicar DDD no ecossistema de hoje? Realmente vale a pena o tempo investido?
@@ -8,11 +6,11 @@ O DDD nos fornece uma base teórica e padrões muito bons para construir um soft
 
 Este capítulo aborda o lado prático de como esses conceitos podem ser mapeados em um exemplo existente executado no Kubernetes, oferecendo dicas práticas sobre como os conceitos DDD podem ser mapeados para um stack tecnológico (pilha de tecnologia) concreto. Claro, existem milhares de opções diferentes para escolher hoje, mas você pode tomar isso como um exemplo de que tipo de coisas você precisará se atentar ao passar por esta jornada.
 
-> ** INFO: ** é importante destacar que este capítulo não é sobre os conceitos básicos de DDD, portanto, se você é novo no DDD, os seguintes livros são recomendados:  Implementing DDD e DDD Distilled.
+> **INFO:** é importante destacar que este capítulo não é sobre os conceitos básicos de DDD, portanto, se você é novo no DDD, os seguintes livros são recomendados:  Implementing DDD e DDD Distilled.
 
 Este capítulo está dividido em duas seções principais:
-- [Introdução aos tópicos relacionados a Java e nuvem] (# java-in-the-cloud)
-- [De Monolith até K8s usando DDD] (# from-monolith-to-k8s-using-ddd)
+- [Introdução aos tópicos relacionados a Java e nuvem](#java-in-the-cloud)
+- [De Monolith até K8s usando DDD](#from-monolith-to-k8s-using-ddd)
 
 
 ## Java na nuvem
@@ -29,7 +27,7 @@ Enquanto costumávamos ter um monólito com todos os recursos de nossas grandes 
 
 Construir um serviço hoje com endpoints REST é uma tarefa bastante fácil se você estiver usando um desses frameworks mencionados anteriormente. Você tem um modelo de programação baseado em anotação que permite mapear métodos Java para terminais REST e mecanismos avançados de serialização/desserialização que lidarão com todo o boilerplate de análise de solicitações HTTP.
 
-> ** DICA: ** Para mais detalhes sobre a arquitetura de microsserviços, consulte o capítulo [Microsserviços] () #TODO na fase de revisão: adicionar referência a https://github.com/otaviojava/manual-arquiteto-moderno/blob/ master / capítulo_05.md
+> **DICA:** Para mais detalhes sobre a arquitetura de microsserviços, consulte o capítulo [Microsserviços] () #TODO na fase de revisão: adicionar referência a https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/capítulo_05.md
 
 O verdadeiro problema surge quando você começa a ter mais do que um punhado de serviços. A execução de cada serviço em sua própria JVM irá forçá-lo a executar cada serviço em uma porta diferente e cuidar dos problemas quando essas JVMs travarem. Por isso, a indústria saltou rapidamente para containers por volta de 2015.
 
@@ -47,7 +45,7 @@ Quando você tem um Bounded Context (contexto delimitado) e alguns Serviços, pr
 Quando o número de serviços aumenta, isso se torna incontrolável.
 Por esse motivo, os Container Orchestrators (orquestradores de container) se tornaram populares nos últimos anos, e o Kubernetes está liderando o caminho. O Kubernetes é responsável por lidar com a criação desses container runtimes, como escaloná-los quando há carga e como lidar com containers que apresentem mau comportamento ou falhem.
 
-> ** DICA: ** Para obter mais detalhes sobre containers e ferramentas de orquestração, consulte [Cloud] () capítulo #TODO na fase de revisão: adicionar referência a https://github.com/otaviojava/manual-arquiteto-moderno/blob /master/chapter_07.md
+> **DICA:** Para obter mais detalhes sobre containers e ferramentas de orquestração, consulte [Cloud] () capítulo #TODO na fase de revisão: adicionar referência a https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_07.md
 
 O sucesso do Kubernetes é baseado no fato de que cada grande provedor na nuvem fornece um serviço Kubernetes gerenciado, tornando-o o padrão de fato para suporte a multicloud. Em outras palavras, não importa qual provedor você escolha, você sempre pode confiar que haverá uma API Kubernetes exposta para você interagir e provisionar seus serviços.
 
@@ -56,7 +54,7 @@ O sucesso do Kubernetes é baseado no fato de que cada grande provedor na nuvem 
 
 Se você seguir o caminho do DDD, precisará primeiramente aproveitar algumas das promessas que o DDD lhe deu e certificar-se de que está colhendo os benefícios. Se não podemos fornecer continuamente novas versões de nossos serviços sem interromper a aplicação inteira, estamos apenas tornando nossa vida mais complicada para nada. Se não estamos entregando valor de negócio concreto como resultado do DDD, todas as mudanças sugeridas neste capítulo não valem o esforço ou o tempo.
 
-Eu recomendo o seguinte artigo: [“The Business Value of using DDD”] (https://www.informit.com/articles/article.aspx?p=1944876&seqNum=4), que dá uma visão geral de alto nível dos benefícios de adotar o DDD, não para você como desenvolvedor, mas para o seu negócio.
+Eu recomendo o seguinte artigo: [“The Business Value of using DDD”](https://www.informit.com/articles/article.aspx?p=1944876&seqNum=4), que dá uma visão geral de alto nível dos benefícios de adotar o DDD, não para você como desenvolvedor, mas para o seu negócio.
 
 A próxima seção explora um exemplo que eu criei com base na minha experiência durante a rearquitetura de aplicações monolíticas Java para uma abordagem mais distribuída. O exemplo é fictício, qualquer semelhança com a realidade é mera coincidência :) Nós encorajamos você a abstrair os conceitos e padrões do cenário de exemplo e mapeá-los para seu próprio domínio. No final das contas, este é apenas um exemplo, embora complexo e totalmente funcional.
 
@@ -67,9 +65,9 @@ Esta seção cobre um cenário de exemplo que nos ajuda a explicar alguns dos co
 
 Como esperado, criar uma aplicação completa é um trabalho árduo e geralmente requer muito tempo. Por esse motivo, o exemplo a seguir é fornecido como um conjunto de repositórios de código aberto onde você pode contribuir para melhorá-lo.
 
-- [Repositório De Monolith para K8s Github] (https://github.com/salaboy/from-monolith-to-k8s)
+- [Repositório De Monolith para K8s Github](https://github.com/salaboy/from-monolith-to-k8s)
 
-> ** DICA: ** Como uma aplicação real, o exemplo evoluirá com o tempo, agregando mais ferramentas e melhores práticas, por isso convidamos você a participar dessa jornada onde todos podemos aprender e compartilhar informações valiosas juntos.
+> **DICA:** Como uma aplicação real, o exemplo evoluirá com o tempo, agregando mais ferramentas e melhores práticas, por isso convidamos você a participar dessa jornada onde todos podemos aprender e compartilhar informações valiosas juntos.
 
 Começamos nossa jornada com uma aplicação Java monolítica. O cenário que iremos abordar pertence a uma empresa que se encarrega de fornecer uma plataforma para a criação de sites de conferências. Imagine que cada um de nossos clientes exija que hospedemos e escalonemos seu site de conferências.
 Todos nós vimos grandes aplicações Java Web e, neste cenário, a aplicação se parece com isto:
@@ -80,7 +78,7 @@ O Facade (fachada) “Customer Management” se encarrega de isolar os diferente
 
 Como você pode ver na caixa vermelha, cada Site de Conferência conterá um monte de módulos dependendo da seleção de cada cliente, mas na realidade, em tempo de execução, todo o código estará lá para cada conferência.
 
-> Observe que se você tiver uma plataforma como esta e ela fizer o trabalho que deve fazer, você ** NÃO deve ** alterá-la. A menos que você esteja tendo problemas para gerenciar ou escalar esta "plataforma", você não deve rearquitetar a coisa toda.
+> Observe que se você tiver uma plataforma como esta e ela fizer o trabalho que deve fazer, você **NÃO deve** alterá-la. A menos que você esteja tendo problemas para gerenciar ou escalar esta "plataforma", você não deve rearquitetar a coisa toda.
 
 Agora, essa arquitetura de monólito tem algumas desvantagens claras e, para este cenário, podemos considerar o seguinte motivo para rearquitetá-la em uma plataforma adequada nativa da nuvem:
 
@@ -91,19 +89,19 @@ Agora, essa arquitetura de monólito tem algumas desvantagens claras e, para est
 - Cada mudança na plataforma requer que toda a aplicação seja reiniciada.
 - Cada desenvolvedor envolvido com a aplicação trabalha com a mesma base de código, tornando um lançamento e uma fusão de recursos uma grande tarefa com muitos riscos envolvidos. Isso geralmente pode ser feito por alguém que entende toda a aplicação.
 
-> ** DICA: ** Se você já tem esta aplicação instalada e funcionando e tem clientes usando a plataforma, terá um bom entendimento de quais recursos são essenciais e como começar a reformulá-los.
+> **DICA:** Se você já tem esta aplicação instalada e funcionando e tem clientes usando a plataforma, terá um bom entendimento de quais recursos são essenciais e como começar a reformulá-los.
 
-Como Martin Fowler descreve no post [Monolith First] (https://martinfowler.com/bliki/MonolithFirst.html) é o caminho a tomar. Por ter um monólito, você já entende a solução que precisa construir, tornando mais fácil estimar como a nova arquitetura resolverá os problemas da versão existente. Em outras palavras, se você não tem um monólito existente, não comece com uma arquitetura distribuída do zero. Crie um monólito primeiro e depois divida, se necessário.
+Como Martin Fowler descreve no post [Monolith First](https://martinfowler.com/bliki/MonolithFirst.html) é o caminho a tomar. Por ter um monólito, você já entende a solução que precisa construir, tornando mais fácil estimar como a nova arquitetura resolverá os problemas da versão existente. Em outras palavras, se você não tem um monólito existente, não comece com uma arquitetura distribuída do zero. Crie um monólito primeiro e depois divida, se necessário.
 
 O próximo passo em nossa jornada é decidir por onde começar. Em minha experiência, vi três padrões comuns se repetindo:
 
-- ** Iniciar novas funcionalidades como serviços separados **: isso geralmente é recomendado se você puder manter o monólito como está. Novos serviços não resolverão os problemas já existentes, mas ajudarão suas equipes de desenvolvedores a se acostumarem a trabalhar com uma mentalidade de microsserviços.
-- ** Dividir a funcionalidade existente do monólito ** (e lentamente desative o código antigo): se você tiver problemas urgentes com o monólito, pode avaliar a ramificação de algumas das funcionalidades externas para um novo serviço. Isso pode resolver alguns dos problemas existentes, mas não trará nenhum valor de negócios imediatamente. Isso também aumenta a complexidade das operações do dia a dia, pois você pode acabar executando duas soluções para o mesmo problema por um longo período de tempo. Isso também pode ser usado para entender o quão complexa e cara uma rearquitetura central pode ser.
-- ** Reestruturar o núcleo da plataforma como microsserviços ** (para resolver os problemas existentes): Mais cedo ou mais tarde, se você estiver tendo problemas para manter e dimensionar seu monólito, precisará repensar e redesenhar as partes principais de sua plataforma, certificando-se de focar em resolver os problemas atuais de escalabilidade e manutenção. Isso pode ser uma iniciativa cara, mas pode ser feito de forma totalmente isolada de seus ambientes de produção. Várias vezes eu vi como isso é feito como uma Prova de Conceito para demonstrar que é realmente possível e também para garantir que os membros de sua equipe entendam as implicações de um negócio (vantagens) e do ponto de vista técnico (novo stack tecnológico, novas ferramentas).
+- **Iniciar novas funcionalidades como serviços separados**: isso geralmente é recomendado se você puder manter o monólito como está. Novos serviços não resolverão os problemas já existentes, mas ajudarão suas equipes de desenvolvedores a se acostumarem a trabalhar com uma mentalidade de microsserviços.
+- **Dividir a funcionalidade existente do monólito** (e lentamente desative o código antigo): se você tiver problemas urgentes com o monólito, pode avaliar a ramificação de algumas das funcionalidades externas para um novo serviço. Isso pode resolver alguns dos problemas existentes, mas não trará nenhum valor de negócios imediatamente. Isso também aumenta a complexidade das operações do dia a dia, pois você pode acabar executando duas soluções para o mesmo problema por um longo período de tempo. Isso também pode ser usado para entender o quão complexa e cara uma rearquitetura central pode ser.
+- **Reestruturar o núcleo da plataforma como microsserviços** (para resolver os problemas existentes): Mais cedo ou mais tarde, se você estiver tendo problemas para manter e dimensionar seu monólito, precisará repensar e redesenhar as partes principais de sua plataforma, certificando-se de focar em resolver os problemas atuais de escalabilidade e manutenção. Isso pode ser uma iniciativa cara, mas pode ser feito de forma totalmente isolada de seus ambientes de produção. Várias vezes eu vi como isso é feito como uma Prova de Conceito para demonstrar que é realmente possível e também para garantir que os membros de sua equipe entendam as implicações de um negócio (vantagens) e do ponto de vista técnico (novo stack tecnológico, novas ferramentas).
 
-Neste capítulo, irei cobrir a última dessas opções (** Reestruturar o núcleo da plataforma como microsserviços **) para destacar a solução para nossos problemas existentes com a aplicação monolítica, mas você pode explorar as outras duas, se elas forem mais apropriadas para sua situação.
+Neste capítulo, irei cobrir a última dessas opções (**Reestruturar o núcleo da plataforma como microsserviços**) para destacar a solução para nossos problemas existentes com a aplicação monolítica, mas você pode explorar as outras duas, se elas forem mais apropriadas para sua situação.
 
-> ** DICA: ** Mais informações sobre estratégias e práticas sobre como migrar um monólito existente para a arquitetura de microsserviços podem ser encontradas no capítulo [Microsserviços] () #TODO na fase de revisão: adicionar referência a https://github.com /otaviojava/manual-arquiteto-moderno/blob/master/chapter_05.md
+> **DICA:** Mais informações sobre estratégias e práticas sobre como migrar um monólito existente para a arquitetura de microsserviços podem ser encontradas no capítulo [Microsserviços] () #TODO na fase de revisão: adicionar referência a https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_05.md
 
 É aqui que os conceitos e padrões DDD se tornam realmente úteis para definir como dividir as funcionalidades do monólito e como organizar nossas equipes em torno dos novos serviços. Nas seções a seguir, exploraremos alguns desses conceitos em ação.
 
@@ -116,7 +114,7 @@ Para o nosso cenário, isso pode significar que, em vez de tentar a rearquitetur
 
 Do ponto de vista arquitetônico, isso pode significar um site de conferência monolítico ou um site de conferência construído com diferentes serviços distribuídos. Se os sites de conferência forem complexos o suficiente e quisermos reutilizar os módulos para todos eles, podemos considerar uma abordagem distribuída. Com base na minha experiência, esse tipo de plataforma aproveita os serviços compartilhados na maioria das vezes, então faz sentido arquitetá-los pensando na reutilização.
 
-> ** DICA **: Essa estratégia leva a vários serviços desde o primeiro dia, então isso é algo com o qual você e suas equipes devem se acostumar.
+> **DICA**: Essa estratégia leva a vários serviços desde o primeiro dia, então isso é algo com o qual você e suas equipes devem se acostumar.
 
 Nossos sites de conferências independentes serão semelhantes a este:
 ![chapter_02_02](images/chapter_02_02.png)
@@ -138,7 +136,7 @@ Se estivermos confiantes de que a implementação da funcionalidade de Chamada d
 
 O DDD propõe o conceito de contexto limitado como um conjunto bem definido de funcionalidades que se encaixam. Essas funcionalidades geralmente mapeiam como um Especialista de Domínio (especialista no assunto) fará o trabalho se não houver software disponível. Para planejar, projetar e implementar essas funcionalidades, uma equipe é montada com Especialistas em Domínio que trabalharão lado a lado com Engenheiros de Software. Na maioria das vezes, um Especialista de Domínio saberá quais contextos delimitados já existem e pelo que eles são responsáveis.
 
-> ** INFO: ** De uma perspectiva DDD, é extremamente importante não tornar esses Bounded Contexts um limite técnico que é imposto aos especialistas em domínio.
+> **INFO:** De uma perspectiva DDD, é extremamente importante não tornar esses Bounded Contexts um limite técnico que é imposto aos especialistas em domínio.
 
 Um Bounded Context irá expor um conjunto bem definido de APIs para que outras equipes de diferentes contexto delimitado possam consumir e interagir com a funcionalidade de Chamada de Propostas.
 
@@ -182,19 +180,19 @@ Para fazer o deploy do seu código no Kubernetes, você precisará:
 
 - Opcionalmente, se você estiver criando muitos serviços, convém usar o Helm para empacotar e liberar esses arquivos YAML. Todos esses artefatos precisam versionados adequadamente, o que significa que quando você constrói uma nova versão do seu arquivo JAR, um novo container precisa ser construído e um novo gráfico do Helm precisa ser lançado.
 
-  > ** INFO: ** O Helm fornece a ideia de gráficos (pacotes) que mapeiam um a um a forma como lidamos com nossos artefatos Maven. Se você estiver trabalhando com gráficos do Helm, esses gráficos geralmente também são enviados/liberados para um repositório de gráficos, como o Chart Museum.
+  > **INFO:** O Helm fornece a ideia de gráficos (pacotes) que mapeiam um a um a forma como lidamos com nossos artefatos Maven. Se você estiver trabalhando com gráficos do Helm, esses gráficos geralmente também são enviados/liberados para um repositório de gráficos, como o Chart Museum.
 
 Neste ponto, se você está pensando "isso é muito trabalho", você está 100% certo. Se você está pensando: 'Eu não quero fazer tudo isso', você está absolutamente certo. Eu também não quero fazer isso. Se você quer que isso funcione, você precisa usar ferramentas especializadas que já entregam todas essas funcionalidades de forma automatizada. Você deve tentar automatizar cada etapa, e a indústria usa pipelines de integração contínua para conseguir isso. Vamos falar sobre como entregar pipelines com Jenkins X.
 
-> ** INFO: ** Neste exemplo, estamos visando o Kubernetes e optamos por usar Jenkins X neste conjunto de ferramentas. Jenkins X, traz CI/CD (Continuous Integration/Continuous Delivery) para o Kubernetes e faz parte da Continuous Delivery Foundation.
+> **INFO:** Neste exemplo, estamos visando o Kubernetes e optamos por usar Jenkins X neste conjunto de ferramentas. Jenkins X, traz CI/CD (Continuous Integration/Continuous Delivery) para o Kubernetes e faz parte da Continuous Delivery Foundation.
 
 Como você pode notar, o Jenkins X não é apenas sobre integração contínua, mas também sobre entrega contínua. Ao cobrir a entrega contínua, o pipeline não para quando esses componentes são construídos. O pipeline é responsável por construir, testar e também implantar nossos artefatos em um ambiente ativo onde serão executados para atender nossos clientes. A parte “contínua” faz referência ao fato de que você deseja ter certeza de que a implantação de uma nova versão do seu serviço é fácil e você terá como objetivo implantar novas versões em um curto período de tempo.
 
-> ** INFO: ** Para alcançar a entrega contínua, o Jenkins X usa um conjunto de convenções para permitir que os desenvolvedores se concentrem na construção de valor de negócios. Essas convenções não são exclusivas do Jenkins X e fazem parte das melhores práticas coletadas de diferentes setores e profissionais. Projetos como o Jenkins X são os catalisadores para milhares de membros da comunidade, que são especialistas em CI/CD, o que resulta nas melhores práticas e ferramentas que as aplicam.
+> **INFO:** Para alcançar a entrega contínua, o Jenkins X usa um conjunto de convenções para permitir que os desenvolvedores se concentrem na construção de valor de negócios. Essas convenções não são exclusivas do Jenkins X e fazem parte das melhores práticas coletadas de diferentes setores e profissionais. Projetos como o Jenkins X são os catalisadores para milhares de membros da comunidade, que são especialistas em CI/CD, o que resulta nas melhores práticas e ferramentas que as aplicam.
 
 Uma das convenções usadas pelo Jenkins X é chamada “Trunk Based Development”. Basicamente, significa que cada alteração aplicada (merged) à branch master irá gerar uma nova versão de nossos artefatos. Na maioria das vezes, isso não é confortável para os desenvolvedores, já que muitas dessas práticas são comumente definidas em cada empresa e tendem a variar bastante. A principal motivação para usar algo como o Trunk Based Development é garantir que as equipes não gastem tempo definindo essas práticas. Ao trabalhar com essa convenção, você pode se concentrar na escrita do código e, quando o código estiver pronto e mesclado ao master, uma nova versão é criada e implantada em algum tipo de ambiente de teste para validações adicionais.
 
-> ** DICA: ** Recomendo fortemente que, se você estiver iniciando um novo projeto, verifique as vantagens do Trunk Based Development, bem como do livro Accelerate, pois foi usado como base para a criação de ferramentas como Jenkins X. https://jenkins-x.io/about/overview/accelerate/
+> **DICA:** Recomendo fortemente que, se você estiver iniciando um novo projeto, verifique as vantagens do Trunk Based Development, bem como do livro Accelerate, pois foi usado como base para a criação de ferramentas como Jenkins X. https://jenkins-x.io/about/overview/accelerate/
 
 No fim das contas, Jenkins X usa ambas as convenções, “Um Repositório / Um Serviço” mais “Trunk Based Development”, para levar seu serviço do código-fonte para uma instância em execução dentro de um Cluster Kubernetes.
 
@@ -213,7 +211,7 @@ Você pode encontrar o mesmo setup para todos os projetos dentro da Demonstraç�
 #### APIs abertas
 Se você já está implementando um Bounded Context, logo no início você precisará projetar e especificar que tipo de interface irá expor para outro Bounded Context e serviços terceiros que possam estar interessados ​​na funcionalidade que seu contexto fornece. Uma maneira popular de implementar essas APIs são os terminais REST.
 
-> ** INFO: ** Como você provavelmente está familiarizado com endpoints REST, esta seção se concentra na [Especificação de API aberta] (https://github.com/OAI/OpenAPI-Specification)
+> **INFO:** Como você provavelmente está familiarizado com endpoints REST, esta seção se concentra na [Especificação de API aberta](https://github.com/OAI/OpenAPI-Specification)
 
 Conforme definido no texto das especificações “* a especificação OpenAPI remove as suposições ao chamar um serviço. *” Hoje em dia, frameworks populares como Spring Boot vêm com integração pronta para uso com API aberta e ferramentas de API aberta.
 
@@ -260,13 +258,13 @@ Mapas de Contexto bem definidos ajudam muito a planejar e compreender como esses
 Para nosso exemplo, o seguinte mapa de contexto faria sentido:
 ![chapter_02_07](images/chapter_02_07.png)
 
-Este diagrama descreve as relações entre o Bounded Context simples que temos para nossa aplicação do site de conferência. Aqui podemos ver que existe uma relação ** Cliente/Fornecedor ** entre a Call for Proposals e o Bounded Context da Agenda da Conferência. Onde a Call for Proposals ** é um consumidor ** da Agenda da Conferência do serviço upstream. Entre essas duas equipes, existe também uma relação de ** Parceria(Partnership) **, pois elas precisam colaborar para fazer as coisas. Isso significa que a comunicação entre essas duas equipes é importante e elas devem ser capazes de influenciar o roteiro uma da outra.
+Este diagrama descreve as relações entre o Bounded Context simples que temos para nossa aplicação do site de conferência. Aqui podemos ver que existe uma relação **Cliente/Fornecedor** entre a Call for Proposals e o Bounded Context da Agenda da Conferência. Onde a Call for Proposals **é um consumidor** da Agenda da Conferência do serviço upstream. Entre essas duas equipes, existe também uma relação de **Parceria(Partnership)**, pois elas precisam colaborar para fazer as coisas. Isso significa que a comunicação entre essas duas equipes é importante e elas devem ser capazes de influenciar o roteiro uma da outra.
 
-Por outro lado, a relação com o serviço de Notificação é diferente. A Call for Proposals tem uma relação ascendente com o Bounded Context de Notificação(Notification), mas vai ** confortar ** com seus contratos. Isso significa que, da perspectiva da equipe de Call for Proposals, eles não podem influenciar ou alterar as APIs do Bounded Context de notificação. Isso acontece muito quando temos sistemas legados ou quando esse bounded context é externo à nossa empresa.
+Por outro lado, a relação com o serviço de Notificação é diferente. A Call for Proposals tem uma relação ascendente com o Bounded Context de Notificação(Notification), mas vai **confortar** com seus contratos. Isso significa que, da perspectiva da equipe de Call for Proposals, eles não podem influenciar ou alterar as APIs do Bounded Context de notificação. Isso acontece muito quando temos sistemas legados ou quando esse bounded context é externo à nossa empresa.
 
-> ** DICA: ** Pulando para o lado prático, embora as integrações de sistema sejam um tópico muito amplo, esta seção se concentra em uma recomendação muito prática: “Você deve aprender sobre testes de contato orientados ao consumidor(Consumer-Driven Contact)”. Mais uma vez, Martin Fowler tem um artigo, publicado em 2006, sobre isso: https://martinfowler.com/articles/consumerDrivenContracts.html.
+> **DICA:** Pulando para o lado prático, embora as integrações de sistema sejam um tópico muito amplo, esta seção se concentra em uma recomendação muito prática: “Você deve aprender sobre testes de contato orientados ao consumidor(Consumer-Driven Contact)”. Mais uma vez, Martin Fowler tem um artigo, publicado em 2006, sobre isso: https://martinfowler.com/articles/consumerDrivenContracts.html.
 
-Embora o tópico em si não seja novo, existem ferramentas muito atualizadas para realmente implementar isso em seus projetos, como [Spring Cloud Contracts] (https://spring.io/projects/spring-cloud-contract).
+Embora o tópico em si não seja novo, existem ferramentas muito atualizadas para realmente implementar isso em seus projetos, como [Spring Cloud Contracts](https://spring.io/projects/spring-cloud-contract).
 
 #### Bônus: Implementação de contratos com Spring Cloud Contracts
 
@@ -356,7 +354,7 @@ Se você precisar adicionar qualquer código de inicialização, esta é a class
 
 Agora que o contrato foi validado com cada build, também podemos usar o contrato para gerar um Stub, que é um serviço que se comporta como o serviço real, mas com dados fictícios. Os dados fictícios também são gerados automaticamente, pois também podem ser fornecidos pela definição do contrato. Este Stub é um artefato por si só que pode ser distribuído para outros serviços, por exemplo, aqueles que consomem o serviço “real” para teste.
 
-Isso basicamente significa que agora, toda vez que você construir seu serviço, ** dois ** arquivos JAR serão criados. Um é o JAR da aplicação Spring Boot real e o outro é o Stub de Serviço.
+Isso basicamente significa que agora, toda vez que você construir seu serviço, **dois** arquivos JAR serão criados. Um é o JAR da aplicação Spring Boot real e o outro é o Stub de Serviço.
 Este Stub de Serviço pode ser enviado automaticamente para o repositório do seu artefato (por exemplo, Nexus ou Artifactory) e viverá no mesmo grupo e nome do artefato da sua aplicação JAR.
 
 Finalmente, um Serviço X projetado para consumir seu serviço pode criar testes que iniciarão o Stub gerado anteriormente localmente para evitar a necessidade de uma instância real ou uma configuração de ambiente inteira. Você pode facilmente iniciar o Stub antes de seus testes usando as seguintes anotações:
@@ -382,7 +380,7 @@ Isso baixa automaticamente a versão mais recente do stub e o executa antes que 
 
 É importante observar que tanto o Serviço quanto os contratos são versionados juntos como parte da mesma base de código. Isso implica que o Stub gerado e o próprio Serviço terão a mesma versão. Um serviço de consumidor, para executar seus testes, pode depender do Stub, pois nunca deve depender do próprio serviço. Assim que o consumidor tiver testado usando o Stub de Serviço do produtor, você pode reconhecer rapidamente quando um contrato é quebrado ou quando uma nova versão do contrato não é mais compatível com os consumidores, pois os testes usando os Stubs serão interrompidos quando versões novas e incompatíveis forem lançadas. Neste momento, os consumidores se deparam com uma decisão simples: ficar dependendo dos contratos antigos com uma versão fixa, ou atualizar para a versão mais recente do contrato. Como você pode ver, isso pode exigir que você execute várias versões do seu serviço ao mesmo tempo. Felizmente para nós, o Kubernetes foi criado para oferecer suporte a esses cenários. Você pode ler sobre versões canário (Canary Releases) se estiver interessado em aspectos de multi-version deployments.
 
-> ** DICA: ** O capítulo [Cloud] () cobre Canary Releases, bem como outras estratégias de implantação. #TODO na fase de revisão: adicione referência a https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_07.md
+> **DICA:** O capítulo [Cloud] () cobre Canary Releases, bem como outras estratégias de implantação. #TODO na fase de revisão: adicione referência a https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_07.md
 
 Ambos Bounded Contexts e Mapas de contexto são ótimas ferramentas conceituais para entender como estruturar suas equipes e seu software, mas mais importante, esses conceitos ajudam você a se concentrar no valor do negócio.
 
@@ -401,7 +399,7 @@ Para este exemplo específico, o cenário de conferência, estamos analisando o 
 
 Você precisa prestar atenção às suas interações humanas, pois essas interações tendem a exigir comportamentos assíncronos, como lembretes, notificações, alertas, bem como interfaces de usuário, que devem ser cuidadosamente projetadas.
 
-> ** DICA: ** Como engenheiros, tendemos a simplificar e subestimar a quantidade de trabalho e iterações que podem exigir a criação de uma boa experiência do usuário.
+> **DICA:** Como engenheiros, tendemos a simplificar e subestimar a quantidade de trabalho e iterações que podem exigir a criação de uma boa experiência do usuário.
 
 A interface do usuário que cobre este cenário simples é assim:
 
@@ -433,9 +431,9 @@ De uma perspectiva arquitetônica, parece mais assim:
 Onde a Interface do Usuário com alguma capacidade de roteamento é necessária para encaminhar solicitações ao Serviço Call for Proposals (C4P) para o Serviço de Agenda ou Emails. Neste exemplo, todas as comunicações acontecem por meio de invocações HTTP/Rest.
 
 ### Gateway de API / Interface do usuário
-Na maioria das vezes, um Gateway de API também é usado para ocultar acesso direto a todos os outros serviços. É bastante comum ver esse serviço delegando autorização e autenticação a um provedor OAuth ou SAML, servindo como uma barreira de segurança para o mundo externo. O exemplo usa o [Spring Cloud Gateway] (https://spring.io/projects/spring-cloud-gateway), que fornece o mecanismo de roteamento para encaminhar solicitações de entrada para o restante dos serviços. O Spring Cloud Gateway nos permite transformar qualquer aplicação Spring Boot em um roteador de solicitação com recursos avançados.
+Na maioria das vezes, um Gateway de API também é usado para ocultar acesso direto a todos os outros serviços. É bastante comum ver esse serviço delegando autorização e autenticação a um provedor OAuth ou SAML, servindo como uma barreira de segurança para o mundo externo. O exemplo usa o [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway), que fornece o mecanismo de roteamento para encaminhar solicitações de entrada para o restante dos serviços. O Spring Cloud Gateway nos permite transformar qualquer aplicação Spring Boot em um roteador de solicitação com recursos avançados.
 
-> ** INFO: ** É importante observar que o Spring Cloud Gateway oferece a flexibilidade de realmente adicionar programaticamente qualquer transformação que você deseja/precisa nas solicitações(requests) de entrada. Esse poder e liberdade vêm com a desvantagem de que depende de você manter, testar e corrigir o bug. Em grandes projetos, você pode querer avaliar um gateway de API de terceiros (como Kong, 3Scale, Apigee, etc) com base nos requisitos do seu projeto.
+> **INFO:** É importante observar que o Spring Cloud Gateway oferece a flexibilidade de realmente adicionar programaticamente qualquer transformação que você deseja/precisa nas solicitações(requests) de entrada. Esse poder e liberdade vêm com a desvantagem de que depende de você manter, testar e corrigir o bug. Em grandes projetos, você pode querer avaliar um gateway de API de terceiros (como Kong, 3Scale, Apigee, etc) com base nos requisitos do seu projeto.
 
 O módulo API Gateway / interface do usuário pode ser encontrado neste repositório: https://github.com/salaboy/fmtok8s-api-gateway
 
@@ -471,7 +469,7 @@ spring:
 
 Essas rotas definem um caminho para o gateway como `/c4p/**` irá encaminhar automaticamente a solicitação para o serviço http://fmtok8s-c4p.
 
-> ** INFO: ** A interface de usuário do site pode ser encontrada aqui: https://github.com/salaboy/fmtok8s-api-gateway/tree/master/src/main/resources/templates
+> **INFO:** A interface de usuário do site pode ser encontrada aqui: https://github.com/salaboy/fmtok8s-api-gateway/tree/master/src/main/resources/templates
 > O Controller que busca os dados dos serviços de back-end aqui: https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/main/java/com/salaboy/conferences/site/DemoApplication.java
 
 Como estamos executando no Kubernetes, podemos usar o nome do serviço Kubernetes em vez de apontar para um pod específico. Esse mecanismo de roteamento nos permite expor apenas os Endpoints do Gateway de API para o mundo externo, deixando todos os outros serviços atrás de uma rede segura.
@@ -479,11 +477,11 @@ Como estamos executando no Kubernetes, podemos usar o nome do serviço Kubernete
 ### Eventos de Domínio e o Serviço Call for Proposals
 Como o fluxo em análise é fundamental para o Bounded Context Call For Proposals, não é surpresa que a lógica central pertença ao Serviço Call For Proposals, mais concretamente, às duas funções a seguir: Envio de Proposta e Decisão Tomada pelo Conselho (Proposal Submission and Decision Made By the Board).
 
-> ** INFO: ** O Serviço Call for Proposals pode ser encontrado aqui: https://github.com/salaboy/fmtok8s-c4p/
+> **INFO:** O Serviço Call for Proposals pode ser encontrado aqui: https://github.com/salaboy/fmtok8s-c4p/
 
 O endpoint de Envio de proposta aceita uma proposta da interface do usuário e a armazena em um banco de dados ou storage. Este é um passo importante, precisamos garantir que não perderemos propostas. Observe que podemos estar interessados ​​em emitir um evento de domínio DDD neste momento, pois outros sistemas/aplicações podem estar interessados ​​em reagir sempre que uma proposta for recebida.
 
-> ** INFO: ** Verifique uma implementação real aqui: https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/C4PController.java#L37
+> **INFO:** Verifique uma implementação real aqui: https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/C4PController.java#L37
 
 Mais importante, o endpoint Decision Made by the Board registra uma decisão feita pela diretoria, mas também define as etapas a seguir com base nessa decisão. Na vida real, essa decisão afetará o curso da ação. Na maioria das vezes, esses pontos de decisão e as ações derivadas deles são essenciais para administrar um negócio eficiente e com boa relação custo-benefício.
 https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/C4PController.java#L60
@@ -535,7 +533,7 @@ Outra solução pode ser usar um mecanismo de mensagem ou pub/sub para comunicar
 
 Finalmente, uma abordagem mais recente são as Service Meshes, em que delegamos a responsabilidade de tentar novamente, por exemplo, à infraestrutura. O Service Mesh usa proxies para inspecionar cargas HTTP e códigos de erro, de forma que novas tentativas automáticas possam ser feitas em caso de falha.
 
-> ** DICA: ** Você deve dar uma olhada em Istio, Gloo e LinkerD se quiser entender mais sobre como funcionam Service Meshes e quais são suas vantagens. Mais detalhes sobre as Service Meshes são compartilhados no capítulo Nuvem. #TODO na fase de revisão: adicione referência a https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_07.md
+> **DICA:** Você deve dar uma olhada em Istio, Gloo e LinkerD se quiser entender mais sobre como funcionam Service Meshes e quais são suas vantagens. Mais detalhes sobre as Service Meshes são compartilhados no capítulo Nuvem. #TODO na fase de revisão: adicione referência a https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_07.md
 
 #### Fluxo enterrado no código
 É bastante comum encontrar lógicas de negócios complexas escondidas dentro de nossos serviços, de certa forma obscurecidas por todos os padrões necessários para lidar com erros técnicos, buscar dados de diferentes fontes e transformar dados em diferentes formatos. Em projetos da vida real, fica muito difícil para os Especialistas em Domínio entenderem de fato o código que implementa seus fluxos de negócios.
@@ -552,7 +550,7 @@ Os eventos de domínio (Domain Events) são introduzidos no DDD para externaliza
 
 As ferramentas de Orquestração de Serviço podem ser usadas em conjunto com Cloud Events para externalizar a lógica de negócios enterrada em nossos serviços.
 
-> ** DICA: ** Verifique projetos como Zeebe, jBPM ou Kogito para entender mais sobre como essas ferramentas podem ajudá-lo. Além disso, você pode achar este post sobre Cloud Events muito útil.
+> **DICA:** Verifique projetos como Zeebe, jBPM ou Kogito para entender mais sobre como essas ferramentas podem ajudá-lo. Além disso, você pode achar este post sobre Cloud Events muito útil.
 
 Finalmente, conforme discutido no livro * Implementing DDD *, patterns(padrões) como CQRS (Command/Query Responsibility Segregation [Segregação de Responsabilidade de Consulta e Comando]) podem ajudá-lo muito ao lidar com relatórios e análises. Você quer evitar a execução de relatórios caros ou rotinas intensas de processamento de dados no banco de dados de serviço. Ao aplicar o CQRS, você externaliza os dados sobre os quais está interessado em relatar em um armazenamento separado que possui um formato otimizado para indexar, pesquisar e resumir dados. Uma abordagem popular é enviar dados para ElasticSearch para a indexação completa do texto. Então, na sua aplicação, se você deseja pesquisar entre milhares de propostas, você não consulta o Serviço Call For Proposals. Em vez disso, você usa os índices ElasticSearch, descarregando o serviço Call for Proposals, para que ele possa continuar aceitando propostas para suas conferências.
 
@@ -562,7 +560,7 @@ Uma breve nota sobre Sistemas Legados: tente abstraí-los para que você tenha c
 
 O serviço Email fornecido não inclui uma conexão SMTP, mas expõe um conjunto de APIs que são fáceis de consumir e não exigem que outros serviços incluam clientes SMTP.
 
-> ** INFO: ** O código-fonte deste serviço pode ser encontrado aqui: https://github.com/salaboy/fmtok8s-email
+> **INFO:** O código-fonte deste serviço pode ser encontrado aqui: https://github.com/salaboy/fmtok8s-email
 
 Considere a criação de adapters para seus serviços legados, lembre-se de que dentro do Kubernetes, mesmo que os adapters sejam criados em containers separados, esses containers podem ser executados dentro do mesmo host, evitando um salto(hop) extra de rede.
 
