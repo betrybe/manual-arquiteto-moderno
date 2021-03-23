@@ -60,53 +60,53 @@ Want examples?
 
 In addition to these more "simple" examples (and I highlight the importance of quoting the term), we have more complex ones, which generate many performance differences in applications. For example: what is the difference between using Lists (whether they are Vectors or linked lists) and hash? The main difference is in the search performance. Take a look at this small example of a Java benchmark :
 
-		ArrayList<Produto> lista;
-		lista = new ArrayList<Produto>();
+		ArrayList<Product> list;
+		list = new ArrayList<Product>();
 		for (int i = 0; i < 100000; i++) {
-		    Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
-		    lista.add(p);
+		    Product p = new Product(i + 1, "Product " + (i + 1), 0, 0);
+		    list.add(p);
 		}
-		int quantosAchei=0; // numero de ocorrencias encontradas
-		// inicio da medicao do tempo
-		long inicio = System.currentTimeMillis();
-		Produto busca;
+		int howManyFound=0; // number of occurrences found
+		// start time measurement
+		long start = System.currentTimeMillis();
+		Product search;
 		for (int cont = 0; cont < 10000; cont++) {
-		    for (int i = 0; i < lista.size(); i++) {
-		        Produto tmp = lista.get(i);
-		        if (tmp.getId() == -1) { // forcando buscar um ID que nao existe na lista -> o pior caso
-		             busca = tmp;
-		             quantosAchei++;
+		    for (int i = 0; i < list.size(); i++) {
+		        Product tmp = list.get(i);
+		        if (tmp.getId() == -1) { // forcing the search of an nonexistent ID -> worst case
+		             search = tmp;
+		             howManyFound++;
 		             break;
 		         }
 		     }
 		 }
-		 long fim = System.currentTimeMillis();
-		 // fim da medicao do tempo
-		 System.out.println("Achei = " + quantosAchei +" em "+(fim-inicio));
+		 long end = System.currentTimeMillis();
+		 // end time measurement
+		 System.out.println("Found = " + howManyFound +" in "+(end-start));
 
 That simple algorithm populates a list with 100,000 product-type objects and performs 10,000 searches for a product that does not exist in that list. As it is a linear structure (and we return to the analysis of algorithms), the search must go through all objects until it concludes that it does not exist in the list. An algorithm like this can take a few good seconds to run (a test on a regular machine can take between 2 and 5 seconds to run). Is it possible to improve the performance of this search? Of course. We could use, instead of linear search, a binary search algorithm. Nevertheless, for this strategy, our set would need to be previously ordered.
 
 Now, if we think of another structure, like a HashMap, what is the advantage? Let's look at this code.
 
-		HashMap<Integer, Produto> mapa;
-		mapa = new HashMap<Integer, Produto>();
+		HashMap<Integer, Product> map;
+		map = new HashMap<Integer, Product>();
 		for (int i = 0; i < 1000000; i++) {
-		   Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
-		   mapa.put(p.getId(), p);
+		   Product p = new Product(i + 1, "Product " + (i + 1), 0, 0);
+		   map.put(p.getId(), p);
 		}
-		int quantosAchei=0;
+		int howManyFound=0;
 		
-		// inicio da medicao
-		long inicio = System.currentTimeMillis();
+		// start measurement
+		long start = System.currentTimeMillis();
 		for (int cont=0; cont< 10000; cont++) {
-			Produto busca = mapa.get(-1); // novamente forcando a busca de um elemento que nao existe
-			if (busca != null) {
-				quantosAchei++;
+			Product search = map.get(-1); // again forcing the search of an nonexistent element
+			if (search != null) {
+				howManyFound++;
 			}
 		}
-		long fim = System.currentTimeMillis();
-		// fim da medicao
-		System.out.println("Achei = "+quantosAchei+" em "+(fim-inicio));
+		long end = System.currentTimeMillis();
+		// end measurement
+		System.out.println("Found = "+howManyFound+" in "+(end-start));
 
 By hash's definition, there is a calculation to determine what memory position it will occupy through the object's key attribute. Once this position has been determined, access is direct to the object (or the absence of it). Therefore, an object's computational access time in a hash map is O(1), i.e., constant!
 
