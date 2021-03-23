@@ -11,7 +11,7 @@
 
 * **Nome**: Sérgio Lopes
 * **Cargo**: Especialista em TI no Banco Itaú S / A
-* **Bio:** Desenvolvedor C++, Desenvolvedor Java, Engenheiro de Software, Especialista em TI em back-end. Trabalhando em um dos mais robustos Internet Bankings da América Latina. Atuando na criação do framework de desenvolvimento chamado *Universal*, que é o sistema central do Internet Banking Itaú desde 2001 e até os dias de hoje ainda em operação, trabalhando no desenvolvimento de ferramentas de suporte para este framework, suas especificações, e sua manutenção, em C/C ++.
+* **Bio:** Desenvolvedor C++, Desenvolvedor Java, Engenheiro de Software, Especialista em TI em back-end. Trabalhando em um dos mais robustos Internet Bankings da América Latina. Atuando na criação do framework de desenvolvimento chamado *Universal*, que é o sistema central do Internet Banking Itaú desde 2001 e até os dias de hoje ainda em operação, trabalhando no desenvolvimento de ferramentas de suporte para este framework, suas especificações, e sua manutenção, em C/C++.
 Desenvolvimento do Framework Java, que veio substituir o framework *Universal*, atuando nele desde 2014. Criação de mecanismos de coexistência entre o legado e este novo Framework. Este framework é responsável por atender às necessidades transversais dos canais digitais, fornecendo ferramentas e serviços para acelerar o trabalho de outros engenheiros.
 Trabalhando com tecnologias como: JAVA, Spring Framework, Spring Boot, Docker, Windows/Linux, SQL, JavaScript, Hibernate, Application Server: JBoss EAP.6.X, Testes automatizados com (JUnit4, DBUnit, JMock, Mockito). Eclipse IDE, Maven, Git, Jenkins. Nexus, C++, Visual Studio, Artifactory, Sonar.
 
