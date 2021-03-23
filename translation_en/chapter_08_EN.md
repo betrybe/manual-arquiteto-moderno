@@ -1,6 +1,6 @@
 # Cloud
 
-Once we talked about DDD, microservices, good practices, code design, and software architecture, we have the basis to continue and address one of the most discussed topics in the technology scenario: cloud computing.
+Once we talked about DDD, microservices, good coding practices, and software architecture, we have the basis to continue and address one of the most discussed topics in the technology scenario: cloud computing.
 
 We will discuss what to consider when transposing application architecture to a cloud environment, popular perspectives regarding cloud-native applications and why this concept is linked to tools like Kubernetes. Patterns and functionalities expected in an application will also be described so that they are first-class citizens in a cloud environment.
 
@@ -19,7 +19,7 @@ Understanding these concepts will help you understand your applications' situati
 
 ## Cloud-Native or Cloud-Enabled?
 
-An application can be categorized according to its suitability level for a cloud environment as being *cloud-enabled* or *cloud-native* (a.k.a. *cloud-ready*).
+An application can be categorized according to its suitability level for a cloud environment as being cloud-enabled or cloud-native (a.k.a. cloud-ready).
 
 ### Cloud-Enabled
 
@@ -31,7 +31,7 @@ A cloud-enabled application has gone through refactorings and adjustments to run
 
 Despite the "cons" of having a cloud-enabled application, the cost or effort of refactoring the entire application is not viable. In this way, the application can run in the cloud but can’t enjoy all its benefits.
 
-> **INFO:** [Kubernetes](https://kubernetes.io/): it is an open-source container orchestration tool and works very well with [Docker](https://www.docker.com /). It is currently the most popular tool in the community. Other examples of container orchestration tools are Docker Swarm, Mesos, and Amazon ECS.
+> **INFO:** [Kubernetes](https://kubernetes.io/): it is an open-source container orchestration tool and works very well with [Docker](https://www.docker.com/). It is currently the most popular tool in the community. Other examples of container orchestration tools are Docker Swarm, Mesos, and Amazon ECS.
 
 To better understand everything that a cloud-enabled application is *not* able to use natively, let's talk about the cloud-native concept.
 
@@ -67,7 +67,7 @@ As of writing this book, there is no clear consensus or definition about the ter
 
   
 
-> "Cloud-native technologies enable companies to create and run scalable applications in modern and dynamic environments, such as public, private, and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach. (... ) "
+> "Cloud-native technologies enable companies to create and run scalable applications in modern and dynamic environments, such as public, private, and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach. (...) "
 
 >
 
@@ -143,9 +143,9 @@ To create a project in which you can study examples of implementing cloud-native
 
   
 
-1. Access the website https://start.microprofile.io/
+1. Access https://start.microprofile.io/
 
-2. Insert a `groupId`,` artifactId`, select a version of MicroProfile, version of Java SE, and `runtime`.
+2. Insert a `groupId`,`artifactId`, select a version of MicroProfile, version of Java SE, and `runtime`.
 
 The `runtime` will be the implementation of the MicroProfile specification.
 
@@ -798,45 +798,29 @@ If your scenario still has a low number of images and containers, it may not be 
   
 
 ```
-
 $ docker swarm
-
 
 Usage:  docker swarm COMMAND
 
-
 Manage Swarm
 
-
 Commands:
-
   ca Display and rotate the root CA
-
   init Initialize a swarm
-
   join Join a swarm as a node and/or manager
-
   join-token Manage join tokens
-
   leave Leave the swarm
-
   unlock Unlock swarm
-
   unlock-key Manage the unlock key
-
   update Update the swarm
-
 ```
 
-  
 
 You can create the machines that will be part of the cluster, install Docker and configure Swarm and the network layer. Once your Swarm is configured, you can scale the pod replicas and manage your containers on a smaller scale than Kubernetes.
 
-  
 
 With the introduction of the concept of containers and container orchestration to your team, there will naturally be an evolution towards the automation of the construction and delivery processes of these images and containers. Consequently, the team will have the chance to practice and absorb the necessary knowledge to immerse themselves more naturally in a more complex scenario of robust orchestrators.
 
-  
 
 You should also keep in mind the scenario in which you have already used Kubernetes and have a more in-depth knowledge of the tool. With that, you already have ideas on improving or facilitating internal orchestration flows, development practices, and continuous delivery. You have UI ideas that can assist the user or procedures that can speed up the application delivery. Based on that, you can, instead of using Kubernetes, go for one of the available flavors and even create your own!
 
