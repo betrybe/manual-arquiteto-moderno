@@ -1,6 +1,6 @@
 # NoSQL vs. SQL
 
-Often, when we start a debate on SQL (Structured Query Language) and NoSQL in the technical environment, we can already expect heated discussions because an idea of a war, a dispute, etc., that needs to be won by these technologies' users exists. We want to make it clear: there is no war! Let’s demystify this myth?
+Often, when we start a debate on SQL (Structured Query Language) and NoSQL in the technical environment, we can already expect heated discussions because an idea of a war, a dispute, etc., that needs to be won by these technologies' users exists. We want to make it clear: there is no war! Let’s debunk that?
 
 To begin with, we need to talk a little bit about history. Consequently, we will comprehend the details about NoSQL and its differences from SQL.
 
@@ -26,7 +26,7 @@ The term **NoSQL** was created in 1998 by Carlo Strozzi and later re-introduced 
 
 ### What does NoSQL mean?
 
-There is no, say, "official" definition for what this term actually means, but I particularly like the following: **N**ot **O**nly **SQL**. This definition emphasizes that these databases may use languages similar to [SQL ANSI](https://pt.wikipedia.org/wiki/SQL) to perform queries and other operations and not just SQL itself.
+There is no, say, "official" definition for what this term actually means, but I particularly like the following: **N**ot **O**nly **SQL**. This definition emphasizes that these databases may use languages similar to [SQL ANSI](https://en.wikipedia.org/wiki/SQL) to perform queries and other operations and not just SQL itself.
 
 ### NoSQL features
 
@@ -36,7 +36,7 @@ Before detailing each point of the **BASE** concept, you need to understand the 
 
 We must highlight two main advantages of a cluster, especially in very large database environments:
 
-* **Fault Tolerance**: as there is more than one server or instance for users to connect, the database cluster offers an alternative in case of a server failure. When dealing with thousands of machines in a single [_data center_](https://pt.wikipedia.org/wiki/Centro_de_processamento_de_dados), such failures are a present issue;
+* **Fault Tolerance**: as there is more than one server or instance for users to connect, the database cluster offers an alternative in case of a server failure. When dealing with thousands of machines in a single [data center](https://pt.wikipedia.org/wiki/Centro_de_processamento_de_dados), such failures are a present issue;
 
 * **Load Balancing**: the cluster is usually configured to automatically allocate users to the least used server so that the use of the structure available to the database is optimized.
 
