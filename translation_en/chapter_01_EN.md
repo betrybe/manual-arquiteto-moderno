@@ -122,9 +122,9 @@ Snippet1: row x column filling
 
 	for (int i=0; i < TAM; i++)
 		for (int j=0; j < TAM; j++)
-			matriz[i][j] = valor;
+			matrix[i][j] = valor;
 
-Fragment 2: filling column x row for (int i=0; i < TAM; i++) for (int j=0; j < TAM ; j++) matriz[j][i] = valor;
+Fragment 2: filling column x row for (int i=0; i < TAM; i++) for (int j=0; j < TAM ; j++) matrix[j][i] = valor;
 
 The interesting aspect about these codes is that, in practice, these two algorithms' performance is very different if the dimension of the matrix is ​​considerable (here, by considerable, we will think of values ​​above 5,000).
 
