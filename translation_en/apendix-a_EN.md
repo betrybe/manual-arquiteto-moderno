@@ -2,13 +2,14 @@ Appendix A: Security
 
 ## Security Practices
 
-Secure code should be a rule in any application design, as in some branches, they are as crucial as any quality rule you may have. It is no different for microservices, and there is no secret here; it is the same rule for any application design: at the very least, one must look at the [OWASP Top 10] (https://owasp.org/www-project-top-ten/) and follow these recommendations in your project. The least that the developer needs to know is about these vulnerabilities.
+Secure coding should be a rule in any application design, as in some branches, they are as crucial as any quality rule you may have. It is no different for microservices, and there is no secret here; it is the same rule for any application design: at the very least, one must look at the [OWASP Top 10](https://owasp.org/www-project-top-ten/) and follow these recommendations in their project. The least the developer needs to know is these vulnerabilities.
 
-Seriously, there is nothing new here, and anyone trying to convince you of a "Cross Microservice Injection" or something is trying to fool you.
+Seriously, there is nothing new here, and anyone trying to convince you of a "Cross Microservice Injection" or something like that is trying to fool you.
 
 In the case of Microservices, the approach that changes is concerning authorization and authentication, and we will discuss this later.
 
-An important tip: whenever you look in terms of secure code, is to put something on your CI / CD mat and do your code validation to look for it, and not just check if your code has vulnerabilities. It is interesting to check if the third-party libraries you are using may not be causing any problems in your environment.
+An important tip: whenever you look in terms of secure coding, is to put something on your CI/CD mat and do your code validation to look for it, and not just check if your code has vulnerabilities. It is interesting to check if the third-party libraries you are using may not be causing any problems in your environment.
+// NÃO ENTENDI ESSE PARÁGRAFO
 
 And there are several tools for that, including [Fortify](https://www.microfocus.com/en-us/solutions/application-security), [Snyk](https://snyk.io/), [JFrog Xray](https://jfrog.com/xray/). Because sometimes an outdated dependency can put your service at risk, looking at the best code practices and tools to help point out where to improve will form an unbeatable team.
 
@@ -20,8 +21,8 @@ Regarding containers, these practices are also valid. Never run your container a
 
 The key is to follow at least five pillars:
 
-- Hold by design;
-- Search your premises;
+- Secure by design;
+- Search your dependencies;
 - Always use HTTPS;
 - Use Identity and Access Tokens;
 - Protect and encrypt your secrets.
@@ -34,7 +35,7 @@ Authentication and authorization must be resolved in each of the microservices. 
 
 The library’s use also helps not to break the principle of single responsibility since the service should only be concerned with business logic.
 
-And another point that needs to be analyzed is that microservices must be *stateless*, so it is necessary to use solutions to maintain this.
+And another point that needs to be analyzed is that microservices must be stateless, so it is necessary to use solutions to maintain this.
 
 We can approach authorization and authentication using the distributed session template, using tools to store that session. You can approach/maintain the session in the following ways:
 
@@ -64,8 +65,8 @@ The OpenID pattern is used to connect or use the token to log in to various site
 
 **Authorization Server** - Who generates the access tokens, allows the Client to reach the resources that were allowed with the defined access level.
 
-And how does it work? The "client" asks the Resource Owner for access to the resource, and the latter, when authorizing, sends the "authorization" to the "Client", which is the credential that represents the Resource Owner's authorization. Then the "Client" will ask the authorization Server for an access token; everything being valid, the Client receives its access token, which will be passed on to the Resource Server so that it can consume what was requested.
+And how does it work? The "client" asks the Resource Owner for access to the resource, and the latter, when authorizing, sends the "authorization" to the "Client", which is the credential that represents the Resource Owner's authorization. Then the "Client" will ask the Authorization Server for an access token; everything being valid, the Client receives its access token, which will be passed on to the Resource Server so that it can consume what was requested.
 
-And there are four types of flows to obtain the access token in the OAuth pattern. We have the Authorization Code, which is the most common one; Implicit, which is widely used by SPA applications; the Resource Owner establishes trust between applications; and Client Credentials, which is used to speak from one service to another.
+And there are four types of flows to obtain the access token in the OAuth pattern. We have the Authorization Code, which is the most common one; Implicit, which is widely used by SPA applications; the Resource Owner establishes trust between applications; and Client Credentials, which is used to connect one service to another.
 
-Apart from the authentication and authorization part, which needs to be taken care of separately, the security of microservices is like any application’s security. We need to pay attention to it.
+Apart from the authentication and authorization parts, which need to be taken care of separately, the security of microservices is like any application’s security. We need to pay attention to it.

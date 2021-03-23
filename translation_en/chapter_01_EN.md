@@ -4,7 +4,7 @@ Writing this chapter may not be one of the most straightforward tasks since deve
 
 Well, how to start? A development professional's training is based on their background in a computer science (or engineering) course (or another bachelor's degree in the field). Many of these answers may be in subjects already forgotten by us as students and even by professionals.
 
-The great "mystery" that we can try to reveal here in this chapter can be extremely simple (or become simple) from the moment we identify the following: the various disciplines we study are always interconnected, even if it does not seem so.
+The great "mystery" that we can try to reveal here in this chapter can be extremely simple (or become simple) from the moment we identify the following: the various disciplines we study are always interconnected, even if it doesn't seem so.
 
 ## Why study analysis of algorithms, data structure, operating systems, computer architecture, graphs, among others?
 
@@ -42,9 +42,9 @@ In this case, analyzing the asymptotic complexity, we have:
 	1 execution of line 1
 	N+1 executions of line 2
 	N executions of lines 3 to 5, which implies:
-	1 execution of line 3
-	N + 1 executions of line 4
-	N executions of line 5
+		1 execution of line 3
+		N+1 executions of line 4
+		N executions of line 5
 
 Therefore, if we add up all the executions, we have 1 + (N+1) + N * (1 + (N+1) + N), which results in a polynomial whose greatest exponent is 2 (Nˆ2). So, our order, item, and tax search algorithm can be considered a quadratic time algorithm. That's because we only think about retrieving information. We haven't even thought of these values iteration, which can further increase computational time. Now imagine this scenario on a web system with a few tens of thousands of users connected. If we access the disk (which is a very slow device compared to memory access) inefficiently for a single request, how will the application perform on several simultaneous requests?
 
@@ -56,11 +56,11 @@ We know that Data Structure is a subject that, for many undergraduate students, 
 
 Want examples?
 - **Queues**: Apache Kafka, Rabbit MQ, MQTT, among others, are examples of tools that use the concepts of `queues` in their implementations. Not only single queues but also priority queues, which are also the object of study during the undergraduate period.
-- **Stacks**: Your IDE uses stacks all the time to check whether the open keys have been closed correctly (the language *parser* constantly uses stacks) or the parentheses that define the instructions in `Clojure` comply. That is just to cite immediate examples.
+- **Stacks**: Your IDE uses stacks all the time to check whether the open keys have been closed correctly (the language parser constantly uses stacks) or the parentheses that define the instructions in `Clojure` comply. That is just to cite immediate examples.
 
 In addition to these more "simple" examples (and I highlight the importance of quoting the term), we have more complex ones, which generate many performance differences in applications. For example: what is the difference between using Lists (whether they are Vectors or linked lists) and hash? The main difference is in the search performance. Take a look at this small example of a Java benchmark :
 
-	ArrayList<Produto> lista;
+		ArrayList<Produto> lista;
 		lista = new ArrayList<Produto>();
 		for (int i = 0; i < 100000; i++) {
 		    Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
@@ -88,7 +88,7 @@ That simple algorithm populates a list with 100,000 product-type objects and per
 
 Now, if we think of another structure, like a HashMap, what is the advantage? Let's look at this code.
 
-	HashMap<Integer, Produto> mapa;
+		HashMap<Integer, Produto> mapa;
 		mapa = new HashMap<Integer, Produto>();
 		for (int i = 0; i < 1000000; i++) {
 		   Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
@@ -121,8 +121,8 @@ A very common algorithm during graduation is the route and filling of matrices. 
 Snippet1: row x column filling
 
 	for (int i=0; i < TAM; i++)
-	for (int j=0; j < TAM; j++)
-		matriz[i][j] = valor;
+		for (int j=0; j < TAM; j++)
+			matriz[i][j] = valor;
 
 Fragment 2: filling column x row for (int i=0; i < TAM; i++) for (int j=0; j < TAM ; j++) matriz[j][i] = valor;
 
@@ -130,7 +130,7 @@ The interesting aspect about these codes is that, in practice, these two algorit
 
 But why the performance difference? Due to the number of cache accesses. Let's go a little deeper into the study and also take computer architecture into account. We will see that a matrix is ​​allocated in memory as a large array (the matrix notation that programming languages ​​use is just an abstraction). That’s why (and taking into account the concept of locality of reference - neglected in the study of operating systems), obviously, if a row is brought into the cache, it is much faster to fill its adjacent elements until there is a need to access other memory pages (thus generating a page fault) than looking for elements in "distant" regions of memory, increasing - a lot - the pagination volume.
 
-Considering operating systems and computer architecture may not seem very close to current web development. Still, many of these concepts of memory management and page replacement algorithms are, in fact, present in web development tools. Caching tools (such as REDIS) need to define an updating policy for this data that will be exposed. Knowing algorithms such as MRU - Most Recently Used, LRU - Least Recently Used, MFU - Most Frequently Used, among others, can be vital to understanding how such a tool works, or even (in the absence of something ready) to implement your own caching tool.
+Considering operating systems and computer architecture may not seem very close to current web development. Still, many of these concepts of memory management and page replacement algorithms are, in fact, present in web development tools. Caching tools (such as REDIS) need to define an updating policy for this data that will be exposed. Knowing algorithms such as MRU - Most Recently Used, LRU - Least Recently Used, MFU - Most Frequently Used, among others, can be vital to understanding how such a tool works, or even (in the absence of something ready-to-use) to implement your own caching tool.
 
 And the study of graph theory? Without the optimization algorithms seen in graphs (like the famous Dijkstra’s algorithm), we would not have applications like Waze, for example. But the key point is not limited to reproducing the algorithm, but mainly finding a model that represents what edges and vertices mean in the context of the problem to be solved. The distance between two vertices can be interpreted through the practical difference in meters (or kilometers) or, if based on the speed of the vehicles and the time to commute between two places, a distance, which can be dynamic, is inferred and, consequently, update the value of the edges.
 
@@ -142,7 +142,7 @@ But you, as a developer, may ask yourself, "when will I create a new language?" 
 
 Difficult to answer, but with a tendency to seek challenges. A developer becomes senior more quickly when they deeply understand how technologies, libraries, and frameworks work behind the scenes. Therefore, we will try to answer that question (or perhaps even a provocation) by analyzing it from three perspectives.
 
-**Knowledge view**: obviously, you can (and should!) create your own framework at least once in your life, even if the only user of that framework is yourself. Why? This very one: knowledge. Silvio Meira (one of the leading influencers in computing in Brazil and the world) has already said in a talk that "*the computer professional who has never developed a compiler cannot consider themselves a complete professional, because a compiler requires you to know the entire syllabus of a computer science course*". And I dare to complement: develop a *Game Engine* too, as aspects of linear algebra and computer graphics are not often applied to a compiler. Like a game engine, a compiler requires the developer to *connect the conceptual dots * that have always been neglected.
+**Knowledge view**: obviously, you can (and should!) create your own framework at least once in your life, even if the only user of that framework is yourself. Why? This very one: knowledge. Silvio Meira (one of the leading influencers in computing in Brazil and the world) has already said in a talk that "*the computer professional who has never developed a compiler cannot consider themselves a complete professional, because a compiler requires you to know the entire syllabus of a computer science course*". And I dare to complement: develop a Game Engine too, as aspects of linear algebra and computer graphics are not often applied to a compiler. Like a game engine, a compiler requires the developer to *connect the conceptual dots* that have always been neglected.
 
 **Corporate view**: can many companies adopt frameworks made by the community? Of course! However, there are strategic decisions within corporations so that their products do not depend on third-party technologies. Therefore, framework development teams are very common (mainly in the big players) for their products' internal use. This provides complete control over the technology they use. When these frameworks are mature enough, they can be made available and popularized by the community (under open source licenses). Or they are simply for internal and exclusive use, without access by development communities.
 
