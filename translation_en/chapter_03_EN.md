@@ -8,14 +8,14 @@ Considering an application that adopts clean code practices, the performance gai
 
 We are going to create a football player management application. We are going to have the concept of a `team`, and within a `team` the following information:
 
-- The name of the player, represented by the attribute <code>name</code> of the class <code>Player</code>;
-- The position (`position` of the class `Player`) of the player (goalkeeper, forward, defender, and midfielder);
-- The year the player joined the team, represented by the attribute <code>start</code> of the class <code>Player</code>;
-- The year the player left the team, represented by the attribute  <code>end</code> of the class <code>Player</code>;
-- The number of goals the player scored on the team, represented by the attribute <code>goals</code> of the class<code>Player</code>;
-- The salary of the player, represented by the attribute <code>salary</code> of the class <code>Player</code>;
-- The contact email, in the attribute `email`;
-- The relationship with the team, represented by the class `Team`;
+- The name of the player, represented by the <code>name</code> attribute of the <code>Player</code> class;
+- The position (`position` of the `Player` class) of the player (goalkeeper, forward, defender, and midfielder);
+- The year the player joined the team, represented by the <code>start</code> attribute of the <code>Player</code> class;
+- The year the player left the team, represented by the  <code>end</code> attribute of the <code>Player</code> class;
+- The number of goals the player scored on the team, represented by the <code>goals</code> attribute of the <code>Player</code> class;
+- The salary of the player, represented by the <code>salary</code> attribute of the <code>Player</code> class;
+- The contact email, in the `email` attribute;
+- The relationship with the team, represented by the `Team` class;
 - Keeping in mind the rule that says _a team should not have more than twenty members_.
 
 Based on the information above, the first version of the model is shown below:
@@ -49,7 +49,7 @@ public class Team {
 
 ```
 
-At first glance, we can notice possible code improvements. Note that the attribute `position` is of the type `String`, which does not make sense, since the players’ positions are always the same: goalkeeper, defender, midfielder, and forward. We can improve this scenario by applying the concept of [Value Objects](https://martinfowler.com/bliki/ValueObject.html) through the use of an `Enum`:
+At first glance, we can notice possible code improvements. Note that the `position` attribute is of the type `String`, which does not make sense, since the players’ positions are always the same: goalkeeper, defender, midfielder, and forward. We can improve this scenario by applying the concept of [Value Objects](https://martinfowler.com/bliki/ValueObject.html) through the use of an `Enum`:
 
 ```java
 public enum Position {
@@ -63,9 +63,9 @@ From this perspective, let's look at some business rules for our sample applicat
 
 - Players do not change their email, name, and position, and it is only possible to score one goal at a time. Note that the creation of setter methods is not essential for these attributes.
 - The outgoing year may be empty, but, when filled, it must be after the date of entry;
-- Only the team (represented by the class `Team`) is responsible for managing the players (`Player`), i.e., it will be necessary to create methods to add players to the team.
+- Only the team (represented by the `Team` class) is responsible for managing the players (`Player`), i.e., it will be necessary to create methods to add players to the team.
 
-Let’s work in the class `Team`. We will have to create a method to add multiple players (`Player`) to `Team`. We will also need a method (get) that returns players. It is important to validate the players’ entry since it does not make sense to add a null player. We must also ensure that only the class `Team` adds/removes players. To do that, we must ensure this class returns a read-only list; otherwise, we will have encapsulation issues. One solution would be to return a list as in the following example:
+Let’s work in the `Team` class. We will have to create a method to add multiple players (`Player`) to `Team`. We will also need a method (get) that returns players. It is important to validate the players’ entry since it does not make sense to add a null player. We must also ensure that only the `Team` class adds/removes players. To do that, we must ensure this class returns a read-only list; otherwise, we will have encapsulation issues. One solution would be to return a list as in the following example:
 
 ```java
 import java.util.ArrayList;
@@ -115,7 +115,7 @@ public class Team {
 
 INFO: Many frameworks need the default constructor to exist for the sake of creating an instance from the reflection API. Since the goal is to discourage using the default constructor instead of the construction method, the constructor will be noted with [Deprecated](https://www.baeldung.com/java-deprecated). The Deprecated annotation indicates that this method should not be used.
 
-As far as the class `Player` is concerned, all attributes will have default getters, except for the attribute <code>end</code>, which will have a special treatment: <code>getEnd</code> will return an `Optional`, once <code>end</code> can be null. Another point is the method <code>setEnd</code>, which will only be an integer if the last year is equal to or greater than the player's starting year, i.e., if he started playing in 2004, he could not have finished playing in 2002. Thus, the setter will have to validate at the moment of access.
+As far as the `Player` class is concerned, all attributes will have default getters, except for the <code>end</code> attribute, which will have a special treatment: <code>getEnd</code> will return an `Optional`, once <code>end</code> can be null. Another point is the method <code>setEnd</code>, which will only be an integer if the last year is equal to or greater than the player's starting year, i.e., if he started playing in 2004, he could not have finished playing in 2002. Thus, the setter will have to validate at the moment of access.
 
 ```java
 import java.math.BigDecimal;
@@ -239,9 +239,9 @@ public final class Email implements Supplier<String> {
     }
 
     public static Email of(String value) {
-        Objects.requireNonNull(value, "o valor é obrigatório");
+        Objects.requireNonNull(value, "value is mandatory");
         if (!PATTERN.matcher(value).matches()) {
-            throw new IllegalArgumentException("Email nao válido");
+            throw new IllegalArgumentException("invalid email");
         }
 
         return new Email(value);
@@ -282,7 +282,7 @@ public class Player {
 
 ### Builder Pattern 
 
-The second and last step will be to use the Builder pattern to validate the rules within this class. By adopting this pattern, we will guarantee the object to be instantiated only when the data is valid, besides placing the responsibility for this creation on a class. This pattern is very interesting because, in addition to guaranteeing single responsibility, it decreases the chance of one of the parameters being accidentally changed.
+The second and last step will be to use the builder pattern to validate the rules within this class. By adopting this pattern, we will guarantee the object to be instantiated only when the data is valid, besides placing the responsibility for this creation on a class. This pattern is very interesting because, in addition to guaranteeing single responsibility, it decreases the chance of one of the parameters being accidentally changed.
 
 An important detail is that many of the mapping frameworks, such as Hibernate, OpenJPA, etc., require getters and setters, in addition to the default constructor. One solution would be to create a constructor with all the necessary parameters in private and another one as default and with the Deprecated annotation, making it clear to the developer that that constructor is not well-regarded for use. See in the example below that the builder is the inner class of the `Player` class:
 
@@ -504,13 +504,13 @@ public class Team {
 The source code for this example is available in the repository:
 [https://github.com/soujava/bulletproof](https://github.com/soujava/bulletproof).
 
-TIP: Remember the importance of unit testing throughout the development process!
+TIP: remember the importance of unit testing throughout the development process!
 
 This example demonstrates that only by using object-oriented concepts will you create fail-safe code. So far, all practices are database-agnostic, i.e., we can use these good practices regardless of the persistence technology that will be adopted.
 
 ## Lombok: problem or solution?
 
-In general, the Lombok project is a library famous for reducing the number of lines of code through the use of annotations. This tool has its benefits since code reduction can facilitate reading. An example is the `Builder` annotation, which allows the creation of more intuitive classes and in the Builder pattern. On the other hand, we also see some problems in the use of this project. Items that are listed below:
+In general, the Lombok project is a library famous for reducing the number of lines of code through the use of annotations. This tool has its benefits since code reduction can facilitate reading. An example is the `Builder` annotation, which allows the creation of more intuitive classes and in the builder pattern. On the other hand, we also see some problems in the use of this project. Items that are listed below:
 
 * The code is generated by the Lombok project and is not seen by the IDE. Any exception involving these classes tend to be difficult to find in the stack trace;
 
