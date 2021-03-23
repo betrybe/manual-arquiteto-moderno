@@ -36,7 +36,7 @@ Before detailing each point of the **BASE** concept, you need to understand the 
 
 We must highlight two main advantages of a cluster, especially in very large database environments:
 
-* **Fault Tolerance**: as there is more than one server or instance for users to connect, the database cluster offers an alternative in case of a server failure. When dealing with thousands of machines in a single [data center](https://pt.wikipedia.org/wiki/Centro_de_processamento_de_dados), such failures are a present issue;
+* **Fault Tolerance**: as there is more than one server or instance for users to connect, the database cluster offers an alternative in case of a server failure. When dealing with thousands of machines in a single [data center](https://en.wikipedia.org/wiki/Data_center), such failures are a present issue;
 
 * **Load Balancing**: the cluster is usually configured to automatically allocate users to the least used server so that the use of the structure available to the database is optimized.
 
