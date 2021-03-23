@@ -114,12 +114,12 @@ We usually map **Enums** as a String to make it easier to read in the database o
 ```java
 @Enumerated(EnumType.STRING)
 @Column(length = 9)
-private TipoTelefoneEnum tipo;
+private TypeTelephoneEnum type;
 
-public enum TipoTelefoneEnum {
-    CASA,
-    COMERCIAL,
-    CELULAR;
+public enum TypeTelephoneEnum {
+    HOME,
+    BUSINESS,
+    MOBILE;
 }
 ```
 As readable as this may be for the developer, this column takes up much more space than necessary. In this case, the type column occupies 9 bytes. If we store 10 million records, only the phone type column will occupy 90 MB.
@@ -131,10 +131,10 @@ Note that the @Enumerated column does not need to receive the ORDINAL EnumType v
 ```java
 @Enumerated
 @Column(columnDefinition = "smallint")
-private TipoTelefoneEnum tipo;
+private TypeTelephoneEnum type;
 ```
 
-The value will be stored as an integer, starting with zero for the CASA type. Now, this is much more efficient but less expressive. So, how can we have performance and readability?
+The value will be stored as an integer, starting with zero for the HOME type. Now, this is much more efficient but less expressive. So, how can we have performance and readability?
 
 Just create a table in the database representing the enum and, in the query, join it with the table of constants.
 Does it seem laborious? But it may be worth it if we have millions of records.
@@ -159,6 +159,6 @@ Don’t try to solve all problems at the same time. Start by building a list of 
    
 **Find out:** why is this point underperforming?
    
-**Understand:** What is causing the low performance?
+**Understand:** what is causing the low performance?
    
 **Correct or Improve:** opportunity to correct or improve based on the data obtained in the steps above.
