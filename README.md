@@ -2,13 +2,13 @@
 
 ## Objetivo
 
-Neste livro você irá aprender sobre conceitos que fazem parte da vida de um profissional senior na carreira desenvolvimento e arquitetura de software. Este livro não é um sumário ou a re-escrita de livros reconhecidos no mercado, portanto, é essencial o entendimento prévio de alguns conceitos abordados no decorrer dos capítulos. O diferencial deste conteúdo é que toda a informação é proviniente da aplicação prática das tecnologias, conceitos e culturas apresentadas por como Java Efetivo, Clean Code, Domain Driven Design, Clean Architecture e Building Microservices. 
+Neste livro você irá aprender sobre conceitos que fazem parte da vida de profissionais sênior na carreira desenvolvimento e arquitetura de software. Este livro não é um sumário ou a reescrita de livros reconhecidos no mercado, portanto, é essencial o entendimento prévio de alguns conceitos abordados no decorrer dos capítulos. O diferencial deste conteúdo é que toda a informação é proveniente da aplicação prática das tecnologias, conceitos e culturas apresentadas como Java Efetivo, Clean Code, Domain Driven Design, Clean Architecture e Building Microservices. 
 
-Alinhando teoria e prática, este livro trás visões arquiteturais e motivações que costumam levar a determinadas escolhas, além de apresentar seus respectivos trade-offs. 
+Alinhando teoria e prática, este livro traz visões arquiteturais e motivações que costumam levar a determinadas escolhas, além de apresentar seus respectivos trade-offs. 
 
 ## O que você encontra no livro
 
-Este livro trás tópicos atuais e relevantes que te embasarão na tomada de decisão diária no papel de arquiteto de software.Veja a lista de tópicos discutidos no decorrer deste livro:
+Este livro apresenta tópicos atuais e relevantes que embasarão você na tomada de decisão diária no papel em arquitetura de software.Veja a lista de tópicos discutidos no decorrer deste livro:
 
     1. A importância de aprender os conceitos ao invés de novos frameworks;
     2. Domain Driven Design (DDD), where to go next?
@@ -21,20 +21,20 @@ Este livro trás tópicos atuais e relevantes que te embasarão na tomada de dec
     9. Precisamos falar sobre atualizações;
     10. Destrinchando performance de aplicações;
 
-## O que você não vai encontrar nesse livro
+## O que você não vai encontrar neste livro
 
 * Resumo do contéudo de livros mencionados, listados na bibliografia;
-* Explicação de conceitos considerados básicos como "O que é SOLID", "Como se conectar a um banco de dados". 
+* Explicação de conceitos considerados básicos, como "O que é SOLID", "Como se conectar a um banco de dados". 
 * Tutoriais e guias passo a passo. 
 
 
 ## Contribuições
 
-Este livro surgiu da iniciativa de Otávio Santana, e se materializou através da colaboração de profissionais seniores e reconhecidos na comunidade. Cada autor do livro possui uma opinião bem embasada e experiência de campo nas tecnologias e práticas descritas. 
+Este livro surgiu da iniciativa de Otávio Santana e se materializou através da colaboração de profissionais seniores e com amplo reconhecimento na comunidade. Cada autor e autora que escreveu o livro possui uma opinião bem embasada e experiência de campo nas tecnologias e práticas descritas. 
 
-O grupo de autores iniciais é composto por Otávio Santana, Karina Varela e Sérgio Lopes, se extendendo à grandes nomes como Elder Moraes, Maurício Salatino (Salaboy), Sandro Giacomozzi, Francisco (Professor) Isidro, Leandro Domingues.
+O grupo de autores iniciais é composto por Otávio Santana, Karina Varela e Sérgio Lopes, se extendendo a grandes nomes como Elder Moraes, Maurício Salatino (Salaboy), Sandro Giacomozzi, Francisco (Professor) Isidro, Leandro Domingues.
 
-Com a popularização da iniciativa, a comunidade passa a ativamente colaborar com a revisão do livro. Nosso muito obrigada a todos os contribuidores: https://github.com/otaviojava/manual-arquiteto-moderno/graphs/contributors
+Com a popularização da iniciativa, a comunidade passa a ativamente colaborar com a revisão do livro. Nosso profundo agradecimento a todos que colaboraram: https://github.com/otaviojava/manual-arquiteto-moderno/graphs/contributors
 
 
 
