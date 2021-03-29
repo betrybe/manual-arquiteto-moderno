@@ -50,7 +50,7 @@ No momento da escrita deste livro, não há um consenso ou definição exata ace
 >
 > — [Cloud-Native Computing Foundation](https://www.cncf.io/)
 
-> "'Cloud native' é um adjetivo que descreve as aplicações, arquiteturas, plataformas/infraestrutura e processos que, juntos, tornam o trabalho *econômico* de uma forma que nos permite melhorar nossa capacidade de responder rapidamente às mudanças e reduzir a imprevisibilidade"
+> "Cloud-native é um adjetivo que descreve as aplicações, arquiteturas, plataformas/infraestrutura e processos, que juntos as fazem funcionar de uma forma que nos permita melhorar nossa habilidade de rapidamente responder a mudanças e reduzir imprev that together make it economical to work in a way that allows us to improve our ability to quickly respond to change and reduce imprevisibilidade.” POR FAVOR, VERIFIQUEM ESSE PARÁGRAFO, MISTURA PORT. E ING.
 >
 > — [Christian Posta](https://www.infoq.com/articles/cloud-native-panel/)
 
