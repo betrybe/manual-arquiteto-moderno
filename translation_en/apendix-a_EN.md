@@ -8,8 +8,7 @@ Seriously, there is nothing new here, and anyone trying to convince you of a "Cr
 
 In the case of Microservices, the approach that changes is concerning authorization and authentication, and we will discuss this later.
 
-An important tip: whenever you look in terms of secure coding, is to put something on your CI/CD mat and do your code validation to look for it, and not just check if your code has vulnerabilities. It is interesting to check if the third-party libraries you are using may not be causing any problems in your environment.
-// NÃO ENTENDI ESSE PARÁGRAFO
+An important tip: when it comes to safe code, use CI/CD practices to check if there is any vulnerability in your code. It is interesting to confirm that the third-party libraries you plan to use will not cause problems for the environment.
 
 And there are several tools for that, including [Fortify](https://www.microfocus.com/en-us/solutions/application-security), [Snyk](https://snyk.io/), [JFrog Xray](https://jfrog.com/xray/). Because sometimes an outdated dependency can put your service at risk, looking at the best code practices and tools to help point out where to improve will form an unbeatable team.
 
