@@ -27,13 +27,13 @@ Por volta de 2020, Karina está trabalhando com a Unidade de Negócios de Servi�
 <img src="../images/salaboy512x512.png" alt="salaboy" style="zoom:50%;" />
 
 * **Nome:** Mauricio Salatino (Salaboy)
-* **Cargo:** Principal Software Engineer
+* **Cargo:** Engenheiro de Software
 * **Bio:** Mauricio é engenheiro de software na Camunda (http://www.camunda.com) e instrutor na LearnK8s (http://learnk8s.io). Mauricio trabalha com o Kubernetes há 5 anos, treinando equipes e desenvolvendo aplicações nativas da nuvem. Em sua jornada, ele participou de vários projetos de código aberto, incluindo Zeebe, Jhipster, Spring Cloud e Jenkins X. Anteriormente, Mauricio trabalhou na Red Hat/JBoss no departamento de Engenharia de Automação de Negócios. Mauricio está atualmente envolvido com a CD Foundation (http://cd.foundation), o projeto Jenkins X (como membro do comitê de direção de bootstrap), bem como apresentou na Kubecon 2019 San Diego e na Kubecon 2020 Amsterdam.
 
 <img src="../images/elder-moraes.png" alt="elder-moraes" style="zoom:24%;" />
 
 * **Nome:** Elder Moraes
-* **Cargo:** Developer Advocate, Red Hat
+* **Cargo:** Developer advocate, Red Hat
 * **Bio:** Elder ajuda pessoas desenvolvedoras Java a trabalhar em grandes projetos, orientando-os(as) sobre como construir e entregar aplicações do lado do servidor seguras, disponíveis e rápidas. Ele é o autor do Jakarta EE Cookbook e membro do conselho do SouJava, um dos maiores JUGs do mundo. Como defensor do desenvolvedor, ele compartilha experiências e melhores práticas por meio de conteúdo online e em eventos internacionais como JavaOne, The Developers Conference, QCon, Oracle Code One, Campus Party e Devnexus.
 
 
