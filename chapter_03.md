@@ -57,15 +57,15 @@ public enum Position {
 }
 ```
 
-Uma vez que definimos o modelo inicial, nosso próximo passo é analisar segurança e encapsulamento dos objetos. Esta é umas das bases para um bom código orientado a objetos: a possibilidade de "esconder" os dados e expor apenas os comportamentos. A criação dos métodos assessores (setter) devem ser considerados como último recurso para acesso ao objeto. Um outro ponto é: deve-se avaliar a necessidade de esses métodos serem públicos, ou seja, considere criá-los como `default` ou `protected`, caso seja possível. 
+Uma vez que definimos o modelo inicial, nosso próximo passo é analisar segurança e encapsulamento dos objetos. Esta é umas das bases para um bom código orientado a objetos: a possibilidade de "esconder" os dados e expor apenas os comportamentos. A criação dos métodos assessores (setter) deve ser considerado como último recurso para acesso ao objeto. Um outro ponto é: deve-se avaliar a necessidade de esses métodos serem públicos, ou seja, considere criá-los como `default` ou `protected`, caso seja possível. 
 
 Sob essa perspectiva, vamos analisar algumas regras de negócio da nossa aplicação de exemplo: 
 
-- Os jogadores não mudam de e-mail, nome e de posição, e só é possível marcar um gol por vez. Repare que a criação de métodos setters não são importantes para esses atributos. 
+- Os jogadores não mudam de e-mail, nome e de posição, e só é possível marcar um gol por vez. Repare que a criação de métodos setters não é importante para esses atributos. 
 - O ano de saída pode estar vazio, porém, quando preenchido, deverá ser posterior à data de entrada; 
 - Apenas o time (representado pela classe `Team`) é responsável por gerenciar os jogadores (`Player`), ou seja, será necessário criar métodos para adicionar jogadores ao time. 
 
-Vamos trabalhar na classe `Team`. Teremos de criar de um método para adicionar vários players (`Player`) no `Team`. Também precisaremos de um método (get) que retorne os players. É importante validar a entrada de players, uma vez que não faz sentido adicionar um player nulo. Devemos também garantir que apenas a classe `Team` adicione/remova players. Para isso, devemos assegurar que essa classe retorne uma lista apenas de leitura, do contrário teremos problemas com encapsulamento. Uma maneira de resolver isso seria retornar uma lista como no exemplo a seguir:
+Vamos trabalhar na classe `Team`. Teremos de criar um método para adicionar vários players (`Player`) no `Team`. Também precisaremos de um método (get) que retorne os players. É importante validar a entrada de players, uma vez que não faz sentido adicionar um player nulo. Devemos também garantir que apenas a classe `Team` adicione/remova players. Para isso, devemos assegurar que essa classe retorne uma lista apenas de leitura, do contrário teremos problemas com encapsulamento. Uma maneira de resolver isso seria retornar uma lista como no exemplo a seguir:
 
 ```java
 import java.util.ArrayList;
@@ -181,7 +181,7 @@ public void goal() {
 
 ```
 
-Uma vez definidos os métodos de acesso, o próximo passo está na criação das instâncias de `Team` e `Player`. Como boa parte das informações são obrigatórias para se criar uma instância válida, o primeiro movimento natural seria a criação de um método construtor. Isso é válido com objetos simples, como o `Team`, porém a class `Player` tem mais complexidades, como:
+Uma vez definidos os métodos de acesso, o próximo passo está na criação das instâncias de `Team` e `Player`. Como boa parte das informações é obrigatória para se criar uma instância válida, o primeiro movimento natural seria a criação de um método construtor. Isso é válido com objetos simples, como o `Team`, porém a class `Player` tem mais complexidades, como:
 
 - A quantidade de parâmetros: pode gerar um construtor [polyadic](https://medium.com/coding-skills/clean-code-101-meaningful-names-and-functions-bf450456d90c) (construtor com mais de três argumentos).
 - A complexidade das validações: não faz sentido um player começar a jogar antes de 1863, uma vez que o esporte nasceu nesse ano.
@@ -190,7 +190,7 @@ Para resolver esses problemas, executaremos dois passos: utilização de tipos c
 
 ### Tipos customizados
 
-A primeira estratégia é a criação de um tipo. Essa estratégia faz sentido quando um objeto tem grande complexidade, como por exemplo objetos que lidam com dinheiro e data. Trazer essa complexidade para a entidade pode quebrar o princípio da responsabilidade única. Existe um artigo muito bom escrito por Martin Fowler, [When Make a Type](https://martinfowler.com/ieeeSoftware/whenType.pdf), que explica as vantagens de tais recursos. Também não queremos reinventar a roda, portanto, para representar ano e dinheiro utilizaremos as APIs de Date/Time que nasceram do Java 8 e a Money-API. O único tipo que precisaremos criar é o tipo `e-mail`, como mostra o código a seguir:
+A primeira estratégia é a criação de um tipo. Essa estratégia faz sentido quando um objeto tem grande complexidade, como por exemplo objetos que lidam com dinheiro e data. Trazer essa complexidade para a entidade pode quebrar o princípio da responsabilidade única. Existe um artigo muito bom escrito por Martin Fowler, [When to Make a Type](https://martinfowler.com/ieeeSoftware/whenType.pdf), que explica as vantagens de tais recursos. Também não queremos reinventar a roda, portanto, para representar ano e dinheiro utilizaremos as APIs de Date/Time que nasceram do Java 8 e a Money-API. O único tipo que precisaremos criar é o tipo `e-mail`, como mostra o código a seguir:
 
 ```java
 import java.util.Objects;
@@ -282,9 +282,9 @@ public class Player {
 
 ### Builder Pattern 
 
-O segundo e último passo será utilizar o padrão Builder para fazer com que as regras de validação estejam dentro dessa classe. Ao adotar esse padrão, garantiremos que o objeto só será instanciado quando os dados forem realmente válidos, além de colocar a responsabilidade dessa criação em uma classe. Esse padrão é muito interessante porque, além de garantir a responsabilidade única, diminui a chance de um dos parâmetros serem trocados acidentalmente.	 	 
+O segundo e último passo será utilizar o padrão Builder para fazer com que as regras de validação estejam dentro dessa classe. Ao adotar esse padrão, garantiremos que o objeto só será instanciado quando os dados forem realmente válidos, além de colocar a responsabilidade dessa criação em uma classe. Esse padrão é muito interessante porque, além de garantir a responsabilidade única, diminui a chance de um dos parâmetros ser trocado acidentalmente.	 	 
 
-Um ponto importante é que muitos dos frameworks de mapeamento, como o Hibernate, OpenJPA etc., requerem getters e setters, além do construtor padrão. Uma solução para isso seria criar um construtor com todos os parâmetros necessários em privado e um outro como default e com a anotação Deprecated, deixando claro para o desenvolvedor que aquele construtor não é bem-visto para uso. Veja no exemplo abaixo que o Builder fica como inner class da classe `Player`:
+Um ponto importante é que muitos dos frameworks de mapeamento, como o Hibernate, OpenJPA etc., requerem getters e setters, além do construtor padrão. Uma solução para isso seria criar um construtor com todos os parâmetros necessários em privado e um outro como default e com a anotação Deprecated, deixando claro para a pessoa desenvolvedora que aquele construtor não é bem-visto para uso. Veja no exemplo abaixo que o Builder fica como inner class da classe `Player`:
 
 ```java
 import javax.money.MonetaryAmount;
@@ -511,7 +511,7 @@ Com a criação desse exemplo, demonstramos que apenas ao utilizar conceitos de 
 
 ## Lombok: problema ou solução?
 
-De uma maneira geral, o projeto Lombok é uma biblioteca famosa e conhecida por reduzir a quantidade de linhas de código através da utilização de anotações. Essa ferramenta tem seus benefícios, uma vez que a redução de código pode facilitar a leitura. Um exemplo é a anotação `Builder`, que permite a criação de classes mais intuitiva e no padrão Builder. Por outro lado, também vemos alguns problemas no uso desse projeto, itens que estão listados a seguir:
+De uma maneira geral, o projeto Lombok é uma biblioteca famosa e conhecida por reduzir a quantidade de linhas de código através da utilização de anotações. Essa ferramenta tem seus benefícios, uma vez que a redução de código pode facilitar a leitura. Um exemplo é a anotação `Builder`, que permite a criação de classes mais intuitivas e no padrão Builder. Por outro lado, também vemos alguns problemas no uso desse projeto, itens que estão listados a seguir:
 
 * O código é gerado pelo projeto Lombok e não é visualizado pela IDE. Qualquer exceção que envolva essas classes tenderá a ser difícil de ser seguida pela pilha de exceção;
 
