@@ -6,7 +6,7 @@ DDD provides us with a very good theoretical background and patterns to build ro
 
 This chapter covers the practical side of how these concepts can be mapped into an existing example that runs on top of Kubernetes, giving you practical tips about how DDD concepts can map to a concrete technology stack. Of course, there are tons of different options to choose from today, but you can take this as an example of what kind of things you will need to pay attention to when going through this journey. 
 
->  **INFO:** is important to highlight that this chapter is not about the basic concepts DDD, so if you are new to DDD, the following books are recommended: [Implementing DDD](https://www.amazon.co.uk/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577) and [DDD Distilled](https://www.amazon.co.uk/Domain-Driven-Design-Distilled-Vaughn-Vernon/dp/0134434420/ref=pd_lpo_14_t_1/262-0200870-8496500?_encoding=UTF8&pd_rd_i=0134434420&pd_rd_r=c7957a5b-3f2f-4008-8c93-8a9b5792c448&pd_rd_w=JKKyX&pd_rd_wg=dFALp&pf_rd_p=7b8e3b03-1439-4489-abd4-4a138cf4eca6&pf_rd_r=W41G9RPNEBHEF8Y5DXG8&psc=1&refRID=W41G9RPNEBHEF8Y5DXG8). 
+>  **INFO:** it is important to highlight that this chapter is not about the basic concepts of DDD, so if you are new to DDD, the following books are recommended: [Implementing DDD](https://www.amazon.co.uk/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577) and [DDD Distilled](https://www.amazon.co.uk/Domain-Driven-Design-Distilled-Vaughn-Vernon/dp/0134434420/ref=pd_lpo_14_t_1/262-0200870-8496500?_encoding=UTF8&pd_rd_i=0134434420&pd_rd_r=c7957a5b-3f2f-4008-8c93-8a9b5792c448&pd_rd_w=JKKyX&pd_rd_wg=dFALp&pf_rd_p=7b8e3b03-1439-4489-abd4-4a138cf4eca6&pf_rd_r=W41G9RPNEBHEF8Y5DXG8&psc=1&refRID=W41G9RPNEBHEF8Y5DXG8). 
 
 This chapter is divided into two main sections:
 - [Introduction to Java-related topics and Cloud](#java-in-the-cloud) 
@@ -52,7 +52,7 @@ Kubernetes success is based on the fact that each major cloud provider provides 
 
 ### Capitalizing on DDD benefits
 
-If you follow the DDD path, you need to take advantage on some of the promises that DDD gave you to start with and make sure that you are ripping the benefits. If we cannot continuously deliver new versions of our services without stopping the entire application, we are just making our life more complicated for nothing. If we are not delivering concrete business value as a result of following DDD, all the changes suggested in this chapter are not worth the effort or the time. 
+If you follow the DDD path, you need to take advantage of some of the promises that DDD gave you to start with and make sure that you are ripping the benefits. If we cannot continuously deliver new versions of our services without stopping the entire application, we are just making our life more complicated for nothing. If we are not delivering concrete business value as a result of following DDD, all the changes suggested in this chapter are not worth the effort or the time. 
 
 I recommend the following article: [“The Business Value of using DDD”](https://www.informit.com/articles/article.aspx?p=1944876&seqNum=4), which gives a high-level overview of the benefits of adopting DDD, not for you as a developer, but for your business. 
 
@@ -95,7 +95,7 @@ As Martin Fowler describes in the linked blog post [Monolith First](https://mart
 
 The next step in our journey is to decide where to start. In my experience I’ve seen three common patterns repeating:
 
-- **Start new functionalities as separated services**: this is usually recommended if you can afford to maintain the monolith as it is. New services will not solve the already existing problems, but it will help your developer teams to get used to working with a microservice mindset.
+- **Start new functionalities as separated services**: this is usually recommended if you can afford to maintain the monolith as it is. New services will not solve the already existing problems, but they will help your developer teams to get used to working with a microservice mindset.
 - **Split existing functionality out of the monolith** (and slowly deprecate the old code): if you have pressing issues with the monolith you can evaluate branching off some of the functionality outside into a new service. This might solve some of your existing problems, but it will not bring any business value immediately. It also adds to the complexity of the day-to-day operations as you might end up running two solutions for the same problem over a long period of time. This can also be used to understand how complex and costly a core rearchitecture can be. 
 - **Rearchitect the core of the platform as microservices** (to tackle existing problems): Sooner or later, if you are experiencing problems maintaining and scaling your Monolith, you will need to rethink and redesign the core bits of your platform, making sure that you focus on solving the current scalability and maintenance problems. This can be a costly initiative, but it can be done in complete isolation from your production environments. Several times I’ve seen how this is done as a Proof of Concept to demonstrate that is actually possible and also to make sure that your team members understand the implications from a business (advantages) and technical point of view (new tech stack, new tools).
 
@@ -209,11 +209,11 @@ You can find the same setup for all the projects inside the Conference Site Demo
 
 
 #### Open APIs
-If you are already implementing a Bounded Context, very early one you will need to design and specify what kind of interface are you going to expose to other Bounded Context and third party services that might be interested in the functionality that your context provides. A popular way of implementing these APIs are REST endpoints. 
+If you are already implementing a Bounded Context, very early one you will need to design and specify what kind of interface are you going to expose to other Bounded Context and third party services that might be interested in the functionality that your context provides. A popular way of implementing these APIs is REST endpoints. 
 
 > **INFO:** Since you are probably familiar with REST endpoints already this section is focused on the [Open API Specification](https://github.com/OAI/OpenAPI-Specification )
 
-As defined in the Spec text “*the OpenAPI Specification removes the guesswork in calling a service.*” Nowadays popular frameworks such as Spring Boot comes with out of the box integration with Open API and Open API tooling. 
+As defined in the Spec text “*the OpenAPI Specification removes the guesswork in calling a service.*” Nowadays popular frameworks such as Spring Boot come with out of the box integration with Open API and Open API tooling. 
 
 By just adding a Spring Boot extension/starter, you enable your application to expose a user interface that serves as live documentation and browser of your APIs.
 
@@ -406,7 +406,7 @@ The User Interface that covers this simple scenario looks like this:
 
   ![chapter_02_08](images/chapter_02_08.png)
 
-* The main page also allow potential speakers to submit proposals by filling up a form:
+* The main page also allows potential speakers to submit proposals by filling up a form:
 
   ![chapter_02_09](images/chapter_02_09.png)
 
@@ -478,7 +478,7 @@ Because the flow under analysis is core to the Call For Proposals Bounded Contex
 
 > **INFO:** The Call for Proposals Service can be found here:  https://github.com/salaboy/fmtok8s-c4p/
 
-The Proposal Submission endpoint accepts a proposal from the User Interface and stores it in a Database or storage. This is an important step, we need to make sure that we don’t loose proposals. Notice that we might be interested in emitting a DDD Domain Event at this point as other systems/applications might be interested to react every time that a proposal is received. 
+The Proposal Submission endpoint accepts a proposal from the User Interface and stores it in a Database or storage. This is an important step, we need to make sure that we don’t loose proposals. Notice that we might be interested in emitting a DDD Domain Event at this point as other systems/applications might be interested in reacting every time that a proposal is received. 
 
 > **INFO:** Check an actual implementation here: https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/C4PController.java#L37
 
@@ -522,23 +522,23 @@ Real-life applications are complex, and that complexity tends to come from the i
 Let’s start with something that you might have faced in the past: REST to REST communications can be challenging. 
 
 #### REST to REST communications can be challenging
-If you look at the example provided in the previous section both the Agenda and Email services are invoked from the Call for Proposals Service by using a [REST call](https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/services/AgendaService.java#L29). As we discussed before these interactions represent a key part of our business flow, so you need to make sure that these interactions go as planned 100% of the times. It is vital that our application doesn’t end up in an inconsistent state, for example, a proposal gets approved and published into the agenda, but we never sent a notification to the speaker. As it is coded in this example, if the Agenda or Email Service goes down, the HTTP request will silently fail.
+If you look at the example provided in the previous section both the Agenda and Email services are invoked from the Call for Proposals Service by using a [REST call](https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/services/AgendaService.java#L29). As we discussed before these interactions represent a key part of our business flow, so you need to make sure that these interactions go as planned 100% of the time. It is vital that our application doesn’t end up in an inconsistent state, for example, a proposal gets approved and published into the agenda, but we never sent a notification to the speaker. As it is coded in this example, if the Agenda or Email Service goes down, the HTTP request will silently fail.
 
 This basic requirement, when working with distributed systems where there is no shared state between services becomes a challenge that has several possible solutions. 
 
-One common solution is to write inside our service code to retry in case of failure, this makes every call much more complicated. In the past, there have been several libraries that provided helpers for such situations. It is important to notice that vanilla Kubernetes doesn’t deal with these kind of failure in any way. 
+One common solution is to write inside our service code to retry in case of failure, this makes every call much more complicated. In the past, there have been several libraries that provided helpers for such situations. It is important to notice that vanilla Kubernetes doesn’t deal with this kind of failure in any way. 
 
-Another solution might be to use a messaging or pub/sub mechanism to communicate our services that out of the box provide you with more guarantees about the delivery of the messages sent. Switching to using messaging such as RabbitMQ or Kafka introduces another set of challenges, most of the time related with now dealing with another complex piece of infrastructure that needs to be maintained over time. Nonetheless, messaging has been proven to be robust and the only option for certain scenarios where these guarantees are required, and the volume of interactions is high. 
+Another solution might be to use a messaging or pub/sub mechanism to communicate our services that out of the box provide you with more guarantees about the delivery of the messages sent. Switching to using messaging such as RabbitMQ or Kafka introduces another set of challenges, most of the time related to now dealing with another complex piece of infrastructure that needs to be maintained over time. Nonetheless, messaging has been proven to be robust and the only option for certain scenarios where these guarantees are required, and the volume of interactions is high. 
 
-Finally, a newer approach are Service Meshes, where we delegate the responsibility of retrying, for example,  to the infrastructure. Service Meshes uses proxies to inspect HTTP payloads and error codes so automatic retries can be don in case of failure.
+Finally, a newer approach are Service Meshes, where we delegate the responsibility of retrying, for example,  to the infrastructure. Service Meshes uses proxies to inspect HTTP payloads and error codes so automatic retries can be done in case of failure.
 
-> **TIP:** You should check out Istio, Gloo, and LinkerD if you are interested in understanding more about how Service Meshes work and what are their advantages. More details about Service Meshes are shared on the [Cloud](https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_08.md) chapter.
+> **TIP:** You should check out Istio, Gloo, and LinkerD if you are interested in understanding more about how Service Meshes work and what their advantages are. More details about Service Meshes are shared on the [Cloud](https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_08.md) chapter.
 
 #### Flow Buried in Code
 It is quite common to find complex business logic hidden inside our services, obscured in a way by all the boilerplate required to deal with technical errors, fetch data from different sources and transform data between different formats. In real-life projects, it gets quite hard for Domain Experts to actually understand the code that implements their business flows. 
 
 The example discussed in this chapter would become hard to read if we add the code to deal with other aspects such as: 
-- Unhappy paths and exceptional cases: such as, the speaker that submitted a proposal disappeared and it is not answering any emails.
+- Unhappy paths and exceptional cases: such as, the speaker who submitted a proposal disappeared and is not answering any emails.
 - Time-Based events, reminders and constraints: for example, schedule a reminder for the board members to review a proposal before 3 days after the submission happened. Cancel the reminder if the decision was made before the deadline. 
 - New requirements are added which push developers to change the sequence of the flow: such as, an email that needs to be sent with a confirmation link to the speaker before we publish and approved talk to the agenda. The more requirements the more code that we need to add, the more it looks like spaghetti. 
 - Reporting and Analytics: for example, your manager wants to know how many proposals we receive per day and how much time on average it takes to approve or reject proposals. You might be tempted to add new endpoints to deal with such reports inside the same service. 
