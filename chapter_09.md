@@ -8,8 +8,8 @@ Oras, e por quê? Por alguns motivos (seis, para ser mais exato):
 2. Milhões de linhas de código, milhares e milhares de classes, um "buzilhão" de coisas que dependem de outras tantas;
 3. Cada feature deriva de uma JSR, que não raro está debaixo de um projeto "guarda-chuva". Em cada uma dessas partes, muitas vezes, há pessoas diferentes trabalhando, e ritmos diferentes de evolução dos projetos;
 4. Tudo o que acontece dentro da plataforma é regulado pelo JCP, que não é famoso pela sua velocidade;
-5. O ecossistema de ferramentas e frameworks em torno do Java é um dos maiores do mundo (se não for o maior). Alguns open source, outros propretários. E todos totalmente dependentes do ritmo de evolução da plataforma;
-6. E, finalmente, os (as) usuários (as), que normalmente são pessoas desenvolvedoras que trabalham em empresas. Sem dúvida, as pessoas mais impactadas por qualquer questão referente a ciclo de atualizações, já que são a ponta dessa cadeira de interesse.
+5. O ecossistema de ferramentas e frameworks em torno do Java é um dos maiores do mundo (se não for o maior). Alguns open source, outros proprietários. E todos totalmente dependentes do ritmo de evolução da plataforma;
+6. E, finalmente, os(as) usuários(as), que normalmente são pessoas desenvolvedoras que trabalham em empresas. Sem dúvida, as pessoas mais impactadas por qualquer questão referente a ciclo de atualizações, já que são a ponta dessa cadeia de interesse.
 
 Eu poderia acrescentar mais itens a essa lista, mas creio que ela já é suficiente para justificar o meu ceticismo inicial.
 
@@ -21,15 +21,15 @@ Nas próximas linhas vamos conversar sobre implicações e desafios específicos
 
 Se você já leu/ouviu/estudou alguma coisa sobre DevOps, talvez já tenha passado por algo parecido com essa pergunta.
 
-Só para entendermos rapidamente o princípio aqui envolvido: suponha que você entrega uma versão/atualização de algum software para o (a) usuário (a) final uma vez ao ano.
+Só para entendermos rapidamente o princípio aqui envolvido: suponha que você entrega uma versão/atualização de algum software para o(a) usuário(a) final uma vez ao ano.
 
 Ou seja, você e sua equipe trabalharam um ano inteiro para criar uma versão nova. Codificaram muito, mexeram no banco, alteraram configurações, atualizaram telas e tantas outras coisas que podem ser feitas de acordo com cada tipo de aplicação.
 
 Agora vamos olhar para as implicações desse cenário:
 
-1. Você descarregou um ano de trabalho no colo de seu (sua) usuário (a). Claro que você pode tornar essa experiência o menos dolorosa possível. Mas ainda assim vai doer;
+1. Você descarregou um ano de trabalho no colo de seu(sua) usuário(a). Claro que você pode tornar essa experiência o menos dolorosa possível. Mas ainda assim vai doer;
 2. Você publicou uma massa imensa de alterações. Se ocorrer um bug, a sua superfície de busca/debug é gigantesca;
-3. Você tinha alterações/melhorias simples, pequenas, que já estavam prontas desde o primeiro mês, mas que tiveram que esperar "a grande release" para chegarem até seu (sua) usuário (a).
+3. Você tinha alterações/melhorias simples, pequenas, que já estavam prontas desde o primeiro mês, mas que tiveram que esperar "a grande release" para chegarem até seu(sua) usuário(a).
 
 E, vamos lembrar, estamos falando de um ano. Imagine se você fizer isso a cada dois anos? Ou a cada três anos? 
 
@@ -37,9 +37,9 @@ Bom, era mais ou menos isso que estava acontecendo com o Java. Normalmente levav
 
 Agora vamos pensar na situação oposta, em que você entrega com uma frequência cada vez maior. O que acontece?
 
-1. Você entrega menos coisas para seu (sua) usuário (a) de uma vez só. É mais fácil ele (a) absorver as mudanças. É mais fácil fazer seu treinamento. Ele (a) vai ter uma maior percepção daquela pequena melhoria fantástica que se perderia no meio de uma release maior;
+1. Você entrega menos coisas para seu(sua) usuário(a) de uma vez só. É mais fácil ele(a) absorver as mudanças. É mais fácil fazer seu treinamento. Ele(a) vai ter uma maior percepção daquela pequena melhoria fantástica que se perderia no meio de uma release maior;
 2. Se um bug ocorrer, você tem muito menos lugares para procurar. E, como tem menos código entregue, a chance de ter erros também é menor. Tem gente que até prefere nunca entregar nada, assim nunca dá erro…;
-3. As melhorias melhores chegarão às mãos de seus (suas) usuários (as) em um tempo muito menor. Você vai deixá-los (as) mais feliz com uma frequência maior. Ponto pra você!
+3. As melhorias chegarão às mãos de seus(suas) usuários(as) em um tempo muito menor. Você vai deixá-los(as) mais feliz com uma frequência maior. Ponto pra você!
 
 Foi exatamente o que ocorreu com a plataforma Java. Eles passaram de um período aproximado de três anos entre as releases para outro de seis meses. É uma frequência seis vezes maior.
 
@@ -87,7 +87,7 @@ No caso do item 2 (custo de migração elevado), ele também é perfeitamente ju
 1. Fazer o build do código atual na versão nova (muitos já desistem aqui);
 2. Fazer todos os ajustes de código necessários para funcionar na versão nova;
 3. Fazer todos os testes necessários para garantir que nenhum erro foi adicionado na aplicação pela pura troca de versão de JVM (e, nessas horas, testes unitários serão seu melhor amigo);
-4. Atualizar as ferramentas do seu ecossistema que dependendiam da versão anterior;
+4. Atualizar as ferramentas do seu ecossistema que dependiam da versão anterior;
 5. Garantir que a nova versão do Java estará instalada e configurada em todos os ambientes em que sua aplicação rodar (container ou vms);
 6. Se chegar até aqui, provavelmente já terá boa segurança pra migrar.
 
@@ -95,7 +95,7 @@ E, no caso da migração do Java 8 para versões mais atuais, temos ainda um "pe
 
 Sim, Java tem retrocompatibilidade. Sim, um código feito em Java 1.2 deveria funcionar no Java 14. Mas também é verdade que o Java 9 introduziu mudanças brutais na plataforma que, sim, quebraram muito projeto por aí.
 
-Em linhas bem gerais, a modularização lançada no JDK 9 (projeto Jigsaw) trouxe não apenas a possiblidade de você modularizar a sua aplicação internamente, mas a própria plataforma em si foi modularizada. Então a forma como o seu projeto lida com a plataforma Java mudou, e o resultado disso para muitos projetos acabou inviabilizando a saída destes da versão 8.
+Em linhas bem gerais, a modularização lançada no JDK 9 (projeto Jigsaw) trouxe não apenas a possibilidade de você modularizar a sua aplicação internamente, mas a própria plataforma em si foi modularizada. Então a forma como o seu projeto lida com a plataforma Java mudou, e o resultado disso para muitos projetos acabou inviabilizando a saída destes da versão 8.
 
 Aliás, existe um artigo fantástico da Trisha Gee falando sobre como migrar seu projeto para o JDK 9 (caso ainda esteja em versões anteriores). Além de útil para a migração em si (claro!), ele ainda vai te dar uma ideia de alguns problemas que podem ocorrer durante o processo. Está aqui: <https://www.infoq.com/br/articles/Java-Jigsaw-Migration-Guide/>
 
@@ -109,9 +109,9 @@ Porém, se por um lado é compreensível que se pense duzentas vezes antes de mi
 
 Há motivos para que se lancem novas versões de qualquer software: corrigir erros, melhorar funcionalidades, criar outras novas, ou mesmo introduzir tendências que surgem no mercado de tecnologia.
 
-Com a plataforma Java não é diferente. Ela não é atualizada, evoluída e modernizada "por esporte". Logo, se há motivos técnicos que justificam sua atualização, os (as) bons (as) arquitetos (as), desenvolvedores (as) e engenheiros (as) do mercado devem prestar atenção a isso.
+Com a plataforma Java não é diferente. Ela não é atualizada, evoluída e modernizada "por esporte". Logo, se há motivos técnicos que justificam sua atualização, os(as) bons(as) arquitetos(as), desenvolvedores(as) e engenheiros(as) do mercado devem prestar atenção a isso.
 
-Vamos imaginar que você é um (a) profissional que trabalha em uma aplicação Java que está usando o JDK 8. Vamos supor que, nesse nosso ambiente imaginário, não há interesse em atualizar o Java para as versões mais recentes (mesmo que seja a versão 11, que é a versão LTS - Long Term Support - mais recente em 2020). Vamos olhar alguns poucos e importantes itens que você está perdendo:
+Vamos imaginar que você é um(a) profissional que trabalha em uma aplicação Java que está usando o JDK 8. Vamos supor que, nesse nosso ambiente imaginário, não há interesse em atualizar o Java para as versões mais recentes (mesmo que seja a versão 11, que é a versão LTS - Long Term Support - mais recente em 2020). Vamos olhar alguns poucos e importantes itens que você está perdendo:
 
 * Com a modularização do JDK 9, surgiu também o jlink, que permite que você, de certa forma, gere o seu próprio JRE. Ou seja, você consegue gerar a sua aplicação utilizando estritamente as dependências necessárias. Em um mundo cada vez mais ligado aos containers, é possível gerar imagens até 70% menores utilizando jlink;
 * Falando em containers, até o JDK 8, a plataforma Java não tinha sido concebida para lidar com restrições de memória do processo onde a JVM está rodando (que, no caso dos containers, derivou do cgroups - algo que já existe em sistemas UNIX há décadas). Ou seja, um container rodando até a versão do JDK 8 poderia alocar memória indefinidamente, até que ocupasse todos os recursos disponibilizados para o daemon, o que exigiu que muitos fizessem workarounds (= gambiarras) para evitar maiores problemas. Desde o JDK 9 (vide este artigo <https://www.infoq.com/br/news/2017/03/java-memory-limit-container/>), a cada nova release temos alguma melhoria com relação à gestão de consumo de recursos da plataforma. Hoje podemos dizer que Java é extremamente performático, eficiente e viável para uso com containers;
@@ -131,9 +131,9 @@ E a resposta, claro, não poderia ser diferente: _porque o nosso chefe viu num e
 
 Isso acontece milhares e milhares de vezes ao redor do mundo, diariamente. Empresas e profissionais adotam tecnologias, padrões, abordagens e linguagens sem ao menos saber do que se trata, para que serve, que problemas aquilo resolve e se ao menos elas têm esses problemas. Apenas porque alguém disse que é legal, é novo, é batuta.
 
-Não seja esse (a) profissional! Cada vez que você faz isso, um pod morre em algum cluster de Kubernetes por aí. Ajude a salvar os pods…
+Não seja esse(a) profissional! Cada vez que você faz isso, um pod morre em algum cluster de Kubernetes por aí. Ajude a salvar os pods…
 
-O que um (a) bom (a) arquiteto (a) deveria fazer, então? 
+O que um(a) bom(a) arquiteto(a) deveria fazer, então? 
 
 Ter equilíbrio. Como em tudo na vida.
 
@@ -151,7 +151,7 @@ Como? Veja, tenho algumas sugestões:
 
 1. Quando algo está na moda, tem muita gente falando. Tem muito material sendo criado. Muita palestra sendo dada. Todo esse material de referência é um tesouro de valor inestimável para quem quer saber de fato o que está acontecendo;
 2. Quando tem muita gente tentando algo novo, tem muita gente enfrentando erros, dificuldades, vendo coisas que não funcionam. É aqui que profissionais inteligentes mais tiram projeto: aprendendo com os erros dos outros;
-3. Se houver muitos relatos de sucesso sobre uma determinada hype, preste atenção aos cenários onde esses sucessos ocorreram. São parecidos com o seu? Resolvem algum problema que você tem? Se não se aplicam hoje, podem ser aplicar a algo que você estava planejando para o futuro;
+3. Se houver muitos relatos de sucesso sobre uma determinada hype, preste atenção aos cenários onde esses sucessos ocorreram. São parecidos com o seu? Resolvem algum problema que você tem? Se não se aplicam hoje, podem se aplicar a algo que você estava planejando para o futuro;
 4. Junte tudo isso (material coletado, casos de fracasso e casos de sucesso) e faça sua própria análise. Analise também junto com colegas de trabalho. Façam simulações e provas de conceito. Discutam, criem conteúdo sobre o assunto.
 
 Se você seguir esses passos, dificilmente será iludido pela próxima hype que surgir. E se ela se provar mais do que uma nova "modinha", quem sabe você não sairá na frente como um case de sucesso?
