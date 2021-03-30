@@ -50,7 +50,7 @@ No momento da escrita deste livro, não há um consenso ou definição exata ace
 >
 > — [Cloud-Native Computing Foundation](https://www.cncf.io/)
 
-> "Cloud-native é um adjetivo que descreve as aplicações, arquiteturas, plataformas/infraestrutura e processos, que juntos as fazem funcionar de uma forma que nos permita melhorar nossa habilidade de rapidamente responder a mudanças e reduzir imprev that together make it economical to work in a way that allows us to improve our ability to quickly respond to change and reduce imprevisibilidade.” POR FAVOR, VERIFIQUEM ESSE PARÁGRAFO, MISTURA PORT. E ING.
+> "'Cloud native' é um adjetivo que descreve as aplicações, arquiteturas, plataformas/infraestrutura e processos que, juntos, tornam o trabalho *econômico* de uma forma que nos permite melhorar nossa capacidade de responder rapidamente às mudanças e reduzir a imprevisibilidade." 
 >
 > — [Christian Posta](https://www.infoq.com/articles/cloud-native-panel/)
 
@@ -135,7 +135,7 @@ Considerando que sua aplicação está pronta para deploy:
 
   > **TIP**: Conforme [pesquisas](https://softwareengineering.stackexchange.com/questions/136079/are-there-any-statistics-that-show-the-popularity-of-git-versus-svn) sobre os dados de 2020 (baseadas em códigos open-source), repositórios `git` são atualmente a escolha mais popular.
 
-* Este repositório, por sua vez, pode ser configurado de forma que ações-chave - como criação de uma nova tag, ou commit no branch master - disparem automaticamente uma ferramenta de integração contínua. 
+* Esse repositório, por sua vez, pode ser configurado de forma que ações-chave - como criação de uma nova tag, ou commit no branch master - disparem automaticamente uma ferramenta de integração contínua. 
 
 * A ferramenta iniciará a execução de testes unitários e o empacotamento dessa aplicação (podendo incluir mais passos, como, por exemplo, checagem da qualidade do código). 
 
