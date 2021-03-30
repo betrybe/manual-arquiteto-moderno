@@ -27,7 +27,7 @@ Enquanto costumávamos ter um monólito com todos os recursos de nossas grandes 
 
 Construir um serviço hoje com endpoints REST é uma tarefa bastante fácil se você estiver usando um desses frameworks mencionados anteriormente. Você tem um modelo de programação baseado em anotação que permite mapear métodos Java para terminais REST e mecanismos avançados de serialização/desserialização que lidarão com todo o boilerplate de análise de solicitações HTTP.
 
-> **DICA:** Para mais detalhes sobre a arquitetura de microsserviços, consulte o capítulo [Microsserviços](https://github.com/betrybe/manual-arquiteto-moderno/blob/master/chapter_07.md).
+> **DICA:** Para mais detalhes sobre a arquitetura de microsserviços, consulte o capítulo [Microsserviços](chapter_07.md).
 
 O verdadeiro problema surge quando você começa a ter mais do que um punhado de serviços. A execução de cada serviço em sua própria JVM irá forçá-lo a executar cada serviço em uma porta diferente e cuidar dos problemas quando essas JVMs travarem. Por isso, a indústria saltou rapidamente para containers por volta de 2015.
 
@@ -45,7 +45,7 @@ Quando você tem um Bounded Context (contexto delimitado) e alguns Serviços, pr
 Quando o número de serviços aumenta, isso se torna incontrolável.
 Por esse motivo, os Container Orchestrators (orquestradores de container) se tornaram populares nos últimos anos, e o Kubernetes está liderando o caminho. O Kubernetes é responsável por lidar com a criação desses container runtimes, como escaloná-los quando há carga e como lidar com containers que apresentem mau comportamento ou falhem.
 
-> **DICA:** Para obter mais detalhes sobre containers e ferramentas de orquestração, consulte o capítulo sobre [Cloud](https://github.com/betrybe/manual-arquiteto-moderno/blob/master/chapter_08.md).
+> **DICA:** Para obter mais detalhes sobre containers e ferramentas de orquestração, consulte o capítulo sobre [Cloud](chapter_08.md).
 
 O sucesso do Kubernetes é baseado no fato de que cada grande provedor na nuvem fornece um serviço Kubernetes gerenciado, tornando-o o padrão de fato para suporte a multicloud. Em outras palavras, não importa qual provedor você escolha, você sempre pode confiar que haverá uma API Kubernetes exposta para você interagir e provisionar seus serviços.
 
@@ -101,7 +101,7 @@ O próximo passo em nossa jornada é decidir por onde começar. Em minha experi�
 
 Neste capítulo, irei cobrir a última dessas opções (**Reestruturar o núcleo da plataforma como microsserviços**) para destacar a solução para nossos problemas existentes com a aplicação monolítica, mas você pode explorar as outras duas, se elas forem mais apropriadas para sua situação.
 
-> **DICA:** Mais informações sobre estratégias e práticas sobre como migrar um monólito existente para a arquitetura de microsserviços podem ser encontradas no capítulo [Microsserviços](https://github.com/betrybe/manual-arquiteto-moderno/blob/master/chapter_07.md).
+> **DICA:** Mais informações sobre estratégias e práticas sobre como migrar um monólito existente para a arquitetura de microsserviços podem ser encontradas no capítulo [Microsserviços](chapter_07.md).
 
 É aqui que os conceitos e padrões DDD se tornam realmente úteis para definir como dividir as funcionalidades do monólito e como organizar nossas equipes em torno dos novos serviços. Nas seções a seguir, exploraremos alguns desses conceitos em ação.
 
@@ -380,7 +380,7 @@ Isso baixa automaticamente a versão mais recente do stub e o executa antes que 
 
 É importante observar que tanto o Serviço quanto os contratos são versionados juntos como parte da mesma base de código. Isso implica que o Stub gerado e o próprio Serviço terão a mesma versão. Um serviço de consumidor, para executar seus testes, pode depender do Stub, pois nunca deve depender do próprio serviço. Assim que o consumidor tiver testado usando o Stub de Serviço do produtor, você pode reconhecer rapidamente quando um contrato é quebrado ou quando uma nova versão do contrato não é mais compatível com os consumidores, pois os testes usando os Stubs serão interrompidos quando versões novas e incompatíveis forem lançadas. Neste momento, os consumidores se deparam com uma decisão simples: ficar dependendo dos contratos antigos com uma versão fixa, ou atualizar para a versão mais recente do contrato. Como você pode ver, isso pode exigir que você execute várias versões do seu serviço ao mesmo tempo. Felizmente para nós, o Kubernetes foi criado para oferecer suporte a esses cenários. Você pode ler sobre versões canário (Canary Releases) se estiver interessado em aspectos de multi-version deployments.
 
-> **DICA:** O capítulo [Cloud](https://github.com/betrybe/manual-arquiteto-moderno/blob/master/chapter_08.md) cobre Canary Releases, bem como outras estratégias de implantação.
+> **DICA:** O capítulo [Cloud](chapter_08.md) cobre Canary Releases, bem como outras estratégias de implantação.
 
 Ambos Bounded Contexts e Mapas de contexto são ótimas ferramentas conceituais para entender como estruturar suas equipes e seu software, mas mais importante, esses conceitos ajudam você a se concentrar no valor do negócio.
 
@@ -533,7 +533,7 @@ Outra solução pode ser usar um mecanismo de mensagem ou pub/sub para comunicar
 
 Finalmente, uma abordagem mais recente são as Service Meshes, em que delegamos a responsabilidade de tentar novamente, por exemplo, à infraestrutura. O Service Mesh usa proxies para inspecionar cargas HTTP e códigos de erro, de forma que novas tentativas automáticas possam ser feitas em caso de falha.
 
-> **DICA:** Você deve dar uma olhada em Istio, Gloo e LinkerD se quiser entender mais sobre como funcionam Service Meshes e quais são suas vantagens. Mais detalhes sobre as Service Meshes são compartilhados no capítulo [Cloud](https://github.com/betrybe/manual-arquiteto-moderno/blob/master/chapter_08.md).
+> **DICA:** Você deve dar uma olhada em Istio, Gloo e LinkerD se quiser entender mais sobre como funcionam Service Meshes e quais são suas vantagens. Mais detalhes sobre as Service Meshes são compartilhados no capítulo [Cloud](chapter_08.md).
 
 #### Fluxo enterrado no código
 É bastante comum encontrar lógicas de negócios complexas escondidas dentro de nossos serviços, de certa forma obscurecidas por todos os padrões necessários para lidar com erros técnicos, buscar dados de diferentes fontes e transformar dados em diferentes formatos. Em projetos da vida real, fica muito difícil para os Especialistas em Domínio entenderem de fato o código que implementa seus fluxos de negócios.

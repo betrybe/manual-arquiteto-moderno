@@ -28,7 +28,7 @@ While we used to have a monolith with all the features of our large applications
 
 Building a Service today with REST endpoints is a relatively easy task if you use one of these frameworks previously mentioned. You have an annotation-based programming model that allows you to map Java Methods to REST endpoints and advanced Serialization/Deserialization mechanisms to deal with all the boilerplate of parsing HTTP requests. 
 
->  **TIP:** For more details regarding microservices architecture, refer to the [Microservices](https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_07.md) chapter. 
+>  **TIP:** For more details regarding microservices architecture, refer to the [Microservices](chapter_07.md) chapter. 
 
 The real problem arises when you start having more than a handful of services. Running each service in its own JVM will push you to run each service on a different port and take care of issues when these JVMs crash. For that reason, the industry quickly jumped to containers around 2015. 
 
@@ -46,7 +46,7 @@ When you have one Bounded Context and a few Services, you are probably fine just
 When the number of services grows, this becomes unmanageable. 
 For that reason, Container Orchestrators have become popular in the last few years, and Kubernetes is leading the way. Kubernetes is in charge of dealing with how to create these container runtimes, scale them when there is load, and deal with containers that are misbehaving or crashing. 
 
->  **TIP:** For more details regarding containers and orchestration tools, refer to the [Cloud](https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_08.md) chapter.
+>  **TIP:** For more details regarding containers and orchestration tools, refer to the [Cloud](chapter_08.md) chapter.
 
 Kubernetes success is based on the fact that each major cloud provider provides a managed Kubernetes Service, making it the defacto standard for multi-cloud support. In other words, no matter which Cloud Provider you choose, you can always trust that there will be a Kubernetes API exposed for you to interact and provision your services. 
 
@@ -102,7 +102,7 @@ The next step in our journey is to decide where to start. In my experience, I’
 
 In this chapter, I will cover the last of these options (**Rearchitect the core of the platform as microservices**) to highlight the solution for our existing problems with the monolith application, but you can explore the other two if they are more appropriate for your situation. 
 
->  **TIP:** More information regarding strategies and practices on how to migrate an existing monolith to microservices architecture can be found in the [Microservices](https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_07.md) chapter.
+>  **TIP:** More information regarding strategies and practices on how to migrate an existing monolith to microservices architecture can be found in the [Microservices](chapter_07.md) chapter.
 
 This is where DDD concepts and patterns become handy to define how to split the monolith's functionalities and how to organize our teams around the new services. In the following sections, we will explore some of these concepts in action.
 
@@ -380,7 +380,7 @@ This automatically downloads the latest version of the Stub and runs it before y
 
 It is important to notice that both the service and the contracts are versioned together as part of the same code base. This implies that the generated Stub and the Service itself will have the same version. To run its tests, a consumer service can depend on the Stub, as it should never depend on the service itself. As soon as the consumer has tested using the producer Service Stub, you can quickly recognize when a contract is broken or when consumers no longer support a new version of the contract. The tests using the Stubs will break when new and incompatible versions are released. At this point, the consumers face a simple decision, stay depending on the old contracts with a fixed version or update to the latest version of the contract. As you can see, this might require you to run several versions of your service simultaneously; luckily for us, Kubernetes is built to support these scenarios. You might want to read about Canary Releases if you are interested in aspects of multi-version deployments.
 
-> **TIP:** The [Cloud](https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_08.md) chapter covers Canary Releases as well as other deployment strategies.
+> **TIP:** The [Cloud](chapter_08.md) chapter covers Canary Releases as well as other deployment strategies.
 
 Both, Bounded Contexts and Context Maps are great conceptual tools to understand how to structure your teams and your software, but more importantly, these concepts help you focus on business value. 
 
@@ -533,7 +533,7 @@ Another solution might be to use a messaging or pub/sub mechanism to communicate
 
 Finally, a newer approach is Service Meshes, where we delegate the responsibility of retrying, for example,  to the infrastructure. Service Meshes uses proxies to inspect HTTP payloads and error codes so automatic retries can be done in case of failure.
 
-> **TIP:** You should check out Istio, Gloo, and LinkerD if you are interested in understanding more about how Service Meshes work and what their advantages are. More details about Service Meshes are shared on the [Cloud](https://github.com/otaviojava/manual-arquiteto-moderno/blob/master/chapter_08.md) chapter.
+> **TIP:** You should check out Istio, Gloo, and LinkerD if you are interested in understanding more about how Service Meshes work and what their advantages are. More details about Service Meshes are shared on the [Cloud](chapter_08.md) chapter.
 
 #### Flow Buried in Code
 It is quite common to find complex business logic hidden inside our services, obscured in a way by all the boilerplate required to deal with technical errors, fetch data from different sources and transform data between different formats. In real-life projects, it gets pretty hard for Domain Experts to understand the code that implements their business flows. 
