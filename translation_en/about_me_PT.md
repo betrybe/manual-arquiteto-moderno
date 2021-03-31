@@ -33,7 +33,7 @@ A partir de 2020, Karina está trabalhando com a Unidade de Negócios de Serviç
 
 * **Nome:** Elder Moraes
 * **Cargo:** Developer Advocate, Red Hat
-* **Bio:** Elder ajuda pessoas desenvolvedoras Java a trabalhar em grandes projetos, orientando-os(as) sobre como construir e entregar aplicações seguras, disponíveis e rápidasdo lado do servidor. Ele é o autor do Jakarta EE Cookbook e membro do conselho do SouJava, um dos maiores JUGs do mundo. Como defensor do desenvolvedor, ele compartilha experiências e melhores práticas por meio de conteúdo online e em eventos internacionais como JavaOne, The Developers Conference, QCon, Oracle Code One, Campus Party e Devnexus.
+* **Bio:** Elder ajuda pessoas desenvolvedoras Java a trabalhar em grandes projetos, orientando-os(as) sobre como construir e entregar aplicações seguras, disponíveis e rápidas do lado do servidor. Ele é o autor do Jakarta EE Cookbook e membro do conselho do SouJava, um dos maiores JUGs do mundo. Como defensor do desenvolvedor, ele compartilha experiências e melhores práticas por meio de conteúdo online e em eventos internacionais como JavaOne, The Developers Conference, QCon, Oracle Code One, Campus Party e Devnexus.
 
 
 <img src="../images/sandro-giacomozzi.png" alt="sandro-giacomozzi" style="zoom:24%;" />
