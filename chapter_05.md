@@ -1,6 +1,6 @@
 # Refatoração
 
-Após alguns anos de estrada, quem desenvolve percebe que passa grande parte do seu tempo lendo código e, na maioria das vezes, código escrito por outras pessoas desenvolvedoras. Sem muito esforço, percebe-se que esse tempo é superior ao tempo gasto escrevendo novas linhas de código, afinal de contas, é preciso entender o funcionamento do código atual, onde deverá fazer suas mudanças, e, principalmente, quais classes ou arquivos serão impactados por elas.
+Após alguns anos de estrada, quem desenvolve percebe que passa grande parte do seu tempo lendo código e, na maioria das vezes, código escrito por outras pessoas. Sem muito esforço, percebe-se que esse tempo é superior ao tempo gasto escrevendo novas linhas de código, afinal de contas, é preciso entender o funcionamento do código atual, onde deverá fazer suas mudanças, e, principalmente, quais classes ou arquivos serão impactados por elas.
 
 Não à toa, uma simples alteração no código, como adicionar um `if`, pode levar horas ou mesmo dias. Geralmente, esse alto custo para manter o software é consequência de uma péssima qualidade do código que foi escrito, afinal, quanto maior a dificuldade em ler e entender um trecho de código, maior será o tempo gasto para alterá-lo. E não se engane, mesmo um(a) dev que implementou a funcionalidade no sistema pode ter dificuldades para ler o código após alguns meses.
 
