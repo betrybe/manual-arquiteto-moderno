@@ -14,7 +14,7 @@ Com base nas palavras de Fowler, podemos entender que refatoração é o process
 
 ## Medo de alterar o código que não é seu
 
-Pessoas desenvolvedoras, em algum momento da sua carreira, entraram ou entrarão no meio de um projeto de software. Isso quer dizer que essas pessoas chegaram de paraquedas para desenvolver, corrigir e manter funcionalidades em cima de uma base de código existente, que pode ter desde 6 meses até 20 anos de vida. 
+Se você trabalha com desenvolvimento, em algum momento da sua carreira, entrou ou entrará no meio de um projeto de software. Isso quer dizer que você chegou (ou chegará) de paraquedas para desenvolver, corrigir e manter funcionalidades em cima de uma base de código existente, que pode ter desde 6 meses até 20 anos de vida. 
 
 Essa base de código provavelmente já passou pela mão de diversas outras pessoas, desde quem tem mais experiência até quem tem nível mediano e quem faz estágio, geralmente sob pressão e prazos surreais e apertados. Para piorar, dificilmente a equipe que iniciou o projeto e tomou decisões importantes de arquitetura e de design estará ainda na empresa. Ou seja, um sistema com 5 anos de idade provavelmente sofreu trocas no time completo 2 ou 3 vezes - no mínimo.
 
