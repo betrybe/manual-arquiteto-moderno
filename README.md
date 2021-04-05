@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Neste livro você irá aprender sobre conceitos que fazem parte da vida de profissionais sênior na carreira desenvolvimento e arquitetura de software. Este livro não é um sumário ou a reescrita de livros reconhecidos no mercado, portanto, é essencial o entendimento prévio de alguns conceitos abordados no decorrer dos capítulos. O diferencial deste conteúdo é que toda a informação é proveniente da aplicação prática das tecnologias, conceitos e culturas apresentadas como Java Efetivo, Clean Code, Domain Driven Design, Clean Architecture e Building Microservices. 
+Neste livro você irá aprender sobre conceitos que fazem parte da vida de profissionais seniores na carreira de desenvolvimento e arquitetura de software. Este livro não é um sumário ou a reescrita de livros reconhecidos no mercado. Portanto, é essencial o entendimento prévio de alguns conceitos abordados no decorrer dos capítulos. O diferencial deste conteúdo é que toda a informação é proveniente da aplicação prática das tecnologias, conceitos e culturas apresentadas como Java Efetivo, Clean Code, Domain-Driven Design, Clean Architecture e Building Microservices. 
 
 Alinhando teoria e prática, este livro traz visões arquiteturais e motivações que costumam levar a determinadas escolhas, além de apresentar seus respectivos trade-offs. 
 
@@ -11,7 +11,7 @@ Alinhando teoria e prática, este livro traz visões arquiteturais e motivaçõe
 Este livro apresenta tópicos atuais e relevantes que embasarão você na tomada de decisão diária no papel em arquitetura de software.Veja a lista de tópicos discutidos no decorrer deste livro:
 
     1. A importância de aprender os conceitos ao invés de novos frameworks;
-    2. Domain Driven Design (DDD), where to go next?
+    2. Domain-Driven Design (DDD), where to go next?
     3. Clean Code;
     4. Clean Architecture;
     5. Refatoração;
@@ -32,7 +32,7 @@ Este livro apresenta tópicos atuais e relevantes que embasarão você na tomada
 
 Este livro surgiu da iniciativa de Otávio Santana e se materializou através da colaboração de profissionais seniores e com amplo reconhecimento na comunidade. Cada autor e autora que escreveu o livro possui uma opinião bem embasada e experiência de campo nas tecnologias e práticas descritas. 
 
-O grupo de autores iniciais é composto por Otávio Santana, Karina Varela e Sérgio Lopes, se extendendo a grandes nomes como Elder Moraes, Maurício Salatino (Salaboy), Sandro Giacomozzi, Francisco (Professor) Isidro, Leandro Domingues.
+O grupo de autores iniciais é composto por Otávio Santana, Karina Varela e Sérgio Lopes, estendendo-se a grandes nomes como Elder Moraes, Maurício Salatino (Salaboy), Sandro Giacomozzi, Francisco (Professor) Isidro, Leandro Domingues.
 
 Com a popularização da iniciativa, a comunidade passa a ativamente colaborar com a revisão do livro. Nosso profundo agradecimento a todos que colaboraram: https://github.com/otaviojava/manual-arquiteto-moderno/graphs/contributors
 

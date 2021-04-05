@@ -4,7 +4,7 @@
 
 > **INFO**: Clean Architecture é um livro muito bom e faz parte de uma "trilogia" cuja leitura é recomendada: Clean Code: a Handbook of Agile Software Craftsmanship (Robert C. Martin Series), The Clean Coder: a Code of Conduct for Professional Programmers (Robert C. Martin Series) e, finalmente, Clean Architecture: a Craftsman's Guide to Software Structure and Design (Robert C. Martin Series). 
 >
-> Assumimos que o leitor tenha realizado leitura prévia do livro Clean Architecture. Esse capítulo não tem o objetivo de falar sobre o livro, mas expor como utilizamos e aplicamos seus conceitos com uma visão prática. 
+> Assumimos que o leitor tenha realizado leitura prévia do livro Clean Architecture. Este capítulo não tem o objetivo de falar sobre o livro, mas expor como utilizamos e aplicamos seus conceitos com uma visão prática. 
 
 Iniciaremos falando sobre a estratégia de dividir e conquistar. Essa estratégia possui muitas vantagens, e vamos citar duas dentre elas:
 
@@ -23,7 +23,7 @@ Observe a imagem a seguir:
 
 *Fonte: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html*
 
-Usaremos a imagem acima para discorrer sobre pontos de atenção que valem a pena aplicar em sua arquitetura:
+Usaremos a imagem acima para discorrer sobre pontos de atenção que vale a pena aplicar em sua arquitetura:
 
 
 * Tenha uma estratégia de teste eficaz, que siga a pirâmide de testes;
@@ -40,7 +40,7 @@ Algo bastante discutido em livros de arquitetura em geral é a granularidade de 
 
 > **TIP:** Avalie sempre ao colocar mais camadas em uma aplicação e tenha atenção para que elas não se tornem uma arma de destruição ao invés de um item de ajuda.
 
-A estratégia descrita pelo livro Clean Architecture é uma visão de “fora para dentro”, ou seja, a camada framework acessa a camada de adaptação seguindo a linha do princípio da dependência. Descreveremos seguir, de uma maneira geral, as camadas.
+A estratégia descrita pelo livro Clean Architecture é uma visão de “fora para dentro”, ou seja, a camada framework acessa a camada de adaptação seguindo a linha do princípio da dependência. Descreveremos a seguir, de uma maneira geral, as camadas.
 
 ### Entidades
 
@@ -56,7 +56,7 @@ Nesta camada se concentram as ações da regra de negócios. Uma maneira de pens
 
 Um ponto de vista interessante é que essa camada é uma grande implementação do padrão de projeto [Adapter](https://refactoring.guru/design-patterns/adapter). O seu maior objetivo é deixar as camadas de entidades e Casos de Uso mais transparentes. Por exemplo, uma interface repositório pode ter diversas implementações, seja uma base de dados relacional, seja não relacional. 
 
-O maior objetivo dessa camada é garantir que as mudanças de tecnologia não impactem as outras camadas. Afinal, para quem utiliza não importa se banco de dados é um Cassandra ou um PostgreSQL, mas, num nível técnico, é importante pensar nas diferentes estratégias de modelagem.
+O maior objetivo dessa camada é garantir que as mudanças de tecnologia não impactem as outras camadas. Afinal, para o(a) usuário(a) não importa se o banco de dados é um Cassandra ou um PostgreSQL, mas, num nível técnico, é importante pensar nas diferentes estratégias de modelagem.
 
 ### Frameworks
 
@@ -67,4 +67,4 @@ Esta é a camada que “não importa” para o negócio. Em outras palavras, é 
 
 ## Conclusão
 
-O livro Clean Architecture traz uma boa referência para se aplicar em arquiteturas maduras e uma melhor estratégia de como utilizar e comunicar entre as camadas. Um ponto importante: não existe bala de prata, e o livro em questão também não é um. O material é bastante rico e cheio de detalhes, porém, lembre-se de que camadas tendem a aumentar a complexidade do seu código, pois quanto mais camadas são criadas, mais camadas são mantidas. Como diria o livro [fundamentos de arquitetura de software](https://www.amazon.com/Fundamentals-Software-Architecture-Comprehensive-Characteristics/dp/1492043451), tudo é um trade-off, e o bom senso ainda é a melhor ferramenta para que o arquiteto saiba *quando* e *como* aplicar conceitos e práticas.
+O livro Clean Architecture traz uma boa referência para se aplicar em arquiteturas maduras e uma melhor estratégia de como utilizar e comunicar entre as camadas. Um ponto importante: não existe bala de prata, e o livro em questão também não é um. O material é bastante rico e cheio de detalhes, porém, lembre-se de que camadas tendem a aumentar a complexidade do seu código, pois quanto mais camadas são criadas, mais camadas são mantidas. Como diria o livro [fundamentos de arquitetura de software](https://www.amazon.com/Fundamentals-Software-Architecture-Comprehensive-Characteristics/dp/1492043451), tudo é um trade-off, e o bom senso ainda é a melhor ferramenta para que o(a) arquiteto(a) saiba *quando* e *como* aplicar conceitos e práticas.

@@ -4,7 +4,7 @@ Uma vez que conversamos sobre DDD, microservices, boas práticas, design de cód
 
 Discorreremos sobre o que se considerar ao transpor arquitetura de aplicações para um ambiente de cloud, perspectivas populares a respeito de aplicações "cloud-native" e por que esse conceito é tão ligado a ferramentas como Kubernetes.  Serão também descritos padrões e funcionalidades esperadas em uma aplicação, para que sejam first-class citizens em um ambiente de cloud. 
 
->  **INFO:** Este capítulo não tem como meta ensinar a fazer deploy de serviços em um cluster Kubernetes, configurar serviços na AWS ou criar aplicações cloud-native from scratch. A intenção deste capítulo é prover informações arquiteturais que embasarão suas decisões e modelagem dos seus serviços e plataformas. Com o conhecimento aqui fornecido, você estará preparado (a) e confiante para iniciar ou prosseguir sua jornada cloud-native, independentemente da solução ou linguagem adotada. 
+>  **INFO:** Este capítulo não tem como meta ensinar a fazer deploy de serviços em um cluster Kubernetes, configurar serviços na AWS ou criar aplicações cloud-native from scratch. A intenção deste capítulo é prover informações arquiteturais que embasarão suas decisões e modelagem dos seus serviços e plataformas. Com o conhecimento aqui fornecido, você estará preparado(a) e confiante para iniciar ou prosseguir sua jornada cloud-native, independentemente da solução ou linguagem adotada. 
 
 A buzz-word "cloud-native" começou a se estabelecer por volta de 2014, e sua crescente popularidade se mostra em seu melhor cenário. Para atingir maior espaço no mercado, empresas passaram a rotular seus produtos como cloud-native, quando, na verdade, são apenas tecnologias cloud-enabled. 
 
@@ -80,7 +80,7 @@ Mais adiante discorreremos sobre um set de tecnologias disponíveis que implemen
 
 > **INFO:** Por trazer um runtime mais leve, a especificação Microprofile abriu um leque de possibilidades para o Java no mundo da cloud. Existem diversas implementações, como Payara Micro, Open Liberty, Quarkus, Helidon e outros. 
 
-O Microprofile tem evoluído de forma rápida, e para garantir um conteúdo atualizado, optamos por não incluir todo o código de boas práticas, mas sim, instruir você sobre como obter o conteúdo mais recente e de acordo com sua necessidade. 
+O Microprofile tem evoluído de forma rápida, e para garantir um conteúdo atualizado, optamos por não incluir todo o código de boas práticas, mas sim instruir você sobre como obter o conteúdo mais recente e de acordo com sua necessidade. 
 
 Para criar um projeto em que você pode estudar exemplos de implementação de práticas e funcionalidades cloud-native utilizando-se da especificação MicroProfile, execute os passos a seguir:
 
@@ -98,7 +98,7 @@ Será realizado o download de dois projetos em sua máquina. Você pode iniciar 
 
 Veja no código como são realizadas a implementação das apis de `Health Checks` com liveness e readiness (apis que serão consumidas pelo fato de o orquestrador de containers aumentar a resiliência e suportar processos de deploy ao validar a saúde do pod), de métricas, tracing distribuído, resiliência a timeouts, segurança com JWT, injeção de propriedades de configuração através de anotações, e a utilização de RestClient (permite consumir um serviço rest apenas implementando-se uma interface no serviço cliente). A aplicação de exemplo acima é uma aplicação que inclui *várias*, mas não *todas* as features que iremos discutir.
 
-Além da utilização da especificação MicroProfile para entrega de microserviços cloud-native, outra ferramenta amplamente utilizada é o [Spring Boot](https://spring.io/projects/spring-boot). É possível também construir serviços que usufruem de capabilities de aplicações cloud-native com a utilização de Spring e sua stack. [Spring Cloud](https://cloud.spring.io/spring-cloud-static/spring-cloud.html) é um dos frameworks disponíveis que permitem entregar aplicações cloud-native e Java. Assim como demonstrado para o MicroProfile, também é possível criar aplicações de uma forma simples: https://start.spring.io/. Note que, ao clicar em `Add Dependencies`, você pode filtrar por cloud e escolher os componentes que deseja habilitar em sua aplicação:
+Além da utilização da especificação MicroProfile para entrega de microsserviços cloud-native, outra ferramenta amplamente utilizada é o [Spring Boot](https://spring.io/projects/spring-boot). É possível também construir serviços que usufruem de capabilities de aplicações cloud-native com a utilização de Spring e sua stack. [Spring Cloud](https://cloud.spring.io/spring-cloud-static/spring-cloud.html) é um dos frameworks disponíveis que permitem entregar aplicações cloud-native e Java. Assim como demonstrado para o MicroProfile, também é possível criar aplicações de uma forma simples: https://start.spring.io/. Note que, ao clicar em `Add Dependencies`, você pode filtrar por cloud e escolher os componentes que deseja habilitar em sua aplicação:
 
 ![chapter_08_06](images/chapter_08_06.png)
 
@@ -106,7 +106,7 @@ Agora, uma vez que falamos sobre alguns detalhes de implementação da aplicaç�
 
 ### Princípios de design de conteinerização de aplicações
 
-Em se tratando de detalhes de implementação de uma aplicação cloud-native, é consenso entre as fontes citadas que essas apps serão **conteinerizadas**. Com isso em mente, o (a) arquiteto (a) deve se preocupar não apenas com adoção do  [SOLID](https://www.amazon.com.br/Clean-Architecture-Craftsmans-Software-Structure-ebook/dp/B075LRM681/ref=sr_1_2?adgrpid=83848702769&gclid=CjwKCAjwqpP2BRBTEiwAfpiD-w6m0nZtj0_jaXw7DfCfvIuztN-m6OrPIQ5BH2g2UHzLOird4mProRoCNTYQAvD_BwE&hvadid=426015975773&hvdev=c&hvlocphy=1001541&hvnetw=g&hvqmt=b&hvrand=11863819395550854586&hvtargid=kwd-298463329082&hydadcr=5628_11235154&keywords=clean+architecture&qid=1590032086&sr=8-2) em seu código, mas também com os [princípios de design de conteinerização de aplicações](https://www.redhat.com/en/resources/cloud-native-container-design-whitepaper).
+Em se tratando de detalhes de implementação de uma aplicação cloud-native, é consenso entre as fontes citadas que essas apps serão **conteinerizadas**. Com isso em mente, o(a) arquiteto(a) deve se preocupar não apenas com adoção do  [SOLID](https://www.amazon.com.br/Clean-Architecture-Craftsmans-Software-Structure-ebook/dp/B075LRM681/ref=sr_1_2?adgrpid=83848702769&gclid=CjwKCAjwqpP2BRBTEiwAfpiD-w6m0nZtj0_jaXw7DfCfvIuztN-m6OrPIQ5BH2g2UHzLOird4mProRoCNTYQAvD_BwE&hvadid=426015975773&hvdev=c&hvlocphy=1001541&hvnetw=g&hvqmt=b&hvrand=11863819395550854586&hvtargid=kwd-298463329082&hydadcr=5628_11235154&keywords=clean+architecture&qid=1590032086&sr=8-2) em seu código, mas também com os [princípios de design de conteinerização de aplicações](https://www.redhat.com/en/resources/cloud-native-container-design-whitepaper).
 
 Princípios a serem considerados durante o tempo de **construção** de uma *imagem*:
 
@@ -125,7 +125,7 @@ Com base nesses princípios, é possível notar que não basta apenas criar um `
 
 ### O ciclo de vida de uma aplicação cloud-native
 
-A componentização dos serviços permite agora que os times de desenvolvimento entreguem mudanças com maior velocidade. Com isso, o time de operações precisa responder de forma equivalente, entregando serviços que permitam entregas velozes, porém estáveis. Para atingir o cenário ideal, é de comum entendimento que a automação de processos de T.I. é essencial não só para o aumento da produtividade, mas também para o aceleramento da evolução da organização como um todo. 
+A componentização dos serviços permite agora que os times de desenvolvimento entreguem mudanças com maior velocidade. Com isso, o time de operações precisa responder de forma equivalente, entregando serviços que permitam entregas velozes, porém estáveis. Para atingir o cenário ideal, é de comum entendimento que a automação de processos de TI é essencial não só para o aumento da produtividade, mas também para o aceleramento da evolução da organização como um todo. 
 
 Nos cenários atuais, clientes esperam uma evolução constante e serviços altamente disponíveis e performáticos. Vejamos um cenário que considera essa necessidade e demonstra o ciclo de vida da aplicação, utilizando-se de melhores práticas de implantação.
 
@@ -135,7 +135,7 @@ Considerando que sua aplicação está pronta para deploy:
 
   > **TIP**: Conforme [pesquisas](https://softwareengineering.stackexchange.com/questions/136079/are-there-any-statistics-that-show-the-popularity-of-git-versus-svn) sobre os dados de 2020 (baseadas em códigos open-source), repositórios `git` são atualmente a escolha mais popular.
 
-* Este repositório, por sua vez, pode ser configurado de forma que ações-chave - como criação de uma nova tag, ou commit no branch master - disparem automaticamente uma ferramenta de integração contínua. 
+* Esse repositório, por sua vez, pode ser configurado de forma que ações-chave - como criação de uma nova tag, ou commit no branch master - disparem automaticamente uma ferramenta de integração contínua. 
 
 * A ferramenta iniciará a execução de testes unitários e o empacotamento dessa aplicação (podendo incluir mais passos, como, por exemplo, checagem da qualidade do código). 
 
@@ -193,7 +193,7 @@ E não podemos deixar de falar sobre **Deploy Contínuo**, que é quando você l
 
 #### Automação é o segredo
 
-Pare por um instante e identifique o nível de automação que você possui no momento. Quanto maior a maturidade das práticas de CI mencionadas, mais confiante você se sentirá ao liberar novas releases do seu software. E quanto mais frequentemente você liberar software, mais rápido você terá feedback do (a) usuário (a) final, e o mais importante: maior a garantia de entregar software que funciona e que entrega exatamente o que clientes precisam.  
+Pare por um instante e identifique o nível de automação que você possui no momento. Quanto maior a maturidade das práticas de CI mencionadas, mais confiante você se sentirá ao liberar novas releases do seu software. E quanto mais frequentemente você liberar software, mais rápido você terá feedback do(a) usuário(a) final, e o mais importante: maior a garantia de entregar software que funciona e que entrega exatamente o que clientes precisam.  
 
 Tenha em mente:
 
@@ -203,27 +203,27 @@ Tenha em mente:
 
 #### Estratégias de deployment 
 
-Escolha dentre estratégias de deploy maduras que sejam mais apropriada à sua aplicação para permitir entregas mais confiáveis. Ao escolher a estratégia de deploy para sua aplicação, escolha com base no quão importante é: 
+Escolha dentre estratégias de deploy maduras que sejam mais apropriadas à sua aplicação para permitir entregas mais confiáveis. Ao escolher a estratégia de deploy para sua aplicação, escolha com base no quão importante é: 
 
 - Tempo de indisponibilidade - o quão crítico é para o negócio que sua aplicação fique fora do ar durante o deploy?
 - Sua aplicação suportaria que você executasse duas versões (antiga e a nova) ao mesmo tempo?
-- Você gostaria que um determinado grupo de usuários (as) fizesse testes na sua nova release, antes que você libere para 100% dos (as) usuários (as)?
-- Você não possui um grupo de usuários (as) de testes, mas, mesmo assim, gostaria de avaliar o funcionamento da nova versão, liberando a release apenas para um percentual de usuários (as) finais?
+- Você gostaria que um determinado grupo de usuários(as) fizesse testes na sua nova release, antes que você libere para 100% dos(as) usuários(as)?
+- Você não possui um grupo de usuários(as) de testes, mas, mesmo assim, gostaria de avaliar o funcionamento da nova versão, liberando a release apenas para um percentual de usuários(as) finais?
 
 Veja algumas estratégias de deploy que você pode usar de maneira fácil com plataformas de orquestração como Kubernetes:
 
 * Recreate Strategy: todos os pods existentes serão escalados a zero, e só então o Kubernetes criará pods com a nova versão do seu código. Uma estratégia ousada (tudo ou nada), mas que pode ser necessária em casos de mudanças radicais em estruturas de dados, ou caso você não possa rodar as duas versões simultaneamente em produção;
 
-* Canary release: é um tipo de Rolling Strategy, em que se libera a nova versão e, apenas quando constatado que a nova versão é saudável (de acordo com o readiness check do Kubernetes), o Kubernetes comecará a destruir os pods com a versão antiga; neste cenário, os pods novos e antigos precisam coexistir durante o período de deploy;
+* Canary release: é um tipo de Rolling Strategy, em que se libera a nova versão e, apenas quando constatado que a nova versão é saudável (de acordo com o readiness check do Kubernetes), o Kubernetes começará a destruir os pods com a versão antiga; neste cenário, os pods novos e antigos precisam coexistir durante o período de deploy;
 
-* Blue-Green: é uma boa estratégia para se mitigarem falhas, porém é mais custoso. Utilize caso você queria que um grupo de pessoas realize testes para garantir que a nova versão está de fato pronta e pode ir ao ar. Devem existir dois ambientes de produção idênticos, o azul e o verde, mas apenas um estará ativo por vez. Você terá um router que irá direcionar os usuários para o ambiente ativo.
+* Blue-Green: é uma boa estratégia para se mitigarem falhas, porém é mais custoso. Utilize caso você queira que um grupo de pessoas realize testes para garantir que a nova versão está de fato pronta e pode ir ao ar. Devem existir dois ambientes de produção idênticos, o azul e o verde, mas apenas um estará ativo por vez. Você terá um router que irá direcionar os usuários para o ambiente ativo.
 
   > **TIP:** Leitura recomendada sobre blue-green deployment: artigo [BlueGreenDeployment,por Martin Fowler](https://martinfowler.com/bliki/BlueGreenDeployment.html).
 
-  Digamos que o ambiente azul está ativo, rodando seu código v1. O grupo de usuários (as) realizará os testes no ambiente verde, não ativo, na versão v2. Uma vez confirmado que a nova versão, v2, pode ir ao ar, você vira a chave, e todas as pessoas usuárias passam a utilizar, agora, o ambiente verde. 
+  Digamos que o ambiente azul está ativo, rodando seu código v1. O grupo de usuários(as) realizará os testes no ambiente verde, não ativo, na versão v2. Uma vez confirmado que a nova versão, v2, pode ir ao ar, você vira a chave, e todas as pessoas usuárias passam a utilizar, agora, o ambiente verde. 
   Seguindo a mesma linha, como o ambiente verde agora está em produção, em um próximo deploy você usaria o ambiente azul para garantir o release antes de virar a chave, e assim por diante.
 
-* A/B testing: neste cenário você executa duas versões da aplicação em produção ao mesmo tempo, como uma forma de se testar uma hipótese. Você pode, por exemplo, comparar, durante o período de uma semana, qual das duas versões vai performar melhor. Ou, de uma outra perspectiva, se o fato de adicionar um novo botão na tela da aplicação na nova versão leva os (as) usuários (as) a comprarem mais. Uma vez realizados os testes, pode-se liberar a versão desejada em sua totalidade, usando por exemplo canary release. 
+* A/B testing: neste cenário você executa duas versões da aplicação em produção ao mesmo tempo, como uma forma de se testar uma hipótese. Você pode, por exemplo, comparar, durante o período de uma semana, qual das duas versões vai performar melhor. Ou, de uma outra perspectiva, se o fato de adicionar um novo botão na tela da aplicação na nova versão leva os(as) usuários(as) a comprarem mais. Uma vez realizados os testes, pode-se liberar a versão desejada em sua totalidade, usando por exemplo canary release. 
 
 ## A jornada cloud-native
 
@@ -266,7 +266,7 @@ Uma redução drástica de complexidade para focar a criação do software, cert
 > * [Platform.sh](platform.sh): é um PaaS que utiliza todos os conceitos de infraestrutura como serviço e também é orientado ao Git, além de possibilitar realizar o deploy da aplicação, deixando todo trabalho para a plataforma. Basicamente, a partir de três arquivos [aplicação](https://docs.platform.sh/configuration/app-containers.html), [serviços](https://docs.platform.sh/configuration/services.html) e [rotas](https://docs.platform.sh/configuration/routes.html), podemos fazer o push para um repositório Git. Um simples push para o sistema remoto do Platform.sh criará automaticamente os containers da aplicação, dos serviços como banco de dados e as rotas da aplicação. Nesse caso, a abstração é gigantesca e faz com que o time foque muito mais a aplicação central da empresa.
 > * [Red Hat OpenShift Online](https://www.openshift.com/products/online/): uma opção para se utilizar o OpenShift (a.k.a. [OKD](https://www.okd.io/)) como serviço. Neste PaaS, o OpenShift é disponibilizado na AWS e permite a desenvolvedores de aplicações Ruby, PHP, Node.js e Java utilizarem seus runtimes e banco de dados de preferência para rodar suas aplicações. Possui uma opção self-service e free para pessoas desenvolvedoras. 
 > * [Heroku](heroku.com): nascido em 2007 exclusivamente para Ruby, hoje o Heroku suporta as mais diversas linguagens, como Go, Java, PHP, Node.JS e outras, além de várias ferramentas do ecossistema de uma aplicação;
-> * [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine): o PaaS oferecido pelo Google é totalmente baseado em Kubernetes vanilla. Simples de se iniciar, ao se cadastrar você ganha uma quantidade de créditos para poder rodar seus workloads, e recebe também acesso a outros produtos da Google.
+> * [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine): o PaaS oferecido pelo Google é totalmente baseado em Kubernetes Vanilla. Simples de se iniciar, ao se cadastrar você ganha uma quantidade de créditos para poder rodar seus workloads, e recebe também acesso a outros produtos da Google.
 
 Com base em leituras e conceito aplicação de PaaS por diversas empresas, podemos analisar por duas perspectivas:
 
@@ -289,7 +289,7 @@ De uma maneira geral, temos que pensar nos seguintes três princípios cíclicos
 * Quanto maior a abstração, menor o risco;
 * Quanto menor o risco, menor a complexidade.
 
-É verdade que existem vários benefícios na navegação nos mares da computação em nuvem, porém é muito importante conhecer os tipos de serviços que a cloud disponibiliza e fazer uma análise profunda da complexidade de um serviço e seu respectivo risco, além do tempo que o time está disposto a gastar para criar e manter toda a infraestrutura. O PaaS fornece uma grande vantagem de abstração de toda a infraestrutura e manutenção para que a pessoa desenvolvedora foque seu negócio. O IaaS te garantirá grande flexibilidade e poder para instalar e configurar o que seu time deseja sem nenhum problema, mesmo que tudo tenha que ser configurado manualmente. É muito importante que tanto o time quanto a empresa tenham noção de que, independentemente da escolha, haverá benefícios e desvantagens. É muito importante para que os (as) arquitetos (as) avaliem o que melhor se encaixa na instituição, afinal, cloud e computação não estão relacionados ao quando, mas ao como.
+É verdade que existem vários benefícios na navegação nos mares da computação em nuvem, porém é muito importante conhecer os tipos de serviços que a cloud disponibiliza e fazer uma análise profunda da complexidade de um serviço e seu respectivo risco, além do tempo que o time está disposto a gastar para criar e manter toda a infraestrutura. O PaaS fornece uma grande vantagem de abstração de toda a infraestrutura e manutenção para que a pessoa desenvolvedora foque seu negócio. O IaaS te garantirá grande flexibilidade e poder para instalar e configurar o que seu time deseja sem nenhum problema, mesmo que tudo tenha que ser configurado manualmente. É muito importante que tanto o time quanto a empresa tenham noção de que, independentemente da escolha, haverá benefícios e desvantagens. É muito importante para que os(as) arquitetos(as) avaliem o que melhor se encaixa na instituição, afinal, cloud e computação não estão relacionados ao quando, mas ao como.
 
 # Kubernetes - quando usar e quando não usar
 
@@ -299,14 +299,14 @@ Como decidir quando é a hora de migrar seu workload para uma arquitetura contei
 
 * Utilização da plataforma Kubernetes: em caso de IaaS ou PaaS:
 
-  * Da perspectiva de pessoas desenvolvedoras, a conteinerização da aplicação garante que o código que roda em sua máquina funcionará também nos ambientes produtivos. Basta garantir que a imagem seja corretamente descrita. Além disso, uma vez absorvidos os conceitos de criação de uma aplicação cloud-native e as vantagens de um ambiente de orquestração, o (a) desenvolvedor (a) tem a vantagem da perspectiva da carreira, de estar apto (a) a trabalhar em diferentes vendors, uma vez que há certa padronização na forma de trabalho. Por outro lado, a gestão deve estar ciente da curva de aprendizado inicial que a equipe enfrentará.
+  * Da perspectiva de pessoas desenvolvedoras, a conteinerização da aplicação garante que o código que roda em sua máquina funcionará também nos ambientes produtivos. Basta garantir que a imagem seja corretamente descrita. Além disso, uma vez absorvidos os conceitos de criação de uma aplicação cloud-native e as vantagens de um ambiente de orquestração, o(a) desenvolvedor(a) tem a vantagem da perspectiva da carreira, de estar apto(a) a trabalhar em diferentes vendors, uma vez que há certa padronização na forma de trabalho. Por outro lado, a gestão deve estar ciente da curva de aprendizado inicial que a equipe enfrentará.
 
-    > TIP: É recomendada a leitura do livro [Kubernetes patterns for desiging cloud-native apps](https://www.redhat.com/en/resources/oreilly-kubernetes-patterns-cloud-native-apps). Traz boas práticas na implementação de serviços cloud-native. 
+    > TIP: É recomendada a leitura do livro [Kubernetes patterns for designing cloud-native apps](https://www.redhat.com/en/resources/oreilly-kubernetes-patterns-cloud-native-apps). Traz boas práticas na implementação de serviços cloud-native. 
 
   * Da perspectiva do time de middleware ou sysadmins, o dia a dia passa a ser diferente. Não é mais necessário despender tempo aprendendo como entregar diferentes tipos de aplicação e desvendando suas respectivas peculiaridades e dependências. Basta aprender a lidar com containers, e a forma de trabalho passa a ser padrão, independentemente da tecnologia utilizada nas aplicações. Por outro lado, deve-se entender conceitos de operators, segregação e segurança no ambiente Kubernetes, estratégias de deployment (rolling, blue-green, canary), como lidar com storages etc.
 
 
-##  Kubernetes Vanila e seus sabores
+##  Kubernetes Vanilla e seus sabores
 
 Esse projeto se popularizou por demonstrar que é capaz de lidar com orquestração de containers em larga escala. É possível identificar diversas ofertas baseadas em Kubernetes: Heptio, OpenShift, Platform.sh, Rancher, entre outras. A intenção é que cada empresa por trás dessas plataforma possa agregar valor com features únicas, porém respeitando todos os conceitos e arquiteturas existentes em sua plataforma de origem, Kubernetes. 
 
@@ -319,7 +319,7 @@ Nesse contexto, ao selecionar sua próxima plataforma de orquestração, conside
 - Como você e sua equipe irão lidar com problemas: por si sós, ou precisam de suporte enterprise?
 - Se vai rodar em cloud pública, valide se a plataforma oferece suporte ou tem cases de sucesso na devida opção (Amazon, Google, Azure etc.).
 - Avalie as ferramentas de CI/CD suportadas pela plataforma;
-- Avalie as ferramentas que seu (sua) desenvolvedor (a) terá que utilizar no dia a dia para interagir com a ferramenta de orquestração: existe apenas CLI? Há um console que permite manutenção e monitoramento do ambiente? 
+- Avalie as ferramentas que seu(sua) desenvolvedor(a) terá que utilizar no dia a dia para interagir com a ferramenta de orquestração: existe apenas CLI? Há um console que permite manutenção e monitoramento do ambiente? 
 - Caso seja parte do seu cenário uma migração parcial e de médio/longo prazo de um ambiente on-premise para uma cloud pública, avalie as possibilidades de um ambiente híbrido onde você possa usufruir de ambas as clouds, privada e pública, sem maiores problemas com a plataforma em questão.
 
 ### Como escolher seu set de tecnologias
@@ -353,7 +353,7 @@ Vamos à definição de service mesh (malha de serviços) por [William Morgan, 2
 
 > Uma malha de serviço é uma camada de infraestrutura dedicada a lidar com a comunicação serviço a serviço. É responsável pela entrega confiável de solicitações por meio da topologia complexa de serviços que inclui um aplicativo nativo da nuvem moderno. Na prática, a malha de serviço é normalmente implementada como uma matriz de proxies de rede leves que são implantados juntamente com o código do aplicativo, sem que o aplicativo precise estar ciente.
 
-Estamos falando de um desacoplamento entre o "Dev" e o "Ops", ou melhor, a pessoa desenvolvedora não precisa se preocupar se o código do seu microserviço pode prover as capacidades de que a operação precisa. E toda vez que a operação precisar alterar algo, não é necessária uma nova compilação da aplicação, gerando um desacoplamento que prove a resiliência, a segurança, toda a parte de observability e reteamento RETEAMENTO MESMO? NÃO SERIA ROTEAMENTO? para a malha e fora da aplicação.
+Estamos falando de um desacoplamento entre o "Dev" e o "Ops", ou melhor, a pessoa desenvolvedora não precisa se preocupar se o código do seu microserviço pode prover as capacidades de que a operação precisa. E toda vez que a operação precisar alterar algo, não é necessária uma nova compilação da aplicação, gerando um desacoplamento que prove a resiliência, a segurança, toda a parte de observability e reteamento para a malha e fora da aplicação.
 
 Se avaliarmos que o conceito começou a ganhar popularidade em 2017, é um conceito um tanto quanto novo, mas a ideia é criar uma camada de abstração por cima da aplicação. E, através da malha, prover a segurança entre os serviços, e também delegar para a malha toda a observação e resiliência de que ela possa precisar.
 
@@ -361,9 +361,9 @@ Uma camada de abstração pode existir em três níveis:
 
 - **Biblioteca** - Cada serviço implementa uma biblioteca que inclui as capacidades da malha; blibliotecas como [Hystrix](https://github.com/Netflix/Hystrix) ou [Ribbon](https://github.com/Netflix/ribbon) são exemplos. Essas implementações possuem trade-offs, pois, neste caso, você precisa fornecer as bibliotecas e, com isso, limitar as tecnologias que se pode trabalhar. Se seu projeto tem múltiplas linguagens, você também precisará de múltiplas implementações, e precisará gerenciar esse cenário. 
 - **Node Agent** - Existe um agente rodando em cada nó da malha e com a responsabilidade de cuidar das capacidades da malha. A implementação do Linkerd no Kubernetes usa esse modelo. O trade-off aqui é que o time de Ops precisa trabalhar em conjunto com o time de Dev para que as capacidades estejam bem estabelecidas.
-- **Sidecar** - Atualmente, a implementação mais sugerida é o modelo usado pelo Istio com Envoy. Nesse modelo, para a cada container de aplicação existirá um container ao lado - no mesmo pod. Esse sidecar lida com tudo que a malha precisa para chegar ou sair do serviço.
+- **Sidecar** - Atualmente, a implementação mais sugerida é o modelo usado pelo Istio com Envoy. Nesse modelo, para cada container de aplicação existirá um container ao lado - no mesmo pod. Esse sidecar lida com tudo que a malha precisa para chegar ou sair do serviço.
 
-Mas o que são essas capacidades da `Malha` que são mencionadas? A malha de serviços deve seguir as regras de ORASTAR sem ter códigos implementados no seu microserviço:
+Mas o que são essas capacidades da `Malha` que são mencionadas? A malha de serviços deve seguir as regras de ORASTAR sem ter códigos implementados no seu microsserviço:
 
 - **Observability** - O Painel de Controle provê todos os serviços de observação que estão rodando no plano de dados. Ou seja, métricas para ver a latência, consumo de banda, logging e tracing, tudo que precisa para monitorar a saúde dos seus serviços ficam na malha, provendo visualizações gráficas de todas as requisições.
 - **Routing** - As regras de roteamento para o controle do tráfego pode ser feito tanto visualmente quanto por arquivos de configuração e, então, enviadas do controle para todas as aplicações. Estamos falando de mudança e divisão de tráfego, controle sobre o que entra e sai e capacidade de injetar falhas e latências para fazer testes.
@@ -375,7 +375,7 @@ Mas o que são essas capacidades da `Malha` que são mencionadas? A malha de ser
 
 ###### Arquitetura
 
-E, para implementar as regras de ORASTAR, temos a arquitetura de um plano PAINEL? de controle e um plano de dados. Vamos entender esses conceitos.
+E, para implementar as regras de ORASTAR, temos a arquitetura de um painel de controle e um plano de dados. Vamos entender esses conceitos.
 
 `Painel de Controle` é onde ficam as configurações, políticas e a administração dos serviços que estão no plano de dados para o controle de rotas, tráfego, monitoração, descoberta e registro dos serviços. É aqui que está a responsabilidade pela comunicação entre os microsserviços, através de autenticação, autorização e segurança no tráfego da rede.
 
@@ -435,7 +435,7 @@ Você pode criar as máquinas que farão parte do cluster, instalar o Docker e c
 
 Com a introdução do conceito de containers e orquestração de containers ao seu time, naturalmente haverá uma evolução para a automação dos processos de construção e entrega dessas imagens e containers. Com isso, o time terá a chance de praticar e absorver o conhecimento necessário para imergir mais naturalmente em um cenário mais complexo de orquestradores robustos.
 
-Deve-se também ter em mente o cenário em que você já utilizou o Kubernetes e já tem um conhecimento mais aprofundado da ferramenta. Com isso, você já tem ideias de como melhorar ou facilitar os fluxos internos de orquestração, práticas de desenvolvimento, de entrega contínua. Tem ideias de UI que podem auxiliar o (a) usuário (a) ou práticas que podem acelerar a entrega de aplicações. Com base nisso, você pode, ao invés de usar o Kubernetes, partir para um dos flavors disponíveis, e até mesmo criar o seu próprio flavor! 
+Deve-se também ter em mente o cenário em que você já utilizou o Kubernetes e já tem um conhecimento mais aprofundado da ferramenta. Com isso, você já tem ideias de como melhorar ou facilitar os fluxos internos de orquestração, práticas de desenvolvimento, de entrega contínua. Tem ideias de UI que podem auxiliar o(a) usuário(a) ou práticas que podem acelerar a entrega de aplicações. Com base nisso, você pode, ao invés de usar o Kubernetes, partir para um dos flavors disponíveis, e até mesmo criar o seu próprio flavor! 
 
 # Conclusão 
 
