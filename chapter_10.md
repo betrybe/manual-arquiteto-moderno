@@ -2,7 +2,7 @@
 
 ## Introdução e conceitos
 
-Muitas empresas utilizam a abordagem "deixe o desempenho para depois" para tratar com possíveis problemas de performance que possam ocorrer no ambiente de produção para a fase de testes. Na fase de testes, é provável que não se leve em consideração a carga que a aplicação possa sofrer e o tempo de resposta esperado, pois isso não foi especificado nos requisitos não funcionais - requisitos como o tempo de resposta de uma determinada operação ou a quantidade de acessos simultâneos. Além disso, temos o desafio de conciliar uma arquitetura evolutiva juntamente com a engenharia de desempenho ou performance. Na arquitetura evolutiva temos que ser ágeis e permitir constantes melhorias na arquitetura, deixando as decisões para última hora, enquanto a engenharia de desempenho se preocupa em identificar possíveis gargalos e definir as tecnologias utilizadas já no início do projeto.
+Muitas empresas utilizam a abordagem "deixe o desempenho para depois" para tratar com possíveis problemas de performance que possam ocorrer no ambiente de produção para a fase de testes. Na fase de testes, é provável que não se leve em consideração a carga que a aplicação possa sofrer e o tempo de resposta esperado, pois isso não foi especificado nos requisitos não funcionais - requisitos como o tempo de resposta de uma determinada operação ou a quantidade de acessos simultâneos. Além disso, temos o desafio de conciliar uma arquitetura evolutiva juntamente com a engenharia de desempenho ou performance. Na arquitetura evolutiva, temos que ser ágeis e permitir constantes melhorias na arquitetura, deixando as decisões para última hora, enquanto a engenharia de desempenho se preocupa em identificar possíveis gargalos e definir as tecnologias utilizadas já no início do projeto.
 
 Antes de irmos mais a fundo, vamos rever alguns conceitos importantes sobre desempenho de aplicações.
 
@@ -10,7 +10,7 @@ Antes de irmos mais a fundo, vamos rever alguns conceitos importantes sobre dese
 
 **Latência**: É o tempo que leva para um pacote de dados ir de um ponto a outro. Ao contrário do Throughput, quanto maior a latência, pior a performance. Em sistemas distribuídos, este pode ser um grande problema.
 
-Sistemas de alta performance têm como requisitos alta confiabilidade, baixa latência e alta taxa de vazão. Isso parece comum para quem vai desenvolver um serviço, porém não é uma tarefa das mais fáceis manter e melhorar a performance à medida que o sistema vai sendo utilizado, porque novas funcionalidades são adicionadas, base de dados cresce.
+Sistemas de alta performance têm como requisitos alta confiabilidade, baixa latência e alta taxa de vazão. Isso parece comum para quem vai desenvolver um serviço, porém não é uma tarefa das mais fáceis manter e melhorar a performance à medida que o sistema vai sendo utilizado, porque novas funcionalidades são adicionadas, a base de dados cresce.
 
 ## Agilidade versus Performance
 
@@ -33,15 +33,15 @@ Cuidado com a performance também quer dizer, em muitos casos, implementar mais 
 
 ## Como medir a performance? 
 
-Existem muitas formas de medir a performance da aplicação, seja com um monitoramento em tempo real, seja com um teste de ‘stress’ antes de liberar uma funcionalidade em produção. Tudo vai depender do requisito não funcional solicitado. É claro que todo (a) usuário (a) quer ter sempre a resposta o mais rápido possível. Mas qual o limite aceitável? Essa é a medida que se deve ter em mente até mesmo antes de iniciar a codificação. Por exemplo: o tempo de login não pode ser superior a um segundo. Como posso medir isso?
+Existem muitas formas de medir a performance da aplicação, seja com um monitoramento em tempo real, seja com um teste de ‘stress’ antes de liberar uma funcionalidade em produção. Tudo vai depender do requisito não funcional solicitado. É claro que todo(a) usuário(a) quer ter sempre a resposta o mais rápido possível. Mas qual o limite aceitável? Essa é a medida que se deve ter em mente até mesmo antes de iniciar a codificação. Por exemplo: o tempo de login não pode ser superior a um segundo. Como posso medir isso?
 Lembrando que não é simplesmente colocar que o 'login precisa ser feito em menos de um segundo'. Deve-se avaliar em
  quais circunstâncias esse login pode ou não demorar mais. Até onde o sistema de login pode escalar. Uma boa diretriz
   de média seria dizer: o tempo de resposta do login é de 1 segundo para 500 solicitações simultâneas, com uma carga de
    CPU de 60% e uma utilização de memória de 80%.
 
-### Capturando o tempo da requisição.
+### Capturando o tempo da requisição
 
-Neste capítulo, vamos utilizar a ferramenta [jMeter](https://jmeter.apache.org/), muito utilizada para criar diversos tipos de teste de carga e medir o desempenho. O objetivo aqui não é ser um tutorial do jMeter, mas mostrar como é possível gerar e visualizar dados através dele. Abaixo, um exemplo simples de medição de tempo de login considerando 10 usuários (as):
+Neste capítulo, vamos utilizar a ferramenta [jMeter](https://jmeter.apache.org/), muito utilizada para criar diversos tipos de teste de carga e medir o desempenho. O objetivo aqui não é ser um tutorial do jMeter, mas mostrar como é possível gerar e visualizar dados através dele. Abaixo, um exemplo simples de medição de tempo de login considerando 10 usuários(as):
   
 ![](images/chapter_10_01.png)
  
@@ -63,7 +63,7 @@ Ainda podemos ter gráficos mais ricos, utilizando o plugin [PerfMon](https://jm
 
 ![](images/chapter_10_03.png)
 
-No gráfico acima, podemos ver que a maioria das requisições ficou entre 600 e 700 milesegundos em um cenário de testes com 1000 requisições.
+No gráfico acima, podemos ver que a maioria das requisições ficou entre 600 e 700 milissegundos em um cenário de testes com 1000 requisições.
 Podemos ter gráficos ainda mais bonitos e em tempo real, podendo utilizar o [grafana](https://grafana.com/) como visualizador de
  gráficos.
 
@@ -73,9 +73,9 @@ Veja que capturamos o tempo total de um processo de login, porém se o login nã
 ## Entendendo e separando os componentes
 
 Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Para isso, precisamos testar
- separadamente cada componente da arquitetura para descobrir onde é possível diminuir o tempo. É possível que, com
-  apenas uma ferramenta, não seja possível medir a performance da sua aplicação. É provável que você utilize uma
-   ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos. A imagem abaixo é uma representação da arquitetura para servir milhões de usuários (as):
+ separadamente cada componente da arquitetura para descobrir onde podemos diminuir o tempo. É possível que, com
+  apenas uma ferramenta, não se possa medir a performance da sua aplicação. É provável que você utilize uma
+   ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos. A imagem abaixo é uma representação da arquitetura para servir milhões de usuários(as):
 
 ![](images/chapter_10_04.png)
 
@@ -85,7 +85,7 @@ No entanto, não foi de primeira que esta arquitetura foi definida. Foram muitos
 
 ## Monitorando a performance por componente
 
-Conforme demonstrado acima, não é de primeira que se define uma arquitetura para milhões de usuários (as). É necessário
+Conforme demonstrado acima, não é de primeira que se define uma arquitetura para milhões de usuários(as). É necessário
  estressar e medir para verificar onde estão os pontos que podem sofrer carga. Existem várias opções que
   mostram onde estão os gargalos da aplicação. Uma das várias opções é o [javamelody](https://github.com/javamelody
   /javamelody), que pode ser utilizado em modo standalone junto com a sua aplicação Java, é free e muito simples de colocar na aplicação.
@@ -97,7 +97,7 @@ Na imagem acima, podemos notar que uma das consultas SQL demorou, em média, mai
 ![](images/chapter_10_06.png)
 
 No outro exemplo abaixo, podemos ver um desvio bem grande no método 'findById', que, por sua vez, não utiliza um banco
- de dados MySQL, mas sim uma outra fonte de dados externo. Com essas informações em mãos, já é possivel analisar de
+ de dados MySQL, mas sim uma outra fonte de dados externo. Com essas informações em mãos, já é possível analisar de
   modo isolado cada comportamento.
 
 ![](images/chapter_10_07.png)
@@ -118,7 +118,7 @@ Podemos observar em qual dos serviços o tempo de resposta não está adequado e
 
 No mundo Java, utilizamos o JPA para trabalhar com a camada de persistência em bancos de dados relacionais. Neste tópico, abordaremos algumas boas práticas para obtermos uma boa performance na utilização desse padrão.
 
-### Estratégia de geração de Id's
+### Estratégia de geração de IDs
 
 O gerador de identificador TABLE é muito ineficiente. Ele é mais genérico e portável para a maioria dos bancos de dados, porém requer uma transação de banco de dados separada, como também uma conexão separada para garantir que o processo de geração do identificador não esteja vinculado à transação que iniciou. Emprega o uso de bloqueios no nível de linha que são pesados em comparação com as usadas pelas estratégias de geração de identificador como IDENTITY ou SEQUENCE.
 Portanto, se o banco de dados suportar sequences, é muito mais eficiente usar a estratégia SEQUENCE.
