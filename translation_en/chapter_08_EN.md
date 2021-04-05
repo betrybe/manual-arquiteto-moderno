@@ -67,7 +67,7 @@ As of writing this book, there is no clear consensus or definition about the ter
 
   
 
-> "Cloud-native technologies enable companies to create and run scalable applications in modern and dynamic environments, such as public, private, and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach. (...) "
+> "Cloud-native technologies enable companies to create and run scalable applications in modern and dynamic environments, such as public, private, and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach. (...)"
 
 >
 
@@ -75,7 +75,7 @@ As of writing this book, there is no clear consensus or definition about the ter
 
   
 
-> "Cloud-native é um adjetivo que descreve as aplicações, arquiteturas, plataformas/infraestrutura e processos, que juntos as fazem funcionar de uma forma que nos permita melhorar nossa habilidade de rapidamente responder a mudanças e reduzir imprev that together make it economical to work in a way that allows us to improve our ability to quickly respond to change and reduce imprevisibilidade.” POR FAVOR, VERIFIQUEM ESSE PARÁGRAFO, MISTURA PORT. E ING.
+> "'Cloud native' is an adjective that describes the applications, architectures, platforms/infrastructure, and processes, that together make it *economical* to work in a way that allows us to improve our ability to quickly respond to change and reduce unpredictability"
 
 >
 

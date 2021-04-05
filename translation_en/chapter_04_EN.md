@@ -25,7 +25,7 @@ We will use the image above to discuss attention points that are worth applying 
 
 * Have an effective testing strategy that follows the testing pyramid;
 * The structures must be isolated in individual modules. When (not if) we change our minds, we will need to change in just one place;
-* "Screaming Architecture" also known as <u>intended use</u>[@Otavio #Revise the underscore]. When looking at the package structure, you can immediately see what the application does, and not its technical details. It is similar to when using package by layer instead of package by feature.
+* "Screaming Architecture" also known as intended use. When looking at the package structure, you can immediately see what the application does, and not its technical details. It is similar to when using package by layer instead of package by feature.
 
 * All business logic must be in a use case, so it will be easy to find and not duplicate anywhere else;
 
