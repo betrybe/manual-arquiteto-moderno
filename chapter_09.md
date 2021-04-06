@@ -9,7 +9,7 @@ Oras, e por quê? Por alguns motivos (seis, para ser mais exato):
 3. Cada feature deriva de uma JSR, que não raro está debaixo de um projeto "guarda-chuva". Em cada uma dessas partes, muitas vezes, há pessoas diferentes trabalhando, e ritmos diferentes de evolução dos projetos;
 4. Tudo o que acontece dentro da plataforma é regulado pelo JCP, que não é famoso pela sua velocidade;
 5. O ecossistema de ferramentas e frameworks em torno do Java é um dos maiores do mundo (se não for o maior). Alguns open source, outros proprietários. E todos totalmente dependentes do ritmo de evolução da plataforma;
-6. E, finalmente, os(as) usuários(as), que normalmente são pessoas desenvolvedoras que trabalham em empresas. Sem dúvida, as pessoas mais impactadas por qualquer questão referente a ciclo de atualizações, já que são a ponta dessa cadeia de interesse.
+6. E, finalmente, os(as) usuários(as), que normalmente são desenvolvedores(as) que trabalham em empresas. Sem dúvida, são as pessoas mais impactadas por qualquer questão referente a ciclo de atualizações, já que são a ponta dessa cadeia de interesse.
 
 Eu poderia acrescentar mais itens a essa lista, mas creio que ela já é suficiente para justificar o meu ceticismo inicial.
 
@@ -47,7 +47,7 @@ Só para te dar uma ideia, o JDK 9 teve noventa e um itens em sua release, enqua
 
 ## Os problemas de não atualizar a versão de JVM
 
-A empresa JRebel publicou no ano de 2020 os resultados de uma pesquisa realizada com centenas de pessoas desenvolvedoras ao redor do mundo. Veja abaixo um dos resultados específicos em relação às versões de Java:
+A empresa JRebel publicou no ano de 2020 os resultados de uma pesquisa realizada com centenas de profissionais ao redor do mundo. Veja abaixo um dos resultados específicos em relação às versões de Java:
 
 ![alt text](images/chapter_09_01.png)
 *Fonte: https://www.jrebel.com/blog/2020-java-technology-report*
@@ -57,13 +57,13 @@ Outra pesquisa interessante também, publicada em 2020 pela Snyk, trouxe os segu
 ![alt text](images/chapter_09_02.png)
 Fonte: https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/
 
-Tirando apenas a média dessas duas pesquisas, já temos cerca de 60% das pessoas desenvolvedoras Java ainda na versão 8. E há pesquisas por aí que dizem que esse número pode ser ainda maior, chegando a algo em torno de 80%.
+Tirando apenas a média dessas duas pesquisas, já temos cerca de 60% dos desenvolvedores Java ainda na versão 8. E há pesquisas por aí que dizem que esse número pode ser ainda maior, chegando a algo em torno de 80%.
 
 Considerando que o Java 8 foi lançado em 2014 e que já temos uma outra LTS (Java 11) desde 2018, deveríamos fazer no mínimo duas perguntas, para as quais já elenco as devidas respostas.
 
 ### Por que o mercado ainda está no JDK 8?
 
-Vamos encarar a realidade: o mercado, principalmente quando se fala em aplicações enterprise, não anda na mesma velocidade que toda pessoa desenvolvedora gostaria.
+Vamos encarar a realidade: o mercado, principalmente quando se fala em aplicações enterprise, não anda na mesma velocidade que todos nós gostaríamos.
 
 E por que isso? Eu diria que os principais motivos estão claramente listados na mesma pesquisa da Snyk já mencionada acima:
 
@@ -88,7 +88,7 @@ No caso do item 2 (custo de migração elevado), ele também é perfeitamente ju
 2. Fazer todos os ajustes de código necessários para funcionar na versão nova;
 3. Fazer todos os testes necessários para garantir que nenhum erro foi adicionado na aplicação pela pura troca de versão de JVM (e, nessas horas, testes unitários serão seu melhor amigo);
 4. Atualizar as ferramentas do seu ecossistema que dependiam da versão anterior;
-5. Garantir que a nova versão do Java estará instalada e configurada em todos os ambientes em que sua aplicação rodar (container ou vms);
+5. Garantir que a nova versão do Java estará instalada e configurada em todos os ambientes em que sua aplicação rodar (container ou VMs);
 6. Se chegar até aqui, provavelmente já terá boa segurança pra migrar.
 
 E, no caso da migração do Java 8 para versões mais atuais, temos ainda um "pequeno" detalhe pelo caminho: o Java 9.
@@ -139,7 +139,7 @@ Ter equilíbrio. Como em tudo na vida.
 
 Cada dia tem uma nova bala de prata por aí, algo que vai resolver todos os problemas, que você pode utilizar em todos os projetos. É a fórmula do fracasso.
 
-E daí vem o outro extremo: não se presta atenção em novidade alguma, não se experimenta nada, não se faz uma POC sequer para ver a aplicação de alguma nova tendência. Tudo em nome de evitar a hype. Mais gente matando pods por aí.
+E daí vem o outro extremo: há quem não preste atenção em novidade alguma, não experimenta nada, não faz uma POC sequer para ver a aplicação de alguma nova tendência. Tudo em nome de evitar a hype. Mais gente matando pods por aí.
 
 De novo, equilíbrio.
 
@@ -150,7 +150,7 @@ O segredo é usar a hype a seu favor. Tirar proveito dela.
 Como? Veja, tenho algumas sugestões:
 
 1. Quando algo está na moda, tem muita gente falando. Tem muito material sendo criado. Muita palestra sendo dada. Todo esse material de referência é um tesouro de valor inestimável para quem quer saber de fato o que está acontecendo;
-2. Quando tem muita gente tentando algo novo, tem muita gente enfrentando erros, dificuldades, vendo coisas que não funcionam. É aqui que profissionais inteligentes mais tiram projeto: aprendendo com os erros dos outros;
+2. Quando tem muita gente tentando algo novo, tem muita gente enfrentando erros, dificuldades, vendo coisas que não funcionam. É aqui que profissionais inteligentes mais tiram proveito: aprendendo com os erros dos outros;
 3. Se houver muitos relatos de sucesso sobre uma determinada hype, preste atenção aos cenários onde esses sucessos ocorreram. São parecidos com o seu? Resolvem algum problema que você tem? Se não se aplicam hoje, podem se aplicar a algo que você estava planejando para o futuro;
 4. Junte tudo isso (material coletado, casos de fracasso e casos de sucesso) e faça sua própria análise. Analise também junto com colegas de trabalho. Façam simulações e provas de conceito. Discutam, criem conteúdo sobre o assunto.
 
