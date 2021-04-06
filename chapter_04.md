@@ -1,70 +1,70 @@
-# Refatoração
+# Clean Architecture
 
-Após alguns anos de estrada, todo desenvolvedor percebe que passa grande parte do seu tempo lendo código e, na maioria das vezes, código escrito por outros desenvolvedores. Sem muito esforço, ele percebe que esse tempo é superior ao tempo gasto escrevendo novas linhas de código, afinal de contas, ele precisa entender o funcionamento do código atual, onde deverá fazer suas mudanças e principalmente quais classes ou arquivos serão impactados por elas.
+É interessante como os conceitos de Clean Architecture podem ser relacionados em diversos aspectos com o livro de Domain Driven Design, de Eric Evans. Podemos exemplificar esta relação quando, no livro de DDD, é citada diversas vezes a proposta de criação de uma linguagem próxima do negócio: a linguagem ubíqua. Já no livro Clean Architecture, de Robert C. Martin Series, se fala sobre separar o código de negócio do que importa, ou seja, não amarrar regra de negócio com a tecnologia escolhida.
 
-Não à toa, uma simples alteração no código, como adicionar um `if`, pode levar horas ou mesmo dias. Geralmente, esse alto custo para manter o software é consequência de uma péssima qualidade do código que foi escrito, afinal, quanto maior a dificuldade em ler e entender um trecho de código maior será o tempo gasto para alterá-lo. E não se engane, mesmo o desenvolvedor que implementou a funcionalidade no sistema pode ter dificuldades para ler o código após alguns meses.
+> **INFO**: Clean Architecture é um livro muito bom e faz parte de uma "trilogia" cuja leitura é recomendada: Clean Code: a Handbook of Agile Software Craftsmanship (Robert C. Martin Series), The Clean Coder: a Code of Conduct for Professional Programmers (Robert C. Martin Series) e, finalmente, Clean Architecture: a Craftsman's Guide to Software Structure and Design (Robert C. Martin Series). 
+>
+> Assumimos que o leitor tenha realizado leitura prévia do livro Clean Architecture. Este capítulo não tem o objetivo de falar sobre o livro, mas expor como utilizamos e aplicamos seus conceitos com uma visão prática. 
 
-Para evitar esse problema, é preciso investir na qualidade e na clareza do código atual e do código que venha a ser escrito pela equipe, dessa forma, diminuindo o custo para fazer alterações no sistema. O que eu estou querendo dizer, é que o desenvolvedor precisará melhorar o código já pronto e que funciona sem mudar o seu comportamento. E, essa técnica, conhecida por muitos profissionais, é chamada de **Refatoração** (ou do inglês Refactoring).
+Iniciaremos falando sobre a estratégia de dividir e conquistar. Essa estratégia possui muitas vantagens, e vamos citar duas dentre elas:
 
-Uma das definições mais aceitas na indústria para "Refatoração" é a do **Martin Fowler** em seu livro **Refactoring: Improving the Design of Existing Code**, na qual diz:
+* **Testes**: Uma das grandes vantagens nessa separação, certamente, se encontra na facilidade de testes, principalmente os testes de unidade. Uma maior separação das camadas facilita, por exemplo, mockar as camadas de infraestrutura e fazer com que o teste seja barato - em outras palavras, fácil de criar e rápido de executar. Por consequência, esses testes tendem a ser executados constantemente, com a facilidade e maior cobertura. 
+  É comum vivenciar projetos em que testes levam horas para serem executados, trazendo consequências negativas. Testes que falham constantemente tendem a ser ignorados, e testes não confiáveis farão com que o time nunca saiba se houve um problema de regressão ou se simplesmente é aquele “erro amigo”. 
 
-> "Refatoração é uma técnica controlada para reestruturar um trecho de código existente, alterando sua estrutura interna sem modificar seu comportamento externo. Consiste em uma série de pequenas transformações que preservam o comportamento inicial. Cada transformação (chamada de refatoração) reflete em uma pequena mudança, mas uma sequência de transformações pode produzir uma significante reestruturação. Como cada refatoração é pequena, é menos provável que se introduza um erro. Além disso, o sistema  continua em pleno funcionamento depois de cada pequena refatoração, reduzindo as chances do sistema ser seriamente danificado durante a reestruturação."
+> **TIP:** Vale salientar que não estamos criticando outros tipos de testes; porém, testes unitários têm vantagens. Ao considerarmos que tecnologias como Hibernate, Java e JPA possuem seus próprios testes, lembre-se de que o que você de fato testar são as regras do seu negócio.
 
-Em outras palavras, refatoração é o processo de modificar um trecho de código já escrito, executando pequenos passos (**baby-steps**) sem modificar o comportamento atual do sistema. É uma técnica utilizada para melhorar algum aspecto do código, entre eles podemos citar melhorias na clareza do código para facilitar a leitura, ou também melhorias no design das classes a fim de trazer maior flexbilidade ao sistema.
+* **Baixo impacto em mudanças**: Uma separação maior do negócio da tecnologia acarreta menores impactos em casos de mudança de tecnologia, como, por exemplo, uma troca entre vendors de banco de dados. 
 
-## Medo de alterar código de outro programador
+> **TIP:** Na área de arquitetura, o pragmatismo é uma característica crucial. O maior foco de um arquiteto é resolver um problema usando a tecnologia como meio, não como fim. Deste modo, usuários(as) finais não precisam, e muitas vezes, não querem saber qual o banco ou linguagem estão sendo utilizados.
 
-Todo desenvolvedor em algum momento da sua carreira entrou ou entrará no meio de um projeto de software. Isso quer dizer que ele chegou de paraquedas para desenvolver, corrigir e manter funcionalidades em cima de uma base de código existente, que pode ter desde 6 meses até 20 anos de vida. 
+Observe a imagem a seguir:
 
-Essa base de código provavelmente já passou pela mão de diversos desenvolvedores, desde os mais experientes até os medianos e os estagiários, geralmente sob pressão e prazos surreais e apertados. Para piorar, dificilmente a equipe que iniciou o projeto e, tomou decisões importantes de arquitetura e de design, estará ainda na empresa. Ou seja, um sitema com 5 anos de idade pode ter trocado o time completo 2 ou 3 vezes no mínimo.
+![](images/chapter_04_01.jpg)
 
-Essa alta rotatividade de profissionais traz inúmeros prejuízos à empresa, em especial ao código do sistema. Pois certos trechos de código críticos foram (e são) alterados, mantidos e evoluídos por diversos destes profissionais, uns que dominam o negócio de ponta a ponta, outros nem tanto; uns com completa maestria nas tecnologias e frameworks utilizados enquanto outros não tem a mínima idéia de como elas funcionam; já outros, utilizaram o projeto como laboratório no curto tempo que permanceram na empresa. Não é de se espantar que boa parte desse código seja repleto de gambiarras, duplicação de rotinas, abarrotados de comentários desatualizados, pouca clareza nas lógicas de negócio, alto acoplamento e baixa coesão. Não se assuste ao ter que manter uma classe ou um método com mais de 5 mil linhas de código macarrônico e totalmente ilegível.
+*Fonte: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html*
 
-Situações como essa são mais comuns do que a maioria dos profissionais imagina. Lidar com sistemas problemáticos dessa magnitude traz frustrução e, principalmente, **medo** para o novo desenvolvedor que acabara de entrar na empresa. Ele terá que trabalhar no código "dos outros", programando no escuro, sem ter a mínima noção se sua última alteração impacta noutras partes do sistema ou pior ainda, qual o tamanho desse impacto.
-
-## A importância dos testes automatizados na hora refatorar
-
-Quanto menos conhecimento no sistema o desenvolvedor tem, maior é sua insegurança na hora de alterar código e menores são as garantias de que suas alterações não causarão mais estragos ao sistema que já se encontra frágil pelo tempo. Mesmo pequenas refatorações com o intuito de melhorar a clareza ou a simplicidade do código podem gerar novos bugs, reintroduzir bugs antigos no sistema ou impactar o sistema de forma negativa.
-
-Se refatorar código traz riscos, como o desenvolvedor pode garantir que erros não serão introduzidos nas suas refatorações?
-
-A verdade, é que refatorar código sem uma garantia concreta de que o comportamento atual não vá mudar é um ato imprudente, pois não adianta nada melhorar o código se algo que já existe é quebrado. Essa garantia pode ser obtida de diversas maneiras, mas sem dúvida uma das melhores alternativas a um preço justo é através do uso de **testes automatizados**; uma bateria de testes de regressão mostraria rapidamente se uma determinada mudança (ou refatoração) no código mudou o comportamento da funcionalidade ou mesmo impactou outras partes do sistema. Perceba que os testes funcionam como uma rede de segurança para encorajar o desenvolvedor a refatorar código e, principalmente, a mantê-lo motivado a tornar essa prática uma constante no seu dia a dia.
-
-Certamente é possível fazer refatorações sem uma linha de teste automatizado, muitas empresas e equipes fazem isso, contudo, não se pode ignorar que há grandes riscos envolvidos nessa prática que podem introduzir bugs ou gerar prejuízos à empresa ou cliente final. Refatorar código sem testes torna tudo mais difícil e arriscado, consome mais tempo do que o necessário, desencoraja melhorias no código e ainda exige muito mais do desenvolvedor. Um detalhe importante é que, a experiência do desenvolvedor conta bastante nesse momento, seja na hora de refatorar usando passos pequenos e seguros, analisar e mensurar o impacto de suas (possíveis) mudanças ou simplesmente decidir que não vale a pena refatorar determinado trecho de código.
-
-Apesar da experiência do desenvolvedor fazer a diferença na hora de refatorar, as chances são de que seu gestor não o permita modificar código que funciona e já se encontra em produção.
-
-## Refatoração contínua do código
-
-## Sistemas legados e o ímpeto do jovem
-
-## Qual sua motivação para refatorar o código?
+Usaremos a imagem acima para discorrer sobre pontos de atenção que vale a pena aplicar em sua arquitetura:
 
 
-### Refatorando para legibilidade
-...
+* Tenha uma estratégia de teste eficaz, que siga a pirâmide de testes;
+* As estruturas devem ser isoladas em módulos individuais. Quando (não se) mudarmos de ideia, precisaremos fazer mudança em apenas um lugar;
+* "Arquitetura Gritante" também conhecida como uso pretendido. Ao olhar para a estrutura do pacote, percebe-se imediatamente o que o aplicativo faz, e não seus detalhes técnicos. É semelhante a quando se utiliza package by layer ao invés de package by feature. 
 
-### Refatorando para flexibilidade
-...
+* Toda a lógica de negócios deve estar em um caso de uso, portanto, será fácil encontrar e não duplicar em nenhum outro lugar;
 
-### Refatorando para performance
-...
+* Será um bom monolito com casos de uso claros que você poderá dividir em microsserviços mais tarde, depois de aprender mais sobre eles.
 
-### Refatorando para remover duplicidade
-...
+## Granularidade de camadas
 
-### Refatorando para usar uma biblioteca
-...
+Algo bastante discutido em livros de arquitetura em geral é a granularidade de camadas. Com o tempo se percebe que as camadas podem ajudar tanto em abstração e separação de responsabilidade de negócio quanto no aumento da complexidade do código. 
 
-## Como medir a qualidade do seu código?
+> **TIP:** Avalie sempre ao colocar mais camadas em uma aplicação e tenha atenção para que elas não se tornem uma arma de destruição ao invés de um item de ajuda.
 
-    - numero de linhas por metodo;
-    - complexidade ciclomatica;
-    - Número de métodos por classe;
-    - Número de campos por classe;
-    - acoplamento eferente
-    - acoplamento aferente
-    - Lack of Cohesion of Methods;
+A estratégia descrita pelo livro Clean Architecture é uma visão de “fora para dentro”, ou seja, a camada framework acessa a camada de adaptação seguindo a linha do princípio da dependência. Descreveremos a seguir, de uma maneira geral, as camadas.
 
-# Concluindo    
+### Entidades
 
+Caso você venha do DDD, não verá muita novidade nessa camada e nos conceitos. Ela é responsável por encapsular o domínio do negócio. O ponto principal é que essa camada é o core, ou seja, é a razão de fazer a aplicação em si. Ou seja, é nela que se concentram as regras de negócio e não deve mudar de acordo com itens externos, como, por exemplo, mudança de banco de dados.
+
+>  **TIP:** Particularmente, não achamos "crime federal" caso existam tecnologias que tendem a não mudar, por exemplo, bibliotecas utilitárias usadas por toda a empresa. Em uma aplicação menor, podem ser apenas interfaces e classes que tenham que ser utilizadas em todas as camadas, como a interface de um repositório.
+
+### Casos de uso
+
+Nesta camada se concentram as ações da regra de negócios. Uma maneira de pensar é que esta seja uma continuação da camada de entidade. Muitas regras que envolvem as entidades ficam muito grandes para caberem apenas na entidade, isso sem mencionar o clássico problema de responsabilidade única que tanto falamos no [SOLID](https://en.wikipedia.org/wiki/SOLID).
+
+### Interface de adaptação
+
+Um ponto de vista interessante é que essa camada é uma grande implementação do padrão de projeto [Adapter](https://refactoring.guru/design-patterns/adapter). O seu maior objetivo é deixar as camadas de entidades e Casos de Uso mais transparentes. Por exemplo, uma interface repositório pode ter diversas implementações, seja uma base de dados relacional, seja não relacional. 
+
+O maior objetivo dessa camada é garantir que as mudanças de tecnologia não impactem as outras camadas. Afinal, para o(a) usuário(a) não importa se o banco de dados é um Cassandra ou um PostgreSQL, mas, num nível técnico, é importante pensar nas diferentes estratégias de modelagem.
+
+### Frameworks
+
+
+Esta é a camada que “não importa” para o negócio. Em outras palavras, é a camada para o "meio" e não para o "fim". Ela é composta por ferramentas e tecnologias como banco de dados. O maior ponto para a estratégia dessa camada é evitar que ela passe para o menor número possível de camadas. É importante salientar que quanto menos código nessa camada melhor, ou seja, ele terá o necessário para interligar as tecnologias.
+
+
+
+## Conclusão
+
+O livro Clean Architecture traz uma boa referência para se aplicar em arquiteturas maduras e uma melhor estratégia de como utilizar e comunicar entre as camadas. Um ponto importante: não existe bala de prata, e o livro em questão também não é um. O material é bastante rico e cheio de detalhes, porém, lembre-se de que camadas tendem a aumentar a complexidade do seu código, pois quanto mais camadas são criadas, mais camadas são mantidas. Como diria o livro [fundamentos de arquitetura de software](https://www.amazon.com/Fundamentals-Software-Architecture-Comprehensive-Characteristics/dp/1492043451), tudo é um trade-off, e o bom senso ainda é a melhor ferramenta para que o(a) arquiteto(a) saiba *quando* e *como* aplicar conceitos e práticas.

@@ -1,118 +1,41 @@
 # Manual do Arquiteto Moderno
 
-## Proposta
-
 ## Objetivo
 
-Esta proposta é para a criação de um material que trás pontos de vista práticos propostos partir idéias existentes em renomados livros do mundo de desenvolvimento de software. Com base nestes livros e em resultados da aplicação destes conceitos na prática, será exposta a visão de arquitetos e engenheiros sêniors .
-Um ponto importante sobre esse livro é que não há intenção de se introduzir conceitos iniciais, tendo isto em mente, o publico alvo é um público já experimentado no mundo do software. É recomendado, previamente, a leitura dos seguintes livros:
+Neste livro você irá aprender sobre conceitos que fazem parte da vida de profissionais seniores na carreira de desenvolvimento e arquitetura de software. Este livro não é um sumário ou a reescrita de livros reconhecidos no mercado. Portanto, é essencial o entendimento prévio de alguns conceitos abordados no decorrer dos capítulos. O diferencial deste conteúdo é que toda a informação é proveniente da aplicação prática das tecnologias, conceitos e culturas apresentadas como Java Efetivo, Clean Code, Domain-Driven Design, Clean Architecture e Building Microservices. 
 
--   Java Efetivo;   
--   Clean Code;
--   DDD;
--   Clean Architecture;
--   Building Microservices;
--   The Twelve Factors;
+Alinhando teoria e prática, este livro traz visões arquiteturais e motivações que costumam levar a determinadas escolhas, além de apresentar seus respectivos trade-offs. 
 
-Alinhando teoria e prática, este livro trará visões arquiteturais, motivações que levam a determinadas escolhas e seus trade-offs. Não serão detalhados tutoriais ou usos de frameworks específicos.
+## O que você encontra no livro
 
-## Capítulos
+Este livro apresenta tópicos atuais e relevantes que embasarão você na tomada de decisão diária no papel em arquitetura de software.Veja a lista de tópicos discutidos no decorrer deste livro:
 
-A seguir está a lista de tópicos discutidos no decorrer deste livro. Foram selecionados tópicos atuais e relevantes que irão te ajudar a tomar melhores decisões dia a dia como arquiteto.
+    1. A importância de aprender os conceitos ao invés de novos frameworks;
+    2. Domain-Driven Design (DDD), where to go next?
+    3. Clean Code;
+    4. Clean Architecture;
+    5. Refatoração;
+    6. Banco de dados;
+    7. Microservices;
+    8. Cloud;
+    9. Precisamos falar sobre atualizações;
+    10. Destrinchando performance de aplicações;
 
-### 1 Domain Driven Design (DDD)
+## O que você não vai encontrar neste livro
 
-* Quando criar Tipos
-* Java DSL e API fluente
-* Builders: uma maneira intituiva e segura para se instânciar objetos
-
-### 2 Clean Code
-
-* Dando adeus ao excesso de getters e setters
-* Definindo APIs a prova de bala
-* Lombok: problema ou solução?
-
-### 3 Clean Architecture
-
-* Design de código: segregue a lógica de negócio
-* Testes
-	* Testando com mock 
-	* Teste de Unidades e de integração, qual a quantidade correta?
-	* Teste lógica de negócio, não de frameworks.
+* Resumo do contéudo de livros mencionados, listados na bibliografia;
+* Explicação de conceitos considerados básicos, como "O que é SOLID", "Como se conectar a um banco de dados". 
+* Tutoriais e guias passo a passo. 
 
 
-### 4 Refatoração
+## Contribuições
 
-* Como negociar uma refatoração?
-* Como lidar com o legado
-* Estratégia do escoteiro
-* Abandonar todo o código e fazer um novo?
+Este livro surgiu da iniciativa de Otávio Santana e se materializou através da colaboração de profissionais seniores e com amplo reconhecimento na comunidade. Cada autor e autora que escreveu o livro possui uma opinião bem embasada e experiência de campo nas tecnologias e práticas descritas. 
 
+O grupo de autores iniciais é composto por Otávio Santana, Karina Varela e Sérgio Lopes, estendendo-se a grandes nomes como Elder Moraes, Maurício Salatino (Salaboy), Sandro Giacomozzi, Francisco (Professor) Isidro, Leandro Domingues.
 
-### 5 Microservices
-
-* Monolitos vs Microsserviços
-* Quais as vantagens de se escolher por Microsserviços
-* E os desafios que Microsserviços vão trazer
-* Quando não escolher por Microsserviços
-* Planejando uma migração de um monolito para uma arquitetura de microservices
-* Por onde começar?
-* Práticas de Segurança
-
-
-### 6 Banco de dados
-
-* NoSQL vs SQL
-* Dicas de modelagem relacional e não relacional
-* Validação de dados é responsabilidade do banco ou da aplicação?
-* Lidando com dados em uma arquitetura de microservicos
-* Paginação
-
-
-### 7 Cloud
-
-* Cloud-Native ou Cloud-Enabled
-  * Cloud-Enabled
-  * Perspectivas sobre o conceito cloud-native
-  * Princípios de Design e containerização de aplicações
-  * Funcionalidades de uma aplicação cloud-native
-  * O ciclo de vida de uma aplicação cloud-native
-  * A jornada cloud-native
-* IaaS, PaaS e SaaS: Uma perspectiva arquitetural
-  * IaaS - Infra as a Service
-  * PaaS - Platform as a Service
-  * SaaS - Software as a Service
-* Kubernetes - Quando usar e quando não usar
-  * Kubernetes Vanila e seus sabores
-  * Service Mesh
-    * Arquitetura
-    * Ferramentas
-
-
-#### 8 A importância de aprender os conceitos ao invés de novos frameworks
-
-* Teorema do CAP e seus impactos na arquitetura
-* DTO ou não DTO?
-* Melhores práticas para se definir camadas da aplicação
-
-#### 9 Precisamos falar sobre atualizações
-
-* Os problemas de se permanecer em uma versão fixa de JVM
-* Ciclo de atualizações dos frameworks
-* Usando provas de conceito (POC) no ciclo de desenvolvimento
-* Definindo a tecnologia do próximo projeto
-* Balanceando a necessidade vs hype
-
-
-### 10 Destrinchando performance de aplicações
-
-* Conceitos
-* Testes de carga
-* Logging
-
-## Livro Colaborativo
-
-A proposta é que este seja um livro colaborativo, onde haja uma revisão profissional de linguagem semântica e práticas de escrita sobre o conteúdo entregue. O grupo de autores será inicialmente composto por Otávio Santana, Karina Varela e Sérgio Lopes, sendo possível que novos colaboradores submetam conteúdo de sua expertise ao longo do processo de criação.
+Com a popularização da iniciativa, a comunidade passa a ativamente colaborar com a revisão do livro. Nosso profundo agradecimento a todos que colaboraram: https://github.com/otaviojava/manual-arquiteto-moderno/graphs/contributors
 
 
 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
