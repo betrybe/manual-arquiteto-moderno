@@ -20,7 +20,7 @@ Structuring, i.e., organizing data from sources like these was (and is) possible
 
 The term **NoSQL** was created in 1998 by Carlo Strozzi and later re-introduced by Eric Evans in 2009 when the latter participated in the organization of an event to discuss **open-source** and **distributed** databases. And speaking of distributed databases, this is a concept widely used by NoSQL databases: basically, NoSQL databases operate in distributed computing, which represents a significant gain of scalability and performance.
 
-**TIP:** To understand a little more about distributed computing, we recommend reading the following article: [Paradigm of distributed computing](https://imasters.com.br/arquitetura-da-informacao/paradigma-da-computacao-distribuida).
+**TIP:** To understand a little more about distributed computing, we recommend reading more about the paradigm of distributed computing.
 
 ## NoSQL
 

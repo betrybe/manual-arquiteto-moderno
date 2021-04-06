@@ -20,7 +20,7 @@ Estruturar, isto é, organizar os dados provenientes de fontes como estas era (e
 
 O termo **NoSQL** foi originalmente criado em 1998 por Carlo Strozzi e, posteriormente, reintroduzido por Eric Evans em 2009, quando este participou da organização de um evento para discutir bancos de dados **open source** e **distribuídos**. E por falar em bancos distribuídos, esse é um conceito amplamente utilizado pelos bancos NoSQL: basicamente, os bancos NoSQL são bancos de dados que operam em computação distribuída, o que impulsiona um significativo grau de escalabilidade e performance. 
 
-**TIP:** Para entender um um pouco mais sobre computação distribuída, recomendamos a leitura do seguinte artigo: [Paradigma da computação distribuída](https://imasters.com.br/arquitetura-da-informacao/paradigma-da-computacao-distribuida).
+**TIP:** Para entender um pouco mais sobre computação distribuída, recomendamos a leitura do seguinte artigo: [Paradigma da computação distribuída](https://imasters.com.br/arquitetura-da-informacao/paradigma-da-computacao-distribuida).
 
 ## NoSQL
 
@@ -34,11 +34,11 @@ Quando você estudou sobre bancos de dados relacionais, viu que esses bancos sã
 
 Antes de detalhar cada ponto do conceito **BASE**, você precisa entender a representação de um termo no contexto de banco de dados que verá ao longo deste capítulo: **cluster**. Um cluster, nesse contexto, se refere à capacidade de um conjunto de **servidores** (de banco) ou **instâncias** (de banco) se conectarem a um banco de dados. Uma **instância** é uma coleção de memória e processos que interagem com o banco de dados, que é o conjunto de arquivos físicos que efetivamente armazenam os dados.
 
-Devemos descatar duas principais vantagens de um cluster, especialmente em ambientes de banco de dados de alto volume:
+Devemos destacar duas principais vantagens de um cluster, especialmente em ambientes de banco de dados de alto volume:
 
 * **Tolerância a falhas** (_Fault Tolerance_): como há mais de um servidor ou instância para os usuários se conectarem, o cluster de bancos de dados oferece uma alternativa no caso de falha em um servidor. Quando se lida com dezenas de milhares de máquinas em um único [_data center_](https://pt.wikipedia.org/wiki/Centro_de_processamento_de_dados), tais falhas são um problema presente;
 
-* **Balanceamento de carga** (_Load Balancing_): o cluster geralmente é configurado para permitir que a aplicação cliente seja automaticamente alocado ao servidor com o mínimo de uso para que, assim, se otimize o uso da estrutura disponível para o banco.
+* **Balanceamento de carga** (_Load Balancing_): o cluster geralmente é configurado para permitir que a aplicação cliente seja automaticamente alocada ao servidor com o mínimo de uso para que, assim, se otimize o uso da estrutura disponível para o banco.
 
 #### Detalhando o conceito BASE
 
@@ -170,7 +170,7 @@ Alguns bancos de dados possuem a comum característica de ter suporte de uma ou 
 
 ![Teorema do CAP](images/chapter_06_05.png "Teorema do CAP")
 
-Um dos grandes desafios dos bancos de dados NoSQL é que eles lidam com a persistência distribuída, ou seja, as informações ficam localizados em mais de um servidor. Foram criados diversos estudos para ajudar nesse desafio de persistência distribuída, mas o mais famoso foi uma teoria criada em 1999, o Teorema do CAP. 
+Um dos grandes desafios dos bancos de dados NoSQL é que eles lidam com a persistência distribuída, ou seja, as informações ficam localizadas em mais de um servidor. Foram criados diversos estudos para ajudar nesse desafio de persistência distribuída, mas o mais famoso foi uma teoria criada em 1999, o Teorema do CAP. 
 
 Esse teorema afirma que é impossível que o armazenamento de dados distribuído forneça simultaneamente mais de duas das três garantias seguintes:
 

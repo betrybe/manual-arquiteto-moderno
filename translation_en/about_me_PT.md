@@ -3,7 +3,7 @@
 <img src="../images/otavio-java.png" alt="otavio-java" style="zoom:24%;" />
 
 * **Nome**: Otavio Santana
-* **Cargo**: Devrel Engineer
+* **Cargo**: Staff Engineer
 * **Bio:** Capacitando pessoas desenvolvedoras em todo o mundo a entregar softwares melhores, com mais rapidez e escalabilidade na nuvem. Otavio é um engenheiro de software apaixonado por foco em nuvem e tecnologia Java. Ele tem experiência principalmente em aplicações de persistência poliglotas e de alto desempenho em finanças, mídia social e e-commerce. Otavio é membro de Grupos de Especialistas e Líder Especialista em vários comitês executivos JCP e JSRs. Ele está trabalhando em vários projetos da Apache e Eclipse Foundation, como Apache Tamaya, MicroProfile, Jakarta EE, onde está liderando a primeira especificação em Jakarta EE com Jakarta NoSQL. Líder do JUG e palestrante global nas conferências JavaOne e Devoxx, Otavio recebeu reconhecimento por suas contribuições para OSS, como o JCP Outstanding Award, membro do ano e JSR inovador, Duke’s Choice Award e Java Champion Award, para citar alguns.
 
 
@@ -23,12 +23,12 @@ Trabalhando com tecnologias como: JAVA, Spring Framework, Spring Boot, Docker, W
 * **Bio:** Karina M. Varela tem experiência de mais de dez anos em TI, trabalhando em funções como desenvolvedora de aplicações, arquiteta de software, consultora, líder de tecnologia e gerenciamento de marketing de produto. Com uma sólida formação em desenvolvimento de software, ela tem experiência profissional em planejamento, arquitetura, entrega e solução de problemas de software crítico em ambientes empresariais de diferentes setores ao redor do mundo.
 A partir de 2020, Karina está trabalhando com a Unidade de Negócios de Serviços de Aplicativos da Red Hat como Gerente de Marketing Técnico, especialista no assunto de Automação de Negócios. Ela é membro da comunidade SouJava, tem paixão por ajudar as comunidades e gosta especialmente de projetos e iniciativas de código aberto. Outro hobby é falar em conferências e já palestrou em conferências como Campus Party, TDC e Women Who Code.
 
-
 <img src="../images/salaboy512x512.png" alt="salaboy" style="zoom:50%;" />
 
 * **Nome:** Mauricio Salatino (Salaboy)
 * **Cargo:** Engenheiro de Software
 * **Bio:** Mauricio é engenheiro de software na Camunda (http://www.camunda.com) e instrutor na LearnK8s (http://learnk8s.io). Trabalha com o Kubernetes há cinco anos, treinando equipes e desenvolvendo aplicações nativas da nuvem. Em sua jornada, participou de vários projetos de código aberto, incluindo Zeebe, Jhipster, Spring Cloud e Jenkins X. Anteriormente, Mauricio trabalhou na Red Hat/JBoss, no departamento de Engenharia de Automação de Negócios. Apresentou-se na Kubecon 2019 San Diego e na Kubecon 2020 Amsterdam. Está atualmente envolvido com a CD Foundation (http://cd.foundation) e com o projeto Jenkins X (como membro do comitê de direção de bootstrap). 
+
 <img src="../images/elder-moraes.png" alt="elder-moraes" style="zoom:24%;" />
 
 * **Nome:** Elder Moraes

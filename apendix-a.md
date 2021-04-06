@@ -8,7 +8,7 @@ Sério mesmo, não há nada novo aqui, e qualquer pessoa que esteja tentando con
 
 No caso de Microsserviços, a abordagem que muda é em relação a Autorização e Autenticação, e vamos discutir isso mais à frente.
 
-Uma dica importante, sempre que se olha em termos de código seguro, é colocar algo na sua esteira de CI/CD e fazer a validação do seu código para procurar isso, e não verificar apenas se o seu código traz vulnerabilidades. É interessante olhar se as bibliotecas de terceiros que você possa estar usando não podem estar causando algum problema no seu ambiente.
+Uma dica importante, em se tratando de código seguro, utilize as práticas de CI/CD para validar se há alguma vulnerabilidade no seu código. É interessante confirmar se as bibliotecas de terceiros que você planeja utilizar não trarão problemas ao ambiente.
 
 E ferramentas para isso há várias, entre elas temos o [Fortify](https://www.microfocus.com/en-us/solutions/application-security), [Snyk](https://snyk.io/), [JFrog Xray](https://jfrog.com/xray/). Porque às vezes uma dependência desatualizada pode colocar seu serviço em posição de risco, então olhar a melhor prática no código e uma ferramenta para ajudar a apontar onde melhorar formam um time imbatível.
 
