@@ -49,12 +49,12 @@ Só para te dar uma ideia, o JDK 9 teve noventa e um itens em sua release, enqua
 
 A empresa JRebel publicou no ano de 2020 os resultados de uma pesquisa realizada com centenas de profissionais ao redor do mundo. Veja abaixo um dos resultados específicos em relação às versões de Java:
 
-![alt text](images/chapter_09_01.png)
+<img src="resources/chapter_09_01.png" alt="alt text" style="zoom:20%;" />
 *Fonte: https://www.jrebel.com/blog/2020-java-technology-report*
 
 Outra pesquisa interessante também, publicada em 2020 pela Snyk, trouxe os seguintes resultados:
 
-![alt text](images/chapter_09_02.png)
+<img src="resources/chapter_09_02.png" alt="alt text" style="zoom:22%;" />
 Fonte: https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/
 
 Tirando apenas a média dessas duas pesquisas, já temos cerca de 60% dos desenvolvedores Java ainda na versão 8. E há pesquisas por aí que dizem que esse número pode ser ainda maior, chegando a algo em torno de 80%.
@@ -67,7 +67,7 @@ Vamos encarar a realidade: o mercado, principalmente quando se fala em aplicaç�
 
 E por que isso? Eu diria que os principais motivos estão claramente listados na mesma pesquisa da Snyk já mencionada acima:
 
-![alt text](images/chapter_09_03.png)
+<img src="resources/chapter_09_03.png" alt="alt text" style="zoom:25%;" />
 Fonte: https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/
 
 Esse resultado, aliás, não deveria surpreender ninguém. Os principais motivos que fazem profissionais e empresas ao redor do mundo não terem essa ânsia pelas últimas atualizações são:

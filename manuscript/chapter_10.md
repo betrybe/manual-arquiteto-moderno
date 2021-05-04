@@ -19,15 +19,15 @@ Se a performance é a prioridade no projeto, considere verificar as dependência
 ### Verifique o que está carregando na bagagem
 
 Em um projeto Java utilizando o Maven, por exemplo, podemos verificar a árvore de dependências utilizando o comando `mvn dependency:tree`, e ainda podemos filtrar somente por dependências de compilação, ex: `mvn dependency:tree -Dscope=compile`. 
- 
+
 ``` asciidoc
  [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ testcontainers ---
  [INFO] com.testcontainers:jar:1.0-SNAPSHOT
  [INFO] \- mysql:mysql-connector-java:jar:5.1.47:compile`
 ```
- 
+
 É muito comum desenvolvermos serviços que são empacotados em um arquivo jar conhecido como _fatjar_, em que todas as dependências são colocadas dentro do jar. Em muitos casos você não precisará daquela dependência para rodar o seu serviço. Ela pode ser uma dependência de teste, ou estar provida por um servidor de aplicações. Então é sempre uma boa ideia verificar as dependências do seu projeto.
- 
+
 Cuidado com a performance também quer dizer, em muitos casos, implementar mais código em vez de utilizar alguma
  biblioteca que facilita o trabalho e acelera o desenvolvimento, o que pode lhe custar a performance lá na frente.     
 
@@ -42,12 +42,12 @@ Lembrando que não é simplesmente colocar que o 'login precisa ser feito em men
 ### Capturando o tempo da requisição
 
 Neste capítulo, vamos utilizar a ferramenta [jMeter](https://jmeter.apache.org/), muito utilizada para criar diversos tipos de teste de carga e medir o desempenho. O objetivo aqui não é ser um tutorial do jMeter, mas mostrar como é possível gerar e visualizar dados através dele. Abaixo, um exemplo simples de medição de tempo de login considerando 10 usuários(as):
-  
-![](images/chapter_10_01.png)
- 
+
+![](resources/chapter_10_01.png)
+
 Ao rodar o teste acima, verificamos no Relatório de Sumário os resultados:
 
-![](images/chapter_10_02.png)
+![](resources/chapter_10_02.png)
 
 Alguns dados importantes neste momento:
 
@@ -61,7 +61,7 @@ Alguns dados importantes neste momento:
 
 Ainda podemos ter gráficos mais ricos, utilizando o plugin [PerfMon](https://jmeter-plugins.org/wiki/PerfMon/), por exemplo:
 
-![](images/chapter_10_03.png)
+![](resources/chapter_10_03.png)
 
 No gráfico acima, podemos ver que a maioria das requisições ficou entre 600 e 700 milissegundos em um cenário de testes com 1000 requisições.
 Podemos ter gráficos ainda mais bonitos e em tempo real, podendo utilizar o [grafana](https://grafana.com/) como visualizador de
@@ -77,7 +77,7 @@ Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Par
   apenas uma ferramenta, não se possa medir a performance da sua aplicação. É provável que você utilize uma
    ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos. A imagem abaixo é uma representação da arquitetura para servir milhões de usuários(as):
 
-![](images/chapter_10_04.png)
+![](resources/chapter_10_04.png)
 
 **Créditos:** https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/
 
@@ -89,18 +89,18 @@ Conforme demonstrado acima, não é de primeira que se define uma arquitetura pa
  estressar e medir para verificar onde estão os pontos que podem sofrer carga. Existem várias opções que
   mostram onde estão os gargalos da aplicação. Uma das várias opções é o [javamelody](https://github.com/javamelody
   /javamelody), que pode ser utilizado em modo standalone junto com a sua aplicação Java, é free e muito simples de colocar na aplicação.
-  
-![](images/chapter_10_05.png)
+
+![](resources/chapter_10_05.png)
 
 Na imagem acima, podemos notar que uma das consultas SQL demorou, em média, mais que o normal em relação a outras. Podemos descobrir de onde veio esse comando SQL, como também executar o comando SQL em modo 'Explain', a fim de revelar que a query está fazendo um 'full scan' e que será preciso ajustar a query ou criar índices específicos na tabela.
 
-![](images/chapter_10_06.png)
+![](resources/chapter_10_06.png)
 
 No outro exemplo abaixo, podemos ver um desvio bem grande no método 'findById', que, por sua vez, não utiliza um banco
  de dados MySQL, mas sim uma outra fonte de dados externo. Com essas informações em mãos, já é possível analisar de
   modo isolado cada comportamento.
 
-![](images/chapter_10_07.png)
+![](resources/chapter_10_07.png)
 
 Existem muitas ferramentas de monitoramento, e o que fica aqui como exemplo é que, em alguns casos, você vai precisar ir no detalhe e fazer algum ajuste fino na infraestrutura, ou até mesmo no código.
 
@@ -109,8 +109,8 @@ Existem muitas ferramentas de monitoramento, e o que fica aqui como exemplo é q
 Sistemas distribuídos, atualmente mais populares com a utilização de microsserviços, são complexos e difíceis de
  monitorar a performance. Nesse caso, vamos precisar de mecanismos mais sofisticados, como a utilização de um 'tracing' distribuído por exemplo. Aqui também existem várias soluções, como os famosos APMs, tais como o New Relic, AppDynamics, DataDog e Dynatrace. Vale lembrar que muitos provedores de cloud fornecem ferramentas de análise de performance, tal como o AWS Performance Insights.
 No mundo OpenSource, vale destacar a ferramenta [Jaeger Tracing](https://www.jaegertracing.io/), cuja especialidade é fazer o monitoramento de serviços distribuídos rodando em uma infraestrutura do Kubernetes, por exemplo.
- 
-![](images/chapter_10_08.png)
+
+![](resources/chapter_10_08.png)
 
 Podemos observar em qual dos serviços o tempo de resposta não está adequado e tomar as devidas ações.
 
@@ -175,10 +175,10 @@ Muitas outras medidas de performance podem ser adotadas ou verificadas no seu c�
 Não tente resolver todos os problemas ao mesmo tempo. Comece construindo uma lista dos cinco principais
  contribuidores da hora e da queima da CPU, memória ou IO e explore soluções. Ataque um dos problemas e reavalie a
    arquitetura. Abaixo, algumas etapas que podem ajudar a encontrar e solucionar um problema de performance.
-   
+
 **Descobrir:** Por que este ponto está com baixa performance?
-   
+
 **Entender:** O que está causando a baixa performance?
-   
+
 **Corrigir ou Melhorar:** Oportunidade de corrigir ou melhorar com base nos dados obtidos nas etapas acima.
 
