@@ -6,6 +6,8 @@ Pois bem, como iniciar? Basicamente, a formação de profissionais de desenvolvi
 
 O grande "mistério" que podemos tentar revelar aqui neste capítulo pode ser extremamente simples (ou tornar-se simples) a partir do momento em que identificamos o seguinte: as diferentes disciplinas que estudamos estão sempre interconectadas, mesmo que não pareça.
 
+mudança de teste
+
 ## Por que estudar Análise de Algoritmos, Estruturas de Dados, Sistemas Operacionais, Arquitetura de Computadores, Grafos, entre outros?
 
 Podemos interconectar disciplinas de Análise de Algoritmos com Programação Orientada a Objetos e Bancos de dados? Sim! E de uma forma mais comum do que se pode imaginar:
