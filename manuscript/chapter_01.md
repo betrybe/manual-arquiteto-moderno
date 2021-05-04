@@ -14,10 +14,10 @@ Considere o exemplo de uma busca de objetos em um banco através de um ORM. Depe
 
 Ter consciência de que um `Lazy Fetch` com Hibernate, por exemplo pode gerar uma complexidade assintótica muito maior do que um `Eager Fetch` é fundamental para senior developers. Isso porque, por exemplo, em um sistema de recuperação de cabeçalhos de pedidos e seus respectivos itens, ocorre uma sequência de acessos ao banco de dados muito volumosa na primeira abordagem (*lazy*). Acessos para recuperar todos os cabeçalhos de pedidos e, para cada pedido, mais uma sequência de acessos ao banco de dados. Se observarmos um algoritmo com essas características, veremos algo próximo ao pseudocódigo a seguir:
 
-	1. recuperar conjunto de pedidos e armazenar em listaP
-	2. para cada pedido P em listaP faça
-	3. 	   recuperar itens I[] do pedido P a partir de seu ID
-	4. fim-para
+	recuperar conjunto de pedidos e armazenar em listaP
+	para cada pedido P em listaP faça
+		recuperar itens I[] do pedido P a partir de seu ID
+	fim-para
 
 De forma bastante geral, a execução das instruções pode ser descrita da forma abaixo:
 
@@ -29,13 +29,13 @@ Desse modo, a complexidade desse algoritmo é de ordem O(n). Isso significa que,
 
 Podemos extrapolar ainda esse algoritmo e, para cada item, recuperar toda a lista de impostos, que pode gerar um algoritmo de complexidade quadrática O(n2). Observe:
 
-	1. recuperar conjunto de pedidos e armazenar em listaP
-	2. para cada pedido P em listaP[] faça
-	3. 	   recuperar itens I[] do pedido P a partir de seu ID
-	4.     para cada item I de P, faça
-	5.          recuperar lista L de impostos de I[]
-	6.     fim-para
-	7. fim-para
+	recuperar conjunto de pedidos e armazenar em listaP
+	para cada pedido P em listaP[] faça
+	 	  	  recuperar itens I[] do pedido P a partir de seu ID
+	      para cada item I de P, faça
+	          recuperar lista L de impostos de I[]
+	      fim-para
+	fim-para
 
 Nesse caso, analisando a complexidade assintótica, temos:
 
@@ -127,9 +127,12 @@ Fragmento1: preenchimento Linha x Coluna
 			matriz[i][j] = valor;
 
    Fragmento 2: preenchimento Coluna x Linha
-	   for (int i=0; i < TAM; i++)
-		   for (int j=0; j < TAM ; j++)
-			   matriz[j][i] = valor;
+
+```
+for (int i=0; i < TAM; i++)
+	for (int j=0; j < TAM ; j++)
+		matriz[j][i] = valor;
+```
 
 O aspecto interessante nesses códigos é que, na prática, o desempenho desses dois algoritmos é muito diferente, se a dimensão da matriz for considerável (aqui, para considerável, vamos pensar em valores acima de 5.000).
 
@@ -142,6 +145,8 @@ E o estudo de teoria dos Grafos? Sem os algoritmos de otimização vistos em Gra
 Não apenas Grafos, mas Autômatos e Compiladores, duas disciplinas fundamentais hoje para extração de textos através de expressões regulares (100% implementadas através de Autômatos Finitos Determinísticos - os famosos AFDs) e também Compiladores para a construção de novas linguagens (se observarmos a quantidade de linguagens que surgiram desde o ano 2000 até hoje, isso é muita coisa).
 
 Mas você, como dev, pode se perguntar: "E quando eu farei uma nova linguagem?". Talvez a resposta seja "dificilmente", para não dizer "nunca"; mas, olhando um pouco além do dia a dia, desenvolvedores Front-End já devem ter utilizado frameworks como Angular ou React, correto? Pois bem, tais frameworks precisam fazer uso de análise de arquivos HTML com *tags* específicas que substituem valores para objetos. A leitura dessas tags (para posterior geração do código final da sua *single page application*) é feita por um *parser* que, a partir dos componentes criados, gera todo o arquivo HTML com as bibliotecas Javascript para que seu Aplicativo consiga funcionar. Talvez isso ajude a responder à questão que motiva este capítulo, na seção a seguir. 
+
+{pagebreak}
 
 ## O ponto-chave: usar frameworks, fazer as tarefas manualmente, ou melhor, criar seu próprio?
 
