@@ -245,7 +245,7 @@ Quando falamos de cloud e seus serviços, note que quanto menor a abstração qu
 
 
 
-<img src="images/chapter_08_02.png" style="zoom:20%;" />
+![](images/chapter_08_02.png)
 
 ### IaaS - Infra as a Service
 
@@ -383,7 +383,7 @@ E, para implementar as regras de ORASTAR, temos a arquitetura de um painel de co
 
 
 
-<img src="images/chapter_08_03.png" style="zoom:20%;" />
+![](images/chapter_08_03.png)
 
 ###### Ferramentas
 

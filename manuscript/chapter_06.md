@@ -68,7 +68,7 @@ Cada classe acima possui uma aplicação diferente, portanto, devemos entender a
 
 #### Classe `Key / Value`
 
-<img src="images/chapter_06_01.png" alt="Estrutura de Chave-valor" title="Estrutura de Chave-valor" style="zoom:15%;" />
+![](images/chapter_06_01.png)
 
 Os bancos do tipo chave-valor possuem uma estrutura similar à da classe `java.util.Map` do Java, ou seja, a *informação* (`value`) será recuperada apenas pela *chave* (`key`). Esse tipo de banco de dados pode ser utilizado, por exemplo, para gerenciar sessões de usuários logados. Outro exemplo de utilização é aliado a um DNS, onde a chave é o endereço, por exemplo, `www.google.com`, e o valor é o IP desse servidor.
 
@@ -93,7 +93,7 @@ Nessa classe de banco, não é possível realizar operações como `join` entre 
 
 #### Classe `Column Family`
 
-<img src="images/chapter_06_02.png" alt="Estrutura família de colunas" title="Estrutura família de colunas" style="zoom:15%;" />
+![](images/chapter_06_02.png)
 
 Esse modelo se tornou popular através do paper "[Bigtable: a Distributed Storage System for Structured Data](https://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf)", criado por funcionários do Google, com o objetivo de montar um sistema de armazenamento de dados distribuído, projetado para ter um alto grau de escalabilidade e de volume de dados. Assim como o chave-valor, para realizar uma busca ou recuperar alguma informação dentro do banco de dados, é necessário utilizar o campo que funciona como um identificador único, que seria semelhante à chave na estrutura chave-valor. Porém as semelhanças terminam por aí. 
 
@@ -124,7 +124,7 @@ Ao contrapor o banco do tipo família de coluna com os bancos relacionais, é po
 
 Os bancos de dados orientados a documento têm sua estrutura muito semelhante a um arquivo JSON ou XML. Eles são compostos por um grande número de campos, que são criados em tempo de execução, gerando grande flexibilidade, tanto para a leitura como para escrita da informação. 
 
-<img src="images/chapter_06_03.png" alt="Estrutura de documentos {w=10%}" title="Estrutura de coleção de documentos" style="zoom:15%;" />
+![](images/chapter_06_03.png)
 
 Eles permitem que seja realizada a leitura da informação por campos que não sejam a chave. Algumas implementações, por exemplo, têm uma altíssima integração com motores de busca, o que os torna cruciais para a realização de análise de dados ou logs de um sistema. Veja abaixo algumas implementações dos bancos de dados do tipo documento:
 
@@ -168,7 +168,7 @@ Alguns bancos de dados possuem a comum característica de ter suporte de uma ou 
 
 ### Teorema do CAP
 
-<img src="images/chapter_06_05.png" alt="Teorema do CAP" title="Teorema do CAP" style="zoom:15%;" />
+![](images/chapter_06_05.png)
 
 Um dos grandes desafios dos bancos de dados NoSQL é que eles lidam com a persistência distribuída, ou seja, as informações ficam localizadas em mais de um servidor. Foram criados diversos estudos para ajudar nesse desafio de persistência distribuída, mas o mais famoso foi uma teoria criada em 1999, o Teorema do CAP. 
 
@@ -190,7 +190,7 @@ Porém, o Cassandra tem o recurso de nível de consistência, de modo que é pos
 
 No mundo NoSQL, cada classe de banco tem o objetivo de resolver problemas particulares. Como o gráfico abaixo mostra, existe um balanço entre o modelo de complexidade: modelos que permitem mais complexidade em modelagem e busca resultam en menos escalabilidade. Como exemplo, temos o banco de classe chave-valor, que é mais escalável, porém permite menos complexidade, uma vez que as queries são baseadas apenas na chave.
 
-<img src="images/chapter_06_06.png" alt="Escalabilidade vs Complexidade" title="Escalabilidade vs Complexidade" style="zoom:20%;" />
+![](images/chapter_06_06.png)
 
 ### Master/Slave vs Masterless
 
