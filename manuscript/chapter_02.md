@@ -73,7 +73,7 @@ As expected, creating a full-blown application is hard work and usually requires
 We begin our journey with a monolith Java application. The scenario that we will cover belongs to a company in charge of providing a platform to create Conference websites. Imagine that each of our customers requires us to host and scale their Conference website. 
 We all have seen big Java Web applications, and in this scenario, the application looks like this: 
 
-![chapter_02_01](resources/chapter_02_01a.png)
+![chapter_02_01](images/chapter_02_01a.png)
 
 The “Customer Management” Facade is in charge of isolating different customers from each other. In some companies, this is defined as a multi-tenant platform or application. Unfortunately, this is quite common in the Java space. For historical reasons, implementations ended up growing into enormous, scary monoliths that came with a lot of scalability issues as well as data and traffic isolation challenges. No matter how fancy our platform looks, it is just running in a single JVM. You have no way of scaling each customer - you scale all or nothing. 
 
