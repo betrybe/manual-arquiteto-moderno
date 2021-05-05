@@ -43,11 +43,11 @@ Lembrando que não é simplesmente colocar que o 'login precisa ser feito em men
 
 Neste capítulo, vamos utilizar a ferramenta [jMeter](https://jmeter.apache.org/), muito utilizada para criar diversos tipos de teste de carga e medir o desempenho. O objetivo aqui não é ser um tutorial do jMeter, mas mostrar como é possível gerar e visualizar dados através dele. Abaixo, um exemplo simples de medição de tempo de login considerando 10 usuários(as):
 
-![](resources/chapter_10_01.png)
+![](images/chapter_10_01.png)
 
 Ao rodar o teste acima, verificamos no Relatório de Sumário os resultados:
 
-![](resources/chapter_10_02.png)
+![](images/chapter_10_02.png)
 
 Alguns dados importantes neste momento:
 
@@ -61,7 +61,7 @@ Alguns dados importantes neste momento:
 
 Ainda podemos ter gráficos mais ricos, utilizando o plugin [PerfMon](https://jmeter-plugins.org/wiki/PerfMon/), por exemplo:
 
-![](resources/chapter_10_03.png)
+![](images/chapter_10_03.png)
 
 No gráfico acima, podemos ver que a maioria das requisições ficou entre 600 e 700 milissegundos em um cenário de testes com 1000 requisições.
 Podemos ter gráficos ainda mais bonitos e em tempo real, podendo utilizar o [grafana](https://grafana.com/) como visualizador de
@@ -77,7 +77,7 @@ Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Par
   apenas uma ferramenta, não se possa medir a performance da sua aplicação. É provável que você utilize uma
    ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos. A imagem abaixo é uma representação da arquitetura para servir milhões de usuários(as):
 
-![](resources/chapter_10_04.png)
+![](images/chapter_10_04.png)
 
 **Créditos:** https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/
 
@@ -90,17 +90,17 @@ Conforme demonstrado acima, não é de primeira que se define uma arquitetura pa
   mostram onde estão os gargalos da aplicação. Uma das várias opções é o [javamelody](https://github.com/javamelody
   /javamelody), que pode ser utilizado em modo standalone junto com a sua aplicação Java, é free e muito simples de colocar na aplicação.
 
-![](resources/chapter_10_05.png)
+![](images/chapter_10_05.png)
 
 Na imagem acima, podemos notar que uma das consultas SQL demorou, em média, mais que o normal em relação a outras. Podemos descobrir de onde veio esse comando SQL, como também executar o comando SQL em modo 'Explain', a fim de revelar que a query está fazendo um 'full scan' e que será preciso ajustar a query ou criar índices específicos na tabela.
 
-![](resources/chapter_10_06.png)
+![](images/chapter_10_06.png)
 
 No outro exemplo abaixo, podemos ver um desvio bem grande no método 'findById', que, por sua vez, não utiliza um banco
  de dados MySQL, mas sim uma outra fonte de dados externo. Com essas informações em mãos, já é possível analisar de
   modo isolado cada comportamento.
 
-![](resources/chapter_10_07.png)
+![](images/chapter_10_07.png)
 
 Existem muitas ferramentas de monitoramento, e o que fica aqui como exemplo é que, em alguns casos, você vai precisar ir no detalhe e fazer algum ajuste fino na infraestrutura, ou até mesmo no código.
 
@@ -110,7 +110,7 @@ Sistemas distribuídos, atualmente mais populares com a utilização de microsse
  monitorar a performance. Nesse caso, vamos precisar de mecanismos mais sofisticados, como a utilização de um 'tracing' distribuído por exemplo. Aqui também existem várias soluções, como os famosos APMs, tais como o New Relic, AppDynamics, DataDog e Dynatrace. Vale lembrar que muitos provedores de cloud fornecem ferramentas de análise de performance, tal como o AWS Performance Insights.
 No mundo OpenSource, vale destacar a ferramenta [Jaeger Tracing](https://www.jaegertracing.io/), cuja especialidade é fazer o monitoramento de serviços distribuídos rodando em uma infraestrutura do Kubernetes, por exemplo.
 
-![](resources/chapter_10_08.png)
+![](images/chapter_10_08.png)
 
 Podemos observar em qual dos serviços o tempo de resposta não está adequado e tomar as devidas ações.
 
@@ -172,9 +172,7 @@ Muitas outras medidas de performance podem ser adotadas ou verificadas no seu c�
 
 ## Conclusão
 
-Não tente resolver todos os problemas ao mesmo tempo. Comece construindo uma lista dos cinco principais
- contribuidores da hora e da queima da CPU, memória ou IO e explore soluções. Ataque um dos problemas e reavalie a
-   arquitetura. Abaixo, algumas etapas que podem ajudar a encontrar e solucionar um problema de performance.
+Não tente resolver todos os problemas ao mesmo tempo. Comece construindo uma lista dos cinco principais contribuidores da hora e da queima da CPU, memória ou IO e explore soluções. Ataque um dos problemas e reavalie a arquitetura. Abaixo, algumas etapas que podem ajudar a encontrar e solucionar um problema de performance.
 
 **Descobrir:** Por que este ponto está com baixa performance?
 

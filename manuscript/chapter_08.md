@@ -88,7 +88,7 @@ Para criar um projeto em que você pode estudar exemplos de implementação de p
 2. Insira um `groupId`, `artifactId`, selecione uma versão do MicroProfile, versão do Java SE, e o `runtime`. 
    O `runtime ` será a implementação da especificação MicroProfile. 
 
-![/chapter_08_04](resources/chapter_08_04.png)
+![/chapter_08_04](images/chapter_08_04.png)
 
 3. Clique em `Download`. 
 
@@ -100,7 +100,7 @@ Veja no código como são realizadas a implementação das apis de `Health Check
 
 Além da utilização da especificação MicroProfile para entrega de microsserviços cloud-native, outra ferramenta amplamente utilizada é o [Spring Boot](https://spring.io/projects/spring-boot). É possível também construir serviços que usufruem de capabilities de aplicações cloud-native com a utilização de Spring e sua stack. [Spring Cloud](https://cloud.spring.io/spring-cloud-static/spring-cloud.html) é um dos frameworks disponíveis que permitem entregar aplicações cloud-native e Java. Assim como demonstrado para o MicroProfile, também é possível criar aplicações de uma forma simples: https://start.spring.io/. Note que, ao clicar em `Add Dependencies`, você pode filtrar por cloud e escolher os componentes que deseja habilitar em sua aplicação:
 
-![chapter_08_06](resources/chapter_08_06.png)
+![chapter_08_06](images/chapter_08_06.png)
 
 Agora, uma vez que falamos sobre alguns detalhes de implementação da aplicação propriamente dita, vamos seguir em frente e entender melhores práticas de conteinerização dessas aplicações. 
 
@@ -237,7 +237,7 @@ Vamos discorrer sobre como *infraestrutura como serviço (Infrastructure As A Se
 
 A melhor maneira de se pensar no cloud em termos de abstração para o negócio certamente é na analogia de um serviço de pizzaria como serviço. Podemos partir do cenário em que temos a opção de preparar toda a pizza em casa e ter que gerenciar todo o processo de criação e cozimento, ou sair para comer a pizza em um restaurante sem se preocupar com sua criação. 
 
-![](resources/chapter_08_01.png)
+![](images/chapter_08_01.png)
 
 Na imagem acima, temos dispostos quatro formatos: on-premise, IaaS, PaaS e SaaS. As caixinhas brancas são as tarefas de nossa responsabilidade, e as azuis são de responsabilidade de terceiros. Essa mesma comparação pode ser feita se trocarmos as tarefas de criação de pizza por tarefas referentes a criação de software: instalação e gerenciamento de sistema operacional, networking, storage, orquestração de serviços, gerenciamento de middleware, runtime, pipelines de CI/CD, e até a criação da aplicação propriamente dita.
 
@@ -245,7 +245,7 @@ Quando falamos de cloud e seus serviços, note que quanto menor a abstração qu
 
 
 
-<img src="resources/chapter_08_02.png" style="zoom:15%;" />
+<img src="images/chapter_08_02.png" style="zoom:20%;" />
 
 ### IaaS - Infra as a Service
 
@@ -331,7 +331,7 @@ Existem diversas opções de implementação de cada uma destas funcionalidades,
 
 A CNCF assume projetos e os classifica como **graduados**, **incubando** ou em **sandbox**. Essa classificação deriva da maturidade de cada software, de acordo com sua utilização no mercado:
 
-![chasm-cncf](resources/chapter_08_05.png)
+![chasm-cncf](images/chapter_08_05.png)
 
 *Imagem obtida em https://www.cncf.io/projects/*
 
@@ -383,7 +383,7 @@ E, para implementar as regras de ORASTAR, temos a arquitetura de um painel de co
 
 
 
-<img src="resources/chapter_08_03.png" style="zoom:20%;" />
+<img src="images/chapter_08_03.png" style="zoom:20%;" />
 
 ###### Ferramentas
 
