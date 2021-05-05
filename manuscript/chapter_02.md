@@ -118,7 +118,7 @@ From an architectural point of view, this might mean a monolith Conference Site 
 > **TIP**: This strategy leads to having multiple services from day one, so this is something that you and your teams should get used to.
 
 Our independent Conference Sites will look like this: 
-![chapter_02_02](resources/chapter_02_02.png)
+![chapter_02_02](images/chapter_02_02.png)
 
 As you can see in the previous diagram, it is pretty clear that there are significant architectural changes. In this case, it is pretty common to have the User Interface, the “Conference Site” box separated from core services. This user-facing component will most of the time act as a router, routing requests from the Conference  Site to services that are not directly exposed to users. 
 
@@ -145,7 +145,7 @@ The Call for Proposals Bounded Context will enable a team to implement all the n
 
 As soon as you start designing the Call for Proposal functionality, you realize that you will need to consume and interact with other teams. Very early on, the following Bounded Contexts are identified:
 
-![chapter_02_03](resources/chapter_02_03.png)
+![chapter_02_03](images/chapter_02_03.png)
 
 Each of these Bounded Contexts should be owned by different teams. We need to ensure that they have enough autonomy to make progress, create new versions with new features, and deploy concrete software components to our customer’s environments. 
 
@@ -168,7 +168,7 @@ With the rise in popularity of Kubernetes, it is also common to find Kubernetes 
 
 You, as a developer targeting Kubernetes as your deployment platform, are now responsible for a bunch of artifacts, not just your Java Service source code. 
 
-![](resources/chapter_02_04.png)
+![](images/chapter_02_04.png)
 
 In order to deploy your code to Kubernetes, you will need to: 
 - Build and test your source code, if it is Java, you can use, for example, Maven or Gradle to do that;
@@ -197,7 +197,7 @@ One of the conventions used by Jenkins X is called “Trunk Based Development”
 
 At the end of the day, Jenkins X uses both conventions, “One Repository / One Service” plus “Trunk Based Development”, to take your service from source code to a running instance inside a Kubernetes Cluster. 
 
-![chapter_02_05](resources/chapter_02_05.png)
+![chapter_02_05](images/chapter_02_05.png)
 
 In our example, the following links demonstrate all these concepts in action. 
 
@@ -242,7 +242,7 @@ In real-life projects, these user interfaces and API specification documents can
 
 The following screenshot shows the Open API User Interface that is provided by just including the previous dependency. This screen can be accessed by pointing your browser to host:port/swagger-ui.html, and it provides a simple client to interact with your services, understand which endpoints are exposed and which data these endpoints expect and return. 
 
-![chapter_02_06](resources/chapter_02_06.png)
+![chapter_02_06](images/chapter_02_06.png)
 
 Feel free to clone one of the services from this example and run it with the `mvn spring-boot:run` command to explore each service APIs definitions. By default, each service will start in port 8080, so you should point your browser at http://localhost:8080/swagger-ui.html.
 
@@ -257,7 +257,7 @@ As you might guess, APIs are vital, but understanding who is going to consume ou
 Well-defined Context Maps help a lot to plan and understand how these “isolated" Bounded Context and teams working on them will interact daily. 
 
 For our example, the following context map would make sense:
-![chapter_02_07](resources/chapter_02_07.png)
+![chapter_02_07](images/chapter_02_07.png)
 
 This diagram depicts the relationships between the simple Bounded Context that we have for our Conference Site application. Here we can see a **Customer/Supplier** relationship between Call for Proposals and the Conference Agenda Bounded Context. Where Call for Proposals **is a consumer** of the upstream service Conference Agenda. There is a **Partnership** relationship between these two teams as well, as they need to collaborate to get things done. This means that the communication between these two teams is essential, and they should be able to influence each other’s roadmap. 
 
@@ -405,19 +405,19 @@ The User Interface that covers this simple scenario looks like this:
 
 * The main page inside the Conference Site displays the Agenda divided by days. The items inside the Agenda are the ones that are already confirmed and were approved by the committee.
 
-  ![chapter_02_08](resources/chapter_02_08.png)
+  ![chapter_02_08](images/chapter_02_08.png)
 
 * The main page also allows potential speakers to submit proposals by filling up a form:
 
-  ![chapter_02_09](resources/chapter_02_09.png)
+  ![chapter_02_09](images/chapter_02_09.png)
 
 * Once the proposal is submitted, the potential speaker will need to wait for Approval or Rejection by the committee. The committee members have a back-office page where they can Approve or Reject each submitted proposal: 
 
-  ![chapter_02_10](resources/chapter_02_10.png)
+  ![chapter_02_10](images/chapter_02_10.png)
 
 * The back-office page also offers Board members the option to send email notifications to the potential speakers.
 
-  ![chapter_02_11](resources/chapter_02_11.png)
+  ![chapter_02_11](images/chapter_02_11.png)
 
 
 
@@ -426,7 +426,7 @@ Once again, you can notice the simplification of this scenario on purpose to est
 #### Architecture and Services 
 
 From an architectural perspective it might look more like this: 
-![chapter_01_12](resources/chapter_01_12.png)
+![chapter_01_12](images/chapter_01_12.png)
 
 Where the User Interface with some routing capability is required to forward requests to the Call for Proposals Service (C4P) to the Agenda or Emails Service.  In this example, all the communications happen via HTTP/Rest invocations. 
 
