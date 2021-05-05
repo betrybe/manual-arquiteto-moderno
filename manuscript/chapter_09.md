@@ -49,7 +49,7 @@ Só para te dar uma ideia, o JDK 9 teve noventa e um itens em sua release, enqua
 
 A empresa JRebel publicou no ano de 2020 os resultados de uma pesquisa realizada com centenas de profissionais ao redor do mundo. Veja abaixo um dos resultados específicos em relação às versões de Java:
 
-<img src="images/chapter_09_01.png" alt="alt text" style="zoom:15%;" />
+{width=60%}![](images/chapter_09_01.png)
 *Fonte: https://www.jrebel.com/blog/2020-java-technology-report*
 
 Outra pesquisa interessante também, publicada em 2020 pela Snyk, trouxe os seguintes resultados:
