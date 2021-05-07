@@ -9,8 +9,10 @@ Este capítulo aborda o lado prático de como esses conceitos podem ser mapeados
 > **INFO:** é importante destacar que este capítulo não é sobre os conceitos básicos de DDD. Portanto, se você é novo no DDD, os seguintes livros são recomendados: Implementing DDD e DDD Distilled.
 
 Este capítulo está dividido em duas seções principais:
-- [Introdução aos tópicos relacionados a Java e nuvem](#java-in-the-cloud)
-- [De Monolith até K8s usando DDD](#from-monolith-to-k8s-using-ddd)
+
+*[Introdução aos tópicos relacionados a Java e nuvem](#java-na-nuvem)
+
+*De Monolith até K8s usando DDD
 
 
 ## Java na nuvem
@@ -20,10 +22,14 @@ Existem muitos frameworks por aí com o objetivo de fornecer uma experiência ma
 Isso vai contra o que nós (como comunidade Java) estávamos fazendo cinco anos atrás, e alguns de nós ainda fazem, que era fazer o deploy de nossas aplicações Java dentro de um servidor de aplicação ou um Servlet Container como o Tomcat.
 
 Enquanto costumávamos ter um monolito com todos os recursos de nossas grandes aplicações integradas, agora buscamos ter um conjunto de serviços com funcionalidades bem definidas. Esses novos (micro) serviços compartilham as seguintes características:
-- Tendem a localizar e versionar todos os artefatos que são necessários para ir do código-fonte até um serviço em execução em um ambiente.
-- Cada serviço é construído, mantido, desenvolvido e implantado por uma equipe diferente.
-- Cada serviço tem seu próprio ciclo de lançamento.
-- Cada serviço expõe um conjunto bem definido de APIs.
+
+*Tendem a localizar e versionar todos os artefatos que são necessários para ir do código-fonte até um serviço em execução em um ambiente.
+
+*Cada serviço é construído, mantido, desenvolvido e implantado por uma equipe diferente.
+
+*Cada serviço tem seu próprio ciclo de lançamento.
+
+*Cada serviço expõe um conjunto bem definido de APIs.
 
 Construir um serviço hoje com endpoints REST é uma tarefa bastante fácil se você estiver usando um desses frameworks mencionados anteriormente. Você tem um modelo de programação baseado em anotação que permite mapear métodos Java para terminais REST e mecanismos avançados de serialização/desserialização que lidarão com todo o boilerplate de análise de solicitações HTTP.
 
@@ -65,7 +71,7 @@ Esta seção cobre um cenário de exemplo que nos ajuda a explicar alguns dos co
 
 Como esperado, criar uma aplicação completa é um trabalho árduo e geralmente requer muito tempo. Por esse motivo, o exemplo a seguir é fornecido como um conjunto de repositórios de código aberto, e você pode contribuir para melhorá-lo.
 
-- [Repositório De Monolith para K8s Github](https://github.com/salaboy/from-monolith-to-k8s)
+*[Repositório De Monolith para K8s Github](https://github.com/salaboy/from-monolith-to-k8s)
 
 > **DICA:** Como uma aplicação real, o exemplo evoluirá com o tempo, agregando mais ferramentas e melhores práticas, por isso convidamos você a participar dessa jornada em que todos podemos aprender e compartilhar informações valiosas juntos.
 
@@ -118,7 +124,7 @@ Do ponto de vista arquitetônico, isso pode significar um site de conferência m
 > **DICA**: Essa estratégia leva a vários serviços desde o primeiro dia, então isso é algo com o qual você e suas equipes devem se acostumar.
 
 Nossos sites de conferências independentes serão semelhantes a este:
-![chapter_02_02](../images/chapter_02_02.png)
+![chapter_02_02](images/chapter_02_02.png)
 
 Como você pode ver no diagrama anterior, está bastante claro que há mudanças arquitetônicas importantes. É bastante comum ter a Interface do Usuário, neste caso, a caixa “Conference Site”, separada dos serviços principais. Na maioria das vezes, esse componente voltado para o(a) usuário(a) agirá como um roteador, encaminhando solicitações do site de conferência para serviços que não são expostos diretamente a usuários(as).
 
@@ -145,7 +151,7 @@ O Bounded Context Call for Proposals permitirá que uma equipe implemente todas 
 
 Assim que começa a projetar a funcionalidade Call for Proposals, você percebe que precisará consumir e interagir com outras equipes. Logo no início, os seguintes Bounded Contexts são identificados:
 
-![chapter_02_03](../images/chapter_02_03.png)
+![chapter_02_03](images/chapter_02_03.png)
 
 Cada um desses Bounded Contexts deve pertencer a equipes diferentes, e precisamos ter certeza de que eles têm autonomia suficiente para progredir, criar novas versões com novos recursos e implantar componentes de software concretos para os ambientes de nossos(as) clientes.
 
@@ -154,6 +160,7 @@ Do lado prático, cada Bounded Context será implementado como um ou um conjunto
 Para o propósito deste exemplo, um único serviço implementará toda a lógica do Bounded Contexts Call for Proposals, e a equipe por trás desse serviço será responsável por projetar suas APIs, escolher as estruturas que usarão e realmente implantá-las em um ambiente ao vivo.
 
 Aprofundando os detalhes práticos, existem algumas das melhores práticas compartilhadas por muitas empresas e ferramentas:
+
 - Um Repositório / Um Serviço + Entrega Contínua
 - APIs abertas
 
@@ -168,9 +175,10 @@ Com o aumento da popularidade do Kubernetes, também é comum encontrar o Manife
 
 Você, como desenvolvedor(a) que visa ao Kubernetes como sua plataforma de implantação, agora é responsável por vários artefatos, não apenas pelo código-fonte do serviço Java.
 
-![](../images/chapter_02_04.png)
+![](images/chapter_02_04.png)
 
 Para fazer o deploy do seu código no Kubernetes: 
+
 - Você precisará construir e testar seu código-fonte. Se for Java, você pode usar, por exemplo, Maven ou Gradle para fazer isso;
 
 - Isso resultará em um arquivo JAR que você pode querer enviar para um repositório como Nexus ou Artifactory. Esse arquivo JAR já terá uma versão nele, e se você estiver usando Maven ou Gradle, esse JAR será identificado por seu GAV (Grupo/Artefato/Versão).
@@ -193,18 +201,18 @@ Como você pode notar, o Jenkins X não é apenas sobre integração contínua, 
 
 Uma das convenções usadas pelo Jenkins X é chamada “Trunk Based Development”. Basicamente, significa que cada alteração aplicada (merged) à branch master irá gerar uma nova versão de nossos artefatos. Na maioria das vezes, isso não é confortável para os desenvolvedores, já que muitas dessas práticas são comumente definidas em cada empresa e tendem a variar bastante. A principal motivação para usar algo como o Trunk Based Development é garantir que as equipes não gastem tempo definindo essas práticas. Ao trabalhar com essa convenção, você pode se concentrar na escrita do código e, quando o código estiver pronto e mesclado ao master, uma nova versão é criada e implantada em algum tipo de ambiente de teste para validações adicionais.
 
-> **DICA:** Recomendo fortemente que, se você estiver iniciando um novo projeto, verifique as vantagens do Trunk Based Development, bem como do livro Accelerate, pois foi usado como base para a criação de ferramentas como Jenkins X. https://jenkins-x.io/about/overview/accelerate/
+> **DICA:** Recomendo fortemente que, se você estiver iniciando um novo projeto, verifique as vantagens do Trunk Based Development, bem como do livro Accelerate, pois foi usado como base para a criação de ferramentas como [Jenkins X](https://jenkins-x.io/about/overview/accelerate/).
 
 No fim das contas, Jenkins X usa ambas as convenções, “Um Repositório / Um Serviço” mais “Trunk Based Development”, para levar seu serviço do código-fonte para uma instância em execução dentro de um Cluster Kubernetes.
 
-![chapter_02_05](../images/chapter_02_05.png)
+![chapter_02_05](images/chapter_02_05.png)
 
 Em nosso exemplo, os links a seguir demonstram todos esses conceitos em ação.
 
-- Pipeline: https://github.com/salaboy/fmtok8s-email/blob/master/jenkins-x.yml
-- DockerFile: https://github.com/salaboy/fmtok8s-email/blob/master/Dockerfile
-- Gráficos do Helm: https://github.com/salaboy/fmtok8s-email/tree/master/charts/fmtok8s-email
-- Versões contínuas: https://github.com/salaboy/fmtok8s-email/releases
+- [Pipeline](https://github.com/salaboy/fmtok8s-email/blob/master/jenkins-x.yml)
+- [DockerFile](https://github.com/salaboy/fmtok8s-email/blob/master/Dockerfile)
+- [Gráficos do Helm](https://github.com/salaboy/fmtok8s-email/tree/master/charts/fmtok8s-email)
+- [Versões contínuas](https://github.com/salaboy/fmtok8s-email/releases)
 
 Você pode encontrar o mesmo setup para todos os projetos dentro da Demonstração do Site de Conferência.
 
@@ -214,7 +222,7 @@ Se você já está implementando um Bounded Context, logo no início você preci
 
 > **INFO:** Como você provavelmente está familiarizado com endpoints REST, esta seção se concentra na [Especificação de API aberta](https://github.com/OAI/OpenAPI-Specification)
 
-Conforme definido no texto das especificações “* a especificação OpenAPI remove as suposições ao chamar um serviço. *” Hoje em dia, frameworks populares como Spring Boot vêm com integração pronta para uso com API aberta e ferramentas de API aberta.
+Conforme definido no texto das especificações *“a especificação OpenAPI remove as suposições ao chamar um serviço.”* Hoje em dia, frameworks populares como Spring Boot vêm com integração pronta para uso com API aberta e ferramentas de API aberta.
 
 Apenas adicionando uma extensão/iniciador Spring Boot, você permite que sua aplicação exponha uma interface de usuário que serve como documentação e navegador ao vivo de suas APIs.
 
@@ -228,6 +236,7 @@ Se você está usando Spring Boot padrão (Tomcat), será preciso adicionar ao s
 </dependency>
 ```
 Se você estiver usando o Webflux, a pilha reativa que você precisa adicionar é:
+
 ```xml
 <dependency>
    <groupId>org.springdoc</groupId>
@@ -236,15 +245,15 @@ Se você estiver usando o Webflux, a pilha reativa que você precisa adicionar �
 </dependency>
 ```
 
-- https://github.com/salaboy/fmtok8s-email/blob/master/pom.xml#L40 
+- <https://github.com/salaboy/fmtok8s-email/blob/master/pom.xml#L40>
 
 Em projetos da vida real, essas interfaces de usuário e documentos de especificação de API podem ser usados por outras equipes para entender com detalhes concretos como interagir com seus serviços. Quanto mais cedo você expõe uma API, mais cedo outras equipes podem começar a aproveitar seu serviço.
 
-A captura de tela a seguir mostra a interface de usuário da API aberta, a qual é fornecida apenas incluindo a dependência anterior. Essa tela pode ser acessada apontando seu navegador para host:port/swagger-ui.html. Ela fornece um cliente simples para interagir com seus serviços, entender quais terminais estão expostos e quais dados esses terminais esperam e retornam.
+A captura de tela a seguir mostra a interface de usuário da API aberta, a qual é fornecida apenas incluindo a dependência anterior. Essa tela pode ser acessada apontando seu navegador para *host:port/swagger-ui.html*. Ela fornece um cliente simples para interagir com seus serviços, entender quais terminais estão expostos e quais dados esses terminais esperam e retornam.
 
-![chapter_02_06](../images/chapter_02_06.png)
+![chapter_02_06](images/chapter_02_06.png)
 
-Sinta-se à vontade para clonar um dos serviços deste exemplo e executá-lo com o comando `mvn spring-boot: run` para explorar as definições de APIs de cada serviço. Por padrão, cada serviço iniciará na porta 8080, portanto, você deve apontar seu navegador para http://localhost:8080/swagger-ui.html
+Sinta-se à vontade para clonar um dos serviços deste exemplo e executá-lo com o comando `mvn spring-boot: run` para explorar as definições de APIs de cada serviço. Por padrão, cada serviço iniciará na porta 8080, portanto, você deve apontar seu navegador para <http://localhost:8080/swagger-ui.html>
 
 ### Mapa de contexto para entender as interações técnicas e da equipe
 
@@ -257,13 +266,13 @@ Como você pode imaginar, as APIs são extremamente importantes, mas entender qu
 Mapas de contexto bem definidos ajudam muito a planejar e compreender como esses bounded contexts “isolados” e as equipes que trabalham neles irão interagir no dia a dia.
 
 Para nosso exemplo, o seguinte mapa de contexto faria sentido:
-![chapter_02_07](../images/chapter_02_07.png)
+![chapter_02_07](images/chapter_02_07.png)
 
 Esse diagrama descreve as relações entre o bounded context simples que temos para nossa aplicação do site de conferência. Aqui podemos ver que existe uma relação **Cliente/Fornecedor** entre a Call for Proposals e o bounded context da Agenda da Conferência. A Call for Proposals **é um consumidor** da Agenda da Conferência do serviço upstream. Entre essas duas equipes, existe também uma relação de **Parceria(Partnership)**, pois elas precisam colaborar para fazer as coisas. Isso significa que a comunicação entre essas duas equipes é importante e que elas devem ser capazes de influenciar o roteiro uma da outra.
 
 Por outro lado, a relação com o serviço de Notificação é diferente. A Call for Proposals tem uma relação ascendente com o Bounded Context de Notificação (Notification), mas vai **confortar** com seus contratos. Isso significa que, da perspectiva da equipe de Call for Proposals, eles não podem influenciar ou alterar as APIs do Bounded Context de notificação. Isso acontece muito quando temos sistemas legados ou quando esse bounded context é externo à nossa empresa.
 
-> **DICA:** Pulando para o lado prático, embora as integrações de sistema sejam um tópico muito amplo, esta seção se concentra em uma recomendação muito prática: “Você deve aprender sobre testes de contrato orientados ao consumidor (Consumer-Driven Contract)”. Mais uma vez, Martin Fowler tem um artigo, publicado em 2006, sobre isso: https://martinfowler.com/articles/consumerDrivenContracts.html.
+> **DICA:** Pulando para o lado prático, embora as integrações de sistema sejam um tópico muito amplo, esta seção se concentra em uma recomendação muito prática: “Você deve aprender sobre testes de contrato orientados ao consumidor (Consumer-Driven Contract)”. Mais uma vez, Martin Fowler tem um artigo, publicado em 2006, sobre isso: <https://martinfowler.com/articles/consumerDrivenContracts.html>.
 
 Embora o tópico em si não seja novo, existem ferramentas muito atualizadas para realmente implementar isso em seus projetos, como [Spring Cloud Contracts](https://spring.io/projects/spring-cloud-contract).
 
@@ -271,7 +280,7 @@ Embora o tópico em si não seja novo, existem ferramentas muito atualizadas par
 
 Com Spring Cloud Contracts, a história é assim: primeiro você define um contrato para suas APIs. Isso basicamente significa que tipo de solicitação o consumidor deve enviar e que tipo de resposta precisamos fornecer como serviço.
 
-Um contrato é semelhante a isto: https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/test/resources/contracts/shouldAcceptPostProposal.groovy
+Um contrato é semelhante a isto: <https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/test/resources/contracts/shouldAcceptPostProposal.groovy>
 
 ```groovy
 Contract.make {
@@ -307,7 +316,7 @@ Contract.make {
 Este contrato define a interação para o envio de uma nova Proposta ao Serviço Call for Proposal. Como você pode ver, ele envolve uma solicitação `POST` e um body com algumas propriedades predefinidas, incluindo um `header` com um `Content Type` muito específico. Esse contrato também define que o retorno para o consumidor agregará às informações enviadas uma propriedade `id` com formato `UUID`.
 
 Agora, esse contrato pode ser usado para gerar um teste para realmente verificar se o seu serviço está funcionando conforme o esperado, do ponto de vista do consumidor. Portanto, se você definiu qualquer contrato em seu projeto ao construir e testar esse projeto, os contratos serão executados em uma instância real de seu serviço. Isso nos permite ter certeza de que quebraremos a construção se um contrato for quebrado. Para criar e executar automaticamente esses testes, você só precisa adicionar uma dependência e um plug-in ao seu projeto maven:
-https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/pom.xml#L50
+<https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/pom.xml#L50>
 
 ```xml
 <dependency>
@@ -320,7 +329,7 @@ https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/pom.xml#L50
 ```
 
 E na seção `<build><plugins>`, o seguinte plugin:
-https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/pom.xml#L88
+<https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/pom.xml#L88>
 
 ```xml
 <plugin>
@@ -336,7 +345,7 @@ https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/pom.xml#L88
 
 ```
 
-Finalmente, dependendo da forma do serviço que você testará, pode ser necessária alguma confirmação: https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/test/java/com/salaboy/conferences/c4p/ContractVerifierBase.java#L16
+Finalmente, dependendo da forma do serviço que você testará, pode ser necessária alguma confirmação: <https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/test/java/com/salaboy/conferences/c4p/ContractVerifierBase.java#L16>
 
 ```java
 @RunWith(SpringRunner.class)
@@ -375,7 +384,7 @@ public class C4PApisTests {
 }
 ```
 
-https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/test/java/com/salaboy/conferences/site/C4PApisTests.java#L29
+<https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/test/java/com/salaboy/conferences/site/C4PApisTests.java#L29>
 
 Isso baixa automaticamente a versão mais recente do stub e o executa antes que seu teste comece, usando uma porta aleatória que você pode obter via injection, usando `@StubRunnerPort`. 
 
@@ -406,19 +415,19 @@ A interface de usuário que cobre esse cenário simples é assim:
 
 * A página principal dentro do site da conferência exibe a agenda dividida por dias. Os itens da pauta são os que já estão confirmados e foram aprovados pelo comitê.
 
-  ![chapter_02_08](../images/chapter_02_08.png)
+  ![chapter_02_08](images/chapter_02_08.png)
 
 * A página principal também permite que palestrantes em potencial enviem propostas, preenchendo um formulário:
 
-  ![chapter_02_09](../images/chapter_02_09.png)
+  ![chapter_02_09](images/chapter_02_09.png)
 
 * Assim que a proposta for enviada, o palestrante em potencial precisará aguardar a aprovação ou rejeição do comitê. Os membros do comitê têm uma página de back-office, onde podem aprovar ou rejeitar cada proposta enviada:
 
-  ![chapter_02_10](../images/chapter_02_10.png)
+  ![chapter_02_10](images/chapter_02_10.png)
 
 * A página de back-office também oferece aos membros do comitê a opção de enviar notificações por e-mail aos palestrantes em potencial.
 
-  ![chapter_02_11](../images/chapter_02_11.png)
+  ![chapter_02_11](images/chapter_02_11.png)
 
 
 
@@ -427,7 +436,7 @@ Mais uma vez, você pode notar a simplificação proposital desse cenário, para
 #### Arquitetura e Serviços
 
 De uma perspectiva arquitetônica, parece mais assim:
-![chapter_01_12](../images/chapter_01_12.png)
+![chapter_01_12](images/chapter_01_12.png)
 
 A Interface do Usuário com alguma capacidade de roteamento é necessária para encaminhar solicitações ao Serviço Call for Proposals (C4P) para o Serviço de Agenda ou Emails. Neste exemplo, todas as comunicações acontecem por meio de invocações HTTP/Rest.
 
@@ -436,7 +445,7 @@ Na maioria das vezes, um Gateway de API também é usado para ocultar acesso dir
 
 > **INFO:** É importante observar que o Spring Cloud Gateway oferece a flexibilidade de realmente adicionar programaticamente qualquer transformação que você deseja/precisa nas solicitações (requests) de entrada. Esse poder e liberdade vêm com a desvantagem de que depende de você manter, testar e corrigir o bug. Em grandes projetos, você pode querer avaliar um gateway de API de terceiros (como Kong, 3Scale, Apigee etc.) com base nos requisitos do seu projeto.
 
-O módulo API Gateway / interface do usuário pode ser encontrado neste repositório: https://github.com/salaboy/fmtok8s-api-gateway
+O módulo API Gateway / interface do usuário pode ser encontrado neste repositório: <https://github.com/salaboy/fmtok8s-api-gateway>
 
 O que adiciona às suas dependências maven:
 
@@ -447,7 +456,7 @@ O que adiciona às suas dependências maven:
 </dependency>
 ```
 E configure as rotas padrão para nossos serviços dentro do arquivo application.yaml:
-https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/main/resources/application.yaml#L4
+<https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/main/resources/application.yaml#L4>
 
 ```yaml
 spring:
@@ -468,24 +477,24 @@ spring:
           - RewritePath=/email/(?<id>.*), /$\{id}
 ```
 
-Essas rotas definem um caminho para o gateway como `/c4p/**`, que irá encaminhar automaticamente a solicitação para o serviço http://fmtok8s-c4p.
+Essas rotas definem um caminho para o gateway como `/c4p/**`, que irá encaminhar automaticamente a solicitação para o serviço <http://fmtok8s-c4p>.
 
-> **INFO:** A interface de usuário do site pode ser encontrada aqui: https://github.com/salaboy/fmtok8s-api-gateway/tree/master/src/main/resources/templates
-> O Controller que busca os dados dos serviços de back-end, aqui: https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/main/java/com/salaboy/conferences/site/DemoApplication.java
+> **INFO:** A interface de usuário do site pode ser encontrada aqui: <https://github.com/salaboy/fmtok8s-api-gateway/tree/master/src/main/resources/templates>
+> O Controller que busca os dados dos serviços de back-end, aqui: <https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/main/java/com/salaboy/conferences/site/DemoApplication.java>
 
 Como estamos executando no Kubernetes, podemos usar o nome do serviço Kubernetes em vez de apontar para um pod específico. Esse mecanismo de roteamento nos permite expor apenas os Endpoints do Gateway de API para o mundo externo, deixando todos os outros serviços atrás de uma rede segura.
 
 ### Eventos de domínio e o serviço Call for Proposals
 Como o fluxo em análise é fundamental para o Bounded Context Call For Proposals, não é surpresa que a lógica central pertença ao Serviço Call For Proposals, mais concretamente, às duas funções a seguir: Envio de Proposta e Decisão Tomada pelo Conselho (Proposal Submission and Decision Made By the Board).
 
-> **INFO:** O Serviço Call for Proposals pode ser encontrado aqui: https://github.com/salaboy/fmtok8s-c4p/
+> **INFO:** O Serviço Call for Proposals pode ser encontrado aqui: <https://github.com/salaboy/fmtok8s-c4p/>
 
 O endpoint de Envio de Proposta aceita uma proposta da interface do usuário e a armazena em um banco de dados ou storage. Este é um passo importante, precisamos garantir que não perderemos propostas. Observe que podemos estar interessados ​​em emitir um evento de domínio DDD neste momento, pois outros sistemas/aplicações podem estar interessados ​​em reagir sempre que uma proposta for recebida.
 
-> **INFO:** Verifique uma implementação real aqui: https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/C4PController.java#L37
+> **INFO:** Verifique uma implementação real aqui: <https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/C4PController.java#L37>
 
 Mais importante, o endpoint Decision Made by the Board registra uma decisão feita pela diretoria, mas também define as etapas a seguir com base nessa decisão. Na vida real, essa decisão afetará o curso da ação. Na maioria das vezes, esses pontos de decisão e as ações derivadas deles são essenciais para administrar um negócio eficiente e com boa relação custo-benefício.
-https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/C4PController.java#L60
+<https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/C4PController.java#L60>
 
 ```java
 @PostMapping(value = "/{id}/decision")
@@ -523,7 +532,7 @@ As aplicações da vida real são complexas, e essa complexidade tende a vir da 
 
 Vamos começar com algo que você pode ter enfrentado no passado: comunicações REST para REST podem ser desafiadoras.
 
-#### comunicações REST para REST podem ser desafiadoras
+#### Comunicações REST para REST podem ser desafiadoras
 Se você olhar o exemplo fornecido na seção anterior, os serviços de Agenda e de Email são chamados a partir do Serviço Call for Proposals usando uma [chamada REST](https://github.com/salaboy/fmtok8s-c4p/blob/no-workflow/src/main/java/com/salaboy/conferences/c4p/services/AgendaService.java#L29). Como discutimos antes, essas interações representam uma parte fundamental de nosso fluxo de negócios, então você precisa ter certeza de que essas interações ocorram conforme planejado 100% das vezes. É vital que nosso aplicativo não acabe em um estado inconsistente - por exemplo, uma proposta é aprovada e publicada na agenda, mas nunca enviamos uma notificação ao palestrante. Como está codificado neste exemplo, se os Serviços de Agenda ou de Email ficarem inativos, a solicitação HTTP silenciosamente falhará.
 
 Este requisito básico, ao trabalhar com sistemas distribuídos onde não existe estado compartilhado entre os serviços, torna-se um desafio com várias soluções possíveis.
@@ -540,6 +549,7 @@ Finalmente, uma abordagem mais recente são as Service Meshes, em que delegamos 
 É bastante comum encontrar lógicas de negócios complexas escondidas dentro de nossos serviços, de certa forma obscurecidas por todos os padrões necessários para lidar com erros técnicos, buscar dados de diferentes fontes e transformar dados em diferentes formatos. Em projetos da vida real, fica muito difícil para os especialistas em Domínio entenderem de fato o código que implementa seus fluxos de negócios.
 
 O exemplo discutido neste capítulo se tornaria difícil de ler se adicionássemos o código para lidar com outros aspectos, como:
+
 - Caminhos infelizes e casos excepcionais: como o palestrante que apresentou a proposta desapareceu e não está respondendo a e-mails.
 - Eventos, lembretes e restrições com base no tempo (Time-Based): por exemplo, programe um lembrete para os membros do conselho analisarem uma proposta antes de três dias após o envio. Cancele o lembrete se a decisão foi tomada antes do prazo.
 - Novos requisitos são adicionados, o que leva as pessoas desenvolvedoras a mudar a sequência do fluxo, como, por exemplo, um e-mail que precisa ser enviado com um link de confirmação para o palestrante antes de publicarmos e aprovarmos a palestra para a agenda. Quanto mais requisitos, mais código precisamos adicionar, e mais ele vira um código espaguete.
@@ -553,15 +563,15 @@ As ferramentas de Orquestração de Serviço podem ser usadas em conjunto com Cl
 
 > **DICA:** Verifique projetos como Zeebe, jBPM ou Kogito para entender mais sobre como essas ferramentas podem ajudar você. Além disso, você pode achar este post sobre Cloud Events muito útil.
 
-Finalmente, conforme discutido no livro * Implementing DDD *, patterns (padrões) como CQRS (Command/Query Responsibility Segregation [Segregação de Responsabilidade de Consulta e Comando]) podem ajudá-lo muito ao lidar com relatórios e análises. Você quer evitar a execução de relatórios caros ou rotinas intensas de processamento de dados no banco de dados de serviço. Ao aplicar o CQRS, você externaliza os dados que está interessado em relatar em um armazenamento separado que possui um formato otimizado para indexar, pesquisar e resumir dados. Uma abordagem popular é enviar dados para ElasticSearch para a indexação completa do texto. Então, na sua aplicação, se você deseja pesquisar entre milhares de propostas, você não consulta o Serviço Call for Proposals. Em vez disso, você usa os índices ElasticSearch, descarregando o serviço Call for Proposals, para que ele possa continuar aceitando propostas para suas conferências.
+Finalmente, conforme discutido no livro *Implementing DDD*, patterns (padrões) como CQRS (Command/Query Responsibility Segregation [Segregação de Responsabilidade de Consulta e Comando]) podem ajudá-lo muito ao lidar com relatórios e análises. Você quer evitar a execução de relatórios caros ou rotinas intensas de processamento de dados no banco de dados de serviço. Ao aplicar o CQRS, você externaliza os dados que está interessado em relatar em um armazenamento separado que possui um formato otimizado para indexar, pesquisar e resumir dados. Uma abordagem popular é enviar dados para ElasticSearch para a indexação completa do texto. Então, na sua aplicação, se você deseja pesquisar entre milhares de propostas, você não consulta o Serviço Call for Proposals. Em vez disso, você usa os índices ElasticSearch, descarregando o serviço Call for Proposals, para que ele possa continuar aceitando propostas para suas conferências.
 
-#### Adaptadores(Adapters) para sistemas legados
+#### Adaptadores (Adapters) para sistemas legados
 
 Uma breve nota sobre Sistemas Legados: tente abstraí-los para que você tenha controle sobre suas APIs. Para o exemplo visto neste capítulo, um serviço chamado Email foi introduzido para expor via endpoints HTTP a funcionalidade de um servidor de email. Isso foi feito propositalmente para destacar as vantagens de fornecer um adaptador para um servidor que não podemos alterar (um servidor SMTP). Nesse adaptador, podemos incluir funções auxiliares, modelos e funcionalidades específicas de domínio que são exigidas por nossos casos de uso.
 
 O serviço Email fornecido não inclui uma conexão SMTP, mas expõe um conjunto de APIs que são fáceis de consumir e não exigem que outros serviços incluam clientes SMTP.
 
-> **INFO:** O código-fonte desse serviço pode ser encontrado aqui: https://github.com/salaboy/fmtok8s-email
+> **INFO:** O código-fonte desse serviço pode ser encontrado aqui: <https://github.com/salaboy/fmtok8s-email>
 
 Considere a criação de adapters para seus serviços legados. Lembre-se de que, dentro do Kubernetes, mesmo que os adapters sejam criados em containers separados, esses containers podem ser executados dentro do mesmo host, evitando um salto (hop) extra de rede.
 
