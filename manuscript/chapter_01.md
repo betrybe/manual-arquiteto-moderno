@@ -1,3 +1,5 @@
+![](images/capas_teste.png)
+
 # A importância de aprender conceitos ao invés de novos frameworks
 
 Escrever este capítulo pode não ser uma das tarefas mais fáceis, uma vez que o público-alvo deste material é o de desenvolvedores(as) com alto nível de experiência (*Senior Developers*). A intenção, portanto, deste texto não é de um acadêmico dizer o que profissionais devem estudar, mas, principalmente, gerar uma autocrítica sobre muitos assuntos que poderiam ser explorados com maior profundidade (e até mesmo a aplicação da famosa expressão "ligar os pontos") enquanto estávamos em processo de formação (na universidade).
