@@ -10,7 +10,7 @@ A buzz-word "cloud-native" começou a se estabelecer por volta de 2014, e sua cr
 
 > **TIP:** Uma das formas de se avaliar a popularidade de um termo é validar a quantidade de buscas realizadas ao longo do tempo e as regiões interessadas.
 >
-> https://trends.google.com.br/trends/explore?date=all&q=cloud-native
+> <https://trends.google.com.br/trends/explore?date=all&q=cloud-native>
 
 O entendimento desses conceitos te auxiliará no entendimento da situação em que suas aplicações estão e dará suporte ao planejamento de uma jornada para a cloud. Vamos discorrer sobre essas categorizações, seus conceitos e diferenças.
 
@@ -84,7 +84,7 @@ O Microprofile tem evoluído de forma rápida, e para garantir um conteúdo atua
 
 Para criar um projeto em que você pode estudar exemplos de implementação de práticas e funcionalidades cloud-native utilizando-se da especificação MicroProfile, execute os passos a seguir:
 
-1. Acesse o site https://start.microprofile.io/
+1. Acesse o site <https://start.microprofile.io/>
 2. Insira um `groupId`, `artifactId`, selecione uma versão do MicroProfile, versão do Java SE, e o `runtime`. 
    O `runtime ` será a implementação da especificação MicroProfile. 
 
@@ -163,7 +163,7 @@ Começo este tópico com uma pergunta para você:
 
 Este é o estado da arte da integração e entrega contínua. Mas calma, mesmo que sua resposta seja não, a integração e entrega contínua ainda devem fazer parte da sua jornada cloud-native. **Integração** Contínua e **Entrega** Contínua são temas tão vastos que cada um possui seu próprio livro. Mas vamos discorrer sobre os principais tópicos a seguir.
 
-Primeiro de tudo, a base: <u>automação de tarefas</u>. "Mas até onde devo automatizar?", você me pergunta. Vamos lá:
+Primeiro de tudo, a base: **automação de tarefas**. "Mas até onde devo automatizar?", você me pergunta. Vamos lá:
 
 #### Integração Contínua (CI)
 
@@ -212,18 +212,18 @@ Escolha dentre estratégias de deploy maduras que sejam mais apropriadas à sua 
 
 Veja algumas estratégias de deploy que você pode usar de maneira fácil com plataformas de orquestração como Kubernetes:
 
-* Recreate Strategy: todos os pods existentes serão escalados a zero, e só então o Kubernetes criará pods com a nova versão do seu código. Uma estratégia ousada (tudo ou nada), mas que pode ser necessária em casos de mudanças radicais em estruturas de dados, ou caso você não possa rodar as duas versões simultaneamente em produção;
+* **Recreate Strategy**: todos os pods existentes serão escalados a zero, e só então o Kubernetes criará pods com a nova versão do seu código. Uma estratégia ousada (tudo ou nada), mas que pode ser necessária em casos de mudanças radicais em estruturas de dados, ou caso você não possa rodar as duas versões simultaneamente em produção;
 
-* Canary release: é um tipo de Rolling Strategy, em que se libera a nova versão e, apenas quando constatado que a nova versão é saudável (de acordo com o readiness check do Kubernetes), o Kubernetes começará a destruir os pods com a versão antiga; neste cenário, os pods novos e antigos precisam coexistir durante o período de deploy;
+* **Canary release**: é um tipo de Rolling Strategy, em que se libera a nova versão e, apenas quando constatado que a nova versão é saudável (de acordo com o readiness check do Kubernetes), o Kubernetes começará a destruir os pods com a versão antiga; neste cenário, os pods novos e antigos precisam coexistir durante o período de deploy;
 
-* Blue-Green: é uma boa estratégia para se mitigarem falhas, porém é mais custoso. Utilize caso você queira que um grupo de pessoas realize testes para garantir que a nova versão está de fato pronta e pode ir ao ar. Devem existir dois ambientes de produção idênticos, o azul e o verde, mas apenas um estará ativo por vez. Você terá um router que irá direcionar os usuários para o ambiente ativo.
+* **Blue-Green**: é uma boa estratégia para se mitigarem falhas, porém é mais custoso. Utilize caso você queira que um grupo de pessoas realize testes para garantir que a nova versão está de fato pronta e pode ir ao ar. Devem existir dois ambientes de produção idênticos, o azul e o verde, mas apenas um estará ativo por vez. Você terá um router que irá direcionar os usuários para o ambiente ativo.
 
   > **TIP:** Leitura recomendada sobre blue-green deployment: artigo [BlueGreenDeployment,por Martin Fowler](https://martinfowler.com/bliki/BlueGreenDeployment.html).
 
   Digamos que o ambiente azul está ativo, rodando seu código v1. O grupo de usuários(as) realizará os testes no ambiente verde, não ativo, na versão v2. Uma vez confirmado que a nova versão, v2, pode ir ao ar, você vira a chave, e todas as pessoas usuárias passam a utilizar, agora, o ambiente verde. 
   Seguindo a mesma linha, como o ambiente verde agora está em produção, em um próximo deploy você usaria o ambiente azul para garantir o release antes de virar a chave, e assim por diante.
 
-* A/B testing: neste cenário você executa duas versões da aplicação em produção ao mesmo tempo, como uma forma de se testar uma hipótese. Você pode, por exemplo, comparar, durante o período de uma semana, qual das duas versões vai performar melhor. Ou, de uma outra perspectiva, se o fato de adicionar um novo botão na tela da aplicação na nova versão leva os(as) usuários(as) a comprarem mais. Uma vez realizados os testes, pode-se liberar a versão desejada em sua totalidade, usando por exemplo canary release. 
+* **A/B testing**: neste cenário você executa duas versões da aplicação em produção ao mesmo tempo, como uma forma de se testar uma hipótese. Você pode, por exemplo, comparar, durante o período de uma semana, qual das duas versões vai performar melhor. Ou, de uma outra perspectiva, se o fato de adicionar um novo botão na tela da aplicação na nova versão leva os(as) usuários(as) a comprarem mais. Uma vez realizados os testes, pode-se liberar a versão desejada em sua totalidade, usando por exemplo canary release. 
 
 ## A jornada cloud-native
 
@@ -263,9 +263,9 @@ Uma redução drástica de complexidade para focar a criação do software, cert
 
 > **TIP:** Veja abaixo algumas opções de PaaS atualmente disponíveis no mercado: 
 >
-> * [Platform.sh](platform.sh): é um PaaS que utiliza todos os conceitos de infraestrutura como serviço e também é orientado ao Git, além de possibilitar realizar o deploy da aplicação, deixando todo trabalho para a plataforma. Basicamente, a partir de três arquivos [aplicação](https://docs.platform.sh/configuration/app-containers.html), [serviços](https://docs.platform.sh/configuration/services.html) e [rotas](https://docs.platform.sh/configuration/routes.html), podemos fazer o push para um repositório Git. Um simples push para o sistema remoto do Platform.sh criará automaticamente os containers da aplicação, dos serviços como banco de dados e as rotas da aplicação. Nesse caso, a abstração é gigantesca e faz com que o time foque muito mais a aplicação central da empresa.
+> * [Platform.sh](https://platform.sh/): é um PaaS que utiliza todos os conceitos de infraestrutura como serviço e também é orientado ao Git, além de possibilitar realizar o deploy da aplicação, deixando todo trabalho para a plataforma. Basicamente, a partir de três arquivos [aplicação](https://docs.platform.sh/configuration/app-containers.html), [serviços](https://docs.platform.sh/configuration/services.html) e [rotas](https://docs.platform.sh/configuration/routes.html), podemos fazer o push para um repositório Git. Um simples push para o sistema remoto do Platform.sh criará automaticamente os containers da aplicação, dos serviços como banco de dados e as rotas da aplicação. Nesse caso, a abstração é gigantesca e faz com que o time foque muito mais a aplicação central da empresa.
 > * [Red Hat OpenShift Online](https://www.openshift.com/products/online/): uma opção para se utilizar o OpenShift (a.k.a. [OKD](https://www.okd.io/)) como serviço. Neste PaaS, o OpenShift é disponibilizado na AWS e permite a desenvolvedores de aplicações Ruby, PHP, Node.js e Java utilizarem seus runtimes e banco de dados de preferência para rodar suas aplicações. Possui uma opção self-service e free para pessoas desenvolvedoras. 
-> * [Heroku](heroku.com): nascido em 2007 exclusivamente para Ruby, hoje o Heroku suporta as mais diversas linguagens, como Go, Java, PHP, Node.JS e outras, além de várias ferramentas do ecossistema de uma aplicação;
+> * [Heroku](https://www.heroku.com/): nascido em 2007 exclusivamente para Ruby, hoje o Heroku suporta as mais diversas linguagens, como Go, Java, PHP, Node.JS e outras, além de várias ferramentas do ecossistema de uma aplicação;
 > * [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine): o PaaS oferecido pelo Google é totalmente baseado em Kubernetes Vanilla. Simples de se iniciar, ao se cadastrar você ganha uma quantidade de créditos para poder rodar seus workloads, e recebe também acesso a outros produtos da Google.
 
 Com base em leituras e conceito aplicação de PaaS por diversas empresas, podemos analisar por duas perspectivas:
@@ -278,8 +278,6 @@ Em ambos os cenários, é comum assumir que há maior autonomia da pessoa desenv
 ### SaaS - Software as a Service
 
 O software como serviço é a oferta que provê uma solução mais rápida para determinado problema. Nessa oferta, clientes optam por consumir um programa pronto para uso e não precisam se preocupar com hospedagem, escalabilidade etc., e nem mesmo com desenvolvimento. Toda a complexidade e o risco já foram resolvidos. No entanto, a customização é bem reduzida, e a possibilidade de configuração depende diretamente do provedor. 
-
----
 
 ### Conclusão sobre IaaS, Paas e SaaS
 
@@ -333,17 +331,17 @@ A CNCF assume projetos e os classifica como **graduados**, **incubando** ou em *
 
 ![chasm-cncf](images/chapter_08_05.png)
 
-*Imagem obtida em https://www.cncf.io/projects/*
+*Imagem obtida em <https://www.cncf.io/projects/>*
 
 Se tiver a possibilidade, acesse a [CNCF Cloud Native Interactive Landscape](https://landscape.cncf.io/zoom=200) e repare as inúmeras tecnologias disponíveis para solucionar os problemas de um ambiente de nuvem. Note que, apesar de ser hoje a mais popular, Kubernetes é apenas *uma* dentre as opções de orquestração de contêineres. Não podemos deixar de ressaltar algumas tecnologias populares:
 
-* Diversas distribuições de Kubernetes, como [Red Hat OpenShift](openshift.com) e [Rancher]([rancher.com](https://rancher.com/));
-* Ofertas de PaaS, como [Heroku]([heroku.com](https://www.heroku.com/)) e [platform.sh](platform.sh);
+* Diversas distribuições de Kubernetes, como [Red Hat OpenShift](https://www.openshift.com/) e [Rancher](https://rancher.com/);
+* Ofertas de PaaS, como [Heroku](https://www.heroku.com/) e [platform.sh](https://platform.sh/);
 * [Jaeger](https://www.jaegertracing.io/) para tracing de aplicações, e [Prometheus](https://prometheus.io/) e [Grafana](https://grafana.com/) para monitoramento;
-* [Strimzi]([strimzi.io](https://strimzi.io/)) e [Apache Spark]([spark.apache.org](https://spark.apache.org/)) para streaming e mensageria;
-* [Istio]([istio.io](https://istio.io/)) para service mesh, [Envoy]([envoyproxy.io](https://www.envoyproxy.io/)) para Service proxy;
-* [Jenkins]([jenkins.io](https://jenkins.io/)), [JenkinsX]([jenkins.io](https://jenkins.io/)) e [Tekton]([tekton.dev](https://tekton.dev/)) para CI/CD;
-* [Helm]([helm.sh](https://helm.sh/)), [Operator Framework]([coreos.com/operators](https://coreos.com/operators/)) e [Podman]([podman.io](https://podman.io/)) para construção de imagens e definição de aplicações.
+* [Strimzi](https://strimzi.io/) e [Apache Spark](https://spark.apache.org/) para streaming e mensageria;
+* [Istio](https://istio.io/) para service mesh, [Envoy](https://www.envoyproxy.io/) para Service proxy;
+* [Jenkins](https://jenkins.io/), [JenkinsX](https://jenkins.io/) e [Tekton](https://tekton.dev/) para CI/CD;
+* [Helm](https://helm.sh/), [Operator Framework](https://coreos.com/operators/) e [Podman](https://podman.io/) para construção de imagens e definição de aplicações.
 
 Ainda no contexto de ferramentas e funcionalidades de que aplicações cloud-native podem usufruir, vamos falar a seguir sobre service mesh e as tecnologias existentes.
 

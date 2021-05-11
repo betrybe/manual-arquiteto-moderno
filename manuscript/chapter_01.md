@@ -19,6 +19,8 @@ Ter consciência de que um `Lazy Fetch` com Hibernate, por exemplo pode gerar um
 		recuperar itens I[] do pedido P a partir de seu ID
 	fim-para
 
+{pagebreak}
+
 De forma bastante geral, a execução das instruções pode ser descrita da forma abaixo:
 
 	1 execução da linha 1
@@ -144,8 +146,6 @@ O aspecto interessante nesses códigos é que, na prática, o desempenho desses 
 Mas por que a diferença de desempenho? Por conta do número de acessos ao cache. Se aprofundarmos um pouco mais o estudo e também levarmos em conta a Arquitetura de Computadores, veremos que uma matriz é alocada em memória como um grande array (a notação de matriz que as linguagens de programação utilizam é apenas uma abstração). Por conta disso (e levando em consideração o conceito da localidade referencial - negligenciado no estudo de Sistemas Operacionais), obviamente, se uma linha é trazida para o cache, é muito mais rápido preencher seus elementos adjacentes até que haja a necessidade de acesso a outras páginas de memória (gerando assim um *page fault*) do que ficar buscando elementos em regiões "distantes" da memória, aumentando - e muito - o volume de paginação.
 
 Aliás, pode não parecer algo muito próximo do desenvolvimento Web atual levantarmos aspectos de Sistemas Operacionais e Arquitetura de Computadores, mas muitos desses conceitos de gerenciamento de memória e algoritmos de substituição de páginas estão, sim, presentes em ferramentas de desenvolvimento Web. Ferramentas de Cache (como REDIS, por exemplo) precisam definir uma política de atualização desses dados que serão expostos. Conhecer os algoritmos como o *MRU - Most Recently Used*, *LRU - Least Recently Used*, *MFU - Most Frequently Used*, entre outros, pode ser de fundamental importância para entender como uma ferramenta dessas trabalha, ou mesmo (na ausência de algo pronto) para implementar sua própria ferramenta de cache.
-
-{pagebreak}
 
 E o estudo de teoria dos Grafos? Sem os algoritmos de otimização vistos em Grafos (como o famoso *Algoritmo de Dijkstra*), não teríamos aplicações como Waze, por exemplo. Só que o ponto principal não se limita a apenas reproduzir o algoritmo, mas principalmente em encontrar um modelo que represente o que arestas e vértices significam no contexto do problema a ser resolvido. A distância entre dois vértices pode ser interpretada através da diferença efetiva em metros (ou quilômetros) ou, se baseada na velocidade dos automóveis e no tempo para se trafegar entre dois pontos, infere-se uma distância que pode ser dinâmica e, por consequência, atualizar o valor das arestas.
 

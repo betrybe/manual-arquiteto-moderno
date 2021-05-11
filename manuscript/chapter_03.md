@@ -505,8 +505,6 @@ public class Team {
 
 ```
 
-{pagebreak}
-
 O código fonte desse exemplo está disponível no repositório: [https://github.com/soujava/bulletproof](https://github.com/soujava/bulletproof).
 
 > **TIP**: Lembre-se da importância dos testes de unidade em todo o processo de desenvolvimento!

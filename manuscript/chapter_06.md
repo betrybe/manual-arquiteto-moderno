@@ -14,13 +14,13 @@ Esse foi o contexto em que os bancos de dados relacionais foram criados, inclusi
 
 O tempo passou, nossa tecnologia evoluiu e, com essa evolução, mais um problema surgiu: produzimos dados em uma quantidade muito grande, muitas vezes de forma desestruturada e também descentralizada, com sistemas cada vez mais distribuídos. 
 
-**TIP:** _Esses dados são chamados de *desestruturados* por terem origem em diversas fontes, como sensores IOT (_Internet of Things_, i.e. geladeiras conectadas à internet, relógios inteligentes e carros autônomos), imagens e documentos não catalogados, dentre outros exemplos._
+> **TIP:** Esses dados são chamados de *desestruturados* por terem origem em diversas fontes, como sensores IOT (Internet of Things, i.e. geladeiras conectadas à internet, relógios inteligentes e carros autônomos), imagens e documentos não catalogados, dentre outros exemplos.
 
 Estruturar, isto é, organizar os dados provenientes de fontes como estas era (e é) possível, porém iria requerer muito tempo. Esse tempo extra impactaria o processo de desenvolvimento e entrega de software e, consequentemente, levaria as empresas a perderem o time to market da solução sendo criada. Esse problema precisava ser resolvido e, assim, nasceram os bancos de dados NoSQL!
 
 O termo **NoSQL** foi originalmente criado em 1998 por Carlo Strozzi e, posteriormente, reintroduzido por Eric Evans em 2009, quando este participou da organização de um evento para discutir bancos de dados **open source** e **distribuídos**. E por falar em bancos distribuídos, esse é um conceito amplamente utilizado pelos bancos NoSQL: basicamente, os bancos NoSQL são bancos de dados que operam em computação distribuída, o que impulsiona um significativo grau de escalabilidade e performance. 
 
-**TIP:** Para entender um pouco mais sobre computação distribuída, recomendamos a leitura do seguinte artigo: [Paradigma da computação distribuída](https://imasters.com.br/arquitetura-da-informacao/paradigma-da-computacao-distribuida).
+> **TIP:** Para entender um pouco mais sobre computação distribuída, recomendamos a leitura do seguinte artigo: [Paradigma da computação distribuída](https://imasters.com.br/arquitetura-da-informacao/paradigma-da-computacao-distribuida).
 
 ## NoSQL
 
@@ -48,6 +48,8 @@ Devemos destacar duas principais vantagens de um cluster, especialmente em ambie
 - Soft State - **S**
     - Não é necessário estar consistente o tempo todo. Ou seja: com um banco distribuído em várias máquinas e todas sendo usadas com igual frequência para escrita e consulta, é possível que, em dado momento, uma máquina receba uma escrita e não tenha tido tempo de "repassar" essa escrita para as demais máquinas do banco. Assim, se uma aplicação consultar a máquina que já foi atualizada e outra o fizer numa máquina menos atualizada, os resultados, que deveriam ser iguais, serão diferentes. Imagine a sua _timeline_ do **Facebook**: nela são exibidos os posts, porém nem todos os posts são exibidos exatamente ao mesmo tempo. Nesse caso, o que acontece é que a informação foi enviada ao banco de dados, mas nem todos os servidores do cluster têm essa mesma informação ao mesmo tempo. Isso permite que o banco de dados possa gerenciar mais informações de escrita sem ter que se preocupar em replicá-las em uma mesma operação;
 
+      {pagebreak}
+    
 - Eventually Consistent - **E**
     - O sistema se torna consistente em algum momento. Em outras palavras, ele eventualmente se tornará consistente. Como não temos a informação replicada "instantaneamente", esse conceito se encarrega de deixar o banco consistente "ao seu tempo". Isso porque, dependendo das configurações do cluster, essa replicação pode acontecer mais rapidamente ou não. Mas em algum momento as informações estarão consistentes e presentes em todos os servidores do cluster.
 
@@ -124,6 +126,8 @@ Ao contrapor o banco do tipo família de coluna com os bancos relacionais, é po
 
 Os bancos de dados orientados a documento têm sua estrutura muito semelhante a um arquivo JSON ou XML. Eles são compostos por um grande número de campos, que são criados em tempo de execução, gerando grande flexibilidade, tanto para a leitura como para escrita da informação. 
 
+{width=60%}
+
 ![](images/chapter_06_03.png)
 
 Eles permitem que seja realizada a leitura da informação por campos que não sejam a chave. Algumas implementações, por exemplo, têm uma altíssima integração com motores de busca, o que os torna cruciais para a realização de análise de dados ou logs de um sistema. Veja abaixo algumas implementações dos bancos de dados do tipo documento:
@@ -167,6 +171,8 @@ Alguns bancos de dados possuem a comum característica de ter suporte de uma ou 
 * Couchbase
 
 ### Teorema do CAP
+
+{width=60%}
 
 ![](images/chapter_06_05.png)
 

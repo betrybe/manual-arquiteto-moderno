@@ -121,6 +121,8 @@ Do ponto de vista arquitetônico, isso pode significar um site de conferência m
 
 > **DICA**: Essa estratégia leva a vários serviços desde o primeiro dia, então isso é algo com o qual você e suas equipes devem se acostumar.
 
+{pagebreak}
+
 Nossos sites de conferências independentes serão semelhantes a este:
 
 ![chapter_02_02](images/chapter_02_02.png)
@@ -129,6 +131,7 @@ Como você pode ver no diagrama anterior, está bastante claro que há mudanças
 
 Mas, antes de entrar em detalhes técnicos, como priorizamos e nos certificamos de que começamos com o pé direito? Como podemos definir o escopo desses serviços corretamente (nem muito macro, nem muito micro)? Os conceitos DDD podem nos ajudar, fornecendo algumas respostas e orientações.
 
+{pagebreak}
 
 ### Contextos limitados para começar a dividir seu monolito
 
@@ -411,8 +414,6 @@ Você precisa prestar atenção às suas interações humanas, pois essas intera
 > **DICA:** Como engenheiros, tendemos a simplificar e subestimar a quantidade de trabalho e iterações que podem exigir a criação de uma boa experiência do(da) usuário(a).
 
 A interface de usuário que cobre esse cenário simples é assim:
-
-{pagebreak}
 
 * A página principal dentro do site da conferência exibe a agenda dividida por dias. Os itens da pauta são os que já estão confirmados e foram aprovados pelo comitê.
 
