@@ -21,7 +21,7 @@ Observe a imagem a seguir:
 
 ![](images/chapter_04_01.png)
 
-*Fonte: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html*
+*Fonte: <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>*
 
 Usaremos a imagem acima para discorrer sobre pontos de atenção que vale a pena aplicar em sua arquitetura:
 
