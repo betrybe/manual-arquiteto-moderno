@@ -122,14 +122,14 @@ Agora, estou buscando valorizar bastante a Análise de Algoritmos, correto? Quer
 
 Um algoritmo bastante comum na formação durante a graduação é o percurso e preenchimento de matrizes. Esse tipo de algoritmo, independente de o preenchimento ser via Linhas x Colunas ou Colunas x Linhas, na visão única e exclusiva da Análise de Algoritmos é irrelevante, pois ambos são de ordem assintótica O(nˆ2). Observe estes fragmentos de código Java:
 
+{pagebreak}
+
 **Fragmento1**: preenchimento Linha x Coluna
 
 
 	for (int i=0; i < TAM; i++)
 		for (int j=0; j < TAM; j++)
 			matriz[i][j] = valor;
-
-{pagebreak}
 
 **Fragmento 2**: preenchimento Coluna x Linha
 
