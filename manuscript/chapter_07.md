@@ -1,4 +1,4 @@
-# Arquitetura de microsserviços{#chapter_07}
+# Arquitetura de microsserviços {#chapter_07}
 
 Com a popularização da utilização de ambientes de cloud para entrega de software, a [arquitetura orientada a microsserviços](https://www.martinfowler.com/articles/microservices.html) passou a ser cada vez mais adotada. O quão confortável a comunidade de TI pode se sentir acerca da adoção dessa arquitetura? 
 

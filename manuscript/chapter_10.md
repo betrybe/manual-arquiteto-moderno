@@ -1,4 +1,4 @@
-# Destrinchando performance de aplicações{#chapter_10}
+# Destrinchando performance de aplicações {#chapter_10}
 
 ## Introdução e conceitos
 

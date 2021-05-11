@@ -1,4 +1,4 @@
-# Refatoração{#chapter_05}
+# Refatoração {#chapter_05}
 
 Após alguns anos de estrada, quem desenvolve percebe que passa grande parte do seu tempo lendo código e, na maioria das vezes, código escrito por outras pessoas. Sem muito esforço, percebe-se que esse tempo é superior ao tempo gasto escrevendo novas linhas de código, afinal de contas, é preciso entender o funcionamento do código atual, onde deverá fazer suas mudanças, e, principalmente, quais classes ou arquivos serão impactados por elas.
 

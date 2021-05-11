@@ -1,4 +1,4 @@
-# NoSQL vs. SQL{#chapter_06}
+# NoSQL vs. SQL {#chapter_06}
 
 Muitas das vezes, quando iniciamos um debate sobre SQL (Structured Query Language) e NoSQL no meio técnico, já podemos esperar o surgimento de discussões acaloradas. Isso se deve ao fato, principalmente, de que existe uma ideia de que há uma guerra, uma rixa etc. que precisa ser vencida entre quem faz uso dessas tecnologias. Já queremos deixar claro, não existe guerra alguma! Vamos desfazer esse mito?
 

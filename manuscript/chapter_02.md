@@ -16,7 +16,7 @@ Este capítulo está dividido em duas seções principais:
 - [De Monolith até K8s usando DDD](#evoluindo-seu-monolito)
 
 
-## Java na nuvem{#java-na-nuvem}
+## Java na nuvem {#java-na-nuvem}
 
 Existem muitos frameworks por aí com o objetivo de fornecer uma experiência mais fácil para os desenvolvedores que criam microsserviços. Exemplos disso são Spring Boot, Quarkus, Micronaut, Helidon etc. Em geral, o objetivo desses frameworks é criar um arquivo JAR autônomo, que possa ser executado, fornecendo a você um executável livre de dependências e que requer apenas a Java Virtual Machine (JVM) para rodar.
 
@@ -63,7 +63,7 @@ Eu recomendo o seguinte artigo: [“The Business Value of Using DDD”](https://
 A próxima seção explora um exemplo que eu criei com base na minha experiência durante a rearquitetura de aplicações monolíticas Java para uma abordagem mais distribuída. O exemplo é fictício, qualquer semelhança com a realidade é mera coincidência :) Nós encorajamos você a abstrair os conceitos e padrões do cenário de exemplo e mapeá-los para seu próprio domínio. No final das contas, este é apenas um exemplo, embora complexo e totalmente funcional.
 
 
-## Evoluindo seu monolito na prática, usando DDD{#evoluindo-seu-monolito}
+## Evoluindo seu monolito na prática, usando DDD {#evoluindo-seu-monolito}
 
 Esta seção cobre um cenário de exemplo que nos ajuda a explicar alguns dos conceitos em ação. Você pode mapear esses conceitos para seu domínio de negócios e copiar a solução técnica real do exemplo para alguns dos desafios apresentados.
 
@@ -412,6 +412,8 @@ Você precisa prestar atenção às suas interações humanas, pois essas intera
 
 A interface de usuário que cobre esse cenário simples é assim:
 
+{pagebreak}
+
 * A página principal dentro do site da conferência exibe a agenda dividida por dias. Os itens da pauta são os que já estão confirmados e foram aprovados pelo comitê.
 
   ![chapter_02_08](images/chapter_02_08.png)
@@ -437,6 +439,8 @@ A interface de usuário que cobre esse cenário simples é assim:
 
 
 Mais uma vez, você pode notar a simplificação proposital desse cenário, para estabelecer um conjunto básico de funcionalidades, iterar rapidamente e fazê-lo funcionar e então expandir os requisitos.
+
+{pagebreak}
 
 #### Arquitetura e Serviços
 
@@ -464,8 +468,9 @@ O que adiciona às suas dependências maven:
 E configure as rotas padrão para nossos serviços dentro do arquivo application.yaml:
 <https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/main/resources/application.yaml#L4>
 
-```yaml
 {language=yaml}
+
+```yaml
 spring:
   cloud:
     gateway:

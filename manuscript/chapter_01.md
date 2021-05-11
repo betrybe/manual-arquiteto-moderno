@@ -1,4 +1,4 @@
-# A importância de aprender conceitos ao invés de novos frameworks{#chapter_01}
+# A importância de aprender conceitos ao invés de novos frameworks {#chapter_01}
 
 Escrever este capítulo pode não ser uma das tarefas mais fáceis, uma vez que o público-alvo deste material é o de desenvolvedores(as) com alto nível de experiência (*Senior Developers*). A intenção, portanto, deste texto não é de um acadêmico dizer o que profissionais devem estudar, mas, principalmente, gerar uma autocrítica sobre muitos assuntos que poderiam ser explorados com maior profundidade (e até mesmo a aplicação da famosa expressão "ligar os pontos") enquanto estávamos em processo de formação (na universidade).
 
@@ -55,34 +55,37 @@ A que conclusão podemos chegar depois de toda essa discussão? Talvez não seja
 Sabemos que Estruturas de Dados é um assunto que, para muitos(as) estudantes em formação, é tenebroso e extremamente abstrato. Porém é necessário e fundamental termos conhecimento das estruturas básicas e avançadas para também entendermos as ferramentas que utilizamos em sistemas atuais.
 
 Quer exemplos? 
+
 - **Filas**: Apache Kafka, Rabbit MQ, MQTT, entre outros, são exemplos de ferramentas que utilizam os conceitos de `filas` em suas implementações. Não apenas filas únicas, mas filas com prioridades, que também são objeto de estudo no período da graduação.
 - **Pilhas**: Sua IDE faz uso de pilhas a todo momento para conferir se as chaves abertas foram fechadas corretamente (o *parser* da linguagem faz uso de pilhas quase que constantemente). Se os parênteses que definem as instruções em `Clojure` estão em conformidade. Isso apenas para citar exemplos imediatos. 
 
 Além desses exemplos mais "simples" (e destaco a importância de se colocar o termo entre aspas), temos também exemplos mais complexos, que geram muita diferença de desempenho nas aplicações. Por exemplo: qual a diferença entre utilizarmos Listas (sejam elas Vetores ou listas ligadas) e Hash? A principal diferença está no desempenho da busca. Observe este pequeno exemplo de benchmark em Java:
 
-		ArrayList<Produto> lista;
-		lista = new ArrayList<Produto>();
-		for (int i = 0; i < 100000; i++) {
-		    Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
-		    lista.add(p);
-		}
-		int quantosAchei=0; // numero de ocorrencias encontradas
-		// inicio da medicao do tempo
-		long inicio = System.currentTimeMillis();
-		Produto busca;
-		for (int cont = 0; cont < 10000; cont++) {
-		    for (int i = 0; i < lista.size(); i++) {
-		        Produto tmp = lista.get(i);
-		        if (tmp.getId() == -1) { // forcando buscar um ID que nao existe na lista -> o pior caso
-		             busca = tmp;
-		             quantosAchei++;
-		             break;
-		         }
-		     }
-		 }
-		 long fim = System.currentTimeMillis();
-		 // fim da medicao do tempo
-		 System.out.println("Achei = " + quantosAchei +" em "+(fim-inicio));
+```java
+	ArrayList<Produto> lista;
+	lista = new ArrayList<Produto>();
+	for (int i = 0; i < 100000; i++) {
+	    Produto p = new Produto(i + 1, "Produto " + (i + 1), 0, 0);
+	    lista.add(p);
+	}
+	int quantosAchei=0; // numero de ocorrencias encontradas
+	// inicio da medicao do tempo
+	long inicio = System.currentTimeMillis();
+	Produto busca;
+	for (int cont = 0; cont < 10000; cont++) {
+	    for (int i = 0; i < lista.size(); i++) {
+	        Produto tmp = lista.get(i);
+	        if (tmp.getId() == -1) { // forcando buscar um ID que nao existe na lista -> o pior caso
+	             busca = tmp;
+	             quantosAchei++;
+	             break;
+	         }
+	     }
+	 }
+	 long fim = System.currentTimeMillis();
+	 // fim da medicao do tempo
+	 System.out.println("Achei = " + quantosAchei +" em "+(fim-inicio));
+```
 
 Esse simples algoritmo popula uma lista com 100.000 objetos do tipo produto e realiza 10.000 buscas de um produto inexistente nessa lista. Como é uma estrutura linear (e voltamos à análise de algoritmos), a busca obrigatoriamente tem que passar por todos os objetos até concluir que ele não existe na lista. Um algoritmo deste pode levar alguns bons segundos para executar (um teste em uma máquina comum pode levar entre 2 e 5 segundos para executar).
 É possível melhorar o desempenho dessa busca? Claro que sim. Poderíamos usar, ao invés de busca linear, um algoritmo de busca binária. Entretanto, para essa estratégia, nosso conjunto precisaria estar previamente ordenado. 
@@ -119,7 +122,7 @@ Agora, estou buscando valorizar bastante a Análise de Algoritmos, correto? Quer
 
 Um algoritmo bastante comum na formação durante a graduação é o percurso e preenchimento de matrizes. Esse tipo de algoritmo, independente de o preenchimento ser via Linhas x Colunas ou Colunas x Linhas, na visão única e exclusiva da Análise de Algoritmos é irrelevante, pois ambos são de ordem assintótica O(nˆ2). Observe estes fragmentos de código Java:
 
-Fragmento1: preenchimento Linha x Coluna
+**Fragmento1**: preenchimento Linha x Coluna
 
 
 	for (int i=0; i < TAM; i++)
@@ -128,7 +131,7 @@ Fragmento1: preenchimento Linha x Coluna
 
 {pagebreak}
 
-Fragmento 2: preenchimento Coluna x Linha
+**Fragmento 2**: preenchimento Coluna x Linha
 
 ```
 for (int i=0; i < TAM; i++)
