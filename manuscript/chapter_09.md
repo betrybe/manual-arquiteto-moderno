@@ -1,4 +1,4 @@
-# Precisamos falar sobre atualizações
+# Precisamos falar sobre atualizações{#chapter_09}
 
 Não vou mentir pra você: quando ouvi falar que o Java seria atualizado a cada seis meses, pensei comigo: "xiiiii… esse negócio não vai dar certo".
 

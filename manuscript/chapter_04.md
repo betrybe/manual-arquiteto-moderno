@@ -1,4 +1,4 @@
-# Clean Architecture
+# Clean Architecture{#chapter_04}
 
 É interessante como os conceitos de Clean Architecture podem ser relacionados em diversos aspectos com o livro de Domain Driven Design, de Eric Evans. Podemos exemplificar esta relação quando, no livro de DDD, é citada diversas vezes a proposta de criação de uma linguagem próxima do negócio: a linguagem ubíqua. Já no livro Clean Architecture, de Robert C. Martin Series, se fala sobre separar o código de negócio do que importa, ou seja, não amarrar regra de negócio com a tecnologia escolhida.
 

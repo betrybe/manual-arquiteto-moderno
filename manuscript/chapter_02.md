@@ -1,4 +1,4 @@
-# Tenho lido sobre DDD, para onde devo ir depois? {#chapter_2}
+# Tenho lido sobre DDD, para onde devo ir depois? {#chapter_02}
 
 Você já codifica Java há muitos anos, já leu sobre Domain-Driven Design (DDD) e deseja aplicar isso a um projeto da vida real. Como isso funciona? O que realmente significa aplicar DDD no ecossistema de hoje? Realmente vale a pena o tempo investido?
 
@@ -13,10 +13,10 @@ Este capítulo aborda o lado prático de como esses conceitos podem ser mapeados
 Este capítulo está dividido em duas seções principais:
 
 - [Introdução aos tópicos relacionados a Java e nuvem](#java-na-nuvem)
-- De Monolith até K8s usando DDD
+- [De Monolith até K8s usando DDD](#evoluindo-seu-monolito)
 
 
-## Java na nuvem
+## Java na nuvem{#java-na-nuvem}
 
 Existem muitos frameworks por aí com o objetivo de fornecer uma experiência mais fácil para os desenvolvedores que criam microsserviços. Exemplos disso são Spring Boot, Quarkus, Micronaut, Helidon etc. Em geral, o objetivo desses frameworks é criar um arquivo JAR autônomo, que possa ser executado, fornecendo a você um executável livre de dependências e que requer apenas a Java Virtual Machine (JVM) para rodar.
 
@@ -31,7 +31,7 @@ Enquanto costumávamos ter um monolito com todos os recursos de nossas grandes a
 
 Construir um serviço hoje com endpoints REST é uma tarefa bastante fácil se você estiver usando um desses frameworks mencionados anteriormente. Você tem um modelo de programação baseado em anotação que permite mapear métodos Java para terminais REST e mecanismos avançados de serialização/desserialização que lidarão com todo o boilerplate de análise de solicitações HTTP.
 
-> **DICA:** Para mais detalhes sobre a arquitetura de microsserviços, consulte o capítulo [Microsserviços](#chapter_07.md).
+> **DICA:** Para mais detalhes sobre a arquitetura de microsserviços, consulte o capítulo [Microsserviços](#chapter_07).
 
 O verdadeiro problema surge quando você começa a ter mais do que um punhado de serviços. A execução de cada serviço em sua própria JVM irá forçá-lo a executar cada serviço em uma porta diferente e cuidar dos problemas quando essas JVMs travarem. Por isso, a indústria saltou rapidamente para containers por volta de 2015.
 
@@ -49,7 +49,7 @@ Quando você tem um Bounded Context (contexto delimitado) e alguns Serviços, pr
 Quando o número de serviços aumenta, isso se torna incontrolável.
 Por esse motivo, os Container Orchestrators (orquestradores de container) se tornaram populares nos últimos anos, e o Kubernetes está liderando o caminho. O Kubernetes é responsável por lidar com a criação desses container runtimes, como escaloná-los quando há carga e como lidar com containers que apresentem mau comportamento ou falhem.
 
-> **DICA:** Para obter mais detalhes sobre containers e ferramentas de orquestração, consulte o capítulo sobre [Cloud](#chapter_08.md).
+> **DICA:** Para obter mais detalhes sobre containers e ferramentas de orquestração, consulte o capítulo sobre [Cloud](#chapter_08).
 
 O sucesso do Kubernetes é baseado no fato de que cada grande provedor na nuvem fornece um serviço Kubernetes gerenciado, tornando-o o padrão de fato para suporte a multicloud. Em outras palavras, não importa qual provedor você escolha, você sempre pode confiar que haverá uma API Kubernetes exposta para você interagir e provisionar seus serviços.
 
@@ -63,7 +63,7 @@ Eu recomendo o seguinte artigo: [“The Business Value of Using DDD”](https://
 A próxima seção explora um exemplo que eu criei com base na minha experiência durante a rearquitetura de aplicações monolíticas Java para uma abordagem mais distribuída. O exemplo é fictício, qualquer semelhança com a realidade é mera coincidência :) Nós encorajamos você a abstrair os conceitos e padrões do cenário de exemplo e mapeá-los para seu próprio domínio. No final das contas, este é apenas um exemplo, embora complexo e totalmente funcional.
 
 
-## Evoluindo seu monolito na prática, usando DDD
+## Evoluindo seu monolito na prática, usando DDD{#evoluindo-seu-monolito}
 
 Esta seção cobre um cenário de exemplo que nos ajuda a explicar alguns dos conceitos em ação. Você pode mapear esses conceitos para seu domínio de negócios e copiar a solução técnica real do exemplo para alguns dos desafios apresentados.
 
@@ -389,7 +389,7 @@ Isso baixa automaticamente a versão mais recente do stub e o executa antes que 
 
 É importante observar que tanto o Serviço quanto os contratos são versionados juntos, como parte da mesma base de código. Isso implica que o Stub gerado e o próprio Serviço terão a mesma versão. Um serviço de consumidor, para executar seus testes, pode depender do Stub, pois nunca deve depender do próprio serviço. Assim que o consumidor tiver testado por meio do Stub de Serviço do produtor, você pode reconhecer rapidamente quando um contrato é quebrado ou quando uma nova versão do contrato não é mais compatível com os consumidores, pois os testes usando os Stubs serão interrompidos quando versões novas e incompatíveis forem lançadas. Neste momento, os consumidores se deparam com uma decisão simples: ficar dependendo dos contratos antigos com uma versão fixa, ou atualizar para a versão mais recente do contrato. Isso pode exigir que você execute várias versões do seu serviço ao mesmo tempo. Felizmente para nós, o Kubernetes foi criado para oferecer suporte a esses cenários. Você pode ler sobre versões canário (Canary Releases) se estiver interessado em aspectos de multi-version deployments.
 
-> **DICA:** O capítulo [Cloud](#chapter_08.md) cobre Canary Releases, bem como outras estratégias de implantação.
+> **DICA:** O capítulo [Cloud](#chapter_08) cobre Canary Releases, bem como outras estratégias de implantação.
 
 Ambos, bounded contexts e mapas de contexto, são ótimas ferramentas conceituais para entender como estruturar suas equipes e seu software, mas, mais importante, esses conceitos ajudam você a se concentrar no valor do negócio.
 
@@ -465,6 +465,7 @@ E configure as rotas padrão para nossos serviços dentro do arquivo application
 <https://github.com/salaboy/fmtok8s-api-gateway/blob/master/src/main/resources/application.yaml#L4>
 
 ```yaml
+{language=yaml}
 spring:
   cloud:
     gateway:
@@ -549,7 +550,7 @@ Outra solução pode ser usar um mecanismo de mensagem ou pub/sub para comunicar
 
 Finalmente, uma abordagem mais recente são as Service Meshes, em que delegamos a responsabilidade de tentar novamente, por exemplo, à infraestrutura. O Service Mesh usa proxies para inspecionar cargas HTTP e códigos de erro, de forma que novas tentativas automáticas possam ser feitas em caso de falha.
 
-> **DICA:** Você deve dar uma olhada em Istio, Gloo e LinkerD se quiser entender mais sobre como funcionam Service Meshes e quais são suas vantagens. Mais detalhes sobre as Service Meshes são compartilhados no capítulo [Cloud](#chapter_08.md).
+> **DICA:** Você deve dar uma olhada em Istio, Gloo e LinkerD se quiser entender mais sobre como funcionam Service Meshes e quais são suas vantagens. Mais detalhes sobre as Service Meshes são compartilhados no capítulo [Cloud](#chapter_08).
 
 #### Fluxo enterrado no código
 É bastante comum encontrar lógicas de negócios complexas escondidas dentro de nossos serviços, de certa forma obscurecidas por todos os padrões necessários para lidar com erros técnicos, buscar dados de diferentes fontes e transformar dados em diferentes formatos. Em projetos da vida real, fica muito difícil para os especialistas em Domínio entenderem de fato o código que implementa seus fluxos de negócios.
@@ -589,5 +590,3 @@ Este capítulo abordou uma ampla gama de ferramentas e princípios referentes a 
 - Mantenha suas equipes atualizadas com treinamentos. A transferência de conhecimento é um grande problema quando o stack tecnológico é amplo e complexo. Aprenda a identificar quais são os principais tópicos com os quais suas equipes têm dificuldade e encontre treinamento que possa ajudar a difundir o conhecimento entre elas.
 - Use convenções em vez de definições internas, aproveite as comunidades de código aberto, que são ótimos lugares para encontrar as melhores práticas aplicadas, inovações e tendências. Não tenha medo de participar, envolver-se e compartilhar seus aprendizados.
 - Considere o uso de provedores SaaS (Software as a Service) em vez de hospedagem interna, quando possível. Se você já está rodando em um provedor na nuvem, precisa seriamente considerar o conjunto de serviços que eles oferecem. Provedores na nuvem e ofertas de SaaS economizarão um tempo valioso ao configurar e manter peças-chave de sua infraestrutura. Mesmo um(a) desenvolvedor(a) podendo executar Kafka, ElasticSearch ou qualquer outra ferramenta de terceiros usando containers, não significa que ele(ela) esteja disposto a manter, atualizar e fazer backup desses serviços para toda a empresa.
-
-teste confira o [capítulo 2](#chapter_2)
