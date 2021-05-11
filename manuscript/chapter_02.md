@@ -564,7 +564,7 @@ O exemplo discutido neste capítulo se tornaria difícil de ler se adicionássem
 
 Não existem soluções milagrosas para enfrentar esses desafios, mas eu gostaria de mencionar algumas coisas que podem, em seus cenários, ajudar a reduzir a complexidade e fornecer visibilidade sobre como seus serviços estão funcionando.
 
-Os eventos de domínio (Domain Events) são introduzidos no DDD para externalizar o estado da aplicação que pode ser relevante para o consumo de outros serviços. Do lado prático, esses eventos podem ser criados usando [Cloud Events](cloudevents.io), que fornece um formato independente de transporte para a troca de eventos.
+Os eventos de domínio (Domain Events) são introduzidos no DDD para externalizar o estado da aplicação que pode ser relevante para o consumo de outros serviços. Do lado prático, esses eventos podem ser criados usando [Cloud Events](https://cloudevents.io/), que fornece um formato independente de transporte para a troca de eventos.
 
 As ferramentas de Orquestração de Serviço podem ser usadas em conjunto com Cloud Events para externalizar a lógica de negócios enterrada em nossos serviços.
 
