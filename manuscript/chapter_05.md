@@ -1,4 +1,4 @@
-# Refatoração
+# Refatoração {#chapter_05}
 
 Após alguns anos de estrada, quem desenvolve percebe que passa grande parte do seu tempo lendo código e, na maioria das vezes, código escrito por outras pessoas. Sem muito esforço, percebe-se que esse tempo é superior ao tempo gasto escrevendo novas linhas de código, afinal de contas, é preciso entender o funcionamento do código atual, onde deverá fazer suas mudanças, e, principalmente, quais classes ou arquivos serão impactados por elas.
 
@@ -8,7 +8,7 @@ Para diminuir o custo nas alterações do sistema, é necessário **investir na 
 
 Uma das definições mais aceitas na indústria para "Refatoração" é a de **Martin Fowler**, em seu livro **Refactoring: Improving the Design of Existing Code**, segundo a qual:
 
-> "Refatoração é uma técnica controlada para reestruturar um trecho de código existente, **alterando sua estrutura interna sem modificar seu comportamento externo**. Consiste em uma série de pequenas transformações que preservam o comportamento inicial. Cada transformação (chamada de refatoração) reflete em uma pequena mudança, mas uma sequência de transformações pode produzir uma significante reestruturação. Como cada refatoração é pequena, é menos provável que se introduza um erro. Além disso, o sistema continua em pleno funcionamento depois de cada pequena refatoração, reduzindo as chances de o sistema ser seriamente danificado durante a reestruturação." -- Martin Fowler
+> "Refatoração é uma técnica controlada para reestruturar um trecho de código existente, **alterando sua estrutura interna sem modificar seu comportamento externo**. Consiste em uma série de pequenas transformações que preservam o comportamento inicial. Cada transformação (chamada de refatoração) reflete em uma pequena mudança, mas uma sequência de transformações pode produzir uma significante reestruturação. Como cada refatoração é pequena, é menos provável que se introduza um erro. Além disso, o sistema continua em pleno funcionamento depois de cada pequena refatoração, reduzindo as chances de o sistema ser seriamente danificado durante a reestruturação." -- *Martin Fowler*
 
 Com base nas palavras de Fowler, podemos entender que refatoração é o processo de modificar um trecho de código já escrito, executando pequenos passos (**baby steps**) sem modificar o comportamento atual do sistema. É uma técnica utilizada para melhorar algum aspecto do código, entre os quais podemos citar melhorias na clareza do código para facilitar a leitura, ou também ajustes no design das classes a fim de trazer maior flexibilidade ao sistema.
 

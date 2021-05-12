@@ -1,4 +1,4 @@
-# Precisamos falar sobre atualizações
+# Precisamos falar sobre atualizações {#chapter_09}
 
 Não vou mentir pra você: quando ouvi falar que o Java seria atualizado a cada seis meses, pensei comigo: "xiiiii… esse negócio não vai dar certo".
 
@@ -49,13 +49,13 @@ Só para te dar uma ideia, o JDK 9 teve noventa e um itens em sua release, enqua
 
 A empresa JRebel publicou no ano de 2020 os resultados de uma pesquisa realizada com centenas de profissionais ao redor do mundo. Veja abaixo um dos resultados específicos em relação às versões de Java:
 
-![alt text](images/chapter_09_01.png)
-*Fonte: https://www.jrebel.com/blog/2020-java-technology-report*
+![](images/chapter_09_01.png)
+*Fonte: <https://www.jrebel.com/blog/2020-java-technology-report>*
 
 Outra pesquisa interessante também, publicada em 2020 pela Snyk, trouxe os seguintes resultados:
 
-![alt text](images/chapter_09_02.png)
-Fonte: https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/
+![](images/chapter_09_02.png)
+*Fonte: <https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/>*
 
 Tirando apenas a média dessas duas pesquisas, já temos cerca de 60% dos desenvolvedores Java ainda na versão 8. E há pesquisas por aí que dizem que esse número pode ser ainda maior, chegando a algo em torno de 80%.
 
@@ -67,8 +67,8 @@ Vamos encarar a realidade: o mercado, principalmente quando se fala em aplicaç�
 
 E por que isso? Eu diria que os principais motivos estão claramente listados na mesma pesquisa da Snyk já mencionada acima:
 
-![alt text](images/chapter_09_03.png)
-Fonte: https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/
+![](images/chapter_09_03.png)
+*Fonte: <https://snyk.io/blog/developers-dont-want-to-leave-java-8-as-64-hold-firm-on-their-preferred-release/>*
 
 Esse resultado, aliás, não deveria surpreender ninguém. Os principais motivos que fazem profissionais e empresas ao redor do mundo não terem essa ânsia pelas últimas atualizações são:
 
@@ -118,6 +118,8 @@ Vamos imaginar que você é um(a) profissional que trabalha em uma aplicação J
 * A partir do JDK 10, o compilador JIT do Graal VM está disponível em qualquer distribuição de Java. Ele é em média 13% mais rápido que o JIT padrão, e tem evoluído rapidamente;
 * No JDK 9, o G1 passou a ser o Garbage Collector default da plataforma, o que traz ganhos substanciais de performance se você simplesmente mudar a JVM (sem tocar no seu código);
 * Falando em Garbage Collector, você poderia (quem sabe?) estar avaliando o uso do Shenandoah, um Garbage Collector chamado de "low-pause-time", ou seja, que faz a sua coleta praticamente sem gerar overhead na sua JVM.
+
+{pagebreak}
 
 Poderíamos escrever outro livro só listando coisas que as aplicações rodando em uma JVM na versão 8 estão "perdendo". E veja que nem foram mencionadas aqui questões de segurança, que é algo crítico em qualquer ambiente corporativo.
 

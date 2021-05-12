@@ -1,4 +1,4 @@
-# NoSQL vs. SQL
+# NoSQL vs. SQL {#chapter_06}
 
 Muitas das vezes, quando iniciamos um debate sobre SQL (Structured Query Language) e NoSQL no meio técnico, já podemos esperar o surgimento de discussões acaloradas. Isso se deve ao fato, principalmente, de que existe uma ideia de que há uma guerra, uma rixa etc. que precisa ser vencida entre quem faz uso dessas tecnologias. Já queremos deixar claro, não existe guerra alguma! Vamos desfazer esse mito?
 
@@ -14,13 +14,13 @@ Esse foi o contexto em que os bancos de dados relacionais foram criados, inclusi
 
 O tempo passou, nossa tecnologia evoluiu e, com essa evolução, mais um problema surgiu: produzimos dados em uma quantidade muito grande, muitas vezes de forma desestruturada e também descentralizada, com sistemas cada vez mais distribuídos. 
 
-**TIP:** _Esses dados são chamados de *desestruturados* por terem origem em diversas fontes, como sensores IOT (_Internet of Things_, i.e. geladeiras conectadas à internet, relógios inteligentes e carros autônomos), imagens e documentos não catalogados, dentre outros exemplos._
+> **TIP:** Esses dados são chamados de *desestruturados* por terem origem em diversas fontes, como sensores IOT (Internet of Things, i.e. geladeiras conectadas à internet, relógios inteligentes e carros autônomos), imagens e documentos não catalogados, dentre outros exemplos.
 
 Estruturar, isto é, organizar os dados provenientes de fontes como estas era (e é) possível, porém iria requerer muito tempo. Esse tempo extra impactaria o processo de desenvolvimento e entrega de software e, consequentemente, levaria as empresas a perderem o time to market da solução sendo criada. Esse problema precisava ser resolvido e, assim, nasceram os bancos de dados NoSQL!
 
 O termo **NoSQL** foi originalmente criado em 1998 por Carlo Strozzi e, posteriormente, reintroduzido por Eric Evans em 2009, quando este participou da organização de um evento para discutir bancos de dados **open source** e **distribuídos**. E por falar em bancos distribuídos, esse é um conceito amplamente utilizado pelos bancos NoSQL: basicamente, os bancos NoSQL são bancos de dados que operam em computação distribuída, o que impulsiona um significativo grau de escalabilidade e performance. 
 
-**TIP:** Para entender um pouco mais sobre computação distribuída, recomendamos a leitura do seguinte artigo: [Paradigma da computação distribuída](https://imasters.com.br/arquitetura-da-informacao/paradigma-da-computacao-distribuida).
+> **TIP:** Para entender um pouco mais sobre computação distribuída, recomendamos a leitura do seguinte artigo: [Paradigma da computação distribuída](https://imasters.com.br/arquitetura-da-informacao/paradigma-da-computacao-distribuida).
 
 ## NoSQL
 
@@ -48,6 +48,8 @@ Devemos destacar duas principais vantagens de um cluster, especialmente em ambie
 - Soft State - **S**
     - Não é necessário estar consistente o tempo todo. Ou seja: com um banco distribuído em várias máquinas e todas sendo usadas com igual frequência para escrita e consulta, é possível que, em dado momento, uma máquina receba uma escrita e não tenha tido tempo de "repassar" essa escrita para as demais máquinas do banco. Assim, se uma aplicação consultar a máquina que já foi atualizada e outra o fizer numa máquina menos atualizada, os resultados, que deveriam ser iguais, serão diferentes. Imagine a sua _timeline_ do **Facebook**: nela são exibidos os posts, porém nem todos os posts são exibidos exatamente ao mesmo tempo. Nesse caso, o que acontece é que a informação foi enviada ao banco de dados, mas nem todos os servidores do cluster têm essa mesma informação ao mesmo tempo. Isso permite que o banco de dados possa gerenciar mais informações de escrita sem ter que se preocupar em replicá-las em uma mesma operação;
 
+      {pagebreak}
+    
 - Eventually Consistent - **E**
     - O sistema se torna consistente em algum momento. Em outras palavras, ele eventualmente se tornará consistente. Como não temos a informação replicada "instantaneamente", esse conceito se encarrega de deixar o banco consistente "ao seu tempo". Isso porque, dependendo das configurações do cluster, essa replicação pode acontecer mais rapidamente ou não. Mas em algum momento as informações estarão consistentes e presentes em todos os servidores do cluster.
 
@@ -68,7 +70,7 @@ Cada classe acima possui uma aplicação diferente, portanto, devemos entender a
 
 #### Classe `Key / Value`
 
-![Estrutura de Chave-valor](images/chapter_06_01.png "Estrutura de Chave-valor")
+![](images/chapter_06_01.png)
 
 Os bancos do tipo chave-valor possuem uma estrutura similar à da classe `java.util.Map` do Java, ou seja, a *informação* (`value`) será recuperada apenas pela *chave* (`key`). Esse tipo de banco de dados pode ser utilizado, por exemplo, para gerenciar sessões de usuários logados. Outro exemplo de utilização é aliado a um DNS, onde a chave é o endereço, por exemplo, `www.google.com`, e o valor é o IP desse servidor.
 
@@ -93,7 +95,7 @@ Nessa classe de banco, não é possível realizar operações como `join` entre 
 
 #### Classe `Column Family`
 
-![Estrutura família de colunas](images/chapter_06_02.png "Estrutura família de colunas")
+![](images/chapter_06_02.png)
 
 Esse modelo se tornou popular através do paper "[Bigtable: a Distributed Storage System for Structured Data](https://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf)", criado por funcionários do Google, com o objetivo de montar um sistema de armazenamento de dados distribuído, projetado para ter um alto grau de escalabilidade e de volume de dados. Assim como o chave-valor, para realizar uma busca ou recuperar alguma informação dentro do banco de dados, é necessário utilizar o campo que funciona como um identificador único, que seria semelhante à chave na estrutura chave-valor. Porém as semelhanças terminam por aí. 
 
@@ -124,7 +126,9 @@ Ao contrapor o banco do tipo família de coluna com os bancos relacionais, é po
 
 Os bancos de dados orientados a documento têm sua estrutura muito semelhante a um arquivo JSON ou XML. Eles são compostos por um grande número de campos, que são criados em tempo de execução, gerando grande flexibilidade, tanto para a leitura como para escrita da informação. 
 
-![Estrutura de documentos {w=30%}](images/chapter_06_03.png "Estrutura de coleção de documentos")
+{width=60%}
+
+![](images/chapter_06_03.png)
 
 Eles permitem que seja realizada a leitura da informação por campos que não sejam a chave. Algumas implementações, por exemplo, têm uma altíssima integração com motores de busca, o que os torna cruciais para a realização de análise de dados ou logs de um sistema. Veja abaixo algumas implementações dos bancos de dados do tipo documento:
 
@@ -168,7 +172,9 @@ Alguns bancos de dados possuem a comum característica de ter suporte de uma ou 
 
 ### Teorema do CAP
 
-![Teorema do CAP](images/chapter_06_05.png "Teorema do CAP")
+{width=60%}
+
+![](images/chapter_06_05.png)
 
 Um dos grandes desafios dos bancos de dados NoSQL é que eles lidam com a persistência distribuída, ou seja, as informações ficam localizadas em mais de um servidor. Foram criados diversos estudos para ajudar nesse desafio de persistência distribuída, mas o mais famoso foi uma teoria criada em 1999, o Teorema do CAP. 
 
@@ -190,7 +196,7 @@ Porém, o Cassandra tem o recurso de nível de consistência, de modo que é pos
 
 No mundo NoSQL, cada classe de banco tem o objetivo de resolver problemas particulares. Como o gráfico abaixo mostra, existe um balanço entre o modelo de complexidade: modelos que permitem mais complexidade em modelagem e busca resultam en menos escalabilidade. Como exemplo, temos o banco de classe chave-valor, que é mais escalável, porém permite menos complexidade, uma vez que as queries são baseadas apenas na chave.
 
-![Escalabilidade vs Complexidade](images/chapter_06_06.png "Escalabilidade vs Complexidade")
+![](images/chapter_06_06.png)
 
 ### Master/Slave vs Masterless
 

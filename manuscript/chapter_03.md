@@ -1,4 +1,4 @@
-# Clean code
+# Clean code {#chapter_03}
 
 São claros e reconhecidos os grandes benefícios obtidos por meio da utilização de boas práticas no código. Algo que logo se nota ao se trabalhar com um código limpo e fluido é a melhor legibilidade de código e a maior facilidade de manutenção. Mas, ao construir aplicações e discutir práticas de arquitetura, há um outro ponto que não podemos deixar de lado: a integridade dos dados que serão manipulados. Será que as boas práticas de código refletem de forma positiva na integridade desses dados? Um dos tópicos primordiais tópicos cobertos pelo livro [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship-ebook/dp/B001GSTOAM) é que, diferentemente da programação estruturada, a orientação a objetos expõe comportamento escondendo os dados. Com isso em mente, neste capítulo discorreremos sobre os benefícios da utilização de boas práticas de código e as vantagens obtidas ao se implementarem modelos ricos.
 
@@ -8,12 +8,12 @@ Levando em consideração uma aplicação que adota práticas de clean code, os 
 
 Vamos criar uma aplicação de gestão de jogadores de futebol. Teremos o conceito de `time`, e dentro de um `time` teremos as seguintes informações:
 
-- O nome do jogador, representado pelo atributo <code>name</code> da classe <code>Player</code>;
+- O nome do jogador, representado pelo atributo `name` da classe `Player`;
 - A posição (`position` da classe `Player`) do jogador (goleiro, ataque, defesa e meio de campo); 
-- O ano em que o jogador entrou no time, representado pelo atributo <code>start</code> da classe <code>Player</code>; 
-- O ano em que o jogador saiu do time, representado pelo atributo <code>end</code> da classe <code>Player</code>; 
-- O número de gols que o jogador realizou no time, representado pelo atributo <code>goals</code> da classe <code>Player</code>;
-- O salário do jogador, representado pelo atributo <code>salary</code> da classe <code>Player</code>;
+- O ano em que o jogador entrou no time, representado pelo atributo `start` da classe `Player`; 
+- O ano em que o jogador saiu do time, representado pelo atributo `end` da classe `Player`; 
+- O número de gols que o jogador realizou no time, representado pelo atributo `goals` da classe `Player`;
+- O salário do jogador, representado pelo atributo `salary` da classe `Player`;
 - O email para contato, no atributo `email`;
 - A relação com o time, representada pela classe `Team`;	
 - Lembrando a regra, _um time não deve ter mais que vinte membros_.
@@ -113,9 +113,9 @@ public class Team {
 
 ```
 
-INFO: Muitos frameworks precisam que o construtor padrão exista por questão de realizar a criação de uma instância a partir da API de Reflection. Como o objetivo é desencorajar o uso do construtor padrão ao invés do uso do método de construção, o construtor será anotado com [Deprecated](https://www.baeldung.com/java-deprecated). A anotação Deprecated indica que esse método não deve ser utilizado.
+> **INFO**: Muitos frameworks precisam que o construtor padrão exista por questão de realizar a criação de uma instância a partir da API de Reflection. Como o objetivo é desencorajar o uso do construtor padrão ao invés do uso do método de construção, o construtor será anotado com [Deprecated](https://www.baeldung.com/java-deprecated). A anotação Deprecated indica que esse método não deve ser utilizado.
 
-Com relação à classe `Player`, todos os atributos terão getters padrão, com exceção do atributo <code>end</code>, que terá um tratamento especial: o <code>getEnd</code> retornará um `Optional`, uma vez que o <code>end</code> pode ser nulo. Outro ponto é o método <code>setEnd</code>, que só será íntegro caso o último ano seja igual ou maior que o ano de início do player, ou seja, se ele começou a jogar em 2004, não faz sentido ele ter terminado de jogar em 2002. Desse modo, o setter terá de fazer a validação no momento do acesso.
+Com relação à classe `Player`, todos os atributos terão getters padrão, com exceção do atributo `end`, que terá um tratamento especial: o `getEnd` retornará um `Optional`, uma vez que o `end`pode ser nulo. Outro ponto é o método `setEnd`, que só será íntegro caso o último ano seja igual ou maior que o ano de início do player, ou seja, se ele começou a jogar em 2004, não faz sentido ele ter terminado de jogar em 2002. Desse modo, o setter terá de fazer a validação no momento do acesso.
 
 ```java
 import java.math.BigDecimal;
@@ -397,6 +397,8 @@ public class Player {
 
 ```
 
+{pagebreak}
+
 Dessa forma, teremos a certeza de que, quando a instância de um jogador (`Player`) for criada, ela será consistente e à prova de falhas.
 
 ```java
@@ -505,7 +507,7 @@ public class Team {
 
 O código fonte desse exemplo está disponível no repositório: [https://github.com/soujava/bulletproof](https://github.com/soujava/bulletproof).
 
-TIP: Lembre-se da importância dos testes de unidade em todo o processo de desenvolvimento!
+> **TIP**: Lembre-se da importância dos testes de unidade em todo o processo de desenvolvimento!
 
 Com a criação desse exemplo, demonstramos que apenas ao utilizar conceitos de orientação a objetos você estará criando um código à prova de falhas. Até esse momento, todas as práticas funcionam de maneira agnóstica ao banco de dados, ou seja, podemos utilizar essas boas práticas independentemente da tecnologia de persistência que será adotada.  
 
