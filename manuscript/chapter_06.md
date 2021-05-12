@@ -57,7 +57,7 @@ Para finalizar, uma outra particularidade marcante de bancos não estruturados �
 
 ---
 
-### NoSQL e suas classes
+## NoSQL e suas classes
 
 Os bancos de dados NoSQL podem ser categorizados em quatro tipos (que, no contexto de banco de dados, são chamados de **classes**):
 
@@ -209,7 +209,7 @@ Em linha geral, a persistência no mundo NoSQL possui duas maneiras de comunica�
 * *O Master/Slave*: é o modelo de comunicação que se caracteriza por um controle unidirecional de um ou mais dispositivos. Em linhas gerais, o nó master é utilizado para a escrita e para a replicação das informações para todos os nós escravos, que, por sua vez, são responsáveis por realizar a leitura das informações. Dessa maneira, é possível garantir maior consistência de dados. Como há um único ponto para a escrita, é possível ter suporte a comportamentos como, por exemplo, transação. Porém existe um ponto de falha: o master. Caso o servidor fique fora do ar, teremos problemas com a escrita. Em cenários como este, bancos de dados modernos conseguem realizar a eleição de um novo nó master de maneira automática.
 * *Masterless*: é o modelo de comunicação que se caracteriza por um controle multidirecional por um ou mais dispositivos. Ou seja, não existe um único nó responsável por leitura ou escrita. Cada nó pode ser responsável pelas duas operações. Assim, não existe nenhum ponto de falha, a elasticidade acontece de maneira natural, porém a consistência da informação se torna mais difícil, uma vez que é necessário um certo tempo para que os nós tenham a informação mais atualizada.
 
-### Conclusão
+## Conclusão
 
 Este capítulo teve como objetivo dar o pontapé inicial para os bancos de dados não relacionais. Foram discutidos os principais conceitos acerca de bancos não estruturados, as classes de bancos e suas estruturas. Com esse novo paradigma de persistência não estruturada, as portas se abrem para novas possibilidades e novos desafios na implementação de aplicações. 
 
