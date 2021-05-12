@@ -95,7 +95,7 @@ Caso você esteja em um cenário em que precisa migrar um monolito, é recomenda
 
 * Utilizar microservices apenas porque grandes empresas utilizam esse tipo de arquitetura. No mundo de arquitetura de software, uma decisão não deve ser tomada apenas pela popularidade na solução. Como [Edson Yanaga](https://twitter.com/yanaga) fala em seu [livro](https://developers.redhat.com/books/migrating-microservice-databases-relational-monolith-distributed-data/): “Certamente, sempre lemos grandes coisas sobre as arquiteturas de microservices implementadas por empresas como Netflix ou Amazon. Então, deixe-me fazer uma pergunta: quantas empresas no mundo podem ser Netflix e Amazon?”.
 
-# Conclusão
+## Conclusão
 
 Como visto, a arquitetura de microsserviços traz muitos benefícios para o seu ambiente e lhe oferece a vantagem de deixar o desenvolvimento independente quando se tem vários times e funcionalidades, e essa independência se estende também para o deploy da aplicação. Ou seja, você dá velocidade e agilidade para seus times e consegue ter código de melhor qualidade, já que ele vai estar organizado ao redor da funcionalidade. Tem-se a vantagem de ser fácil de escalar apenas no ponto em que se precisa, e ainda poder ser aplicado na tecnologia que você tem mais domínio.
 

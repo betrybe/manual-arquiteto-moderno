@@ -237,6 +237,7 @@ Vamos discorrer sobre como *infraestrutura como serviço (Infrastructure As A Se
 
 A melhor maneira de se pensar no cloud em termos de abstração para o negócio certamente é na analogia de um serviço de pizzaria como serviço. Podemos partir do cenário em que temos a opção de preparar toda a pizza em casa e ter que gerenciar todo o processo de criação e cozimento, ou sair para comer a pizza em um restaurante sem se preocupar com sua criação. 
 
+{width=120%}
 ![](images/chapter_08_01.png)
 
 Na imagem acima, temos dispostos quatro formatos: on-premise, IaaS, PaaS e SaaS. As caixinhas brancas são as tarefas de nossa responsabilidade, e as azuis são de responsabilidade de terceiros. Essa mesma comparação pode ser feita se trocarmos as tarefas de criação de pizza por tarefas referentes a criação de software: instalação e gerenciamento de sistema operacional, networking, storage, orquestração de serviços, gerenciamento de middleware, runtime, pipelines de CI/CD, e até a criação da aplicação propriamente dita.
@@ -289,7 +290,7 @@ De uma maneira geral, temos que pensar nos seguintes três princípios cíclicos
 
 É verdade que existem vários benefícios na navegação nos mares da computação em nuvem, porém é muito importante conhecer os tipos de serviços que a cloud disponibiliza e fazer uma análise profunda da complexidade de um serviço e seu respectivo risco, além do tempo que o time está disposto a gastar para criar e manter toda a infraestrutura. O PaaS fornece uma grande vantagem de abstração de toda a infraestrutura e manutenção para que a pessoa desenvolvedora foque seu negócio. O IaaS te garantirá grande flexibilidade e poder para instalar e configurar o que seu time deseja sem nenhum problema, mesmo que tudo tenha que ser configurado manualmente. É muito importante que tanto o time quanto a empresa tenham noção de que, independentemente da escolha, haverá benefícios e desvantagens. É muito importante para que os(as) arquitetos(as) avaliem o que melhor se encaixa na instituição, afinal, cloud e computação não estão relacionados ao quando, mas ao como.
 
-# Kubernetes - quando usar e quando não usar
+## Kubernetes - quando usar e quando não usar
 
 Como decidir quando é a hora de migrar seu workload para uma arquitetura conteinerizada e orquestrada por plataformas como Kubernetes? Entenda mudanças culturais e operacionais para tomar uma decisão mais embasada. Os pontos abaixo descritos são válidos para plataformas como Kubernetes e seus vários flavors.
 
@@ -435,7 +436,7 @@ Com a introdução do conceito de containers e orquestração de containers ao s
 
 Deve-se também ter em mente o cenário em que você já utilizou o Kubernetes e já tem um conhecimento mais aprofundado da ferramenta. Com isso, você já tem ideias de como melhorar ou facilitar os fluxos internos de orquestração, práticas de desenvolvimento, de entrega contínua. Tem ideias de UI que podem auxiliar o(a) usuário(a) ou práticas que podem acelerar a entrega de aplicações. Com base nisso, você pode, ao invés de usar o Kubernetes, partir para um dos flavors disponíveis, e até mesmo criar o seu próprio flavor! 
 
-# Conclusão 
+## Conclusão 
 
 Não existem dúvidas de que o futuro da tecnologia reside na cloud. Com o surgimento dos microsserviços, cada vez mais precisamos do conhecimento do ecossistema que gira ao seu redor. Com o aumento do uso de containers e práticas de DevOps, cada vez mais as pessoas desenvolvedoras precisam conhecer sobre plataforma, e o system admin precisa conhecer sobre desenvolvimento. 
 
