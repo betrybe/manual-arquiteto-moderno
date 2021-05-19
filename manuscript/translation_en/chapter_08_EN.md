@@ -151,7 +151,7 @@ The `runtime` will be the implementation of the MicroProfile specification.
 
   
 
-![/chapter_08_04](../images/chapter_08_04.png)
+![Image 08_01: MicroProfile Starter application page.](../images/chapter_08_04.png)
 
   
 
@@ -175,7 +175,7 @@ In addition to using the MicroProfile specification for delivering cloud-native 
 
   
 
-![chapter_08_06](../images/chapter_08_06.png)
+![Image 08_02: Spring initializr application page.](../images/chapter_08_06.png)
 
   
 
@@ -449,7 +449,7 @@ The best way to think of the cloud in terms of abstraction for business is certa
 
   
 
-![](../images/chapter_08_01.png)
+![Image 08_03: Diferent types of cloud offering representation through the "Pizza as a Service" example.](../images/chapter_08_01.png)
 
   
 
@@ -461,7 +461,7 @@ When we talk about the cloud and its services, note that the lower the abstracti
 
   
 
-![](../images/chapter_08_02.png)
+![Image 08_03: Complexity vs Risk Matrix of the different cloud options.](../images/chapter_08_02.png)
 
   
 
@@ -582,7 +582,6 @@ How do you decide when it's time to migrate your workload to a containerized arc
 * From the perspective of the middleware team or sysadmins, everyday life is different. It is no longer necessary to learn how to deliver other applications and unravel their peculiarities and dependencies. Just learn to handle containers, and the way of working becomes standard, regardless of the technology used in the applications. On the other hand, operators, segregation, and security concepts in the Kubernetes environment, deployment strategies (rolling, blue-green, canary), how to deal with storage, etc., must be understood.
 
   
-  
 
 ## Vanilla Kubernetes and their flavors
 
@@ -619,7 +618,7 @@ In this context, when selecting your next orchestration platform, consider:
 ### How to choose your technology set
 
   
-  
+
 
 There are several options for implementing each of these features, and you can see the various options recommended for a cloud scenario in the [CNCF Cloud Native Interactive Landscape](https://landscape.cncf.io/zoom=200).
 
@@ -633,7 +632,7 @@ CNCF takes on projects and classifies them as **graduated**, **incubating**, or 
 
   
 
-![chasm-cncf](../images/chapter_08_05.png)
+![Image 08_04: What is the "Chasm" and the levels of technology adoption.](../images/chapter_08_05.png)
 
   
 
@@ -731,13 +730,13 @@ To implement the ORASTAR rules, we have the architecture of a control panel and 
 
   
 
-`Data plan` is where all microservices and their sidecars are located, no matter how they are implemented. It is through a layer that the control panel interacts to control the services.
+`Data plane` is where all microservices and their sidecars are located, no matter how they are implemented. It is through a layer that the control panel interacts to control the services.
 
   
-  
+
   
 
-![](../images/chapter_08_03.png)
+![Image 08_05: Data Plane representation](../images/chapter_08_03.png)
 
   
 
