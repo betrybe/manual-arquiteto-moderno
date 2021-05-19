@@ -19,7 +19,7 @@ Iniciaremos falando sobre a estratégia de dividir e conquistar. Essa estratégi
 
 Observe a imagem a seguir:
 
-![](images/chapter_04_01.png)
+![Imagem 04_01: As diferentes camadas da aplicação e como as práticas do Clean Architecture pregam que devem ocorrer as interações entre estas camadas. ](images/chapter_04_01.png)
 
 *Fonte: <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>*
 

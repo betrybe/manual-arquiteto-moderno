@@ -39,13 +39,13 @@ Lembrando que não é simplesmente colocar que o 'login precisa ser feito em men
 
 Neste capítulo, vamos utilizar a ferramenta [jMeter](https://jmeter.apache.org/), muito utilizada para criar diversos tipos de teste de carga e medir o desempenho. O objetivo aqui não é ser um tutorial do jMeter, mas mostrar como é possível gerar e visualizar dados através dele. Abaixo, um exemplo simples de medição de tempo de login considerando 10 usuários(as):
 
-![](images/chapter_10_01.png)
+![Imagem 10_01: Teste com JMeter que realiza a invocação de API de login, enviando usuário e senha via POST.](images/chapter_10_01.png)
 
 {pagebreak}
 
 Ao rodar o teste acima, verificamos no Relatório de Sumário os resultados:
 
-![](images/chapter_10_02.png)
+![Imagem 10_02: Resultado do teste de invocação de API de login.](images/chapter_10_02.png)
 
 Alguns dados importantes neste momento:
 
@@ -59,7 +59,7 @@ Alguns dados importantes neste momento:
 
 Ainda podemos ter gráficos mais ricos, utilizando o plugin [PerfMon](https://jmeter-plugins.org/wiki/PerfMon/), por exemplo:
 
-![](images/chapter_10_03.png)
+![Imagem 10_03: Utilização de plugin para análise de resultados com gráficos. ](images/chapter_10_03.png)
 
 No gráfico acima, podemos ver que a maioria das requisições ficou entre 600 e 700 milissegundos em um cenário de testes com 1000 requisições.
 Podemos ter gráficos ainda mais bonitos e em tempo real, podendo utilizar o [grafana](https://grafana.com/) como visualizador de gráficos.
@@ -70,7 +70,7 @@ Veja que capturamos o tempo total de um processo de login, porém se o login nã
 
 Medimos o tempo total de um login e precisamos melhorar o tempo de resposta. Para isso, precisamos testar separadamente cada componente da arquitetura para descobrir onde podemos diminuir o tempo. É possível que, com apenas uma ferramenta, não se possa medir a performance da sua aplicação. É provável que você utilize uma ferramenta de carga para estressar a aplicação e várias outras para coletar os dados. Como exemplo, podemos ter uma aplicação que tem uma api para o login com acesso ao banco de dados. No entanto, podemos ter cenários bem mais complexos. A imagem abaixo é uma representação da arquitetura para servir milhões de usuários(as):
 
-![](images/chapter_10_04.png)
+![Imagem 10_04: Arquitetura de uma aplicação complexa com capacidade para atender um alto número de requisições.](images/chapter_10_04.png)
 
 **Créditos:** <https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/>
 
@@ -78,9 +78,9 @@ No entanto, não foi de primeira que esta arquitetura foi definida. Foram muitos
 
 ## Monitorando a performance por componente
 
-Conforme demonstrado acima, não é de primeira que se define uma arquitetura para milhões de usuários(as). É necessário estressar e medir para verificar onde estão os pontos que podem sofrer carga. Existem várias opções que mostram onde estão os gargalos da aplicação. Uma das várias opções é o [javamelody](https://github.com/javamelody), que pode ser utilizado em modo standalone junto com a sua aplicação Java, é free e muito simples de colocar na aplicação.
+Conforme demonstrado acima, não é de primeira que se define uma arquitetura para milhões de usuários(as). É necessário estressar e medir para verificar onde estão os pontos que podem sofrer carga. Existem várias opções que mostram onde estão os gargalos da aplicação. Uma das várias opções é o [JavaMelody](https://github.com/javamelody), que pode ser utilizado em modo standalone junto com a sua aplicação Java, é free e muito simples de colocar na aplicação.
 
-![](images/chapter_10_05.png)
+![Imagem 10_05: Exibição de métricas para queries SQL executadas, através do JavaMelody](images/chapter_10_05.png)
 
 Na imagem acima, podemos notar que uma das consultas SQL demorou, em média, mais que o normal em relação a outras. Podemos descobrir de onde veio esse comando SQL, como também executar o comando SQL em modo 'Explain', a fim de revelar que a query está fazendo um 'full scan' e que será preciso ajustar a query ou criar índices específicos na tabela.
 
@@ -88,7 +88,7 @@ Na imagem acima, podemos notar que uma das consultas SQL demorou, em média, mai
 
 No outro exemplo abaixo, podemos ver um desvio bem grande no método 'findById', que, por sua vez, não utiliza um banco de dados MySQL, mas sim uma outra fonte de dados externo. Com essas informações em mãos, já é possível analisar de modo isolado cada comportamento.
 
-![](images/chapter_10_07.png)
+![Imagem 10_07: Repare o longo tempo de execução do método CompanyService.findByid que impacta diretamente no tempo de resposta da requisição ao servidor Spring.](images/chapter_10_07.png)
 
 Existem muitas ferramentas de monitoramento, e o que fica aqui como exemplo é que, em alguns casos, você vai precisar ir no detalhe e fazer algum ajuste fino na infraestrutura, ou até mesmo no código.
 
@@ -97,7 +97,7 @@ Existem muitas ferramentas de monitoramento, e o que fica aqui como exemplo é q
 Sistemas distribuídos, atualmente mais populares com a utilização de microsserviços, são complexos e difíceis de monitorar a performance. Nesse caso, vamos precisar de mecanismos mais sofisticados, como a utilização de um 'tracing' distribuído por exemplo. Aqui também existem várias soluções, como os famosos APMs, tais como o New Relic, AppDynamics, DataDog e Dynatrace. Vale lembrar que muitos provedores de cloud fornecem ferramentas de análise de performance, tal como o AWS Performance Insights.
 No mundo OpenSource, vale destacar a ferramenta [Jaeger Tracing](https://www.jaegertracing.io/), cuja especialidade é fazer o monitoramento de serviços distribuídos rodando em uma infraestrutura do Kubernetes, por exemplo.
 
-![](images/chapter_10_08.png)
+![Imagem 10_08: Arquitetura de serviços distribuídos e a relação entre rastro e alcance nestes serviços.](images/chapter_10_08.png)
 
 Podemos observar em qual dos serviços o tempo de resposta não está adequado e tomar as devidas ações.
 
