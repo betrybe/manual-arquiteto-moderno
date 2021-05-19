@@ -70,7 +70,7 @@ Cada classe acima possui uma aplicação diferente, portanto, devemos entender a
 
 #### Classe `Key / Value`
 
-![](images/chapter_06_01.png)
+![Imagem 06_01: Exemplo de estrutura de dados em um banco Key/Value](images/chapter_06_01.png)
 
 Os bancos do tipo chave-valor possuem uma estrutura similar à da classe `java.util.Map` do Java, ou seja, a *informação* (`value`) será recuperada apenas pela *chave* (`key`). Esse tipo de banco de dados pode ser utilizado, por exemplo, para gerenciar sessões de usuários logados. Outro exemplo de utilização é aliado a um DNS, onde a chave é o endereço, por exemplo, `www.google.com`, e o valor é o IP desse servidor.
 
@@ -95,7 +95,7 @@ Nessa classe de banco, não é possível realizar operações como `join` entre 
 
 #### Classe `Column Family`
 
-![](images/chapter_06_02.png)
+![Imagem 06_02: Exemplo de estrutura de dados armazenadas em um banco Column Family.](images/chapter_06_02.png)
 
 Esse modelo se tornou popular através do paper "[Bigtable: a Distributed Storage System for Structured Data](https://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf)", criado por funcionários do Google, com o objetivo de montar um sistema de armazenamento de dados distribuído, projetado para ter um alto grau de escalabilidade e de volume de dados. Assim como o chave-valor, para realizar uma busca ou recuperar alguma informação dentro do banco de dados, é necessário utilizar o campo que funciona como um identificador único, que seria semelhante à chave na estrutura chave-valor. Porém as semelhanças terminam por aí. 
 
@@ -128,13 +128,13 @@ Os bancos de dados orientados a documento têm sua estrutura muito semelhante a 
 
 {width=60%}
 
-![](images/chapter_06_03.png)
+![Imagem 06_03: Estrutura do dado armazenado em um banco orientado a documentos](images/chapter_06_03.png)
 
 Eles permitem que seja realizada a leitura da informação por campos que não sejam a chave. Algumas implementações, por exemplo, têm uma altíssima integração com motores de busca, o que os torna cruciais para a realização de análise de dados ou logs de um sistema. Veja abaixo algumas implementações dos bancos de dados do tipo documento:
 
-* AmazonSimpleDb
-* ApacheCouchdb
-* MongoDb
+* AmazonSimpleDB
+* ApacheCouchDB
+* MongoDB
 * Riak
 
 
@@ -151,7 +151,7 @@ Uma outra característica de bancos do tipo documento é que, no geral, são _sc
 
 #### Classe `Graph`
 
-![Estutura de Grafos](images/chapter_06_04.png "Estutura de Grafos")
+![Imagem 06_04: Como os dados são armazenados em um banco de classe Grafo.](images/chapter_06_04.png "Estutura de Grafos")
 
 O banco do tipo grafo é uma estrutura de dados que conecta um conjunto de vértices através de um conjunto de arestas. Os bancos modernos dessa categoria suportam estruturas de grafo multirrelacionais, em que existem diferentes tipos de vértices (representando pessoas, lugares, itens) e diferentes tipos de arestas. Os sistemas de recomendação que acontecem em redes sociais são o maior case para o banco do tipo grafo. Veja abaixo alguns exemplos desse tipo de banco:
 
@@ -174,7 +174,7 @@ Alguns bancos de dados possuem a comum característica de ter suporte de uma ou 
 
 {width=60%}
 
-![](images/chapter_06_05.png)
+![Imagem 06_05: Teorema do CAP.](images/chapter_06_05.png)
 
 Um dos grandes desafios dos bancos de dados NoSQL é que eles lidam com a persistência distribuída, ou seja, as informações ficam localizadas em mais de um servidor. Foram criados diversos estudos para ajudar nesse desafio de persistência distribuída, mas o mais famoso foi uma teoria criada em 1999, o Teorema do CAP. 
 
@@ -196,7 +196,7 @@ Porém, o Cassandra tem o recurso de nível de consistência, de modo que é pos
 
 No mundo NoSQL, cada classe de banco tem o objetivo de resolver problemas particulares. Como o gráfico abaixo mostra, existe um balanço entre o modelo de complexidade: modelos que permitem mais complexidade em modelagem e busca resultam en menos escalabilidade. Como exemplo, temos o banco de classe chave-valor, que é mais escalável, porém permite menos complexidade, uma vez que as queries são baseadas apenas na chave.
 
-![](images/chapter_06_06.png)
+![Imagem 06_06: Mapeamento dos tipos de banco de dados e a matriz Escalabilidade vs Complexidade. ](images/chapter_06_06.png)
 
 ### Master/Slave vs Masterless
 
@@ -204,7 +204,7 @@ Em linha geral, a persistência no mundo NoSQL possui duas maneiras de comunica�
 
 
 
-![Master/Slave vs Masterless](images/chapter_06_07.png "Master/Slave vs Masterless")
+![Imagem 06_07: Estrutura de banco Master/Slave e Masterless.](images/chapter_06_07.png "Master/Slave vs Masterless")
 
 * *O Master/Slave*: é o modelo de comunicação que se caracteriza por um controle unidirecional de um ou mais dispositivos. Em linhas gerais, o nó master é utilizado para a escrita e para a replicação das informações para todos os nós escravos, que, por sua vez, são responsáveis por realizar a leitura das informações. Dessa maneira, é possível garantir maior consistência de dados. Como há um único ponto para a escrita, é possível ter suporte a comportamentos como, por exemplo, transação. Porém existe um ponto de falha: o master. Caso o servidor fique fora do ar, teremos problemas com a escrita. Em cenários como este, bancos de dados modernos conseguem realizar a eleição de um novo nó master de maneira automática.
 * *Masterless*: é o modelo de comunicação que se caracteriza por um controle multidirecional por um ou mais dispositivos. Ou seja, não existe um único nó responsável por leitura ou escrita. Cada nó pode ser responsável pelas duas operações. Assim, não existe nenhum ponto de falha, a elasticidade acontece de maneira natural, porém a consistência da informação se torna mais difícil, uma vez que é necessário um certo tempo para que os nós tenham a informação mais atualizada.
