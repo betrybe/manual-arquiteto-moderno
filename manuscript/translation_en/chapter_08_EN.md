@@ -151,7 +151,7 @@ The `runtime` will be the implementation of the MicroProfile specification.
 
   
 
-![Imagem 08_01: MicroProfile Starter application page.](../images/chapter_08_04.png)
+![Image 08_01: MicroProfile Starter application page.](../images/chapter_08_04.png)
 
   
 
@@ -175,7 +175,7 @@ In addition to using the MicroProfile specification for delivering cloud-native 
 
   
 
-![Imagem 08_02: Spring initializr application page.](../images/chapter_08_06.png)
+![Image 08_02: Spring initializr application page.](../images/chapter_08_06.png)
 
   
 
@@ -449,7 +449,7 @@ The best way to think of the cloud in terms of abstraction for business is certa
 
   
 
-![Imagem 08_03: Representation of the diferent types of cloud offering through the "Pizza as a Service" example.](../images/chapter_08_01.png)
+![Image 08_03: Diferent types of cloud offering representation through the "Pizza as a Service" example.](../images/chapter_08_01.png)
 
   
 
@@ -461,7 +461,7 @@ When we talk about the cloud and its services, note that the lower the abstracti
 
   
 
-![Imagem 08_03: Complexity vs Risk Matrix of the different cloud options.](../images/chapter_08_02.png)
+![Image 08_03: Complexity vs Risk Matrix of the different cloud options.](../images/chapter_08_02.png)
 
   
 
@@ -632,7 +632,7 @@ CNCF takes on projects and classifies them as **graduated**, **incubating**, or 
 
   
 
-![Imagem 08_04: What is the "Chasm" and the levels of technology adoption.](../images/chapter_08_05.png)
+![Image 08_04: What is the "Chasm" and the levels of technology adoption.](../images/chapter_08_05.png)
 
   
 
@@ -736,7 +736,7 @@ To implement the ORASTAR rules, we have the architecture of a control panel and 
 
   
 
-![Imagem 08_05: Data Plane representation](../images/chapter_08_03.png)
+![Image 08_05: Data Plane representation](../images/chapter_08_03.png)
 
   
 
