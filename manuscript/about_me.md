@@ -1,51 +1,50 @@
 # About ME
 
-<img src="images/otavio-java.png" alt="otavio-java" style="zoom:24%;" />
+<img src="../images/otavio-java.png" alt="otavio-java" style="zoom:24%;" />
 
-* **Name**: Otavio Santana
-* **Job Title**: Devrel Engineer
-*   **Bio:** Empowering developers worldwide to deliver better software faster, scalable in the Cloud. Otavio is a passionate software engineer focused on Cloud and Java technology. He has experience mainly in persistence polyglot and high-performance applications in finances, social media, and e-commerce. Otavio is a member of both Expert Groups and Expert Leader in several JSRs and JCP executive committee. He is working on several Apache and Eclipse Foundation projects such as Apache Tamaya, MicroProfile, Jakarta EE, where he is leading the first specification at Jakarta EE with Jakarta NoSQL. A JUG leader and global speaker at JavaOne and Devoxx conferences. Otavio has received recognition for his OSS contributions such as the JCP Outstanding Award, Member of the year and innovative JSR, Duke’s Choice Award, and Java Champion Award, to name a few.
-
-
-
-<img src="images/sergio-lopes.jpeg" alt="sergio-lopes" style="zoom:50%;" />
-
-* **Name**: Sérgio Lopes
-* **Job Title**: IT Specialist in Banco Itaú S/A
-* **Bio:** C++ Developer, Java Developer, Software Enginner, IT Specialist in backend. Working in one of the most robust Internet Banking in Latin America. Acting in the creation of the development framework called *Universal*, which is the core system of Internet Banking Itaú since 2001 and to the present day still in operation, working on the development of support tools for this framework, the specifications of the framework, and its maintenance, using C/C ++.
-  Development of the Java Framework, which came to replace the *Universal* framework, acting on it since 2014. Creation of coexistence mechanisms between legacy and this new Framework. This framework is responsible for addressing the crosscutting needs of digital channels, providing tools and services to accelerate the work of other engineers.
-  Working with technologies such as: JAVA, Spring Framework, Spring Boot, Docker, Windows / Linux, SQL, JavaScript, Hibernate, Application Server: JBoss EAP.6.X, Automated Testing with (JUnit4, DBUnit, JMock, Mockito). Eclipse IDE, Maven, Git, Jenkins. Nexus, C ++, Visual Studio, Artifactory, Sonar.
+* **Nome**: Otavio Santana
+* **Cargo**: Staff Engineer
+* **Bio:** Capacitando pessoas desenvolvedoras em todo o mundo a entregar softwares melhores, com mais rapidez e escalabilidade na nuvem. Otavio é um engenheiro de software apaixonado por foco em nuvem e tecnologia Java. Ele tem experiência principalmente em aplicações de persistência poliglotas e de alto desempenho em finanças, mídia social e e-commerce. Otavio é membro de Grupos de Especialistas e Líder Especialista em vários comitês executivos JCP e JSRs. Ele está trabalhando em vários projetos da Apache e Eclipse Foundation, como Apache Tamaya, MicroProfile, Jakarta EE, onde está liderando a primeira especificação em Jakarta EE com Jakarta NoSQL. Líder do JUG e palestrante global nas conferências JavaOne e Devoxx, Otavio recebeu reconhecimento por suas contribuições para OSS, como o JCP Outstanding Award, membro do ano e JSR inovador, Duke’s Choice Award e Java Champion Award, para citar alguns.
 
 
+<img src="../images/sergio-lopes.jpeg" alt="sergio-lopes" style="zoom:50%;" />
 
-<img src="images/karina-varela.png" alt="karina-varela" style="zoom:24%;" />
+* **Nome**: Sérgio Lopes
+* **Cargo**: Especialista em TI no Banco Itaú S/A
+* **Bio:** Desenvolvedor C++, desenvolvedor Java, engenheiro de software, especialista em TI em back-end. Trabalhando em um dos mais robustos Internet Bankings da América Latina. Atuando na criação do framework de desenvolvimento chamado *Universal*, que é o sistema central do Internet Banking Itaú desde 2001 e até os dias de hoje ainda em operação, trabalhando no desenvolvimento de ferramentas de suporte para esse framework, suas especificações e sua manutenção, em C/C++.
+Desenvolvimento do Framework Java, que veio substituir o framework *Universal*, atuando nele desde 2014. Criação de mecanismos de coexistência entre o legado e este novo Framework, responsável por atender às necessidades transversais dos canais digitais, fornecendo ferramentas e serviços para acelerar o trabalho de outros engenheiros.
+Trabalhando com tecnologias como: JAVA, Spring Framework, Spring Boot, Docker, Windows/Linux, SQL, JavaScript, Hibernate, Application Server: JBoss EAP.6.X, Testes automatizados com (JUnit4, DBUnit, JMock, Mockito). Eclipse IDE, Maven, Git, Jenkins. Nexus, C++, Visual Studio, Artifactory, Sonar.
 
-* **Name:** Karina Varela
-* **Job Title:** Senior Technical Product Marketing Manager, Red Hat
-* **Bio:** Karina M. Varela has experienced more than ten years on I.T., working in roles like application developer, software architect, consultant, tech lead, and product marketing management. With a solid background in software development, she has professional expertise in planning, architecting, delivering, and troubleshooting critical software in enterprise environments of different sectors around the world. 
-  By the time of 2020, Karina is working with the Application Services Business Unit in Red Hat, as a Technical Marketing Manager, an expert on the matter of Business Automation. She's a member of the Sou Java community, and passionate for helping the communities and especially fond of open-source projects and initiatives. Another hobby is to speak at conferences, therefore, she presented in conferences like Campus Party, TDC, and Women Who Code.
-  
-<img src="images/salaboy512x512.png" alt="salaboy" style="zoom:50%;" />
 
-* **Name:** Mauricio Salatino (Salaboy)
-* **Job Title:** Principal Software Engineer
-* **Bio:** Mauricio is a Principal Software Engineer at Camunda (http://www.camunda.com ) and a LearnK8s (http://learnk8s.io ) Instructor. Mauricio has been working with Kubernetes for the last 5 years, training teams and developing cloud-native applications. In his journey, he has participated in several open-source projects including Zeebe, Jhipster, Spring Cloud and Jenkins X. Previously, Mauricio worked at Red Hat/JBoss in the Business Automation Engineering department. Mauricio is currently involved with the CD Foundation (http://cd.foundation), the Jenkins X project (as member of the bootstrap steering committee) as well as he presented at Kubecon 2019 San Diego and Kubecon 2020 Amsterdam. 
-  
+<img src="../images/karina-varela.png" alt="karina-varela" style="zoom:24%;" />
 
-<img src="images/elder-moraes.png" alt="elder-moraes" style="zoom:24%;" />
+* **Nome:** Karina Varela
+* **Cargo:** Gerente Técnico Sênior de Marketing de Produtos, Red Hat
+* **Bio:** Karina M. Varela tem experiência de mais de dez anos em TI, trabalhando em funções como desenvolvedora de aplicações, arquiteta de software, consultora, líder de tecnologia e gerenciamento de marketing de produto. Com uma sólida formação em desenvolvimento de software, ela tem experiência profissional em planejamento, arquitetura, entrega e solução de problemas de software crítico em ambientes empresariais de diferentes setores ao redor do mundo.
+A partir de 2020, Karina está trabalhando com a Unidade de Negócios de Serviços de Aplicativos da Red Hat como Gerente de Marketing Técnico, especialista no assunto de Automação de Negócios. Ela é membro da comunidade SouJava, tem paixão por ajudar as comunidades e gosta especialmente de projetos e iniciativas de código aberto. Outro hobby é falar em conferências e já palestrou em conferências como Campus Party, TDC e Women Who Code.
 
-* **Name:** Elder Moraes
-* **Job Title:** Developer Advocate, Red Hat
-* **Bio:** Elder helps Java developers to work on great projects by guiding them on how to build and deliver secure, available, and fast server-side applications. He is the author of Jakarta EE Cookbook and a board member at SouJava, one of the biggest JUGs in the world. As a Developer Advocate, he shares experiences and best practices through online content and at international events like JavaOne, The Developers Conference, QCon, Oracle Code One, Campus Party and Devnexus.
+<img src="../images/salaboy512x512.png" alt="salaboy" style="zoom:50%;" />
 
-<img src="images/sandro-giacomozzi.png" alt="sandro-giacomozzi" style="zoom:24%;" />
+* **Nome:** Mauricio Salatino (Salaboy)
+* **Cargo:** Engenheiro de Software
+* **Bio:** Mauricio é engenheiro de software na Camunda (http://www.camunda.com) e instrutor na LearnK8s (http://learnk8s.io). Trabalha com o Kubernetes há cinco anos, treinando equipes e desenvolvendo aplicações nativas da nuvem. Em sua jornada, participou de vários projetos de código aberto, incluindo Zeebe, Jhipster, Spring Cloud e Jenkins X. Anteriormente, Mauricio trabalhou na Red Hat/JBoss, no departamento de Engenharia de Automação de Negócios. Apresentou-se na Kubecon 2019 San Diego e na Kubecon 2020 Amsterdam. Está atualmente envolvido com a CD Foundation (http://cd.foundation) e com o projeto Jenkins X (como membro do comitê de direção de bootstrap). 
 
-* **Name:** Sandro Giacomozzi
-* **Job Title:** Software engineer, TOTVS
-* **Bio:** Sandro helps Java developers working on enterprise applications to become experts on Java and Devops by practicing the right skills. Volunteer and public speaker. My goal in the software industry is to make organizations and people more agile through processes and tools. Faster, more efficient and quality deliveries. People and technology in line with customer satisfaction and delivery.
+<img src="../images/elder-moraes.png" alt="elder-moraes" style="zoom:24%;" />
 
-<img src="images/Isidro.JPG" alt="Professor Isidro" />
+* **Nome:** Elder Moraes
+* **Cargo:** Developer Advocate, Red Hat
+* **Bio:** Elder ajuda pessoas desenvolvedoras Java a trabalhar em grandes projetos, orientando-os(as) sobre como construir e entregar aplicações seguras, disponíveis e rápidas do lado do servidor. Ele é o autor do Jakarta EE Cookbook e membro do conselho do SouJava, um dos maiores JUGs do mundo. Como defensor do desenvolvedor, ele compartilha experiências e melhores práticas por meio de conteúdo online e em eventos internacionais como JavaOne, The Developers Conference, QCon, Oracle Code One, Campus Party e Devnexus.
 
-* **Name:** Francisco Isidro
-* **Job Title:** * Professor, Researcher at Federal University of ABC
-* **Bio:** Professor Isidro is a Computer Science professor and researcher focused on Programming Fundamentals Teaching, Game Engine Development and Cloud Computing. Isidro mantains a Youtbe channel offering free content about Data Structures, Operating Systems, Web Development, Games and other subjects to all professionals and students who want to improve their knowledge and understand Computer Science and Software Development fundamentals. Speaker at Campus Party, The Developer's Conference, QCon and other conferences, Isidro is always helping developer communities offering technical content and carrer mentoring.
+
+<img src="../images/sandro-giacomozzi.png" alt="sandro-giacomozzi" style="zoom:24%;" />
+
+* **Nome:** Sandro Giacomozzi
+* **Cargo:** Engenheiro de Software, TOTVS
+* **Bio:** Sandro ajuda pessoas desenvolvedoras Java que trabalham em aplicações corporativas a se tornarem especialistas em Java e DevOps, praticando as habilidades certas. Voluntário e palestrante. Seu objetivo na indústria de software é tornar as organizações e as pessoas mais ágeis por meio de processos e ferramentas. Entregas mais rápidas, eficientes e de qualidade. Pessoas e tecnologia alinhadas à satisfação e entrega ao cliente.
+
+
+<img src="../images/Isidro.JPG" alt="Professor Isidro" />
+
+* **Nome:** Francisco Isidro
+* **Cargo:** * Professor, Pesquisador da Universidade Federal do ABC
+* **Bio:** Professor Isidro é professor de Ciência da Computação e pesquisador com foco em Ensino de Fundamentos de Programação, Desenvolvimento de *Game Engines* e Computação em Nuvem. Isidro mantém um canal no Youtube que oferece conteúdo gratuito sobre Estruturas de Dados, Sistemas Operacionais, Desenvolvimento Web, Jogos e outros assuntos para todos os profissionais e estudantes que desejam aprimorar seus conhecimentos e entender os fundamentos da Ciência da Computação e Desenvolvimento de Software. Palestrante na Campus Party, The Developer's Conference, QCon e outras conferências, Isidro está sempre ajudando as comunidades de desenvolvedores oferecendo conteúdo técnico e orientação profissional. 
