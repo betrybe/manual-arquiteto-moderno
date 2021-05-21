@@ -1,6 +1,4 @@
-# About ME
-
-{width=20%}
+{width=50%}
 ![](images/autores__otavio.png)
 
 * **Nome**: Otavio Santana
@@ -11,8 +9,7 @@
 
   {pagebreak}
 
-{width=40%}
-
+{width=50%}
 ![](images/autores__sergio_elder.png)
 
 * **Nome**: Sérgio Lopes
@@ -25,8 +22,7 @@
 
   {pagebreak}
 
-{width=40%}
-
+{width=50%}
 ![](images/autores__karina.png)
 
 * **Nome:** Karina Varela
@@ -36,8 +32,7 @@ A partir de 2020, Karina está trabalhando com a Unidade de Negócios de Serviç
 
 {pagebreak}
 
-{width=40%}
-
+{width=50%}
 ![](images/autores__salaboy.png)
 
 * **Nome:** Mauricio Salatino (Salaboy)
@@ -46,8 +41,7 @@ A partir de 2020, Karina está trabalhando com a Unidade de Negócios de Serviç
 
 {pagebreak}
 
-{width=40%}
-
+{width=50%}
 ![](images/autores__elder-moraes.png)
 
 * **Nome:** Elder Moraes
@@ -56,8 +50,7 @@ A partir de 2020, Karina está trabalhando com a Unidade de Negócios de Serviç
 
 {pagebreak}
 
-{width=40%}
-
+{width=50%}
 ![](images/autores__sandro.png)
 
 * **Nome:** Sandro Giacomozzi
@@ -66,8 +59,7 @@ A partir de 2020, Karina está trabalhando com a Unidade de Negócios de Serviç
 
 {pagebreak}
 
-{width=40%}
-
+{width=50%}
 ![](images/autores__isidro.png)
 
 * **Nome:** Francisco Isidro
