@@ -33,10 +33,10 @@ Podemos extrapolar ainda esse algoritmo e, para cada item, recuperar toda a list
 
 	recuperar conjunto de pedidos e armazenar em listaP
 	para cada pedido P em listaP[] faça
-	 	  	  recuperar itens I[] do pedido P a partir de seu ID
-	      para cada item I de P, faça
-	          recuperar lista L de impostos de I[]
-	      fim-para
+		recuperar itens I[] do pedido P a partir de seu ID
+	  para cada item I de P, faça
+		recuperar lista L de impostos de I[]
+	  fim-para
 	fim-para
 
 Nesse caso, analisando a complexidade assintótica, temos:
@@ -124,9 +124,7 @@ Agora, estou buscando valorizar bastante a Análise de Algoritmos, correto? Quer
 
 Um algoritmo bastante comum na formação durante a graduação é o percurso e preenchimento de matrizes. Esse tipo de algoritmo, independente de o preenchimento ser via Linhas x Colunas ou Colunas x Linhas, na visão única e exclusiva da Análise de Algoritmos é irrelevante, pois ambos são de ordem assintótica O(nˆ2). Observe estes fragmentos de código Java:
 
-{pagebreak}
-
-**Fragmento1**: preenchimento Linha x Coluna
+**Fragmento 1**: preenchimento Linha x Coluna
 
 
 	for (int i=0; i < TAM; i++)
@@ -152,8 +150,6 @@ E o estudo de teoria dos Grafos? Sem os algoritmos de otimização vistos em Gra
 Não apenas Grafos, mas Autômatos e Compiladores, duas disciplinas fundamentais hoje para extração de textos através de expressões regulares (100% implementadas através de Autômatos Finitos Determinísticos - os famosos AFDs) e também Compiladores para a construção de novas linguagens (se observarmos a quantidade de linguagens que surgiram desde o ano 2000 até hoje, isso é muita coisa).
 
 Mas você, como dev, pode se perguntar: "E quando eu farei uma nova linguagem?". Talvez a resposta seja "dificilmente", para não dizer "nunca"; mas, olhando um pouco além do dia a dia, desenvolvedores Front-End já devem ter utilizado frameworks como Angular ou React, correto? Pois bem, tais frameworks precisam fazer uso de análise de arquivos HTML com *tags* específicas que substituem valores para objetos. A leitura dessas tags (para posterior geração do código final da sua *single page application*) é feita por um *parser* que, a partir dos componentes criados, gera todo o arquivo HTML com as bibliotecas Javascript para que seu Aplicativo consiga funcionar. Talvez isso ajude a responder à questão que motiva este capítulo, na seção a seguir. 
-
-{pagebreak}
 
 ## O ponto-chave: usar frameworks, fazer as tarefas manualmente, ou melhor, criar seu próprio?
 
