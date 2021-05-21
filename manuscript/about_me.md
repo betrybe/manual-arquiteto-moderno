@@ -1,7 +1,6 @@
 # About ME
 
-{width=40%}
-
+{width=20%}
 ![](images/autores__otavio.png)
 
 * **Nome**: Otavio Santana
