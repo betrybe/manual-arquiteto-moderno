@@ -65,3 +65,10 @@ A partir de 2020, Karina está trabalhando com a Unidade de Negócios de Serviç
 * **Nome:** Francisco Isidro
 * **Cargo:** Professor, Pesquisador da Universidade Federal do ABC
 * **Bio:** Professor Isidro é professor de Ciência da Computação e pesquisador com foco em Ensino de Fundamentos de Programação, Desenvolvimento de *Game Engines* e Computação em Nuvem. Isidro mantém um canal no Youtube que oferece conteúdo gratuito sobre Estruturas de Dados, Sistemas Operacionais, Desenvolvimento Web, Jogos e outros assuntos para todos os profissionais e estudantes que desejam aprimorar seus conhecimentos e entender os fundamentos da Ciência da Computação e Desenvolvimento de Software. Palestrante na Campus Party, The Developer's Conference, QCon e outras conferências, Isidro está sempre ajudando as comunidades de desenvolvedores oferecendo conteúdo técnico e orientação profissional. 
+
+{width=60%}
+![](images/autores__leandro.png)
+
+* **Name:** Leandro Domingues
+* **Job Title:** Fundador da Cluster Consultoria, MongoDB Champion / Consulting Engineer, Microsoft Data Platform MVP, Community Manager, Speaker
+* **Bio:** MongoDB Champion, Microsoft Data Platform MVP, Top 50 Neo4j Certified com grande experiência em manutenção de grandes volumes de dados e aplicações críticas, após vários anos trabalhando com bancos de dados relacionais, voltei minha carreira para bancos NoSQL nos últimos 7 anos. Com toda a experiência acumulada em bancos de dados relacionais, hoje atuo ajudando pessoas e empresas a entrarem ou se manterem no universo de bancos NoSQL, participando desde a idealização de projetos até a manutenção de ambientes replicados e escaláveis, passando pela modelagem de dados até aumento de performance. Como desenvolvedor minha carreira foi trilhada com base em .NET, porém nos últimos anos me dedico a tecnologias OpenSource, me especializei em NodeJS e Python, manutenção de ambientes Linux, etc. Participo constantemente de eventos nacionais e internacionais em busca de atualização e conhecimento principalmente na área de OpenSource. Ministro treinamentos in-company e turmas abertas de MongoDB e Neo4j.
