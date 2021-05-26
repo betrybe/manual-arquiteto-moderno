@@ -63,5 +63,11 @@ A partir de 2020, Karina está trabalhando com a Unidade de Negócios de Serviç
 ![](images/autores__isidro.png)
 
 * **Nome:** Francisco Isidro
+
 * **Cargo:** Professor, Pesquisador da Universidade Federal do ABC
+
 * **Bio:** Professor Isidro é professor de Ciência da Computação e pesquisador com foco em Ensino de Fundamentos de Programação, Desenvolvimento de *Game Engines* e Computação em Nuvem. Isidro mantém um canal no Youtube que oferece conteúdo gratuito sobre Estruturas de Dados, Sistemas Operacionais, Desenvolvimento Web, Jogos e outros assuntos para todos os profissionais e estudantes que desejam aprimorar seus conhecimentos e entender os fundamentos da Ciência da Computação e Desenvolvimento de Software. Palestrante na Campus Party, The Developer's Conference, QCon e outras conferências, Isidro está sempre ajudando as comunidades de desenvolvedores oferecendo conteúdo técnico e orientação profissional. 
+
+  {pagebreak}
+
+  ![](images/insercao_1.jpg)
