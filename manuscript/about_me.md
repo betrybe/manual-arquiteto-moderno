@@ -26,7 +26,7 @@
   ![](images/autores__karina.png)
   
 * **Nome:** Karina Varela
-* **Cargo:** Gerente Técnico Sênior de Marketing de Produtos, Red Hat
+* **Cargo:** Gerente Técnico Principal de Marketing de Produtos, Red Hat
 * **Bio:** Karina M. Varela tem experiência de mais de dez anos em TI, trabalhando em funções como desenvolvedora de aplicações, arquiteta de software, consultora, líder de tecnologia e gerenciamento de marketing de produto. Com uma sólida formação em desenvolvimento de software, ela tem experiência profissional em planejamento, arquitetura, entrega e solução de problemas de software crítico em ambientes empresariais de diferentes setores ao redor do mundo.
 A partir de 2020, Karina está trabalhando com a Unidade de Negócios de Serviços de Aplicativos da Red Hat como Gerente de Marketing Técnico, especialista no assunto de Automação de Negócios. Ela é membro da comunidade SouJava, tem paixão por ajudar as comunidades e gosta especialmente de projetos e iniciativas de código aberto. Outro hobby é falar em conferências e já palestrou em conferências como Campus Party, TDC e Women Who Code.
 
